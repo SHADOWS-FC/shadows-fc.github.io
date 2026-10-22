@@ -29,12 +29,12 @@ let embeddedData = data;
 for (const [full, property, asset] of [...data.matchAll(/(photo|logo):\s*'(assets\/[^']+)'/g)]) {
   embeddedData = embeddedData.replaceAll(full, `${property}: ${JSON.stringify(await embed(asset))}`);
 }
-const script = `${embeddedData.replace(/^export /gm, '')}\n${app.replace(/^import .* from '\.\/data.js';\n/m, '')}`;
+const script = `${embeddedData.replace(/^export /gm, '')}\n${app.replace(/^import .* from '\.\/data\.js(?:\?[^']*)?';\n/m, '')}`;
 let output = html
-  .replace('<link rel="stylesheet" href="styles.css">', () => `<style>\n${css}\n</style>`)
-  .replace('<link rel="stylesheet" href="editorial.css">', '')
+  .replace(/<link rel="stylesheet" href="styles\.css(?:\?[^"]*)?">/, () => `<style>\n${css}\n</style>`)
+  .replace(/<link rel="stylesheet" href="editorial\.css(?:\?[^"]*)?">/, '')
   .replace('<link rel="preload" as="image" href="assets/night-pitch.png">', '')
-  .replace('<script type="module" src="app.js"></script>', '')
+  .replace(/<script type="module" src="app\.js(?:\?[^"]*)?"><\/script>/, '')
   .replace('</body>', () => `<script>\n${script.replace(/<\/script/gi, '<\\/script')}\n</script>\n</body>`);
 for (const [full, attribute, asset] of [...output.matchAll(/(src|href)="(assets\/[^"<>]+)"/g)]) {
   output = output.replaceAll(full, `${attribute}="${await embed(asset)}"`);

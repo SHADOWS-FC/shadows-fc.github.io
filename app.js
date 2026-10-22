@@ -1,4 +1,4 @@
-import { club, matches, squad, getSummary, getScorers, getRankings, playerName } from './data.js';
+import { club, matches, squad, getSummary, getScorers, getRankings, playerName } from './data.js?v=20261022-match-centre';
 
 const messages = {
   el: {

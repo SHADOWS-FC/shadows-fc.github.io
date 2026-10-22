@@ -90,6 +90,11 @@ for Gkoumas Konstantinos, used in his profile and the MVP feature.
 The standalone build embeds the portraits
 as well as other images and fonts; it requires no additional image requests.
 
+The stylesheet, application and data URLs carry a release version in
+`index.html` and the `app.js` import. Bump them together when publishing a
+visual release so returning visitors receive matching markup and styles.
+The standalone builder accepts these versioned URLs.
+
 ### Visual assets
 
 All eight original logos from `LOGOS.rar` are saved in `assets/logos/`; see
