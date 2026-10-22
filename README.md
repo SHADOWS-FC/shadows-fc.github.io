@@ -62,7 +62,6 @@ as MVP against Savralliolid. Earlier MVPs are unknown, not presumed absent.
 ### Content still to add
 
 - Original club logo and team photos as downloadable files.
-- Original photo for Gkoumas Konstantinos (#6); the archive contains no `6.jpeg`.
 - Confirmation of the season year; dates intentionally show day/month only.
 - The standalone selfie is excluded at the club's request.
 
@@ -82,19 +81,19 @@ Marfa Mixalis (#8, LW), Stavros Kalogiropoulos (#14, CAM), and Kobas Gavrilos
 Tasos Babakos (#10, ST).
 Mixalis is linked to the previously confirmed Mike alias; Stavros
 Kalogiropoulos is linked to the recorded scorer Stavros.
-The club supplied `SHD.rar` containing 12 original JPEGs. All 12 are copied
+The club supplied an updated `SHD.rar` containing 13 original JPEGs. All 13 are copied
 without alteration to `assets/players/` and displayed in player cards and
 profile dialogs. The club confirmed that `10.jpeg` is Tasos Babakos (#10),
-linked to the recorded scorer Tasos. The #6 profile remains without a photo.
+linked to the recorded scorer Tasos. The updated archive supplies `6.jpeg`
+for Gkoumas Konstantinos, used in his profile and the MVP feature.
 The standalone build embeds the portraits
 as well as other images and fonts; it requires no additional image requests.
 
 ### Visual assets
 
 The night pitch background is generated atmospheric artwork, not a photograph
-of Star Sport Club. The MVP shirt is a conceptual vector illustration in the
-club colours, not a product photo. Both will sit alongside original club and
-player assets once those files are available. Roboto Condensed is bundled from
+of Star Sport Club. All player portraits and the MVP photo are the original
+club-supplied files. Roboto Condensed is bundled from
 Fontsource 5.3.0 under the SIL Open Font License (see `assets/FONT-LICENSE.txt`).
 The build embeds the graphics and fonts, so the downloadable HTML has no
 runtime CDN dependencies.

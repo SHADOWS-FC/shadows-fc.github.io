@@ -73,7 +73,7 @@ export const confirmedPlayers = [
   { name: 'Stavros Kalogiropoulos', number: 14, position: 'CAM', confirmed: true, photo: 'assets/players/14.jpeg', scorerName: 'Stavros' },
   { name: 'Kobas Gavrilos', number: 69, position: 'ST', confirmed: true, photo: 'assets/players/69.jpeg' },
   { name: 'Rothos Ioannis', number: 22, position: 'ST', confirmed: true, photo: 'assets/players/22.jpeg', scorerName: 'Rothos' },
-  { name: 'Gkoumas Konstantinos', number: 6, position: 'ST', confirmed: true, photo: null, scorerName: 'Gkoumas' },
+  { name: 'Gkoumas Konstantinos', number: 6, position: 'ST', confirmed: true, photo: 'assets/players/6.jpeg', scorerName: 'Gkoumas' },
   { name: 'Tasos Babakos', number: 10, position: 'ST', confirmed: true, photo: 'assets/players/10.jpeg', scorerName: 'Tasos' },
 ];
 
