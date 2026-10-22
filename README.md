@@ -62,13 +62,11 @@ as MVP against Savralliolid. Earlier MVPs are unknown, not presumed absent.
 ### Content still to add
 
 - Original club logo and team photos as downloadable files.
-- Confirmation of the archive's `10.jpeg`: the complete roster contains #6,
-  but no #10, and the archive contains no `6.jpeg`. Eleven other portraits have
-  been matched by confirmed shirt numbers. Do not guess the remaining identity.
+- Original photo for Gkoumas Konstantinos (#6); the archive contains no `6.jpeg`.
 - Confirmation of the season year; dates intentionally show day/month only.
 - The standalone selfie is excluded at the club's request.
 
-The published squad contains the **12 club-confirmed player profiles**. The
+The published squad contains the **13 club-confirmed player profiles**. The
 club confirmed that this is the complete current roster. The original matchday
 selection is stored separately and does not add unconfirmed players to the
 current squad or rewrite match history. Positions and permanent shirt numbers
@@ -80,14 +78,15 @@ Confirmed so far: Sotiris Giotis (#1, GK), Chatziamanetoglou Giorgos (#82, GK),
 Troka Giorgos (#9, CB), Babakos Dimitris (#11, CB), Zachos Giannis (#5, CB),
 Chatzinikolaou Christos (#28, CM), Chatziamanetoglou Dinos (#7, RW), and
 Marfa Mixalis (#8, LW), Stavros Kalogiropoulos (#14, CAM), and Kobas Gavrilos
-(#69, ST), Rothos Ioannis (#22, ST), and Gkoumas Konstantinos (#6, ST).
+(#69, ST), Rothos Ioannis (#22, ST), Gkoumas Konstantinos (#6, ST), and
+Tasos Babakos (#10, ST).
 Mixalis is linked to the previously confirmed Mike alias; Stavros
 Kalogiropoulos is linked to the recorded scorer Stavros.
-The club supplied `SHD.rar` containing 12 original JPEGs. Eleven are copied
+The club supplied `SHD.rar` containing 12 original JPEGs. All 12 are copied
 without alteration to `assets/players/` and displayed in player cards and
-profile dialogs. The unmatched `10.jpeg` stays outside the published checkout
-until the club confirms which player it depicts. The #6 profile remains
-without a photo in the meantime. The standalone build embeds the portraits
+profile dialogs. The club confirmed that `10.jpeg` is Tasos Babakos (#10),
+linked to the recorded scorer Tasos. The #6 profile remains without a photo.
+The standalone build embeds the portraits
 as well as other images and fonts; it requires no additional image requests.
 
 ### Visual assets

@@ -74,6 +74,7 @@ export const confirmedPlayers = [
   { name: 'Kobas Gavrilos', number: 69, position: 'ST', confirmed: true, photo: 'assets/players/69.jpeg' },
   { name: 'Rothos Ioannis', number: 22, position: 'ST', confirmed: true, photo: 'assets/players/22.jpeg', scorerName: 'Rothos' },
   { name: 'Gkoumas Konstantinos', number: 6, position: 'ST', confirmed: true, photo: null, scorerName: 'Gkoumas' },
+  { name: 'Tasos Babakos', number: 10, position: 'ST', confirmed: true, photo: 'assets/players/10.jpeg', scorerName: 'Tasos' },
 ];
 
 // The club confirmed this is the complete current roster. Historical lineup
