@@ -106,6 +106,7 @@ matchday squad and three coaching staff separately. Printed names, matchday
 numbers and historical positions are preserved without guessing unconfirmed
 profile aliases or assuming a listed substitute came on. The supplied lineup
 graphics are not published as images.
+The club later corrected Savralliolid's coaching staff: Καρβούνης replaces Giotis.
 
 Zachos Giannis (#5) was injured against Legrena on 29/09. Match details and his
 profile show “Estimated absence: 1.5 months”, with the injury date stated

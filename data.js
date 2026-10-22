@@ -132,8 +132,8 @@ export const matches = [
         { name: 'Babakos T.', number: 10 },
         { name: 'Rothos', number: 22 },
       ],
-      staff: [{ name: 'Zachos' }, { name: 'Chatzinikolaou' }, { name: 'Giotis' }],
-      source: 'Eight-player matchday squad and separate coaching staff, transcribed from the supplied graphic.',
+      staff: [{ name: 'Zachos' }, { name: 'Chatzinikolaou' }, { name: 'Καρβούνης' }],
+      source: 'Eight-player matchday squad transcribed from the supplied graphic; club subsequently corrected the coaching staff, replacing Giotis with Καρβούνης.',
     },
   },
 ];

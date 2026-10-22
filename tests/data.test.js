@@ -117,11 +117,11 @@ test('lineups preserve historical positions and the handwritten Aston correction
   assert.ok(!unathletico.lineup.players.some(player => player.name === 'Zachos'));
 });
 
-test('Savralliolid selection keeps printed names/numbers and staff separate', () => {
+test('Savralliolid selection keeps printed players and the club-corrected staff separate', () => {
   const selection = matches.find(match => match.id === 'savralliolid').lineup;
   assert.equal(selection.type, 'squad');
   assert.deepEqual(selection.players, latestMatchdaySquad);
-  assert.deepEqual(selection.staff.map(person => person.name), ['Zachos', 'Chatzinikolaou', 'Giotis']);
+  assert.deepEqual(selection.staff.map(person => person.name), ['Zachos', 'Chatzinikolaou', 'Καρβούνης']);
   assert.equal(selection.players.find(player => player.number === 77).name, 'Ioannis');
   assert.equal(selection.players.find(player => player.number === 22).name, 'Rothos');
 });
