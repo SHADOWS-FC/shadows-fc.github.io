@@ -34,7 +34,7 @@ browser validation here uses HTTP.
 
 ## Content and updates
 
-- `data.js`: matches, scorer names, latest matchday squad, shirt numbers, and aliases.
+- `data.js`: matches, scorer names, confirmed player profiles, historical matchday squad, shirt numbers, and aliases.
 - `app.js`: Greek and English translations and interactions.
 - `styles.css`: base layout and responsive rules.
 - `editorial.css`: photographic hero, condensed typography, match cards, and visual identity.
@@ -68,11 +68,21 @@ as MVP against Savralliolid. Earlier MVPs are unknown, not presumed absent.
 - Confirmation of the season year; dates intentionally show day/month only.
 - The standalone selfie is excluded at the club's request.
 
-The squad currently represents the **latest matchday post**, not a complete
-permanent roster. Its numbers are matchday shirt numbers; permanent positions
-and biographies have not been invented. Prior draft interview answers are not
-published as actual player quotes. Lettermarks are typographic placeholders,
-not the original club crests.
+Club-confirmed profiles are shown first, followed by names from the latest
+matchday post that have not yet been confirmed individually. The original
+matchday selection is stored separately so new player confirmations do not
+rewrite match history. Positions and permanent shirt numbers are added only
+when supplied by the club. Prior draft interview answers are not published as
+actual player quotes. Lettermarks are typographic placeholders, not the
+original club crests.
+
+Confirmed so far: Sotiris Giotis (#1, GK), Chatziamanetoglou Giorgos (#82, GK),
+Troka Giorgos (#9, CB), Babakos Dimitris (#11, CB), Zachos Giannis (#5, CB),
+Chatzinikolaou Christos (#28, CM), and Chatziamanetoglou Dinos (#7, RW).
+Their named portrait images are visible in chat, but the originals have not
+been delivered as downloadable files to the execution workspace. Photos stay
+unset until an original-file upload (for example a ZIP of portraits) is provided.
+The UI supports original portraits as soon as `photo` paths are assigned.
 
 ### Visual assets
 
@@ -88,5 +98,6 @@ runtime CDN dependencies.
 
 This is a static site: deploy the repository root to a static host, with no build
 command required, or run `npm run build` and publish `dist/` for a single-file
-deployment. Hosting, domain selection, and publication are not completed.
+deployment. The site is live at https://zachos7.github.io/SHADOWS-FC/ using
+GitHub Pages from main and the root folder. No custom domain is configured.
 Use the existing checkout in cloud tasks; no Git worktree is needed.

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { matches, squad, getSummary, getScorers, getRankings, playerName } from '../data.js';
+import { matches, squad, latestMatchdaySquad, confirmedPlayers, getSummary, getScorers, getRankings, playerName } from '../data.js';
 
 test('four unique results; duplicate screenshot is not a fifth fixture', () => {
   assert.equal(matches.length, 4);
@@ -35,7 +35,19 @@ test('only confirmed name aliases are merged, preserving original match evidence
 test('last-match MVP and shirt numbers match the supplied information', () => {
   assert.equal(matches.at(-1).mvp, 'Gkoumas');
   assert.equal(matches.at(-1).scorers.find(player => player.name === 'Gkoumas').goals, 3);
-  assert.deepEqual(squad.map(player => player.number), [82, 6, 11, 77, 7, 8, 10, 22]);
+  assert.deepEqual(latestMatchdaySquad.map(player => player.number), [82, 6, 11, 77, 7, 8, 10, 22]);
+});
+
+test('club profiles update the current squad without rewriting historical selections', () => {
+  assert.equal(squad.find(player => player.number === 82).name, 'Chatziamanetoglou Giorgos');
+  assert.equal(latestMatchdaySquad.find(player => player.number === 82).name, 'Chatziamanetoglou G.');
+  assert.equal(squad.filter(player => player.number === 82).length, 1);
+  assert.equal(squad.find(player => player.number === 1).position, 'GK');
+  assert.equal(squad.find(player => player.number === 11).name, 'Babakos Dimitris');
+  assert.equal(squad.find(player => player.number === 9).position, 'CB');
+  assert.equal(new Set(squad.map(player => player.number)).size, squad.length);
+  assert.equal(confirmedPlayers.find(player => player.number === 28).position, 'CM');
+  assert.equal(squad.find(player => player.number === 7).scorerName, 'Dinos');
 });
 
 test('empty record and additional draws are calculated correctly', () => {

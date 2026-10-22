@@ -10,7 +10,7 @@ const [html, baseCss, designCss, data, app, icon] = await Promise.all([
 const embedded = new Map();
 async function embed(file) {
   if (!embedded.has(file)) {
-    const mime = { '.png': 'image/png', '.svg': 'image/svg+xml', '.woff2': 'font/woff2' }[path.extname(file)];
+    const mime = { '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.svg': 'image/svg+xml', '.woff2': 'font/woff2' }[path.extname(file).toLowerCase()];
     if (!mime) throw new Error(`Unsupported asset: ${file}`);
     embedded.set(file, `data:${mime};base64,${(await readFile(path.join(root, file))).toString('base64')}`);
   }

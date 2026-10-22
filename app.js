@@ -12,7 +12,7 @@ const messages = {
     matchGoals: 'ΓΚΟΛ ΣΤΟΝ ΑΓΩΝΑ', recordedGoals: 'ΓΚΟΛ ΣΤΑ 4 ΜΑΤΣ', allScorers: 'Όλοι οι σκόρερ', scorersTitle: 'Οι σκόρερ μας.',
     scorersAside: '21 ΓΚΟΛ. ΟΜΑΔΙΚΗ ΥΠΟΘΕΣΗ.', jointLeaders: 'ΣΤΗΝ ΚΟΡΥΦΗ ΜΑΖΙ', goalsEach: 'ΓΚΟΛ Ο ΚΑΘΕΝΑΣ',
     scoringNote: 'Τα γκολ μετράνε. Η ομάδα περισσότερο.', scorerCaption: 'Γκολ ανά παίκτη στους καταγεγραμμένους αγώνες', player: 'ΠΑΙΚΤΗΣ',
-    squadTitle: 'Η τελευταία αποστολή.', squadNote: 'Η αποστολή και οι αριθμοί φανέλας από το ματς με τη Savralliolid FC.',
+    squadTitle: 'Η ομάδα μας.', squadNote: 'Οι παίκτες πίσω από τη φανέλα. Γνώρισε την ομάδα των SHADOWS FC.',
     searchLabel: 'Αναζήτηση παίκτη', searchPlaceholder: 'Αναζήτηση παίκτη…',
     clubDescription: 'Οι SHADOWS FC είναι η δική μας παρέα στο γήπεδο. Μαύρο και ροζ, κοινές στιγμές και μια ιστορία που συνεχίζει να γράφεται.',
     basedIn: 'Η ΒΑΣΗ ΜΑΣ', vouliagmeni: 'Βουλιαγμένη, Αθήνα', matchVenue: 'ΤΟ ΓΗΠΕΔΟ', newTab: ' (ανοίγει σε νέα καρτέλα)', backTop: 'Στην κορυφή',
@@ -20,6 +20,8 @@ const messages = {
     win: 'Ν', loss: 'Η', draw: 'Ι', winFull: 'Νίκη', lossFull: 'Ήττα', drawFull: 'Ισοπαλία', matchday: 'ΑΓΩΝΑΣ', scorerList: 'ΣΚΟΡΕΡ SHADOWS FC',
     close: 'Κλείσιμο', openMenu: 'Άνοιγμα μενού', closeMenu: 'Κλείσιμο μενού', matchCount: 'αγώνες', noPlayers: 'Δεν βρέθηκε παίκτης.',
     playerCount: 'παίκτες', squadProfile: 'ΑΠΟΣΤΟΛΗ / 21.10', shirtNumber: 'Αριθμός φανέλας στο τελευταίο ματς',
+    playerProfile: 'ΠΡΟΦΙΛ ΠΑΙΚΤΗ', confirmedShirtNumber: 'Αριθμός φανέλας', goalkeeper: 'Τερματοφύλακας', centerBack: 'Κεντρικός αμυντικός', position: 'ΘΕΣΗ',
+    centerMidfielder: 'Κεντρικός μέσος', rightWinger: 'Δεξιός εξτρέμ',
     confirmedGoals: 'ΓΚΟΛ ΣΤΑ 4 ΚΑΤΑΓΕΓΡΑΜΜΕΝΑ ΜΑΤΣ', unknownGoals: 'Δεν έχει επιβεβαιωθεί αντιστοίχιση με τους σκόρερ των αναρτήσεων.',
     detail: 'Λεπτομέρειες', noResults: 'Δεν υπάρχουν αποτελέσματα για αυτό το φίλτρο.',
     scopeNote: 'Οι αριθμοί αφορούν τους τέσσερις καταγεγραμμένους αγώνες.', mvp: 'MVP ΤΟΥ ΑΓΩΝΑ',
@@ -36,7 +38,7 @@ const messages = {
     matchGoals: 'MATCH GOALS', recordedGoals: 'GOALS IN 4 MATCHES', allScorers: 'All goalscorers', scorersTitle: 'On the scoresheet.',
     scorersAside: '21 GOALS. A TEAM EFFORT.', jointLeaders: 'SHARING THE TOP SPOT', goalsEach: 'GOALS EACH',
     scoringNote: 'The goals matter. The team matters more.', scorerCaption: 'Player goals across the recorded matches', player: 'PLAYER',
-    squadTitle: 'The latest matchday squad.', squadNote: 'The squad and shirt numbers from the match against Savralliolid FC.',
+    squadTitle: 'Meet the squad.', squadNote: 'The people behind the shirt. Get to know SHADOWS FC.',
     searchLabel: 'Search players', searchPlaceholder: 'Search players…',
     clubDescription: 'SHADOWS FC is our group of friends on the pitch. Black and pink, shared moments, and a story we’re still writing.',
     basedIn: 'OUR HOME', vouliagmeni: 'Vouliagmeni, Athens', matchVenue: 'THE PITCH', newTab: ' (opens in a new tab)', backTop: 'Back to top',
@@ -44,6 +46,8 @@ const messages = {
     win: 'W', loss: 'L', draw: 'D', winFull: 'Win', lossFull: 'Loss', drawFull: 'Draw', matchday: 'MATCHDAY', scorerList: 'SHADOWS FC SCORERS',
     close: 'Close', openMenu: 'Open menu', closeMenu: 'Close menu', matchCount: 'matches', noPlayers: 'No player found.',
     playerCount: 'players', squadProfile: 'MATCHDAY SQUAD / 21.10', shirtNumber: 'Shirt number in the latest match',
+    playerProfile: 'PLAYER PROFILE', confirmedShirtNumber: 'Shirt number', goalkeeper: 'Goalkeeper', centerBack: 'Centre-back', position: 'POSITION',
+    centerMidfielder: 'Central midfielder', rightWinger: 'Right winger',
     confirmedGoals: 'GOALS IN THE 4 RECORDED MATCHES', unknownGoals: 'A link to the scorer names in the club posts has not been confirmed.',
     detail: 'Details', noResults: 'No results for this filter.', scopeNote: 'Statistics cover the four recorded matches.', mvp: 'PLAYER OF THE MATCH',
     goalDifference: 'goal difference', record: 'W–D–L',
@@ -58,6 +62,7 @@ const t = key => messages[language][key];
 const esc = value => String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
 const initials = name => name.replace(/[^\p{L}\s]/gu, '').split(/\s+/).slice(0, 2).map(word => word[0]).join('').toUpperCase();
 const outcome = match => match.goalsFor > match.goalsAgainst ? 'win' : match.goalsFor < match.goalsAgainst ? 'loss' : 'draw';
+const positionLabel = code => ({ GK: t('goalkeeper'), CB: t('centerBack'), CM: t('centerMidfielder'), RW: t('rightWinger') })[code] || code || '';
 
 function renderArrows() {
   // Draw arrows as vectors so they don't depend on an installed symbol font.
@@ -105,8 +110,8 @@ function renderScorers() {
 
 function renderSquad() {
   const query = $('#player-search').value.trim().toLocaleLowerCase();
-  const visible = squad.filter(player => `${player.name} ${player.number}`.toLocaleLowerCase().includes(query));
-  $('#squad-grid').innerHTML = visible.map(player => `<button class="player-card" data-player="${player.number}" aria-label="${esc(player.name)}, ${t('shirtNumber')} ${player.number}"><span class="player-card-art"><span class="small-brand">SHADOWS / FC</span><span class="player-number" aria-hidden="true">${String(player.number).padStart(2, '0')}</span></span><span class="player-info"><strong>${esc(player.name)}</strong><span aria-hidden="true">↗</span></span></button>`).join('');
+  const visible = squad.filter(player => `${player.name} ${player.number} ${player.position || ''} ${positionLabel(player.position)}`.toLocaleLowerCase().includes(query));
+  $('#squad-grid').innerHTML = visible.map(player => `<button class="player-card${player.photo ? ' has-photo' : ''}" data-player="${player.number}" aria-label="${esc(player.name)}, ${t(player.confirmed ? 'confirmedShirtNumber' : 'shirtNumber')} ${player.number}${player.position ? `, ${esc(positionLabel(player.position))}` : ''}"><span class="player-card-art">${player.photo ? `<img class="player-portrait" src="${esc(player.photo)}" alt="${esc(player.name)}" loading="lazy" width="450" height="560">` : ''}<span class="small-brand">SHADOWS / FC</span><span class="player-number" aria-hidden="true">${String(player.number).padStart(2, '0')}</span></span><span class="player-info"><span class="player-name-group"><strong>${esc(player.name)}</strong>${player.position ? `<small class="player-position">${esc(positionLabel(player.position))}</small>` : ''}</span><span aria-hidden="true">↗</span></span></button>`).join('');
   $('#squad-status').textContent = query ? visible.length ? `${visible.length} ${t('playerCount')}` : t('noPlayers') : '';
   renderArrows();
 }
@@ -123,9 +128,9 @@ function renderDialog() {
     $('#dialog-body').innerHTML = `<h2 id="dialog-title">SHADOWS FC<br>× ${esc(match.opponent)}</h2><p class="dialog-meta">${match.date} · ${match.time}<br>${esc(club.venue)}</p><div class="dialog-score">${match.goalsFor} – ${match.goalsAgainst}</div><h3 class="dialog-subhead">${t('scorerList')}</h3><ul class="dialog-scorers">${match.scorers.map(player => `<li><span>${esc(playerName(player.name))}</span><b>${player.goals}</b></li>`).join('')}</ul>${match.mvp ? `<p class="dialog-meta">${t('mvp')} <strong>${esc(match.mvp)}</strong></p>` : ''}`;
   } else {
     const player = squad.find(item => item.number === dialogContent.id);
-    const scorer = getScorers().find(item => item.name === player.name);
-    $('#dialog-category').textContent = t('squadProfile');
-    $('#dialog-body').innerHTML = `<h2 id="dialog-title">${esc(player.name)}</h2><div class="profile-number">#${player.number}</div><p class="dialog-meta">${t('shirtNumber')}</p>${scorer ? `<div class="profile-stats"><div><strong>${scorer.goals}</strong><small>${t('confirmedGoals')}</small></div></div><p class="dialog-note">${t('scopeNote')}</p>` : `<p class="dialog-note">${t('unknownGoals')}</p>`}`;
+    const scorer = getScorers().find(item => item.name === (player.scorerName || player.name));
+    $('#dialog-category').textContent = t(player.confirmed ? 'playerProfile' : 'squadProfile');
+    $('#dialog-body').innerHTML = `<h2 id="dialog-title">${esc(player.name)}</h2>${player.photo ? `<img class="profile-portrait" src="${esc(player.photo)}" alt="${esc(player.name)}" width="450" height="560">` : ''}<div class="profile-number">#${player.number}</div><p class="dialog-meta">${t(player.confirmed ? 'confirmedShirtNumber' : 'shirtNumber')}</p>${player.position ? `<p class="profile-position"><span>${t('position')}</span><strong>${esc(positionLabel(player.position))}</strong></p>` : ''}${scorer ? `<div class="profile-stats"><div><strong>${scorer.goals}</strong><small>${t('confirmedGoals')}</small></div></div><p class="dialog-note">${t('scopeNote')}</p>` : player.confirmed ? '' : `<p class="dialog-note">${t('unknownGoals')}</p>`}`;
   }
 }
 

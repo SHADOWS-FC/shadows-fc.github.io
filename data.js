@@ -47,9 +47,8 @@ export const matches = [
   },
 ];
 
-// Latest matchday squad ONLY. These are shirt numbers from the supplied post,
-// not permanent squad numbers or inferred positions. Photos await name mapping.
-export const squad = [
+// Historical matchday selection: preserve it when confirmed club profiles arrive.
+export const latestMatchdaySquad = [
   { name: 'Chatziamanetoglou G.', number: 82 },
   { name: 'Gkoumas', number: 6 },
   { name: 'Babakos D.', number: 11 },
@@ -58,6 +57,23 @@ export const squad = [
   { name: 'Marfa', number: 8 },
   { name: 'Babakos T.', number: 10 },
   { name: 'Rothos', number: 22 },
+];
+
+// Confirmed by the club, paired with named portraits in chat. Original photo
+// files are still needed; never substitute a generated likeness for a player.
+export const confirmedPlayers = [
+  { name: 'Sotiris Giotis', number: 1, position: 'GK', confirmed: true, photo: null },
+  { name: 'Chatziamanetoglou Giorgos', number: 82, position: 'GK', confirmed: true, photo: null },
+  { name: 'Troka Giorgos', number: 9, position: 'CB', confirmed: true, photo: null },
+  { name: 'Babakos Dimitris', number: 11, position: 'CB', confirmed: true, photo: null },
+  { name: 'Zachos Giannis', number: 5, position: 'CB', confirmed: true, photo: null, scorerName: 'Zachos' },
+  { name: 'Chatzinikolaou Christos', number: 28, position: 'CM', confirmed: true, photo: null },
+  { name: 'Chatziamanetoglou Dinos', number: 7, position: 'RW', confirmed: true, photo: null, scorerName: 'Dinos' },
+];
+
+export const squad = [
+  ...confirmedPlayers,
+  ...latestMatchdaySquad.filter(player => !confirmedPlayers.some(profile => profile.number === player.number)),
 ];
 
 export function getSummary(list = matches) {
