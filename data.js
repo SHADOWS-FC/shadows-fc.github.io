@@ -69,6 +69,7 @@ export const confirmedPlayers = [
   { name: 'Zachos Giannis', number: 5, position: 'CB', confirmed: true, photo: null, scorerName: 'Zachos' },
   { name: 'Chatzinikolaou Christos', number: 28, position: 'CM', confirmed: true, photo: null },
   { name: 'Chatziamanetoglou Dinos', number: 7, position: 'RW', confirmed: true, photo: null, scorerName: 'Dinos' },
+  { name: 'Marfa Mixalis', number: 8, position: 'LW', confirmed: true, photo: null, scorerName: 'Mixalis' },
 ];
 
 export const squad = [

@@ -78,7 +78,8 @@ original club crests.
 
 Confirmed so far: Sotiris Giotis (#1, GK), Chatziamanetoglou Giorgos (#82, GK),
 Troka Giorgos (#9, CB), Babakos Dimitris (#11, CB), Zachos Giannis (#5, CB),
-Chatzinikolaou Christos (#28, CM), and Chatziamanetoglou Dinos (#7, RW).
+Chatzinikolaou Christos (#28, CM), Chatziamanetoglou Dinos (#7, RW), and
+Marfa Mixalis (#8, LW). Mixalis is linked to the previously confirmed Mike alias.
 Their named portrait images are visible in chat, but the originals have not
 been delivered as downloadable files to the execution workspace. Photos stay
 unset until an original-file upload (for example a ZIP of portraits) is provided.
