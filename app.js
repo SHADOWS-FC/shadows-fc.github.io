@@ -18,7 +18,8 @@ const messages = {
     browseMatches: 'Περιήγηση αγώνων', viewLabel: 'Προβολή αγώνων', paginationLabel: 'Σελίδες αγώνων',
 
     skip: 'Μετάβαση στο περιεχόμενο', navResults: 'Αποτελέσματα', navScorers: 'Σκόρερ', navSquad: 'Ομάδα', navClub: 'Ο σύλλογος',
-    heroDescription: 'Μια παρέα. Μια ομάδα. Η δική μας ιστορία, μέσα κι έξω από το γήπεδο.', viewResults: 'Δες τους αγώνες',
+
+    heroDescription: 'Από τη Βουλιαγμένη. Για το έμβλημα. Μια ομάδα, μια κοινή ιστορία.', viewResults: 'Δες τους αγώνες',
     heroFootnote: 'ΑΠΟ ΤΗ ΒΟΥΛΙΑΓΜΕΝΗ. ΓΙΑ ΤΗΝ ΟΜΑΔΑ.', latestResult: 'ΤΕΛΕΥΤΑΙΟ ΑΠΟΤΕΛΕΣΜΑ', fullTime: 'ΤΕΛΙΚΟ',
     firstWin: 'Η ΠΡΩΤΗ ΝΙΚΗ. ΚΑΙ ΣΥΝΕΧΙΖΟΥΜΕ.', goals: 'ΓΚΟΛ', soFar: 'Η ΠΟΡΕΙΑ ΜΑΣ', seasonNumbers: 'Η ομάδα σε αριθμούς.',
     resultsTitle: 'Οι αγώνες μας.',
@@ -61,7 +62,8 @@ const messages = {
     browseMatches: 'Browse matches', viewLabel: 'Match view', paginationLabel: 'Match pages',
 
     skip: 'Skip to content', navResults: 'Results', navScorers: 'Scorers', navSquad: 'Squad', navClub: 'The club',
-    heroDescription: 'One group of friends. One team. Our own story, on and off the pitch.', viewResults: 'Explore the matches',
+
+    heroDescription: 'Built in Vouliagmeni. Driven by the badge. One team, one shared story.', viewResults: 'Explore the matches',
     heroFootnote: 'FROM VOULIAGMENI. FOR THE TEAM.', latestResult: 'LATEST RESULT', fullTime: 'FULL TIME', firstWin: 'THE FIRST WIN. WE GO AGAIN.',
     goals: 'GOALS', soFar: 'THE STORY SO FAR', seasonNumbers: 'The team in numbers.',
     resultsTitle: 'Our matches.', allGames: 'All matches', wins: 'Wins', losses: 'Losses',

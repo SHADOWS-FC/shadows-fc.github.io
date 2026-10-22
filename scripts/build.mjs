@@ -4,8 +4,8 @@ import path from 'node:path';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const read = name => readFile(path.join(root, name), 'utf8');
-const [html, baseCss, designCss, data, app] = await Promise.all([
-  read('index.html'), read('styles.css'), read('editorial.css'), read('data.js'), read('app.js'),
+const [html, baseCss, designCss, paletteCss, data, app] = await Promise.all([
+  read('index.html'), read('styles.css'), read('editorial.css'), read('white-gold.css'), read('data.js'), read('app.js'),
 ]);
 const embedded = new Map();
 async function embed(file) {
@@ -16,7 +16,7 @@ async function embed(file) {
   }
   return embedded.get(file);
 }
-let css = `${baseCss}\n${designCss}`;
+let css = `${baseCss}\n${designCss}\n${paletteCss}`;
 // CSS custom-property values have a browser size limit. The PNG data URL is
 // larger than that limit: embed it directly into the background declarations
 // instead of routing it through --pitch-image in the standalone build.
@@ -33,6 +33,7 @@ const script = `${embeddedData.replace(/^export /gm, '')}\n${app.replace(/^impor
 let output = html
   .replace(/<link rel="stylesheet" href="styles\.css(?:\?[^"]*)?">/, () => `<style>\n${css}\n</style>`)
   .replace(/<link rel="stylesheet" href="editorial\.css(?:\?[^"]*)?">/, '')
+  .replace(/<link rel="stylesheet" href="white-gold\.css(?:\?[^"]*)?">/, '')
   .replace(/<link rel="preload" as="image" href="assets\/[^"]+">/, '')
   .replace(/<script type="module" src="app\.js(?:\?[^"]*)?"><\/script>/, '')
   .replace('</body>', () => `<script>\n${script.replace(/<\/script/gi, '<\\/script')}\n</script>\n</body>`);

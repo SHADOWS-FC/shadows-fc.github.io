@@ -37,7 +37,8 @@ browser validation here uses HTTP.
 - `data.js`: matches, scorer names, confirmed player profiles, historical matchday squad, shirt numbers, and aliases.
 - `app.js`: Greek and English translations and interactions.
 - `styles.css`: base layout and responsive rules.
-- `editorial.css`: photographic hero, condensed typography, match cards, and visual identity.
+- `editorial.css`: photo-led homepage, condensed typography, match cards and responsive layout.
+- `white-gold.css`: the existing white and gold palette, retained in the simplified homepage and standalone build.
 - `assets/`: self-hosted graphics and fonts, including the font licence.
 - `index.html`: team photograph, latest-first results, scorer leaderboard, and complete squad.
 
