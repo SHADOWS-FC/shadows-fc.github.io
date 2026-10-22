@@ -59,8 +59,8 @@ export const latestMatchdaySquad = [
   { name: 'Rothos', number: 22 },
 ];
 
-// Confirmed by the club, paired with named portraits in chat. Original photo
-// files are still needed; never substitute a generated likeness for a player.
+// Confirmed by the club. Portraits require original named photo files;
+// never substitute a generated likeness for a player.
 export const confirmedPlayers = [
   { name: 'Sotiris Giotis', number: 1, position: 'GK', confirmed: true, photo: null },
   { name: 'Chatziamanetoglou Giorgos', number: 82, position: 'GK', confirmed: true, photo: null },
@@ -70,12 +70,15 @@ export const confirmedPlayers = [
   { name: 'Chatzinikolaou Christos', number: 28, position: 'CM', confirmed: true, photo: null },
   { name: 'Chatziamanetoglou Dinos', number: 7, position: 'RW', confirmed: true, photo: null, scorerName: 'Dinos' },
   { name: 'Marfa Mixalis', number: 8, position: 'LW', confirmed: true, photo: null, scorerName: 'Mixalis' },
+  { name: 'Stavros Kalogiropoulos', number: 14, position: 'CAM', confirmed: true, photo: null, scorerName: 'Stavros' },
+  { name: 'Kobas Gavrilos', number: 69, position: 'ST', confirmed: true, photo: null },
+  { name: 'Rothos Ioannis', number: 22, position: 'ST', confirmed: true, photo: null, scorerName: 'Rothos' },
+  { name: 'Gkoumas Konstantinos', number: 6, position: 'ST', confirmed: true, photo: null, scorerName: 'Gkoumas' },
 ];
 
-export const squad = [
-  ...confirmedPlayers,
-  ...latestMatchdaySquad.filter(player => !confirmedPlayers.some(profile => profile.number === player.number)),
-];
+// The club confirmed this is the complete current roster. Historical lineup
+// entries remain above as match evidence, not additional current players.
+export const squad = confirmedPlayers;
 
 export function getSummary(list = matches) {
   return list.reduce((total, match) => ({

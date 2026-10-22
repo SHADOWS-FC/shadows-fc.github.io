@@ -22,6 +22,7 @@ const messages = {
     playerCount: 'παίκτες', squadProfile: 'ΑΠΟΣΤΟΛΗ / 21.10', shirtNumber: 'Αριθμός φανέλας στο τελευταίο ματς',
     playerProfile: 'ΠΡΟΦΙΛ ΠΑΙΚΤΗ', confirmedShirtNumber: 'Αριθμός φανέλας', goalkeeper: 'Τερματοφύλακας', centerBack: 'Κεντρικός αμυντικός', position: 'ΘΕΣΗ',
     centerMidfielder: 'Κεντρικός μέσος', rightWinger: 'Δεξιός εξτρέμ', leftWinger: 'Αριστερός εξτρέμ',
+    attackingMidfielder: 'Επιτελικός μέσος', striker: 'Επιθετικός',
     confirmedGoals: 'ΓΚΟΛ ΣΤΑ 4 ΚΑΤΑΓΕΓΡΑΜΜΕΝΑ ΜΑΤΣ', unknownGoals: 'Δεν έχει επιβεβαιωθεί αντιστοίχιση με τους σκόρερ των αναρτήσεων.',
     detail: 'Λεπτομέρειες', noResults: 'Δεν υπάρχουν αποτελέσματα για αυτό το φίλτρο.',
     scopeNote: 'Οι αριθμοί αφορούν τους τέσσερις καταγεγραμμένους αγώνες.', mvp: 'MVP ΤΟΥ ΑΓΩΝΑ',
@@ -48,6 +49,7 @@ const messages = {
     playerCount: 'players', squadProfile: 'MATCHDAY SQUAD / 21.10', shirtNumber: 'Shirt number in the latest match',
     playerProfile: 'PLAYER PROFILE', confirmedShirtNumber: 'Shirt number', goalkeeper: 'Goalkeeper', centerBack: 'Centre-back', position: 'POSITION',
     centerMidfielder: 'Central midfielder', rightWinger: 'Right winger', leftWinger: 'Left winger',
+    attackingMidfielder: 'Attacking midfielder', striker: 'Striker',
     confirmedGoals: 'GOALS IN THE 4 RECORDED MATCHES', unknownGoals: 'A link to the scorer names in the club posts has not been confirmed.',
     detail: 'Details', noResults: 'No results for this filter.', scopeNote: 'Statistics cover the four recorded matches.', mvp: 'PLAYER OF THE MATCH',
     goalDifference: 'goal difference', record: 'W–D–L',
@@ -62,7 +64,7 @@ const t = key => messages[language][key];
 const esc = value => String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
 const initials = name => name.replace(/[^\p{L}\s]/gu, '').split(/\s+/).slice(0, 2).map(word => word[0]).join('').toUpperCase();
 const outcome = match => match.goalsFor > match.goalsAgainst ? 'win' : match.goalsFor < match.goalsAgainst ? 'loss' : 'draw';
-const positionLabel = code => ({ GK: t('goalkeeper'), CB: t('centerBack'), CM: t('centerMidfielder'), RW: t('rightWinger'), LW: t('leftWinger') })[code] || code || '';
+const positionLabel = code => ({ GK: t('goalkeeper'), CB: t('centerBack'), CM: t('centerMidfielder'), RW: t('rightWinger'), LW: t('leftWinger'), CAM: t('attackingMidfielder'), ST: t('striker') })[code] || code || '';
 
 function renderArrows() {
   // Draw arrows as vectors so they don't depend on an installed symbol font.

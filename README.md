@@ -68,22 +68,27 @@ as MVP against Savralliolid. Earlier MVPs are unknown, not presumed absent.
 - Confirmation of the season year; dates intentionally show day/month only.
 - The standalone selfie is excluded at the club's request.
 
-Club-confirmed profiles are shown first, followed by names from the latest
-matchday post that have not yet been confirmed individually. The original
-matchday selection is stored separately so new player confirmations do not
-rewrite match history. Positions and permanent shirt numbers are added only
-when supplied by the club. Prior draft interview answers are not published as
+The published squad contains the **12 club-confirmed player profiles**. The
+club confirmed that this is the complete current roster. The original matchday
+selection is stored separately and does not add unconfirmed players to the
+current squad or rewrite match history. Positions and permanent shirt numbers
+are added only when supplied by the club. Prior draft interview answers are not published as
 actual player quotes. Lettermarks are typographic placeholders, not the
 original club crests.
 
 Confirmed so far: Sotiris Giotis (#1, GK), Chatziamanetoglou Giorgos (#82, GK),
 Troka Giorgos (#9, CB), Babakos Dimitris (#11, CB), Zachos Giannis (#5, CB),
 Chatzinikolaou Christos (#28, CM), Chatziamanetoglou Dinos (#7, RW), and
-Marfa Mixalis (#8, LW). Mixalis is linked to the previously confirmed Mike alias.
+Marfa Mixalis (#8, LW), Stavros Kalogiropoulos (#14, CAM), and Kobas Gavrilos
+(#69, ST), Rothos Ioannis (#22, ST), and Gkoumas Konstantinos (#6, ST).
+Mixalis is linked to the previously confirmed Mike alias; Stavros
+Kalogiropoulos is linked to the recorded scorer Stavros.
 Their named portrait images are visible in chat, but the originals have not
 been delivered as downloadable files to the execution workspace. Photos stay
 unset until an original-file upload (for example a ZIP of portraits) is provided.
 The UI supports original portraits as soon as `photo` paths are assigned.
+For the requested ZIP upload, filename stems should match shirt numbers:
+`1`, `82`, `9`, `11`, `5`, `28`, `7`, `8`, `14`, `69`, `22`, `6`.
 
 ### Visual assets
 
