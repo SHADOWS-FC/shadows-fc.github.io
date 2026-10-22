@@ -213,5 +213,31 @@ h1,h2,h3,.hero-score,.stat-number,.match-score,.mvp-name,.art-number,.top-scorer
 .results-order{font-size:11px;line-height:1.8;color:#bcadba;margin:-14px 0 25px}
 #results.results-section{padding-top:55px}
 .scorer-scope-note{font-size:11px;color:#c8b8c5;line-height:1.8;margin:-9px 0 25px}
+
+/* The newsroom is a separate view; the home page keeps its original order. */
+.announcements-section{padding-block:42px 90px;min-height:70vh;scroll-margin-top:120px}
+.news-home-link{display:inline-flex;align-items:center;gap:12px;font-size:11px;font-weight:700;color:#6b5240;padding:9px 0;margin-bottom:40px}
+.news-home-link:hover{color:#a32660}
+.announcements-section .section-heading{align-items:flex-end;margin-bottom:20px}
+.announcements-section h1{font-family:var(--display);font-size:clamp(38px,5.2vw,68px);font-weight:900;line-height:1.05;letter-spacing:-1px;margin-top:16px;color:var(--text)}
+.announcements-intro{font-size:13px;line-height:1.8;color:#665b60;max-width:520px;margin-bottom:38px}
+.announcement-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.announcement-card{min-width:0;background:#fffefa;border:1px solid #e4c5d2;border-top:4px solid #e95198;box-shadow:0 8px 24px #5c26400b;transition:transform .2s,border-color .2s}
+.announcement-card:hover{transform:translateY(-3px);border-color:#cd5c8f}
+.announcement-card>button{display:flex;flex-direction:column;align-items:flex-start;width:100%;height:100%;padding:29px;text-align:left;color:var(--text);background:transparent}
+.announcement-card-meta{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;width:100%;font-size:9px;font-weight:700;line-height:1.6;letter-spacing:.7px;color:#a32660}
+.announcement-card-meta time{color:#817366}
+.announcement-card h2{font-family:var(--display);font-size:30px;line-height:1.2;margin:22px 0 14px;overflow-wrap:anywhere}
+.announcement-card p{font-size:13px;line-height:1.9;color:#716369;margin-bottom:26px}
+.announcement-card-link{display:flex;align-items:center;gap:20px;font-size:11px;font-weight:700;color:#a32660;margin-top:auto}
+.announcements-empty{grid-column:1/-1;padding:44px 30px;background:#fffefa;border:1px solid #e4c5d2;border-top:4px solid #e95198}
+.announcements-empty .eyebrow{color:#a32660}
+.announcements-empty p{font-size:15px;line-height:1.9;color:#665b60;margin-top:16px}
+.announcement-byline{font-size:10px;font-weight:700;letter-spacing:1.1px;color:#a32660;margin:18px 0 26px;padding-bottom:20px;border-bottom:1px solid #ead2de}
+.announcement-body p{font-size:14px;line-height:1.95;color:#4f4248;margin:0 0 20px;overflow-wrap:anywhere}
+.site-header nav a[aria-current="page"]{color:#a32660}
+.site-header nav a[aria-current="page"]:after{width:100%;background:#df448b}
+@media(min-width:801px) and (max-width:1100px){.site-header nav{gap:19px}.site-header nav a{font-size:10px}}
+@media(max-width:760px){.announcement-list{grid-template-columns:1fr}.announcements-section{padding-block:28px 60px}.news-home-link{margin-bottom:28px}.announcements-section .section-heading{display:block}.announcement-card>button{padding:24px}.announcements-intro{font-size:12px;margin-bottom:27px}.announcements-empty{padding:30px 23px}.announcements-empty p{font-size:13px}}
 @media(max-width:800px){.team-hero{padding-top:24px;padding-inline:32px}.team-hero-caption h1{font-size:56px}.team-home-mark{font-size:8px;letter-spacing:1.5px}}
 @media(max-width:560px){.team-hero{padding:16px 20px 0}.team-photo-frame{aspect-ratio:4/5}.team-hero-caption{padding:23px 0 26px;align-items:flex-start;flex-direction:column;gap:13px}.team-hero-caption h1{font-size:49px}.team-hero-caption .eyebrow{font-size:8px;letter-spacing:1.3px}.team-home-mark{font-size:8px;padding:0}.results-order{font-size:10px;margin-top:-16px}#results.results-section{padding-top:42px}.scorer-scope-note{font-size:10px}}

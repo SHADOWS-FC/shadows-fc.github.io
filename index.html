@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#f9f8f3">
-  <meta name="description" content="SHADOWS FC — Η ομάδα της Βουλιαγμένης. Master League, Βούλα. Αποτελέσματα, σκόρερ και ομάδα.">
+  <meta name="description" content="SHADOWS FC — Η ομάδα της Βουλιαγμένης. Master League, Βούλα. Αποτελέσματα, σκόρερ, ομάδα και ανακοινώσεις.">
   <title>SHADOWS FC — Vouliagmeni 16671</title>
   <link rel="icon" href="assets/logos/shadows-fc.jpg" type="image/jpeg">
-  <link rel="stylesheet" href="styles.css?v=20261022-mvp-label">
-  <link rel="stylesheet" href="editorial.css?v=20261022-mvp-label">
-  <link rel="stylesheet" href="white-gold.css?v=20261022-mvp-label">
+  <link rel="stylesheet" href="styles.css?v=20261022-announcements">
+  <link rel="stylesheet" href="editorial.css?v=20261022-announcements">
+  <link rel="stylesheet" href="white-gold.css?v=20261022-announcements">
   <link rel="preload" as="image" href="assets/team.jpg">
-  <script type="module" src="app.js?v=20261022-mvp-label"></script>
+  <script type="module" src="app.js?v=20261022-announcements"></script>
 </head>
 <body>
   <a class="skip-link" href="#main" data-i18n="skip">Μετάβαση στο περιεχόμενο</a>
@@ -22,6 +22,7 @@
       <a href="#results" data-i18n="navResults">Αποτελέσματα</a>
       <a href="#scorers" data-i18n="navScorers">Σκόρερ</a>
       <a href="#squad" data-i18n="navSquad">Ομάδα</a>
+      <a href="#announcements" data-i18n="navAnnouncements">Ανακοινώσεις</a>
     </nav>
     <div class="header-actions">
       <button id="language-toggle" class="language-toggle" aria-label="Switch to English">EN <span aria-hidden="true">↗</span></button>
@@ -30,12 +31,12 @@
   </header>
 
   <main id="main">
-    <section class="team-hero" id="home" aria-labelledby="hero-title">
+    <section class="team-hero" id="home" data-home-section aria-labelledby="hero-title">
       <figure class="team-photo-frame"><img class="team-photo" src="assets/team.jpg" alt="Η ομάδα των SHADOWS FC στο γήπεδο" data-i18n-alt="teamPhotoAlt" width="853" height="1280" fetchpriority="high"></figure>
       <div class="team-hero-caption container"><div><p class="eyebrow" data-i18n="leagueLocation">MASTER LEAGUE · ΒΟΥΛΑ</p><h1 id="hero-title">SHADOWS <span>FC</span></h1></div><span class="team-home-mark">VOULIAGMENI · 16671</span></div>
     </section>
 
-    <section id="results" class="results-section container" aria-labelledby="results-title">
+    <section id="results" class="results-section container" data-home-section aria-labelledby="results-title">
       <div class="section-heading"><div><p class="eyebrow"><span class="section-number">01 /</span> MATCH CENTRE</p><h2 id="results-title" data-i18n="resultsTitle">Οι αγώνες μας.</h2></div><span class="section-aside" id="archive-total"></span></div>
       <p class="results-order" data-i18n="newestFirst">Από τον πιο πρόσφατο αγώνα</p>
       <p id="results-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
@@ -43,16 +44,23 @@
       <nav class="archive-pagination" aria-label="Σελίδες αγώνων" hidden><button id="previous-page" data-i18n="previousPage">Προηγούμενη</button><span id="page-status"></span><button id="next-page" data-i18n="nextPage">Επόμενη</button></nav>
     </section>
 
-    <section id="scorers" class="scorers-section container" aria-labelledby="scorers-title">
+    <section id="scorers" class="scorers-section container" data-home-section aria-labelledby="scorers-title">
       <div class="section-heading"><div><p class="eyebrow"><span class="section-number">02 /</span> ON THE SCORESHEET</p><h2 id="scorers-title" data-i18n="scorersTitle">Οι σκόρερ μας.</h2></div><span class="section-aside" id="scorers-total"></span></div>
       <p class="scorer-scope-note" id="scorer-scope-note"></p>
       <div class="scorers-grid"><div class="top-scorer-card" id="scoring-leaders"></div><div class="scorer-table-wrap"><table class="scorer-table"><caption class="sr-only" data-i18n="scorerCaption">Γκολ ανά παίκτη στους καταγεγραμμένους αγώνες</caption><thead><tr><th scope="col">#</th><th scope="col" data-i18n="player">ΠΑΙΚΤΗΣ</th><th scope="col" data-i18n="goals">ΓΚΟΛ</th></tr></thead><tbody id="scorer-rows"></tbody></table></div></div>
     </section>
 
-    <section id="squad" class="squad-section container" aria-labelledby="squad-title">
+    <section id="squad" class="squad-section container" data-home-section aria-labelledby="squad-title">
       <div class="section-heading"><div><p class="eyebrow"><span class="section-number">03 /</span> THE PEOPLE BEHIND THE SHIRT</p><h2 id="squad-title" data-i18n="squadTitle">Η ομάδα μας.</h2></div><span class="section-aside" id="squad-count"></span></div>
       <p class="squad-note" data-i18n="squadNote">Οι παίκτες πίσω από τη φανέλα. Γνώρισε την ομάδα των SHADOWS FC.</p>
       <div id="squad-grid" class="squad-grid"></div>
+    </section>
+
+    <section id="announcements" class="announcements-section container" aria-labelledby="announcements-title" hidden>
+      <a class="news-home-link" href="#home"><span aria-hidden="true">←</span> <span data-i18n="backHome">Αρχική σελίδα</span></a>
+      <div class="section-heading"><div><p class="eyebrow">SHADOWS FC / NEWSROOM</p><h1 id="announcements-title" tabindex="-1" data-i18n="announcementsTitle">Ανακοινώσεις ομάδας.</h1></div><span class="section-aside" id="announcements-count"></span></div>
+      <p class="announcements-intro" data-i18n="announcementsIntro">Όλες οι επίσημες ενημερώσεις της ομάδας, σε ένα σημείο.</p>
+      <div id="announcement-list" class="announcement-list"></div>
     </section>
 
   </main>

@@ -264,3 +264,11 @@ dialog h2{color:#252019}
 }
 .team-photo-frame .team-photo{border:1px solid #735322;box-shadow:0 0 0 1px #e1c787}
 @media(max-width:560px){.team-photo-frame{padding:7px;box-shadow:0 0 0 1px #e3cb93,0 8px 20px #75551c20,inset 0 0 0 1px #f3dfaa,inset 0 0 0 3px #a07b3c}}
+
+/* White and club-pink stripes frame the content like a football shirt. */
+:root{--stripe-width:96px;--stripe-white:#fffefa;--stripe-pink:#f9dce9}
+html{background:var(--stripe-white)}
+body{background:repeating-linear-gradient(90deg,var(--stripe-white) 0 var(--stripe-width),var(--stripe-pink) var(--stripe-width) calc(var(--stripe-width)*2))}
+.team-hero,.results-section,.scorers-section,.squad-section{background:transparent}
+.scorer-table-wrap{background:var(--stripe-white)}
+@media(max-width:760px){:root{--stripe-width:48px}}

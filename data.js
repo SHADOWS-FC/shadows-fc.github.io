@@ -13,6 +13,11 @@ export const club = {
   logo: 'assets/logos/shadows-fc.jpg',
 };
 
+// Publish only club-supplied statements. Higher order values appear first.
+// Each entry has id, order, title/summary { el, en }, body { el: [], en: [] },
+// and an optional confirmed date. The earlier Sotiris text is awaiting resupply.
+export const announcements = [];
+
 export const matches = [
   {
     id: 'legrena', round: 1, date: '29/09', time: '21:00',

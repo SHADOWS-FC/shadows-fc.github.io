@@ -34,11 +34,11 @@ browser validation here uses HTTP.
 
 ## Content and updates
 
-- `data.js`: matches, scorer names, confirmed player profiles, historical matchday squad, shirt numbers, and aliases.
+- `data.js`: matches, scorer names, confirmed player profiles, historical matchday squad, shirt numbers, aliases, and club announcements.
 - `app.js`: Greek and English translations and interactions.
 - `styles.css`: base layout and responsive rules.
 - `editorial.css`: photo-led homepage, condensed typography, match cards and responsive layout.
-- `white-gold.css`: the existing white and gold palette, retained in the simplified homepage and standalone build.
+- `white-gold.css`: the club palette, white/pink striped background, and gold photograph frame.
 - `assets/`: self-hosted graphics and fonts, including the font licence.
 - `index.html`: team photograph, latest-first results, scorer leaderboard, and complete squad.
 
@@ -48,7 +48,7 @@ Match scores and scorer totals are tested for consistency.
 
 ### Homepage and navigation
 
-The homepage has exactly four sections, in this order: the original team
+The homepage has four sections, in this order: the original team
 photograph, matches from newest to oldest, all-time recorded scorers, then all
 13 confirmed players. There are no search boxes, filter/sort controls, sponsor
 panels or intervening promotional sections. Player portraits retain their
@@ -67,6 +67,16 @@ Each match/player/scorer dialog retains its shareable URL. Browser Back returns
 through the match-to-player drill-down; the copy-link button has a selectable
 text fallback when clipboard access is unavailable. Click scorer names or player
 cards to explore their scoring histories and the corresponding matches.
+
+The Announcements navigation link opens a separate newsroom view at
+`#announcements`, leaving the homepage order intact. Entries are read from
+`announcements` in `data.js`, newest `order` first, and open as full statements
+with shareable `?announcement=…#announcements` links. Each record has a unique
+`id`, an increasing `order`, translated `title` and `summary` objects, and a
+`body` object containing paragraph arrays under `el` and `en`. If a translation
+is missing, the supplied language is shown. Only add a `date` when confirmed.
+The earlier Sotiris statement has not been recovered from the saved content;
+the section remains empty until the club resupplies its text.
 
 To add results, append records to `matches` in `data.js` with a unique `id`, an
 increasing chronological `round`, the confirmed day/month, opponent, score and

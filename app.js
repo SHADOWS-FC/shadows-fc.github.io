@@ -1,7 +1,11 @@
-import { club, matches, squad, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261022-mvp-label';
+import { club, matches, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261022-announcements';
 
 const messages = {
   el: {
+    navAnnouncements: 'Ανακοινώσεις', announcementsTitle: 'Ανακοινώσεις ομάδας.',
+    announcementsIntro: 'Όλες οι επίσημες ενημερώσεις της ομάδας, σε ένα σημείο.',
+    officialAnnouncement: 'ΕΠΙΣΗΜΗ ΑΝΑΚΟΙΝΩΣΗ', announcementCount: 'ανακοινώσεις',
+    readAnnouncement: 'Διάβασε την ανακοίνωση', noAnnouncements: 'Οι ανακοινώσεις της ομάδας θα εμφανίζονται εδώ.', backHome: 'Αρχική σελίδα',
     startingSeven: 'ΑΡΧΙΚΗ ΕΠΤΑΔΑ', matchdayPlayers: 'ΑΠΟΣΤΟΛΗ ΑΓΩΝΑ', substitutes: 'ΑΝΑΠΛΗΡΩΜΑΤΙΚΟΙ',
     coachingStaff: 'ΠΡΟΠΟΝΗΤΙΚΟ ΕΠΙΤΕΛΕΙΟ', headCoach: 'Προπονητής', lineupTitle: 'ΣΥΝΘΕΣΗ ΟΜΑΔΑΣ',
     lineupNotRecorded: 'Δεν έχει καταχωριστεί ακόμη η σύνθεση για αυτόν τον αγώνα.',
@@ -53,6 +57,10 @@ const messages = {
     goalDifference: 'διαφορά γκολ', record: 'Ν–Ι–Η',
   },
   en: {
+    navAnnouncements: 'Announcements', announcementsTitle: 'Club announcements.',
+    announcementsIntro: 'Every official team update, in one place.',
+    officialAnnouncement: 'OFFICIAL ANNOUNCEMENT', announcementCount: 'announcements',
+    readAnnouncement: 'Read announcement', noAnnouncements: 'Team announcements will appear here.', backHome: 'Back to home',
     startingSeven: 'STARTING SEVEN', matchdayPlayers: 'MATCHDAY SQUAD', substitutes: 'SUBSTITUTES',
     coachingStaff: 'COACHING STAFF', headCoach: 'Head coach', lineupTitle: 'TEAM LINEUP',
     lineupNotRecorded: 'The lineup has not been recorded for this match yet.',
@@ -135,6 +143,7 @@ function readArchiveUrl() {
 
 function dialogFromUrl() {
   const params = new URL(location.href).searchParams;
+  if (announcements.some(item => item.id === params.get('announcement'))) return { type: 'announcement', id: params.get('announcement') };
   if (matches.some(match => match.id === params.get('match'))) return { type: 'match', id: params.get('match') };
   if (squad.some(player => String(player.number) === params.get('player'))) return { type: 'player', id: Number(params.get('player')) };
   if (getScorers().some(scorer => scorer.name === params.get('scorer'))) return { type: 'scorer', name: params.get('scorer') };
@@ -143,9 +152,10 @@ function dialogFromUrl() {
 
 function writeUrl(push = false) {
   const url = new URL(location.href);
-  for (const key of ['q', 'month', 'result', 'sort', 'view', 'page', 'match', 'player', 'scorer']) url.searchParams.delete(key);
+  for (const key of ['q', 'month', 'result', 'sort', 'view', 'page', 'match', 'player', 'scorer', 'announcement']) url.searchParams.delete(key);
   if (archive.page > 1) url.searchParams.set('page', archive.page);
-  if (dialogContent) url.searchParams.set(dialogContent.type === 'match' ? 'match' : dialogContent.type === 'player' ? 'player' : 'scorer', dialogContent.id ?? dialogContent.name);
+  if (dialogContent) url.searchParams.set(dialogContent.type, dialogContent.id ?? dialogContent.name);
+  if (dialogContent?.type === 'announcement') url.hash = 'announcements';
   if (url.href !== location.href) {
     try { history[push ? 'pushState' : 'replaceState'](null, '', url); } catch { /* Browsing still works when history is unavailable. */ }
   }
@@ -204,6 +214,24 @@ function renderSquad() {
   renderArrows();
 }
 
+const announcementText = (item, field) => item[field]?.[language] ?? item[field]?.el ?? item[field]?.en;
+
+function renderAnnouncements() {
+  const ordered = [...announcements].sort((a, b) => b.order - a.order);
+  $('#announcements-count').textContent = `${ordered.length} ${t('announcementCount').toLocaleUpperCase()}`;
+  $('#announcement-list').innerHTML = ordered.map(item => `<article class="announcement-card"><button data-open-announcement="${esc(item.id)}"><span class="announcement-card-meta"><span>${t('officialAnnouncement')}</span>${item.date ? `<time>${esc(item.date)}</time>` : ''}</span><h2>${esc(announcementText(item, 'title'))}</h2><p>${esc(announcementText(item, 'summary') || '')}</p><span class="announcement-card-link">${t('readAnnouncement')} <span aria-hidden="true">↗</span></span></button></article>`).join('') || `<div class="announcements-empty"><span class="eyebrow">SHADOWS FC</span><p>${t('noAnnouncements')}</p></div>`;
+  renderArrows();
+}
+
+function renderPageView() {
+  const isNews = location.hash === '#announcements' || dialogContent?.type === 'announcement';
+  document.querySelectorAll('[data-home-section]').forEach(section => { section.hidden = isNews; });
+  $('#announcements').hidden = !isNews;
+  const newsLink = $('#navigation a[href="#announcements"]');
+  if (isNews) newsLink.setAttribute('aria-current', 'page');
+  else newsLink.removeAttribute('aria-current');
+}
+
 const dialog = $('#detail-dialog');
 
 function scoringHistoryMarkup(name) {
@@ -230,7 +258,12 @@ function injuryMarkup(match, playerNumber = null) {
 
 function renderDialog() {
   if (!dialogContent) return;
-  if (dialogContent.type === 'match') {
+  if (dialogContent.type === 'announcement') {
+    const item = announcements.find(entry => entry.id === dialogContent.id);
+    if (!item) return;
+    $('#dialog-category').textContent = t('officialAnnouncement');
+    $('#dialog-body').innerHTML = `<article class="announcement-detail"><h2 id="dialog-title">${esc(announcementText(item, 'title'))}</h2><p class="announcement-byline">SHADOWS FC${item.date ? ` · ${esc(item.date)}` : ''}</p><div class="announcement-body">${(announcementText(item, 'body') || []).map(paragraph => `<p>${esc(paragraph)}</p>`).join('')}</div></article>`;
+  } else if (dialogContent.type === 'match') {
     const match = matches.find(item => item.id === dialogContent.id);
     if (!match) return;
     const ordered = selectMatches(matches, { sort: 'oldest' });
@@ -256,6 +289,7 @@ function openDialog(content, trigger = null, push = true) {
   if (!dialog.open) dialogTrigger = trigger;
   dialogContent = content;
   if (push) writeUrl(true);
+  renderPageView();
   renderDialog();
   if (!dialog.open) dialog.showModal();
   dialog.scrollTop = 0;
@@ -291,7 +325,7 @@ function render() {
   $('#navigation').setAttribute('aria-label', language === 'el' ? 'Κύρια πλοήγηση' : 'Main navigation');
   $('#menu-toggle').setAttribute('aria-label', t($('#menu-toggle').getAttribute('aria-expanded') === 'true' ? 'closeMenu' : 'openMenu'));
   $('.team-photo').alt = t('teamPhotoAlt');
-  renderMatches(); renderScorers(); renderSquad(); renderDialog();
+  renderMatches(); renderScorers(); renderSquad(); renderAnnouncements(); renderPageView(); renderDialog();
 }
 
 $('#language-toggle').addEventListener('click', () => {
@@ -310,7 +344,8 @@ for (const [id, step] of [['previous-page', -1], ['next-page', 1]]) {
 document.addEventListener('click', async event => {
   const button = event.target.closest('button');
   if (!button) return;
-  if (button.hasAttribute('data-open-match')) openDialog({ type: 'match', id: button.dataset.openMatch }, button);
+  if (button.hasAttribute('data-open-announcement')) openDialog({ type: 'announcement', id: button.dataset.openAnnouncement }, button);
+  else if (button.hasAttribute('data-open-match')) openDialog({ type: 'match', id: button.dataset.openMatch }, button);
   else if (button.hasAttribute('data-open-scorer')) showScorer(button.dataset.openScorer, button);
   else if (button.hasAttribute('data-player')) openDialog({ type: 'player', id: Number(button.dataset.player) }, button);
   else if (button.hasAttribute('data-step-match') && button.dataset.stepMatch) {
@@ -333,6 +368,15 @@ window.addEventListener('popstate', () => {
   const requested = dialogFromUrl();
   if (requested) openDialog(requested, null, false);
   else if (dialog.open) { closingFromHistory = true; dialog.close(); }
+  renderPageView();
+});
+window.addEventListener('hashchange', () => {
+  renderPageView();
+  const target = document.getElementById(location.hash.slice(1));
+  if (target && !target.hidden) {
+    target.scrollIntoView({ block: 'start' });
+    if (target.id === 'announcements') $('#announcements-title').focus({ preventScroll: true });
+  }
 });
 $('#close-dialog').addEventListener('click', () => dialog.close());
 dialog.addEventListener('click', event => {
@@ -345,6 +389,7 @@ dialog.addEventListener('close', () => {
   document.body.style.overflow = '';
   dialogContent = null;
   if (!closingFromHistory) writeUrl();
+  renderPageView();
   closingFromHistory = false;
   if (dialogTrigger?.isConnected) dialogTrigger.focus({ preventScroll: true });
 });
