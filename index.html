@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0c0d0e">
+  <meta name="description" content="SHADOWS FC — Η ομάδα της Βουλιαγμένης. Αποτελέσματα, σκόρερ και ομάδα.">
+  <title>SHADOWS FC — Vouliagmeni 16671</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="editorial.css">
+  <link rel="preload" as="image" href="assets/night-pitch.png">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="skip">Μετάβαση στο περιεχόμενο</a>
+  <header class="site-header">
+    <a class="wordmark" href="#home" aria-label="SHADOWS FC home"><span class="brand-monogram" aria-hidden="true">S<span>/</span></span><span>SHADOWS<span class="brand-fc"> FC</span><small>VOULIAGMENI · 16671</small></span></a>
+    <nav id="navigation" aria-label="Main navigation">
+      <a href="#results" data-i18n="navResults">Αποτελέσματα</a>
+      <a href="#scorers" data-i18n="navScorers">Σκόρερ</a>
+      <a href="#squad" data-i18n="navSquad">Ομάδα</a>
+      <a href="#club" data-i18n="navClub">Ο σύλλογος</a>
+    </nav>
+    <div class="header-actions">
+      <button id="language-toggle" class="language-toggle" aria-label="Switch to English">EN <span aria-hidden="true">↗</span></button>
+      <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="navigation" aria-label="Άνοιγμα μενού"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <p class="eyebrow"><span class="pink-line"></span> VOULIAGMENI, ATHENS <span class="tiny-coordinates">BLACK / PINK</span></p>
+        <h1 id="hero-title">FROM THE<br>SHADOWS.<br><span>TOGETHER.</span></h1>
+        <p class="hero-description" data-i18n="heroDescription">Μια παρέα. Μια ομάδα. Η δική μας ιστορία, μέσα κι έξω από το γήπεδο.</p>
+        <a class="button button-pink" href="#results"><span data-i18n="viewResults">Δες τους αγώνες</span><span aria-hidden="true">↗</span></a>
+        <div class="hero-bottom"><span class="status-dot"></span><span data-i18n="heroFootnote">ΑΠΟ ΤΗ ΒΟΥΛΙΑΓΜΕΝΗ. ΓΙΑ ΤΗΝ ΟΜΑΔΑ.</span></div>
+      </div>
+      <div class="hero-match">
+        <div class="pitch-lines" aria-hidden="true"><span></span></div>
+        <div class="match-topline"><span class="eyebrow" data-i18n="latestResult">ΤΕΛΕΥΤΑΙΟ ΑΠΟΤΕΛΕΣΜΑ</span><span class="result-badge" data-i18n="fullTime">ΤΕΛΙΚΟ</span></div>
+        <div class="match-meta"><span>21.10</span><span>STAR SPORT CLUB · VOULA</span></div>
+        <div class="hero-teams"><div><span class="team-emblem shadows-emblem" aria-hidden="true">S<span>/</span></span><strong>SHADOWS FC</strong><small>VOULIAGMENI</small></div><span class="versus">VS</span><div><span class="team-emblem opponent-emblem" aria-hidden="true">SFC</span><strong>SAVRALLIOLID</strong><small>FC</small></div></div>
+        <div class="hero-score" aria-label="SHADOWS FC 7, Savralliolid FC 6"><span>7</span><i>–</i><span>6</span></div>
+        <div class="win-note"><span class="status-dot"></span><span data-i18n="firstWin">Η ΠΡΩΤΗ ΝΙΚΗ. ΚΑΙ ΣΥΝΕΧΙΖΟΥΜΕ.</span></div>
+        <div class="hero-scorers"><span data-i18n="goals">ΓΚΟΛ</span><strong>Gkoumas <b>3</b></strong><strong>Dinos <b>2</b></strong><strong>Rothos <b>2</b></strong></div>
+      </div>
+    </section>
+
+    <div class="ticker" aria-hidden="true"><div>SHADOWS FC <span>✦</span> VOULIAGMENI 16671 <span>✦</span> BLACK & PINK <span>✦</span> ONE TEAM. OUR STORY. <span>✦</span> SHADOWS FC <span>✦</span> VOULIAGMENI 16671 <span>✦</span></div></div>
+
+    <section class="season-summary container" aria-labelledby="summary-title">
+      <div class="summary-intro"><p class="eyebrow" data-i18n="soFar">Η ΠΟΡΕΙΑ ΜΑΣ</p><h2 id="summary-title" data-i18n="seasonNumbers">Η ομάδα σε αριθμούς.</h2><p data-i18n="summaryScope">Στους 4 αγώνες που έχουν καταγραφεί.</p></div>
+      <div id="summary-stats" class="summary-stats"></div>
+    </section>
+
+    <section id="results" class="results-section container" aria-labelledby="results-title">
+      <div class="section-heading"><div><p class="eyebrow"><span class="section-number">01 /</span> MATCH CENTRE</p><h2 id="results-title" data-i18n="resultsTitle">Κάθε ματς, μια ιστορία.</h2></div><span class="section-aside" data-i18n="fourMatches">4 ΑΓΩΝΕΣ · ΟΛΑ ΤΑ ΑΠΟΤΕΛΕΣΜΑΤΑ</span></div>
+      <div class="results-toolbar"><div class="filter-group" role="group" aria-label="Φίλτρο αποτελεσμάτων"><button data-filter="all" class="filter active" aria-pressed="true" data-i18n="allGames">Όλοι οι αγώνες</button><button data-filter="win" class="filter" aria-pressed="false" data-i18n="wins">Νίκες</button><button data-filter="loss" class="filter" aria-pressed="false" data-i18n="losses">Ήττες</button></div><span class="results-hint" data-i18n="clickMatch">Επίλεξε αγώνα για τους σκόρερ ↗</span></div>
+      <p id="results-status" class="sr-only" aria-live="polite"></p>
+      <div id="match-list" class="match-list"></div>
+    </section>
+
+    <section class="spotlight" aria-labelledby="mvp-title">
+      <div class="container spotlight-grid">
+        <div class="spotlight-art" aria-hidden="true"><span class="art-label">PLAYER OF THE MATCH / HAT-TRICK</span><span class="art-number">03</span><img class="mvp-shirt" src="assets/shadows-shirt.svg" alt="" width="400" height="430" loading="lazy"><div class="art-bottom"><span>GKOUMAS</span><span>21.10 / MATCHDAY 04</span></div></div>
+        <div class="spotlight-copy"><p class="eyebrow"><span class="status-dot"></span> MVP / SHADOWS × SAVRALLIOLID</p><h2 id="mvp-title" data-i18n="mvpTitle">Τρία γκολ.<br>Μια μεγάλη βραδιά.</h2><p class="mvp-name">GKOUMAS <span aria-hidden="true">↗</span></p><p data-i18n="mvpDescription">Χατ τρικ στη νίκη με 7–6 απέναντι στη Savralliolid FC. Ο Γκούμας είναι ο MVP του τελευταίου μας αγώνα.</p><div class="mvp-facts"><span><b>3</b><small data-i18n="matchGoals">ΓΚΟΛ ΣΤΟΝ ΑΓΩΝΑ</small></span><span><b>5</b><small data-i18n="recordedGoals">ΓΚΟΛ ΣΤΑ 4 ΜΑΤΣ</small></span></div><a class="text-link" href="#scorers"><span data-i18n="allScorers">Όλοι οι σκόρερ</span><span aria-hidden="true">↗</span></a></div>
+      </div>
+    </section>
+
+    <section id="scorers" class="scorers-section container" aria-labelledby="scorers-title">
+      <div class="section-heading"><div><p class="eyebrow"><span class="section-number">02 /</span> ON THE SCORESHEET</p><h2 id="scorers-title" data-i18n="scorersTitle">Οι σκόρερ μας.</h2></div><span class="section-aside" data-i18n="scorersAside">21 ΓΚΟΛ. ΟΜΑΔΙΚΗ ΥΠΟΘΕΣΗ.</span></div>
+      <div class="scorers-grid"><div class="top-scorer-card"><span class="eyebrow" data-i18n="jointLeaders">ΣΤΗΝ ΚΟΡΥΦΗ ΜΑΖΙ</span><div class="top-scorer-number">5<span data-i18n="goalsEach">ΓΚΟΛ Ο ΚΑΘΕΝΑΣ</span></div><h3>GKOUMAS<br><span>&</span> ROTHOS</h3><p data-i18n="scoringNote">Τα γκολ μετράνε. Η ομάδα περισσότερο.</p></div><div class="scorer-table-wrap"><table class="scorer-table"><caption class="sr-only" data-i18n="scorerCaption">Γκολ ανά παίκτη στους καταγεγραμμένους αγώνες</caption><thead><tr><th scope="col">#</th><th scope="col" data-i18n="player">ΠΑΙΚΤΗΣ</th><th scope="col" data-i18n="goals">ΓΚΟΛ</th></tr></thead><tbody id="scorer-rows"></tbody></table></div></div>
+    </section>
+
+    <section id="squad" class="squad-section container" aria-labelledby="squad-title">
+      <div class="section-heading"><div><p class="eyebrow"><span class="section-number">03 /</span> THE PEOPLE BEHIND THE SHIRT</p><h2 id="squad-title" data-i18n="squadTitle">Η τελευταία αποστολή.</h2></div><label class="search-field"><span aria-hidden="true">⌕</span><span class="sr-only" data-i18n="searchLabel">Αναζήτηση παίκτη</span><input id="player-search" type="search" autocomplete="off" placeholder="Αναζήτηση παίκτη…" aria-label="Αναζήτηση παίκτη"></label></div>
+      <p class="squad-note" data-i18n="squadNote">Η αποστολή και οι αριθμοί φανέλας από το ματς με τη Savralliolid FC.</p>
+      <div id="squad-grid" class="squad-grid"></div><p id="squad-status" class="search-status" aria-live="polite"></p>
+    </section>
+
+    <section id="club" class="club-section" aria-labelledby="club-title"><div class="container club-grid"><div><p class="eyebrow"><span class="section-number">04 /</span> OUR CORNER OF THE WORLD</p><h2 id="club-title">VOULIAGMENI.<br><span>OUR HOME.</span></h2></div><div class="club-copy"><p data-i18n="clubDescription">Οι SHADOWS FC είναι η δική μας παρέα στο γήπεδο. Μαύρο και ροζ, κοινές στιγμές και μια ιστορία που συνεχίζει να γράφεται.</p><div class="club-details"><span data-i18n="basedIn">Η ΒΑΣΗ ΜΑΣ</span><strong data-i18n="vouliagmeni">Βουλιαγμένη, Αθήνα</strong><span data-i18n="matchVenue">ΤΟ ΓΗΠΕΔΟ</span><strong>Star Sport Club · Voula</strong></div><a class="button button-outline" href="https://www.instagram.com/shadows_fc0/" target="_blank" rel="noopener noreferrer"><span>@shadows_fc0</span><span aria-hidden="true">↗</span><span class="sr-only" data-i18n="newTab"> (ανοίγει σε νέα καρτέλα)</span></a></div></div></section>
+  </main>
+
+  <footer class="site-footer container"><a href="#home" class="footer-brand">SHADOWS<span> FC</span></a><span>VOULIAGMENI · 16671</span><a href="#home" class="back-top"><span data-i18n="backTop">Στην κορυφή</span><span aria-hidden="true">↑</span></a></footer>
+  <dialog id="detail-dialog" aria-labelledby="dialog-title"><div class="dialog-top"><span class="eyebrow" id="dialog-category"></span><button id="close-dialog" class="close-dialog" aria-label="Κλείσιμο">×</button></div><div id="dialog-body"></div></dialog>
+</body>
+</html>
