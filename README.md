@@ -75,8 +75,16 @@ with shareable `?announcement=…#announcements` links. Each record has a unique
 `id`, an increasing `order`, translated `title` and `summary` objects, and a
 `body` object containing paragraph arrays under `el` and `en`. If a translation
 is missing, the supplied language is shown. Only add a `date` when confirmed.
-The earlier Sotiris statement has not been recovered from the saved content;
-the section remains empty until the club resupplies its text.
+An optional `photo` path and translated `photoAlt` object pair an announcement
+with its original photograph.
+
+The first entry is the official statement regarding Sotiris, transcribed from
+the club-supplied Instagram caption screenshot. Its original Greek wording,
+paragraphs and closing signature are retained, including when the interface is
+in English. No publication date is inferred. The accompanying embroidered-crest
+photograph at `assets/announcements/sotiris-statement.jpg` is the separate image
+supplied with the statement, copied without alteration; the caption screenshot
+is used only as the text source.
 
 To add results, append records to `matches` in `data.js` with a unique `id`, an
 increasing chronological `round`, the confirmed day/month, opponent, score and

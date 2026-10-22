@@ -1,10 +1,10 @@
-import { club, matches, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261022-announcements';
+import { club, matches, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261022-sotiris';
 
 const messages = {
   el: {
     navAnnouncements: 'Ανακοινώσεις', announcementsTitle: 'Ανακοινώσεις ομάδας.',
     announcementsIntro: 'Όλες οι επίσημες ενημερώσεις της ομάδας, σε ένα σημείο.',
-    officialAnnouncement: 'ΕΠΙΣΗΜΗ ΑΝΑΚΟΙΝΩΣΗ', announcementCount: 'ανακοινώσεις',
+    officialAnnouncement: 'ΕΠΙΣΗΜΗ ΑΝΑΚΟΙΝΩΣΗ', announcementCount: 'ανακοινώσεις', announcementSingular: 'ανακοίνωση',
     readAnnouncement: 'Διάβασε την ανακοίνωση', noAnnouncements: 'Οι ανακοινώσεις της ομάδας θα εμφανίζονται εδώ.', backHome: 'Αρχική σελίδα',
     startingSeven: 'ΑΡΧΙΚΗ ΕΠΤΑΔΑ', matchdayPlayers: 'ΑΠΟΣΤΟΛΗ ΑΓΩΝΑ', substitutes: 'ΑΝΑΠΛΗΡΩΜΑΤΙΚΟΙ',
     coachingStaff: 'ΠΡΟΠΟΝΗΤΙΚΟ ΕΠΙΤΕΛΕΙΟ', headCoach: 'Προπονητής', lineupTitle: 'ΣΥΝΘΕΣΗ ΟΜΑΔΑΣ',
@@ -59,7 +59,7 @@ const messages = {
   en: {
     navAnnouncements: 'Announcements', announcementsTitle: 'Club announcements.',
     announcementsIntro: 'Every official team update, in one place.',
-    officialAnnouncement: 'OFFICIAL ANNOUNCEMENT', announcementCount: 'announcements',
+    officialAnnouncement: 'OFFICIAL ANNOUNCEMENT', announcementCount: 'announcements', announcementSingular: 'announcement',
     readAnnouncement: 'Read announcement', noAnnouncements: 'Team announcements will appear here.', backHome: 'Back to home',
     startingSeven: 'STARTING SEVEN', matchdayPlayers: 'MATCHDAY SQUAD', substitutes: 'SUBSTITUTES',
     coachingStaff: 'COACHING STAFF', headCoach: 'Head coach', lineupTitle: 'TEAM LINEUP',
@@ -216,10 +216,14 @@ function renderSquad() {
 
 const announcementText = (item, field) => item[field]?.[language] ?? item[field]?.el ?? item[field]?.en;
 
+function announcementPhotoMarkup(item, card = false) {
+  return item.photo ? `<img class="announcement-photo${card ? ' announcement-card-photo' : ''}" src="${esc(item.photo)}" alt="${esc(announcementText(item, 'photoAlt') || announcementText(item, 'title'))}" width="1280" height="1232"${card ? ' loading="lazy"' : ''}>` : '';
+}
+
 function renderAnnouncements() {
   const ordered = [...announcements].sort((a, b) => b.order - a.order);
-  $('#announcements-count').textContent = `${ordered.length} ${t('announcementCount').toLocaleUpperCase()}`;
-  $('#announcement-list').innerHTML = ordered.map(item => `<article class="announcement-card"><button data-open-announcement="${esc(item.id)}"><span class="announcement-card-meta"><span>${t('officialAnnouncement')}</span>${item.date ? `<time>${esc(item.date)}</time>` : ''}</span><h2>${esc(announcementText(item, 'title'))}</h2><p>${esc(announcementText(item, 'summary') || '')}</p><span class="announcement-card-link">${t('readAnnouncement')} <span aria-hidden="true">↗</span></span></button></article>`).join('') || `<div class="announcements-empty"><span class="eyebrow">SHADOWS FC</span><p>${t('noAnnouncements')}</p></div>`;
+  $('#announcements-count').textContent = `${ordered.length} ${t(ordered.length === 1 ? 'announcementSingular' : 'announcementCount').toLocaleUpperCase()}`;
+  $('#announcement-list').innerHTML = ordered.map(item => `<article class="announcement-card"><button data-open-announcement="${esc(item.id)}">${announcementPhotoMarkup(item, true)}<span class="announcement-card-meta"><span>${t('officialAnnouncement')}</span>${item.date ? `<time>${esc(item.date)}</time>` : ''}</span><h2>${esc(announcementText(item, 'title'))}</h2><p>${esc(announcementText(item, 'summary') || '')}</p><span class="announcement-card-link">${t('readAnnouncement')} <span aria-hidden="true">↗</span></span></button></article>`).join('') || `<div class="announcements-empty"><span class="eyebrow">SHADOWS FC</span><p>${t('noAnnouncements')}</p></div>`;
   renderArrows();
 }
 
@@ -262,7 +266,7 @@ function renderDialog() {
     const item = announcements.find(entry => entry.id === dialogContent.id);
     if (!item) return;
     $('#dialog-category').textContent = t('officialAnnouncement');
-    $('#dialog-body').innerHTML = `<article class="announcement-detail"><h2 id="dialog-title">${esc(announcementText(item, 'title'))}</h2><p class="announcement-byline">SHADOWS FC${item.date ? ` · ${esc(item.date)}` : ''}</p><div class="announcement-body">${(announcementText(item, 'body') || []).map(paragraph => `<p>${esc(paragraph)}</p>`).join('')}</div></article>`;
+    $('#dialog-body').innerHTML = `<article class="announcement-detail"><h2 id="dialog-title">${esc(announcementText(item, 'title'))}</h2><p class="announcement-byline">SHADOWS FC${item.date ? ` · ${esc(item.date)}` : ''}</p>${announcementPhotoMarkup(item)}<div class="announcement-body">${(announcementText(item, 'body') || []).map(paragraph => `<p>${esc(paragraph)}</p>`).join('')}</div></article>`;
   } else if (dialogContent.type === 'match') {
     const match = matches.find(item => item.id === dialogContent.id);
     if (!match) return;

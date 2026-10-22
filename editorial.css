@@ -225,6 +225,9 @@ h1,h2,h3,.hero-score,.stat-number,.match-score,.mvp-name,.art-number,.top-scorer
 .announcement-card{min-width:0;background:#fffefa;border:1px solid #e4c5d2;border-top:4px solid #e95198;box-shadow:0 8px 24px #5c26400b;transition:transform .2s,border-color .2s}
 .announcement-card:hover{transform:translateY(-3px);border-color:#cd5c8f}
 .announcement-card>button{display:flex;flex-direction:column;align-items:flex-start;width:100%;height:100%;padding:29px;text-align:left;color:var(--text);background:transparent}
+.announcement-photo{display:block;width:100%;height:auto;object-fit:contain;background:#0b0c0e}
+.announcement-card-photo{width:calc(100% + 58px);max-width:none;margin:-29px -29px 27px}
+.announcement-detail>.announcement-photo{margin:0 0 27px}
 .announcement-card-meta{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;width:100%;font-size:9px;font-weight:700;line-height:1.6;letter-spacing:.7px;color:#a32660}
 .announcement-card-meta time{color:#817366}
 .announcement-card h2{font-family:var(--display);font-size:30px;line-height:1.2;margin:22px 0 14px;overflow-wrap:anywhere}
@@ -239,5 +242,6 @@ h1,h2,h3,.hero-score,.stat-number,.match-score,.mvp-name,.art-number,.top-scorer
 .site-header nav a[aria-current="page"]:after{width:100%;background:#df448b}
 @media(min-width:801px) and (max-width:1100px){.site-header nav{gap:19px}.site-header nav a{font-size:10px}}
 @media(max-width:760px){.announcement-list{grid-template-columns:1fr}.announcements-section{padding-block:28px 60px}.news-home-link{margin-bottom:28px}.announcements-section .section-heading{display:block}.announcement-card>button{padding:24px}.announcements-intro{font-size:12px;margin-bottom:27px}.announcements-empty{padding:30px 23px}.announcements-empty p{font-size:13px}}
+@media(max-width:760px){.announcement-card-photo{width:calc(100% + 48px);margin:-24px -24px 24px}}
 @media(max-width:800px){.team-hero{padding-top:24px;padding-inline:32px}.team-hero-caption h1{font-size:56px}.team-home-mark{font-size:8px;letter-spacing:1.5px}}
 @media(max-width:560px){.team-hero{padding:16px 20px 0}.team-photo-frame{aspect-ratio:4/5}.team-hero-caption{padding:23px 0 26px;align-items:flex-start;flex-direction:column;gap:13px}.team-hero-caption h1{font-size:49px}.team-hero-caption .eyebrow{font-size:8px;letter-spacing:1.3px}.team-home-mark{font-size:8px;padding:0}.results-order{font-size:10px;margin-top:-16px}#results.results-section{padding-top:42px}.scorer-scope-note{font-size:10px}}

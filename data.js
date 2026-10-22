@@ -15,8 +15,30 @@ export const club = {
 
 // Publish only club-supplied statements. Higher order values appear first.
 // Each entry has id, order, title/summary { el, en }, body { el: [], en: [] },
-// and an optional confirmed date. The earlier Sotiris text is awaiting resupply.
-export const announcements = [];
+// optional photo/photoAlt, and an optional confirmed date.
+export const announcements = [
+  {
+    id: 'sotiris', order: 1,
+    title: { el: 'Επίσημη ανακοίνωση για τον Σωτήρη', en: 'Official statement regarding Sotiris' },
+    summary: { el: 'Ανακοίνωση του Διοικητικού Συμβουλίου σχετικά με την αποχώρηση του Σωτήρη από την αποψινή αναμέτρηση.' },
+    photo: 'assets/announcements/sotiris-statement.jpg',
+    photoAlt: {
+      el: 'Το ροζ κεντημένο έμβλημα των SHADOWS FC πάνω σε μαύρο ύφασμα',
+      en: 'The embroidered pink SHADOWS FC crest on black fabric',
+    },
+    body: { el: [
+      '🚨 ΕΠΙΣΗΜΗ ΑΝΑΚΟΙΝΩΣΗ — SHADOWS FC 🩷🖤',
+      'Με αφορμή την εκ νέου αιφνιδιαστική αποχώρηση του Σωτήρη από την αποψινή αναμέτρηση, επικαλούμενος για ακόμη μία φορά αόριστους «προσωπικούς λόγους», η διοίκηση της SHADOWS FC εκφράζει την έντονη δυσαρέσκεια και την απόλυτη αγανάκτησή της για τη συνεχιζόμενη απαξίωση προς τον Σύλλογο.',
+      'Το Διοικητικό Συμβούλιο αποφάσισε ομόφωνα την παραπομπή της υπόθεσης στο νομικό τμήμα της ομάδας, το οποίο εξετάζει όλα τα διαθέσιμα ένδικα μέσα, συμπεριλαμβανομένης της αποστολής εξωδίκων, της υποβολής μηνύσεων και της διεκδίκησης αποζημίωσης για ηθική βλάβη.',
+      'Η SHADOWS FC δηλώνει την απόλυτη εμπιστοσύνη της στην Ελληνική Δικαιοσύνη και αναμένει την πλήρη διερεύνηση της υπόθεσης.',
+      'Ο Σύλλογος απαιτεί δημόσια συγγνώμη εντός 24 ωρών και επιφυλάσσεται παντός νομίμου δικαιώματός του για την προάσπιση του κύρους και της ιστορίας του.',
+      'ΚΑΝΕΙΣ ΠΑΝΩ ΑΠΟ ΤΗ SHADOWS FC.',
+      'Θα ακολουθήσουν νεότερες ανακοινώσεις.',
+      'ΕΚ ΤΟΥ ΔΙΟΙΚΗΤΙΚΟΥ ΣΥΜΒΟΥΛΙΟΥ ΤΗΣ SHADOWS FC 💀',
+    ] },
+    source: 'Official statement transcribed from the club-supplied Instagram caption screenshot; paired with the separately supplied embroidered-crest photograph. No publication date was supplied.',
+  },
+];
 
 export const matches = [
   {
