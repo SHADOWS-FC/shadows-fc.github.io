@@ -10,7 +10,8 @@ export const club = {
   venue: 'Star Sport Club · Voula',
   league: 'Master League',
   leagueLocation: 'Voula',
-  logo: 'assets/logos/shadows-fc.jpg',
+  logo: 'assets/logos/shadows-fc-black-pink.jpg',
+  crestShape: 'shadows',
 };
 
 // Publish only club-supplied statements. Higher order values appear first.

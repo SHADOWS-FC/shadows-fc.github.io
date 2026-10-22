@@ -38,7 +38,7 @@ browser validation here uses HTTP.
 - `app.js`: Greek and English translations and interactions.
 - `styles.css`: base layout and responsive rules.
 - `editorial.css`: photo-led homepage, condensed typography, match cards and responsive layout.
-- `white-gold.css`: the club palette, white/pink striped background, and gold photograph frame.
+- `black-pink.css`: the black/pink club palette and striped background, dark cards and dialogs, and gold photograph frame.
 - `assets/`: self-hosted graphics and fonts, including the font licence.
 - `index.html`: team photograph, latest-first results, scorer leaderboard, and complete squad.
 
@@ -53,6 +53,13 @@ photograph, matches from newest to oldest, all-time recorded scorers, then all
 13 confirmed players. There are no search boxes, filter/sort controls, sponsor
 panels or intervening promotional sections. Player portraits retain their
 original photographic backgrounds.
+
+The active club crest is the supplied black/pink image at
+`assets/logos/shadows-fc-black-pink.jpg`, used in the header, footer, match cards,
+match details and browser icon. It is copied without alteration. Club crests
+use a black display canvas with normal blending; opponent crests retain light
+canvases so their supplied artwork stays legible. The black/pink theme covers
+both homepage and announcements, with brighter outcome colours for dark cards.
 
 Matches are paginated at eight per page, always in descending round order.
 In match cards, details and player histories, a win colours only the SHADOWS

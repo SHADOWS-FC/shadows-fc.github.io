@@ -1,0 +1,173 @@
+/* SHADOWS FC — Black & Pink
+   Loaded after the shared layout. Supplied photography remains unchanged. */
+:root{
+  color-scheme:dark;
+  --bg:#070709;--surface:#111015;--surface2:#1b131c;--text:#f6f0f5;
+  --muted:#b5a9b5;--line:#382b39;--pink:#fa3299;--pink-light:#ff9bce;
+  --scoreboard:#111015;--scoreboard-ink:#f6f0f5;--scoreboard-muted:#b5a9b5;
+  --scoreboard-line:#382b39;--scoreboard-pink:#fa3299;
+  --display:'Shadows Condensed','Arial Narrow',Impact,sans-serif;
+  --stripe-width:96px;--stripe-black:#070709;--stripe-pink:#200b19;
+}
+html{background:var(--bg);color:var(--text)}
+body{font-family:Arial,Helvetica,sans-serif;color:var(--text);background:repeating-linear-gradient(90deg,var(--stripe-black) 0 var(--stripe-width),var(--stripe-pink) var(--stripe-width) calc(var(--stripe-width)*2))}
+::selection{color:#070709;background:var(--pink-light)}
+:focus-visible{outline-color:var(--pink-light)}
+.club-topline{min-height:30px;padding:8px max(30px,calc((100vw - 1488px)/2));display:flex;align-items:center;justify-content:space-between;gap:12px;background:#030304;color:var(--pink-light);font-size:9px;letter-spacing:2px;font-weight:800;border-bottom:1px solid #fa32992b}
+.site-header{background:#09080c;border-color:var(--line);color:var(--text);box-shadow:0 2px 14px #0005}
+.site-header .wordmark{color:var(--text)}
+.wordmark small{color:var(--muted)}
+.wordmark .brand-fc,.footer-brand span{color:var(--pink)}
+.brand-seal,.footer-seal{background:#000;outline-color:#fa329966}
+.brand-crest,.footer-seal img{object-fit:contain;mix-blend-mode:normal}
+.site-header nav a{color:#e1d6e0}
+.site-header nav a:hover,.language-toggle:hover{color:var(--pink-light)}
+.site-header nav a:after{background:var(--pink)}
+.site-header nav a[aria-current="page"]{color:var(--pink-light)}
+.site-header nav a[aria-current="page"]:after{background:var(--pink)}
+.language-toggle{background:#17111a;color:var(--text);border-color:#4b2c43}
+.menu-toggle span{background:var(--text)}
+.team-hero,.results-section,.scorers-section,.squad-section{background:transparent}
+.team-hero-caption{border-color:var(--line)}
+.team-hero-caption .eyebrow,.section-heading .eyebrow,.section-number{color:var(--pink-light)}
+.team-home-mark,.results-order,.scorer-scope-note,.section-aside,.results-hint,.squad-note{color:var(--muted)}
+.section-heading h2{color:var(--text)}
+
+/* Light canvases preserve the supplied opponent badges; our crest stays black. */
+.crest-frame{background:#f4f3f4;border:1px solid #473746}
+.crest-frame img{mix-blend-mode:multiply}
+.crest-frame-shadows{background:#000;border-color:#51223c}
+.crest-frame img.crest-shadows{mix-blend-mode:normal;object-fit:contain}
+.crest-frame img.crest-legrena{object-fit:cover;object-position:center 60%;mix-blend-mode:normal}
+.match-row,.match-row:first-child{background:var(--surface);border:1px solid var(--line);border-top:3px solid #674259;color:var(--text);box-shadow:0 4px 18px #0004}
+.match-row:first-child{border-color:#a43170;border-top-color:var(--pink);background:linear-gradient(125deg,#26121f,#111015 75%)}
+.match-row:hover,.match-row:first-child:hover{background:#22131f;border-color:var(--pink);box-shadow:0 10px 28px #0005}
+.match-row:after{background:var(--scoreboard-line)}
+.match-date strong,.match-team,.match-score,.match-card-footer>span:last-child{color:var(--text)}
+.match-date small,.match-team small,.match-outcome,.match-card-footer{color:var(--muted)}
+.match-card-footer .row-arrow{color:var(--pink-light)}
+.match-score small{color:var(--muted)}
+
+/* Only the winning side changes colour; both sides are grey for a draw. */
+[data-result="win"]{--result-color:#57d994;--result-tint:#123022}
+[data-result="loss"]{--result-color:#ff7184;--result-tint:#381923}
+[data-result="draw"]{--result-color:#aab0be;--result-tint:#25252d}
+.score-value,.dialog-score[data-result],.history-score[data-result]{color:var(--text)}
+.score-divider{color:#b3a3b2;margin-inline:.12em}
+[data-result="win"] .score-for{color:#57d994}
+[data-result="loss"] .score-against{color:#ff7184}
+[data-result="draw"] .score-for,[data-result="draw"] .score-against{color:#aab0be}
+.match-row[data-result] .outcome-tag{background:var(--result-tint);color:var(--result-color);border:1px solid currentColor}
+.archive-pagination button{background:#1c131e;border-color:#72415f;color:var(--pink-light)}
+.archive-pagination button:disabled{background:#131015;border-color:#382a37;color:#a193a0}
+#page-status{color:var(--muted)}
+.empty-results{background:var(--surface);color:var(--muted);border-color:#6a3c59}
+
+/* Scorers and player portraits. */
+.top-scorer-card,#scoring-leaders{background:radial-gradient(ellipse at 100% 0,#fa329920,transparent 68%),var(--surface);border-color:#63304e;color:var(--text)}
+.top-scorer-card:after{border-color:#fa329926;box-shadow:0 0 0 35px #fa329908,0 0 0 70px #fa329907}
+.top-scorer-card>.eyebrow,.top-scorer-number{color:var(--pink-light)}
+.top-scorer-card h3,#scoring-leaders h3{color:var(--text)}
+.top-scorer-number span,.top-scorer-card>p{color:var(--muted)}
+.scorer-table-wrap{background:var(--surface);border:1px solid var(--line)}
+.scorer-table th{color:var(--muted);padding-top:17px}
+.scorer-table td{color:var(--text);border-color:var(--line)}
+.scorer-table td:first-child{color:var(--muted)}
+.scorer-table tbody tr:nth-child(-n+2){background:#271321}
+.scorer-table tbody tr:nth-child(-n+2) td:last-child{color:var(--pink-light)}
+.scorer-name:after{background:linear-gradient(90deg,var(--pink),#ff95cd)}
+.scorer-initials{background:#3b2034;color:#ffc6e3}
+.scorer-link{color:var(--text)}
+.scorer-link:hover,.scorer-chevron{color:var(--pink-light)}
+.player-card{background:var(--surface);border-color:var(--line);box-shadow:0 4px 18px #0004}
+.player-card:hover{border-color:var(--pink)}
+.player-card-art,.player-card:nth-child(4n+2) .player-card-art{background:linear-gradient(132deg,#301528,#121016 70%)}
+.player-card-art:before,.player-card:nth-child(4n+2) .player-card-art:before{border-color:#fa32992b;background:transparent}
+.player-card .player-number,.player-card:nth-child(4n+2) .player-number{color:#ba6c98}
+.player-card:hover .player-number{color:var(--pink-light)}
+.player-card-art .small-brand,.player-card:nth-child(4n+2) .small-brand{color:#c2a7bb}
+.player-info{background:var(--surface);border-color:var(--line)}
+.player-info strong{color:var(--text)}
+.player-info>span,.player-position{color:var(--pink-light)}
+.profile-position strong{color:var(--text)}
+.profile-number{color:var(--pink-light)}
+
+/* Match, player, scoring and announcement dialogs. */
+dialog{background:#111015;color:var(--text);border-color:#a43d76;box-shadow:0 25px 95px #000b}
+dialog::backdrop{background:#030205bf}
+.dialog-top .eyebrow{color:var(--pink-light)}
+dialog h2{color:var(--text)}
+.close-dialog{color:var(--pink-light)}
+.dialog-meta,.dialog-scorers li{color:var(--muted);border-color:var(--line)}
+.dialog-scorers b,.dialog-scorer-link span{color:var(--pink-light)}
+.dialog-scorer-link{color:var(--text)}
+.dialog-scorer-link:hover{color:var(--pink-light)}
+.dialog-scoreboard{background:#0b090e;border:1px solid var(--line)}
+.scoring-history button{background:#19111c;border-color:#4f2d46;color:var(--text)}
+.scoring-history button:hover{border-color:var(--pink);background:#281622}
+.scoring-history small{color:var(--muted)}
+.history-goals{color:var(--pink-light)}
+.match-navigation{border-color:var(--line)}
+.match-navigation button{color:var(--pink-light)}
+.match-navigation button:disabled{color:#a491a1}
+.match-navigation>span{color:var(--muted)}
+.share-detail>button{background:#291424;border-color:#a9437b;color:#ffe4f1}
+#share-status{color:var(--pink-light)}
+.share-fallback{color:var(--muted)}
+.share-fallback input{background:#0a080d;color:var(--text);border-color:#844368}
+
+/* Matchday lists remain distinct from scoring records. */
+.match-lineup-section{margin:25px 0;padding-top:21px;border-top:1px solid var(--scoreboard-line)}
+.match-lineup-section .dialog-subhead{margin:0 0 14px;color:var(--pink-light);font-size:10px;letter-spacing:1.2px}
+.match-lineup-list{list-style:none;padding:0;margin:0;border:1px solid #49303f;background:#19121c}
+.match-lineup-list li{display:grid;grid-template-columns:44px minmax(0,1fr);align-items:center;gap:13px;min-height:43px;padding:10px 14px;border-bottom:1px solid #382936}
+.match-lineup-list li:last-child{border-bottom:0}
+.lineup-marker{font-size:11px;font-weight:700;color:var(--pink-light);font-variant-numeric:tabular-nums}
+.lineup-name{font-size:13px;line-height:1.6;color:var(--text);overflow-wrap:anywhere}
+.lineup-subheading{font-size:9px;letter-spacing:1.1px;color:var(--pink-light);margin:22px 0 12px}
+.match-staff-list{list-style:none;margin:0;padding:3px 14px;background:#21131f;border:1px solid #49303f}
+.match-staff-list li{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;font-size:13px;line-height:1.6;border-bottom:1px solid #382936;color:var(--text)}
+.match-staff-list li:last-child{border-bottom:0}
+.match-staff-list small{font-size:10px;color:var(--muted);text-align:right}
+.injury-update{margin:25px 0;padding:19px 18px;border:1px solid #703140;border-left:3px solid #ff7184;background:#29151d}
+.injury-update h3{font-size:9px;letter-spacing:1.3px;color:#ffacb8;margin:0 0 11px}
+.injury-update>strong{display:block;font-family:var(--display);font-size:22px;line-height:1.2;color:var(--text);margin-bottom:9px}
+.injury-update p{font-size:11px;line-height:1.9;color:#e0bcc6;margin:5px 0 0}
+.injury-update .injury-return{padding-top:9px;margin-top:10px;border-top:1px solid #703140;color:#f2cbd6}
+
+/* Newsroom statements retain the supplied images and full readable text. */
+.news-home-link,.announcement-card-meta,.announcement-card-link,.announcement-byline{color:var(--pink-light)}
+.news-home-link:hover{color:#ffcae6}
+.announcements-intro{color:var(--muted)}
+.announcement-card{background:var(--surface);border-color:#63304e;border-top-color:var(--pink);box-shadow:0 8px 24px #0005}
+.announcement-card:hover{border-color:var(--pink)}
+.announcement-card h2{color:var(--text)}
+.announcement-card p,.announcement-card-meta time{color:var(--muted)}
+.announcements-empty{background:var(--surface);border-color:#63304e;border-top-color:var(--pink)}
+.announcements-empty .eyebrow{color:var(--pink-light)}
+.announcements-empty p{color:var(--muted)}
+.announcement-byline{border-color:var(--line)}
+.announcement-body p{color:#e6dce4}
+.site-footer{background:#09080c;color:var(--text);border-top:1px solid var(--line)}
+.site-footer>span,.site-footer .back-top,.footer-wordmark small{color:var(--muted)}
+.back-top>span:last-child{color:var(--pink-light)}
+
+/* A metallic gold picture frame around the original team photograph. */
+.team-photo-frame{
+  padding:12px;border:2px solid #89652e;
+  background:linear-gradient(135deg,#795721 0%,#ecd798 17%,#b18a44 33%,#f5e6bd 52%,#99743a 78%,#d9bd7d 100%);
+  box-shadow:0 0 0 1px #e3cb93,0 12px 30px #75551c26,inset 0 0 0 2px #f3dfaa,inset 0 0 0 4px #a07b3c;
+}
+.team-photo-frame .team-photo{border:1px solid #735322;box-shadow:0 0 0 1px #e1c787}
+@media(max-width:560px){.team-photo-frame{padding:7px;box-shadow:0 0 0 1px #e3cb93,0 8px 20px #75551c20,inset 0 0 0 1px #f3dfaa,inset 0 0 0 3px #a07b3c}}
+
+
+@media(max-width:800px){.site-header nav{background:#0c090f;color:var(--text);border-color:var(--line)}}
+@media(max-width:760px){
+  :root{--stripe-width:48px}
+  .club-topline{padding-inline:18px;font-size:8px;letter-spacing:1.3px}
+  .match-list{grid-template-columns:1fr}
+  .squad-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:440px){.site-header{box-shadow:none}.top-scorer-card{padding:25px}}
+@media(max-width:380px){.match-lineup-list li{grid-template-columns:34px minmax(0,1fr);gap:8px;padding-inline:11px}.lineup-name{font-size:12px}.lineup-marker{font-size:10px}.injury-update{padding:16px 14px}.match-staff-list li{font-size:12px}.match-staff-list small{font-size:9px}}
