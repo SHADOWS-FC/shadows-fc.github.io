@@ -1,7 +1,12 @@
-import { club, matches, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261022-staff';
+import { club, matches, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261022-gallery-squad';
 
 const messages = {
   el: {
+    squadGoalkeepers: 'Τερματοφύλακες', squadDefenders: 'Αμυντικοί', squadMidfielders: 'Μέσοι', squadForwards: 'Επιθετικοί',
+    galleryLabel: 'Φωτογραφίες ομάδας', galleryRole: 'συλλογή φωτογραφιών', gallerySlide: 'φωτογραφία',
+    galleryInstructions: 'Σύρε ή χρησιμοποίησε τα πλήκτρα με τα βέλη για αλλαγή φωτογραφίας',
+    galleryPrevious: 'Προηγούμενη φωτογραφία', galleryNext: 'Επόμενη φωτογραφία', galleryPhoto: 'Φωτογραφία', galleryOf: 'από',
+    galleryHint: 'Σύρε ή πάτησε τα βελάκια', celebrationPhotoAlt: 'Η ομάδα των SHADOWS FC στο γήπεδο με κύπελλο και μετάλλια',
     navAnnouncements: 'Ανακοινώσεις', announcementsTitle: 'Ανακοινώσεις ομάδας.',
     announcementsIntro: 'Όλες οι επίσημες ενημερώσεις της ομάδας, σε ένα σημείο.',
     officialAnnouncement: 'ΕΠΙΣΗΜΗ ΑΝΑΚΟΙΝΩΣΗ', announcementCount: 'ανακοινώσεις', announcementSingular: 'ανακοίνωση',
@@ -57,6 +62,11 @@ const messages = {
     goalDifference: 'διαφορά γκολ', record: 'Ν–Ι–Η',
   },
   en: {
+    squadGoalkeepers: 'Goalkeepers', squadDefenders: 'Defenders', squadMidfielders: 'Midfielders', squadForwards: 'Forwards',
+    galleryLabel: 'Team photographs', galleryRole: 'photo gallery', gallerySlide: 'slide',
+    galleryInstructions: 'Swipe or use the arrow keys to change photograph',
+    galleryPrevious: 'Previous photograph', galleryNext: 'Next photograph', galleryPhoto: 'Photograph', galleryOf: 'of',
+    galleryHint: 'Swipe or use the arrows', celebrationPhotoAlt: 'The SHADOWS FC team on the pitch with a trophy and medals',
     navAnnouncements: 'Announcements', announcementsTitle: 'Club announcements.',
     announcementsIntro: 'Every official team update, in one place.',
     officialAnnouncement: 'OFFICIAL ANNOUNCEMENT', announcementCount: 'announcements', announcementSingular: 'announcement',
@@ -116,6 +126,7 @@ let language = 'el';
 try { if (localStorage.getItem('shadows-language') === 'en') language = 'en'; } catch { /* Storage may be disabled. */ }
 const PAGE_SIZE = 8;
 const archive = { page: 1 };
+let galleryIndex = 0;
 let dialogContent = null;
 let dialogTrigger = null;
 let closingFromHistory = false;
@@ -209,10 +220,99 @@ function renderScorers() {
 }
 
 function renderSquad() {
-  $('#squad-grid').innerHTML = squad.map(player => `<button class="player-card${player.photo ? ' has-photo' : ''}" data-player="${player.number}" aria-label="${esc(player.name)}, ${t(player.confirmed ? 'confirmedShirtNumber' : 'shirtNumber')} ${player.number}${player.position ? `, ${esc(positionLabel(player.position))}` : ''}"><span class="player-card-art">${player.photo ? `<img class="player-portrait" src="${esc(player.photo)}" alt="${esc(player.name)}" loading="lazy" width="450" height="560">` : ''}<span class="small-brand">SHADOWS / FC</span><span class="player-number" aria-hidden="true">${String(player.number).padStart(2, '0')}</span></span><span class="player-info"><span class="player-name-group"><strong>${esc(player.name)}</strong>${player.position ? `<small class="player-position">${esc(positionLabel(player.position))}</small>` : ''}</span><span aria-hidden="true">↗</span></span></button>`).join('');
+  const groups = [
+    { id: 'goalkeepers', title: 'squadGoalkeepers', positions: ['GK'] },
+    { id: 'defenders', title: 'squadDefenders', positions: ['CB'] },
+    { id: 'midfielders', title: 'squadMidfielders', positions: ['CM', 'CAM'] },
+    { id: 'forwards', title: 'squadForwards', positions: ['RW', 'LW', 'ST'] },
+  ];
+  const playerCard = player => `<button class="player-card${player.photo ? ' has-photo' : ''}" data-player="${player.number}" aria-label="${esc(player.name)}, ${t(player.confirmed ? 'confirmedShirtNumber' : 'shirtNumber')} ${player.number}${player.position ? `, ${esc(positionLabel(player.position))}` : ''}"><span class="player-card-art">${player.photo ? `<img class="player-portrait" src="${esc(player.photo)}" alt="${esc(player.name)}" loading="lazy" width="450" height="560">` : ''}<span class="small-brand">SHADOWS / FC</span><span class="player-number" aria-hidden="true">${String(player.number).padStart(2, '0')}</span></span><span class="player-info"><span class="player-name-group"><strong>${esc(player.name)}</strong>${player.position ? `<small class="player-position">${esc(positionLabel(player.position))}</small>` : ''}</span><span aria-hidden="true">↗</span></span></button>`;
+  $('#squad-grid').innerHTML = groups.map(group => {
+    const players = squad.filter(player => group.positions.includes(player.position));
+    return `<section class="squad-group" data-squad-group="${group.id}" aria-labelledby="squad-group-${group.id}"><div class="squad-group-heading"><h3 id="squad-group-${group.id}">${t(group.title)}</h3><span class="squad-group-count">${players.length} ${t('playerCount')}</span></div><div class="squad-group-grid squad-grid">${players.map(playerCard).join('')}</div></section>`;
+  }).join('');
   $('#squad-count').textContent = `${squad.length} ${t('playerCount').toLocaleUpperCase()}`;
   renderArrows();
 }
+
+const galleryTrack = $('#team-gallery-track');
+const gallerySlides = [...galleryTrack.querySelectorAll('.gallery-slide')];
+
+function renderGallery() {
+  $('.team-gallery').setAttribute('aria-label', t('galleryLabel'));
+  $('.team-gallery').setAttribute('aria-roledescription', t('galleryRole'));
+  galleryTrack.setAttribute('aria-label', t('galleryInstructions'));
+  $('#gallery-prev').setAttribute('aria-label', t('galleryPrevious'));
+  $('#gallery-next').setAttribute('aria-label', t('galleryNext'));
+  $('#gallery-prev').disabled = galleryIndex === 0;
+  $('#gallery-next').disabled = galleryIndex === gallerySlides.length - 1;
+  gallerySlides.forEach((slide, index) => {
+    const label = `${t('galleryPhoto')} ${index + 1} ${t('galleryOf')} ${gallerySlides.length}`;
+    slide.setAttribute('aria-label', label);
+    slide.setAttribute('aria-roledescription', t('gallerySlide'));
+    slide.setAttribute('aria-hidden', String(index !== galleryIndex));
+    const dot = $(`[data-gallery-index="${index}"]`);
+    dot.setAttribute('aria-label', label);
+    dot.querySelector('.sr-only').textContent = label;
+    if (index === galleryIndex) dot.setAttribute('aria-current', 'true');
+    else dot.removeAttribute('aria-current');
+  });
+  $('#gallery-counter').textContent = `${String(galleryIndex + 1).padStart(2, '0')} / ${String(gallerySlides.length).padStart(2, '0')}`;
+  $('#gallery-status').textContent = `${t('galleryPhoto')} ${galleryIndex + 1} ${t('galleryOf')} ${gallerySlides.length}`;
+}
+
+function showGalleryPhoto(index, instant = false) {
+  if (!galleryTrack.clientWidth) return;
+  const next = Math.max(0, Math.min(gallerySlides.length - 1, index));
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  galleryTrack.scrollTo({ left: next * galleryTrack.clientWidth, behavior: instant || reducedMotion ? 'instant' : 'smooth' });
+  if (instant || reducedMotion) {
+    galleryIndex = next;
+    renderGallery();
+  }
+}
+
+let galleryScrollFrame = 0;
+galleryTrack.addEventListener('scroll', () => {
+  if (galleryScrollFrame || !galleryTrack.clientWidth) return;
+  galleryScrollFrame = requestAnimationFrame(() => {
+    galleryScrollFrame = 0;
+    if (!galleryTrack.clientWidth) return;
+    const next = Math.max(0, Math.min(gallerySlides.length - 1, Math.round(galleryTrack.scrollLeft / galleryTrack.clientWidth)));
+    if (next !== galleryIndex) { galleryIndex = next; renderGallery(); }
+  });
+}, { passive: true });
+$('#gallery-prev').addEventListener('click', () => showGalleryPhoto(galleryIndex - 1));
+$('#gallery-next').addEventListener('click', () => showGalleryPhoto(galleryIndex + 1));
+document.querySelectorAll('[data-gallery-index]').forEach(dot => dot.addEventListener('click', () => showGalleryPhoto(Number(dot.dataset.galleryIndex))));
+galleryTrack.addEventListener('keydown', event => {
+  const target = { ArrowLeft: galleryIndex - 1, ArrowRight: galleryIndex + 1, Home: 0, End: gallerySlides.length - 1 }[event.key];
+  if (target == null) return;
+  event.preventDefault();
+  showGalleryPhoto(target);
+});
+let galleryDrag = null;
+galleryTrack.addEventListener('pointerdown', event => {
+  if (event.pointerType !== 'mouse' || event.button !== 0) return;
+  galleryDrag = { x: event.clientX, left: galleryTrack.scrollLeft };
+  galleryTrack.classList.add('is-dragging');
+  galleryTrack.setPointerCapture(event.pointerId);
+});
+galleryTrack.addEventListener('pointermove', event => {
+  if (galleryDrag) galleryTrack.scrollLeft = galleryDrag.left + galleryDrag.x - event.clientX;
+});
+function finishGalleryDrag() {
+  if (!galleryDrag) return;
+  galleryDrag = null;
+  galleryTrack.classList.remove('is-dragging');
+  if (!galleryTrack.clientWidth) return;
+  showGalleryPhoto(Math.round(galleryTrack.scrollLeft / galleryTrack.clientWidth));
+}
+galleryTrack.addEventListener('pointerup', finishGalleryDrag);
+galleryTrack.addEventListener('pointercancel', finishGalleryDrag);
+galleryTrack.addEventListener('lostpointercapture', finishGalleryDrag);
+if ('ResizeObserver' in window) new ResizeObserver(() => showGalleryPhoto(galleryIndex, true)).observe(galleryTrack);
+else window.addEventListener('resize', () => showGalleryPhoto(galleryIndex, true));
 
 const announcementText = (item, field) => item[field]?.[language] ?? item[field]?.el ?? item[field]?.en;
 
@@ -328,8 +428,8 @@ function render() {
   $('#close-dialog').setAttribute('aria-label', t('close'));
   $('#navigation').setAttribute('aria-label', language === 'el' ? 'Κύρια πλοήγηση' : 'Main navigation');
   $('#menu-toggle').setAttribute('aria-label', t($('#menu-toggle').getAttribute('aria-expanded') === 'true' ? 'closeMenu' : 'openMenu'));
-  $('.team-photo').alt = t('teamPhotoAlt');
-  renderMatches(); renderScorers(); renderSquad(); renderAnnouncements(); renderPageView(); renderDialog();
+  document.querySelectorAll('[data-i18n-alt]').forEach(image => { image.alt = t(image.dataset.i18nAlt); });
+  renderGallery(); renderMatches(); renderScorers(); renderSquad(); renderAnnouncements(); renderPageView(); renderDialog();
 }
 
 $('#language-toggle').addEventListener('click', () => {

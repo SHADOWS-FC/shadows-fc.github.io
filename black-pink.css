@@ -171,3 +171,13 @@ dialog h2{color:var(--text)}
 }
 @media(max-width:440px){.site-header{box-shadow:none}.top-scorer-card{padding:25px}}
 @media(max-width:380px){.match-lineup-list li{grid-template-columns:34px minmax(0,1fr);gap:8px;padding-inline:11px}.lineup-name{font-size:12px}.lineup-marker{font-size:10px}.injury-update{padding:16px 14px}.match-staff-list li{font-size:12px}.match-staff-list small{font-size:9px}}
+
+/* The full squad is grouped by each player's confirmed football position. */
+.squad-groups{display:grid;grid-template-columns:minmax(0,1fr);gap:44px}
+.squad-group{min-width:0;border-top:1px solid var(--line);padding-top:23px}
+.squad-group-heading{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:22px}
+.squad-group-heading h3{margin:0;font-family:var(--display);font-size:30px;font-weight:700;line-height:1.2;color:var(--text)}
+.squad-group-heading h3:before{content:'';display:inline-block;width:4px;height:24px;background:var(--pink);margin-right:12px;vertical-align:-2px}
+.squad-group-count{flex:none;padding:7px 10px;border:1px solid #63304e;background:#24131f;color:var(--pink-light);font-size:10px;line-height:1.4}
+.squad-group-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:760px){.squad-groups{gap:34px}.squad-group{padding-top:19px}.squad-group-heading{margin-bottom:18px;gap:12px}.squad-group-heading h3{font-size:25px}.squad-group-heading h3:before{height:20px;margin-right:9px}.squad-group-count{font-size:9px;padding:6px 8px}.squad-group-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}

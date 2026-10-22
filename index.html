@@ -7,11 +7,12 @@
   <meta name="description" content="SHADOWS FC — Η ομάδα της Βουλιαγμένης. Master League, Βούλα. Αποτελέσματα, σκόρερ, ομάδα και ανακοινώσεις.">
   <title>SHADOWS FC — Vouliagmeni 16671</title>
   <link rel="icon" href="assets/logos/shadows-fc-black-pink.jpg" type="image/jpeg">
-  <link rel="stylesheet" href="styles.css?v=20261022-staff">
-  <link rel="stylesheet" href="editorial.css?v=20261022-staff">
-  <link rel="stylesheet" href="black-pink.css?v=20261022-staff">
+  <link rel="stylesheet" href="styles.css?v=20261022-gallery-squad">
+  <link rel="stylesheet" href="editorial.css?v=20261022-gallery-squad">
+  <link rel="stylesheet" href="black-pink.css?v=20261022-gallery-squad">
+  <link rel="stylesheet" href="gallery.css?v=20261022-gallery-squad">
   <link rel="preload" as="image" href="assets/team.jpg">
-  <script type="module" src="app.js?v=20261022-staff"></script>
+  <script type="module" src="app.js?v=20261022-gallery-squad"></script>
 </head>
 <body>
   <a class="skip-link" href="#main" data-i18n="skip">Μετάβαση στο περιεχόμενο</a>
@@ -32,7 +33,23 @@
 
   <main id="main">
     <section class="team-hero" id="home" data-home-section aria-labelledby="hero-title">
-      <figure class="team-photo-frame"><img class="team-photo" src="assets/team.jpg" alt="Η ομάδα των SHADOWS FC στο γήπεδο" data-i18n-alt="teamPhotoAlt" width="853" height="1280" fetchpriority="high"></figure>
+      <div class="team-gallery" role="region" aria-roledescription="συλλογή φωτογραφιών" aria-label="Φωτογραφίες ομάδας">
+        <div class="team-photo-frame gallery-frame">
+          <div class="gallery-viewport" id="team-gallery-track" tabindex="0" role="group" aria-label="Σύρε ή χρησιμοποίησε τα πλήκτρα με τα βέλη για αλλαγή φωτογραφίας">
+            <figure class="gallery-slide" role="group"><img class="team-photo team-photo--original" src="assets/team.jpg" alt="Η ομάδα των SHADOWS FC στο γήπεδο" data-i18n-alt="teamPhotoAlt" width="853" height="1280" fetchpriority="high" draggable="false"></figure>
+            <figure class="gallery-slide" role="group"><img class="team-photo team-photo--celebration" src="assets/team-celebration.jpg" alt="Η ομάδα των SHADOWS FC στο γήπεδο με κύπελλο και μετάλλια" data-i18n-alt="celebrationPhotoAlt" width="1280" height="1180" loading="lazy" draggable="false"></figure>
+          </div>
+          <span class="gallery-frame-mark" aria-hidden="true">SHADOWS FC · 16671</span>
+        </div>
+        <div class="gallery-controls">
+          <button id="gallery-prev" class="gallery-arrow" type="button" aria-controls="team-gallery-track" aria-label="Προηγούμενη φωτογραφία" disabled><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m14 6-6 6 6 6" stroke="currentColor" stroke-width="1.6"/></svg></button>
+          <div class="gallery-dots"><button class="gallery-dot" type="button" data-gallery-index="0" aria-controls="team-gallery-track" aria-current="true"><span class="sr-only">Φωτογραφία 1 από 2</span></button><button class="gallery-dot" type="button" data-gallery-index="1" aria-controls="team-gallery-track"><span class="sr-only">Φωτογραφία 2 από 2</span></button></div>
+          <span id="gallery-counter" class="gallery-counter" aria-hidden="true">01 / 02</span>
+          <button id="gallery-next" class="gallery-arrow" type="button" aria-controls="team-gallery-track" aria-label="Επόμενη φωτογραφία"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m10 6 6 6-6 6" stroke="currentColor" stroke-width="1.6"/></svg></button>
+        </div>
+        <p class="gallery-hint" data-i18n="galleryHint">Σύρε ή πάτησε τα βελάκια</p>
+        <p id="gallery-status" class="sr-only" aria-live="polite" aria-atomic="true"></p>
+      </div>
       <div class="team-hero-caption container"><div><p class="eyebrow" data-i18n="leagueLocation">MASTER LEAGUE · ΒΟΥΛΑ</p><h1 id="hero-title">SHADOWS <span>FC</span></h1></div><span class="team-home-mark">VOULIAGMENI · 16671</span></div>
     </section>
 
@@ -53,7 +70,7 @@
     <section id="squad" class="squad-section container" data-home-section aria-labelledby="squad-title">
       <div class="section-heading"><div><p class="eyebrow"><span class="section-number">03 /</span> THE PEOPLE BEHIND THE SHIRT</p><h2 id="squad-title" data-i18n="squadTitle">Η ομάδα μας.</h2></div><span class="section-aside" id="squad-count"></span></div>
       <p class="squad-note" data-i18n="squadNote">Οι παίκτες πίσω από τη φανέλα. Γνώρισε την ομάδα των SHADOWS FC.</p>
-      <div id="squad-grid" class="squad-grid"></div>
+      <div id="squad-grid" class="squad-groups"></div>
     </section>
 
     <section id="announcements" class="announcements-section container" aria-labelledby="announcements-title" hidden>

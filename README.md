@@ -39,8 +39,9 @@ browser validation here uses HTTP.
 - `styles.css`: base layout and responsive rules.
 - `editorial.css`: photo-led homepage, condensed typography, match cards and responsive layout.
 - `black-pink.css`: the black/pink club palette and striped background, dark cards and dialogs, and gold photograph frame.
+- `gallery.css`: the compact framed photo gallery and its responsive navigation controls.
 - `assets/`: self-hosted graphics and fonts, including the font licence.
-- `index.html`: team photograph, latest-first results, scorer leaderboard, and complete squad.
+- `index.html`: team photo gallery, latest-first results, scorer leaderboard, and complete squad.
 
 All match records were transcribed from club screenshots. Scorer totals are
 computed from those records; joint leading scorers receive the same rank.
@@ -48,11 +49,24 @@ Match scores and scorer totals are tested for consistency.
 
 ### Homepage and navigation
 
-The homepage has four sections, in this order: the original team
-photograph, matches from newest to oldest, all-time recorded scorers, then all
-13 confirmed players. There are no search boxes, filter/sort controls, sponsor
+The homepage has four sections, in this order: a gallery of the two supplied
+team photographs, matches from newest to oldest, all-time recorded scorers, then
+all 13 confirmed players. There are no search boxes, filter/sort controls, sponsor
 panels or intervening promotional sections. Player portraits retain their
 original photographic backgrounds.
+
+The squad is grouped into goalkeepers (GK), defenders (CB), midfielders (CM/CAM)
+and forwards (RW/LW/ST), preserving the confirmed position on each player card.
+All 13 profiles remain available: 2 goalkeepers, 3 defenders, 2 midfielders and
+6 forwards.
+
+The opening gallery is narrower than the original photograph display. Its
+black and gold frame has pink corner accents and an engraved club mark.
+Visitors can use arrows, indicator buttons, horizontal scrolling, touch swipes
+or mouse dragging; the focused gallery also supports Left/Right and Home/End.
+There is no automatic advancement. The gallery follows reduced-motion settings,
+announces the current photograph and retains the selected image across layout
+and language changes.
 
 The active club crest is the supplied black/pink image at
 `assets/logos/shadows-fc-black-pink.jpg`, used in the header, footer, match cards,
@@ -114,9 +128,11 @@ separately and an
 approximate return in mid-November. The site does not infer a medical diagnosis,
 a season year or that he has already returned.
 
-The team photograph at `assets/team.jpg` is the original `1-Photo-1.jpg` supplied
-by the club. It is copied without alteration; responsive CSS places it inside a bevelled
-gold frame.
+The team photographs at `assets/team.jpg` and `assets/team-celebration.jpg` are
+the original attachments supplied by the club. Both are copied without
+alteration; CSS frames them in the gallery. The added photograph is displayed
+in full, including the trophy, medals and shirts. No date or competition win is
+inferred from that photograph.
 All player portraits and opponent crests are also the club-supplied originals.
 
 ### Confirmed information
