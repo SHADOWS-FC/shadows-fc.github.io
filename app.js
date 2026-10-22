@@ -1,7 +1,14 @@
-import { club, matches, squad, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261022-score-sides';
+import { club, matches, squad, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261022-match-lineups';
 
 const messages = {
   el: {
+    startingSeven: 'ΑΡΧΙΚΗ ΕΠΤΑΔΑ', matchdayPlayers: 'ΑΠΟΣΤΟΛΗ ΑΓΩΝΑ', substitutes: 'ΑΝΑΠΛΗΡΩΜΑΤΙΚΟΙ',
+    coachingStaff: 'ΠΡΟΠΟΝΗΤΙΚΟ ΕΠΙΤΕΛΕΙΟ', headCoach: 'Προπονητής', lineupTitle: 'ΣΥΝΘΕΣΗ ΟΜΑΔΑΣ',
+    lineupNotRecorded: 'Δεν έχει καταχωριστεί ακόμη η σύνθεση για αυτόν τον αγώνα.',
+    injuryUpdate: 'ΤΡΑΥΜΑΤΙΣΜΟΣ', injuredInMatch: 'Τραυματίστηκε στον αγώνα με', estimatedAbsence: 'Εκτιμώμενη απουσία',
+    monthsUnit: 'μήνες', fromMatchDate: 'από τον αγώνα στις', estimatedReturn: 'Εκτιμώμενη επιστροφή',
+    'mid-November': 'μέσα Νοεμβρίου',
+
     teamPhotoAlt: 'Η ομάδα των SHADOWS FC στο γήπεδο', newestFirst: 'Από τον πιο πρόσφατο αγώνα',
     opponentSearch: 'Αναζήτηση αντιπάλου', matchSearchPlaceholder: 'π.χ. Savralliolid', monthLabel: 'Μήνας', allMonths: 'Όλοι οι μήνες',
     sortLabel: 'Ταξινόμηση', newest: 'Πιο πρόσφατα', oldest: 'Παλαιότερα πρώτα', mostGoals: 'Περισσότερα γκολ SHADOWS',
@@ -46,6 +53,13 @@ const messages = {
     goalDifference: 'διαφορά γκολ', record: 'Ν–Ι–Η',
   },
   en: {
+    startingSeven: 'STARTING SEVEN', matchdayPlayers: 'MATCHDAY SQUAD', substitutes: 'SUBSTITUTES',
+    coachingStaff: 'COACHING STAFF', headCoach: 'Head coach', lineupTitle: 'TEAM LINEUP',
+    lineupNotRecorded: 'The lineup has not been recorded for this match yet.',
+    injuryUpdate: 'INJURY UPDATE', injuredInMatch: 'Injured in the match against', estimatedAbsence: 'Estimated absence',
+    monthsUnit: 'months', fromMatchDate: 'from the match on', estimatedReturn: 'Estimated return',
+    'mid-November': 'mid-November',
+
     teamPhotoAlt: 'The SHADOWS FC team on the pitch', newestFirst: 'Newest matches first',
     opponentSearch: 'Search opponents', matchSearchPlaceholder: 'e.g. Savralliolid', monthLabel: 'Month', allMonths: 'All months',
     sortLabel: 'Sort by', newest: 'Newest first', oldest: 'Oldest first', mostGoals: 'Most SHADOWS goals',
@@ -200,6 +214,20 @@ function scoringHistoryMarkup(name) {
     <div class="scoring-history">${history.map(({ match, goals }) => `<button data-open-match="${esc(match.id)}"><span><small>${match.date} · MD ${String(match.round).padStart(2, '0')}</small><strong>${esc(match.opponent)}</strong></span><span class="history-score" data-result="${outcome(match)}">${scoreMarkup(match)}</span><span class="history-goals"><b>${goals}</b> ${t('goalsUnit')} <span aria-hidden="true">↗</span></span></button>`).join('') || `<p class="dialog-note">${t('noScoringHistory')}</p>`}</div>`;
 }
 
+function lineupMarkup(match) {
+  if (!match.lineup) return `<section class="match-lineup-section"><h3 class="dialog-subhead">${t('lineupTitle')}</h3><p class="dialog-note">${t('lineupNotRecorded')}</p></section>`;
+  const lineup = match.lineup;
+  const players = entries => `<ul class="match-lineup-list">${entries.map(player => `<li><span class="lineup-marker">${player.position ? esc(player.position) : player.number != null ? '#' + player.number : '—'}</span><span class="lineup-name">${esc(player.name)}</span></li>`).join('')}</ul>`;
+  return `<section class="match-lineup-section"><h3 class="dialog-subhead">${t(lineup.type === 'starting' ? 'startingSeven' : 'matchdayPlayers')}</h3>${players(lineup.players)}
+    ${lineup.substitutes?.length ? `<h4 class="lineup-subheading">${t('substitutes')}</h4>${players(lineup.substitutes)}` : ''}
+    ${lineup.staff?.length ? `<h4 class="lineup-subheading">${t('coachingStaff')}</h4><ul class="match-staff-list">${lineup.staff.map(person => `<li><span>${esc(person.name)}</span>${person.role ? `<small>${t(person.role)}</small>` : ''}</li>`).join('')}</ul>` : ''}</section>`;
+}
+
+function injuryMarkup(match, playerNumber = null) {
+  const injuries = (match.injuries || []).filter(injury => playerNumber == null || injury.playerNumber === playerNumber);
+  return injuries.map(injury => `<aside class="injury-update"><h3>${t('injuryUpdate')}</h3><strong>${esc(injury.name)}</strong><p>${t('injuredInMatch')} ${esc(match.opponent)} · ${match.date}.</p><p>${t('estimatedAbsence')}: ${injury.absenceMonths.toLocaleString(language === 'el' ? 'el-GR' : 'en-GB')} ${t('monthsUnit')} ${t('fromMatchDate')} ${match.date}.</p><p class="injury-return">${t('estimatedReturn')}: <b>${t(injury.expectedReturn)}</b>.</p></aside>`).join('');
+}
+
 function renderDialog() {
   if (!dialogContent) return;
   if (dialogContent.type === 'match') {
@@ -209,13 +237,13 @@ function renderDialog() {
     const index = ordered.findIndex(item => item.id === match.id);
     $('#dialog-category').textContent = `${t('matchday')} ${String(match.round).padStart(2, '0')} / ${t('fullTime')}`;
     $('#dialog-body').innerHTML = `<h2 id="dialog-title">SHADOWS FC<br>× ${esc(match.opponent)}</h2><p class="dialog-meta">${t('leagueDetail')}<br>${match.date} · ${match.time}<br>${esc(club.venue)}</p><div class="dialog-scoreboard">${crestMarkup(club.logo)}<div class="dialog-score" data-result="${outcome(match)}">${scoreMarkup(match)}</div>${crestMarkup(match.logo, match.initials, match.crestShape)}</div>
-      <h3 class="dialog-subhead">${t('scorerList')}</h3><ul class="dialog-scorers">${match.scorers.map(player => `<li><button class="dialog-scorer-link" data-open-scorer="${esc(playerName(player.name))}">${esc(playerName(player.name))} <span aria-hidden="true">↗</span></button><b>${player.goals}</b></li>`).join('')}</ul>${match.mvp ? `<p class="dialog-meta">${t('mvp')} <strong>${esc(match.mvp)}</strong></p>` : ''}
+      ${lineupMarkup(match)}${injuryMarkup(match)}<h3 class="dialog-subhead">${t('scorerList')}</h3><ul class="dialog-scorers">${match.scorers.map(player => `<li><button class="dialog-scorer-link" data-open-scorer="${esc(playerName(player.name))}">${esc(playerName(player.name))} <span aria-hidden="true">↗</span></button><b>${player.goals}</b></li>`).join('')}</ul>${match.mvp ? `<p class="dialog-meta">${t('mvp')} <strong>${esc(match.mvp)}</strong></p>` : ''}
       <nav class="match-navigation" aria-label="${t('browseMatches')}"><button data-step-match="${esc(ordered[index - 1]?.id || '')}" ${index === 0 ? 'disabled' : ''}>${t('previousMatch')}</button><span>${index + 1} / ${ordered.length}</span><button data-step-match="${esc(ordered[index + 1]?.id || '')}" ${index === ordered.length - 1 ? 'disabled' : ''}>${t('nextMatch')}</button></nav>`;
   } else if (dialogContent.type === 'player') {
     const player = squad.find(item => item.number === dialogContent.id);
     if (!player) return;
     $('#dialog-category').textContent = t('playerProfile');
-    $('#dialog-body').innerHTML = `<h2 id="dialog-title">${esc(player.name)}</h2>${player.photo ? `<img class="profile-portrait" src="${esc(player.photo)}" alt="${esc(player.name)}" width="450" height="560">` : ''}<div class="profile-number">#${player.number}</div><p class="dialog-meta">${t('confirmedShirtNumber')}</p>${player.position ? `<p class="profile-position"><span>${t('position')}</span><strong>${esc(positionLabel(player.position))}</strong></p>` : ''}${scoringHistoryMarkup(player.scorerName || player.name)}`;
+    $('#dialog-body').innerHTML = `<h2 id="dialog-title">${esc(player.name)}</h2>${player.photo ? `<img class="profile-portrait" src="${esc(player.photo)}" alt="${esc(player.name)}" width="450" height="560">` : ''}<div class="profile-number">#${player.number}</div><p class="dialog-meta">${t('confirmedShirtNumber')}</p>${player.position ? `<p class="profile-position"><span>${t('position')}</span><strong>${esc(positionLabel(player.position))}</strong></p>` : ''}${matches.map(match => injuryMarkup(match, player.number)).join('')}${scoringHistoryMarkup(player.scorerName || player.name)}`;
   } else {
     $('#dialog-category').textContent = t('scorerHistory');
     $('#dialog-body').innerHTML = `<h2 id="dialog-title">${esc(dialogContent.name)}</h2>${scoringHistoryMarkup(dialogContent.name)}`;

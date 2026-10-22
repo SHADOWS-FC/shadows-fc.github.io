@@ -23,6 +23,19 @@ export const matches = [
       { name: 'Zachos', goals: 1 }, { name: 'Galanis', goals: 1 }],
     mvp: null,
     source: 'First-game lineup and full-time posts. Match date from lineup, not post timestamp.',
+    lineup: {
+      type: 'starting',
+      players: [
+        { name: 'Gkoumas', position: 'GK' },
+        { name: 'Babakos Dimitris', position: 'CB' },
+        { name: 'Troka', position: 'CB' },
+        { name: 'Zachos', position: 'CM' },
+        { name: 'Mixalis', position: 'RW' },
+        { name: 'Dinos', position: 'LW' },
+        { name: 'Babakos Tasos', position: 'ST' },
+      ],
+    },
+    injuries: [{ playerNumber: 5, name: 'Zachos Giannis', absenceMonths: 1.5, expectedReturn: 'mid-November' }],
   },
   {
     id: 'aston-voula', round: 2, date: '06/10', time: '20:00',
@@ -32,6 +45,19 @@ export const matches = [
     scorers: [{ name: 'Rothos', goals: 3 }, { name: 'Tasos', goals: 1 }, { name: 'Xatzi', goals: 1 }],
     mvp: null,
     source: 'Second-game lineup and full-time posts. Scorer names retained as printed.',
+    lineup: {
+      type: 'starting',
+      players: [
+        { name: 'Xatzi', position: 'GK' },
+        { name: 'Mitsos', position: 'CB' },
+        { name: 'Manousos', position: 'CB' },
+        { name: 'Marfa', position: 'CM' },
+        { name: 'Dinos', position: 'RW' },
+        { name: 'Rothos', position: 'LW' },
+        { name: 'Tasos', position: 'ST' },
+      ],
+      source: 'Corrected starting-seven graphic: handwritten Rothos replaces the crossed-out Giorgos at LW.',
+    },
   },
   {
     id: 'unathletico', round: 3, date: '12/10', time: '21:00',
@@ -42,6 +68,21 @@ export const matches = [
       { name: 'Gkoumas', goals: 1 }, { name: 'Stavros', goals: 1 }],
     mvp: null,
     source: 'Matchday post dated 12 October; full-time post dated 13 October. Duplicate screenshot counted once.',
+    lineup: {
+      type: 'starting',
+      players: [
+        { name: 'Gkoumas', position: 'GK' },
+        { name: 'Babakos D.', position: 'CB' },
+        { name: 'Xatzi', position: 'CB' },
+        { name: 'Stavros', position: 'CM' },
+        { name: 'Marfa', position: 'RW' },
+        { name: 'Dinos', position: 'LW' },
+        { name: 'Rothos', position: 'ST' },
+      ],
+      substitutes: [{ name: 'Babakos T.' }],
+      staff: [{ name: 'Zachos', role: 'headCoach' }],
+      source: 'Chess-board lineup supplied for the Unathletico match; substitutes are listed without assuming they came on.',
+    },
   },
   {
     id: 'savralliolid', round: 4, date: '21/10', time: '22:00',
@@ -51,6 +92,21 @@ export const matches = [
     scorers: [{ name: 'Gkoumas', goals: 3 }, { name: 'Dinos', goals: 2 }, { name: 'Rothos', goals: 2 }],
     mvp: 'Gkoumas',
     source: 'Matchday caption specifies Wednesday 21/10 at 22:00; result graphic provides scorers. MVP confirmed by club in chat.',
+    lineup: {
+      type: 'squad',
+      players: [
+        { name: 'Chatziamanetoglou G.', number: 82 },
+        { name: 'Gkoumas', number: 6 },
+        { name: 'Babakos D.', number: 11 },
+        { name: 'Ioannis', number: 77 },
+        { name: 'Chatziamanetoglou K.', number: 7 },
+        { name: 'Marfa', number: 8 },
+        { name: 'Babakos T.', number: 10 },
+        { name: 'Rothos', number: 22 },
+      ],
+      staff: [{ name: 'Zachos' }, { name: 'Chatzinikolaou' }, { name: 'Giotis' }],
+      source: 'Eight-player matchday squad and separate coaching staff, transcribed from the supplied graphic.',
+    },
   },
 ];
 

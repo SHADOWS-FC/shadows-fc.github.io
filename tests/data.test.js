@@ -100,3 +100,37 @@ test('scoring histories reconcile aliases and totals without implying appearance
   assert.equal(getScoringHistory('Galanis')[0].goals, 1);
   assert.deepEqual(getScoringHistory('Sotiris Giotis'), []);
 });
+
+test('lineups preserve historical positions and the handwritten Aston correction', () => {
+  const [legrena, aston, unathletico] = matches;
+  assert.equal(legrena.lineup.players.length, 7);
+  assert.deepEqual(legrena.lineup.players.find(player => player.name === 'Zachos'), { name: 'Zachos', position: 'CM' });
+  assert.equal(legrena.lineup.players.find(player => player.name === 'Gkoumas').position, 'GK');
+  assert.equal(squad.find(player => player.number === 6).position, 'ST');
+  assert.equal(aston.lineup.players.length, 7);
+  assert.equal(aston.lineup.players.find(player => player.position === 'LW').name, 'Rothos');
+  assert.ok(!aston.lineup.players.some(player => player.name === 'Giorgos'));
+  assert.equal(aston.lineup.players.find(player => player.name === 'Xatzi').position, 'GK');
+  assert.equal(unathletico.lineup.players.find(player => player.name === 'Xatzi').position, 'CB');
+  assert.deepEqual(unathletico.lineup.substitutes, [{ name: 'Babakos T.' }]);
+  assert.deepEqual(unathletico.lineup.staff, [{ name: 'Zachos', role: 'headCoach' }]);
+  assert.ok(!unathletico.lineup.players.some(player => player.name === 'Zachos'));
+});
+
+test('Savralliolid selection keeps printed names/numbers and staff separate', () => {
+  const selection = matches.find(match => match.id === 'savralliolid').lineup;
+  assert.equal(selection.type, 'squad');
+  assert.deepEqual(selection.players, latestMatchdaySquad);
+  assert.deepEqual(selection.staff.map(person => person.name), ['Zachos', 'Chatzinikolaou', 'Giotis']);
+  assert.equal(selection.players.find(player => player.number === 77).name, 'Ioannis');
+  assert.equal(selection.players.find(player => player.number === 22).name, 'Rothos');
+});
+
+test('Zachos injury is dated to the Legrena match with an approximate return', () => {
+  const injuryMatch = matches.find(match => match.injuries?.length);
+  assert.equal(injuryMatch.id, 'legrena');
+  assert.equal(injuryMatch.date, '29/09');
+  assert.deepEqual(injuryMatch.injuries[0], { playerNumber: 5, name: 'Zachos Giannis', absenceMonths: 1.5, expectedReturn: 'mid-November' });
+  assert.equal(matches.flatMap(match => match.injuries || []).length, 1);
+  assert.equal(squad.find(player => player.number === 5).name, 'Zachos Giannis');
+});

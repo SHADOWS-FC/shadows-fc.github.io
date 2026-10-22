@@ -235,3 +235,23 @@ dialog h2{color:#252019}
 .match-row[data-result] .outcome-tag{background:var(--result-tint);color:var(--result-color);border-color:currentColor}
 /* Frame the supplied portrait logo without its large empty top/bottom margins. */
 .crest-frame img.crest-legrena{object-fit:cover;object-position:center 60%;mix-blend-mode:normal}
+
+/* Matchday information is transcribed as text, separate from scoring records. */
+.match-lineup-section{margin:25px 0;padding-top:21px;border-top:1px solid var(--scoreboard-line)}
+.match-lineup-section .dialog-subhead{margin:0 0 14px;color:var(--gold-dark);font-size:10px;letter-spacing:1.2px}
+.match-lineup-list{list-style:none;padding:0;margin:0;border:1px solid #e3dac9;background:#fffefa}
+.match-lineup-list li{display:grid;grid-template-columns:44px minmax(0,1fr);align-items:center;gap:13px;min-height:43px;padding:10px 14px;border-bottom:1px solid #ece4d6}
+.match-lineup-list li:last-child{border-bottom:0}
+.lineup-marker{font-size:11px;font-weight:700;color:var(--gold-dark);font-variant-numeric:tabular-nums}
+.lineup-name{font-size:13px;line-height:1.6;color:#30291f;overflow-wrap:anywhere}
+.lineup-subheading{font-size:9px;letter-spacing:1.1px;color:#85714c;margin:22px 0 12px}
+.match-staff-list{list-style:none;margin:0;padding:3px 14px;background:#f6f1e7;border:1px solid #e3dac9}
+.match-staff-list li{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;font-size:13px;line-height:1.6;border-bottom:1px solid #e6dcc9;color:#3c3224}
+.match-staff-list li:last-child{border-bottom:0}
+.match-staff-list small{font-size:10px;color:#877552;text-align:right}
+.injury-update{margin:25px 0;padding:19px 18px;border:1px solid #e5c8bd;border-left:3px solid #a95642;background:#fff6f0}
+.injury-update h3{font-size:9px;letter-spacing:1.3px;color:#94422f;margin:0 0 11px}
+.injury-update>strong{display:block;font-family:var(--display);font-size:22px;line-height:1.2;color:#3a2b24;margin-bottom:9px}
+.injury-update p{font-size:11px;line-height:1.9;color:#725b4e;margin:5px 0 0}
+.injury-update .injury-return{padding-top:9px;margin-top:10px;border-top:1px solid #ebd6ca;color:#63472f}
+@media(max-width:380px){.match-lineup-list li{grid-template-columns:34px minmax(0,1fr);gap:8px;padding-inline:11px}.lineup-name{font-size:12px}.lineup-marker{font-size:10px}.injury-update{padding:16px 14px}.match-staff-list li{font-size:12px}.match-staff-list small{font-size:9px}}

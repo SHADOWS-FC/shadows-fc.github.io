@@ -73,6 +73,20 @@ increasing chronological `round`, the confirmed day/month, opponent, score and
 scorers. Rounds determine chronology across New Year; no season year is inferred.
 Scoring histories count games with recorded goals, rather than appearances.
 
+Match details also show text-only lineups transcribed from the club graphics.
+The first three matches have starting sevens; Unathletico additionally lists
+Babakos T. as a substitute and Zachos as head coach. The Aston Voula lineup uses
+the handwritten Rothos correction at LW. Savralliolid lists its eight-player
+matchday squad and three coaching staff separately. Printed names, matchday
+numbers and historical positions are preserved without guessing unconfirmed
+profile aliases or assuming a listed substitute came on. The supplied lineup
+graphics are not published as images.
+
+Zachos Giannis (#5) was injured against Legrena on 29/09. Match details and his
+profile record an estimated absence of 1.5 months from that match, with an
+approximate return in mid-November. The site does not infer a medical diagnosis,
+a season year or that he has already returned.
+
 The team photograph at `assets/team.jpg` is the original `1-Photo-1.jpg` supplied
 by the club. It is copied without alteration; responsive CSS frames the photo.
 All player portraits and opponent crests are also the club-supplied originals.
