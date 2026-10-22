@@ -415,6 +415,51 @@ function setMenu(open) {
   $('#menu-toggle').setAttribute('aria-label', t(open ? 'closeMenu' : 'openMenu'));
 }
 
+
+/* Editorial home panels use the same confirmed match and squad records as the
+   existing match centre. They share the existing language toggle and dialogs. */
+function renderCinematic() {
+  const isGreek = language === 'el';
+  const copy = (el, en) => isGreek ? el : en;
+  document.querySelectorAll('[data-cinema-el]').forEach(element => {
+    element.textContent = element.getAttribute(isGreek ? 'data-cinema-el' : 'data-cinema-en');
+  });
+  const latest = [...matches]
+    .filter(match => Number.isFinite(match.goalsFor) && Number.isFinite(match.goalsAgainst))
+    .sort((a, b) => (b.round || 0) - (a.round || 0))[0];
+  const latestPanel = $('#cinematic-latest');
+  const goalsPanel = $('#cinematic-goals');
+  if (latest) {
+    const result = outcome(latest);
+    const outcomeLabel = result === 'win' ? copy('ΝΙΚΗ', 'WIN') : result === 'loss' ? copy('ΗΤΤΑ', 'LOSS') : copy('ΙΣΟΠΑΛΙΑ', 'DRAW');
+    latestPanel.innerHTML =
+      '<p class="cinematic-eyebrow">' + copy('ΤΕΛΕΥΤΑΙΟΣ ΑΓΩΝΑΣ', 'LAST MATCH') + ' / ' + esc(outcomeLabel) + '</p>' +
+      '<p class="cinematic-mini-meta">' + esc(latest.date) + ' · STAR SPORT CLUB · MD ' + esc(latest.round) + '</p>' +
+      '<div class="cinematic-result-row">' +
+        '<div class="cinematic-result-team"><img src="' + esc(club.logo) + '" alt="" loading="lazy"><strong>SHADOWS FC</strong></div>' +
+        '<div class="cinematic-result-score">' + latest.goalsFor + '<span>–</span>' + latest.goalsAgainst + '</div>' +
+        '<div class="cinematic-result-team">' + (latest.logo ? '<img src="' + esc(latest.logo) + '" alt="" loading="lazy">' : '') +
+          '<strong>' + esc(latest.opponent) + '</strong></div>' +
+      '</div><button class="cinematic-match-open" type="button" data-open-match="' + esc(latest.id) + '">' +
+        copy('ΑΝΑΛΥΣΗ ΑΓΩΝΑ', 'MATCH REPORT') + ' <span aria-hidden="true">↗</span></button>';
+    goalsPanel.innerHTML =
+      '<p class="cinematic-eyebrow cinematic-goals-heading">' + copy('ΤΑ ΓΚΟΛ ΜΑΣ', 'SHADOWS GOALSCORERS') + '</p>' +
+      '<ul class="cinematic-goal-list">' +
+      (latest.scorers || []).map(scorer => '<li><strong>' + esc(scorer.name.toUpperCase()) +
+        '</strong><span aria-label="' + esc(scorer.goals) + ' goals">' + '⚽'.repeat(Math.min(scorer.goals, 12)) + '</span></li>').join('') +
+      '</ul><p class="cinematic-goals-caption">' + copy('Επιβεβαιωμένα στοιχεία τελευταίου αγώνα.', 'Recorded scorers from our most recent match.') + '</p>';
+  } else {
+    latestPanel.textContent = copy('Δεν υπάρχουν καταγεγραμμένοι αγώνες.', 'No recorded matches yet.');
+    goalsPanel.textContent = '';
+  }
+  $('#cinematic-matches-count').textContent =
+    matches.length + ' ' + copy('καταγεγραμμένοι αγώνες', 'recorded matches');
+  const leaders = getRankings(matches).filter(entry => entry.rank === 1);
+  $('#cinematic-top-scorer').textContent = leaders.length
+    ? leaders.map(entry => entry.name).join(' / ') + ' · ' + leaders[0].goals + ' ' + copy('γκολ', 'goals')
+    : copy('Όλα τα γκολ της ομάδας', 'Every goal, every player');
+}
+
 function render() {
   document.documentElement.lang = language;
   document.querySelectorAll('[data-i18n]').forEach(element => {
@@ -429,7 +474,7 @@ function render() {
   $('#navigation').setAttribute('aria-label', language === 'el' ? 'Κύρια πλοήγηση' : 'Main navigation');
   $('#menu-toggle').setAttribute('aria-label', t($('#menu-toggle').getAttribute('aria-expanded') === 'true' ? 'closeMenu' : 'openMenu'));
   document.querySelectorAll('[data-i18n-alt]').forEach(image => { image.alt = t(image.dataset.i18nAlt); });
-  renderGallery(); renderMatches(); renderScorers(); renderSquad(); renderAnnouncements(); renderPageView(); renderDialog();
+  renderGallery(); renderMatches(); renderScorers(); renderSquad(); renderAnnouncements(); renderCinematic(); renderPageView(); renderDialog();
 }
 
 $('#language-toggle').addEventListener('click', () => {
