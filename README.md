@@ -55,6 +55,9 @@ panels or intervening promotional sections. Player portraits retain their
 original photographic backgrounds.
 
 Matches are paginated at eight per page, always in descending round order.
+Scores use green for wins, red for losses and grey for draws in match cards,
+details and player histories. Result letters and accessible labels also convey
+the outcome.
 Old search/filter/sort/view URL parameters are ignored and removed, so links
 from the earlier archive cannot silently hide matches or players. Scorer totals
 always cover the complete recorded match list, including matches on other pages.
@@ -89,7 +92,6 @@ as MVP against Savralliolid. Earlier MVPs are unknown, not presumed absent.
 
 ### Content still to add
 
-- Legrena FC crest; no matching logo has been supplied yet.
 - Confirmation of the season year; dates intentionally show day/month only.
 - The standalone selfie is excluded at the club's request.
 
@@ -100,7 +102,7 @@ current squad or rewrite match history. Positions and permanent shirt numbers
 are added only when supplied by the club. Prior draft interview answers are not published as
 actual player quotes. The club plays in **Master League in Voula**, as confirmed
 by the club. Supplied crests are used for SHADOWS FC, Aston Voula, Unathletico
-and Savralliolid. Legrena retains a typographic lettermark pending its crest.
+and Savralliolid, together with the separately supplied Legrena FC crest.
 
 Confirmed so far: Sotiris Giotis (#1, GK), Chatziamanetoglou Giorgos (#82, GK),
 Troka Giorgos (#9, CB), Babakos Dimitris (#11, CB), Zachos Giannis (#5, CB),
@@ -125,7 +127,8 @@ The standalone builder accepts these versioned URLs.
 
 ### Visual assets
 
-All eight original logos from `LOGOS.rar` are saved in `assets/logos/`; see
+The eight original logos from `LOGOS.rar` and the separately supplied Legrena
+crest are saved in `assets/logos/`; see
 [logo provenance](assets/logos/README.md) for the confirmed mappings.
 The club crest also appears as the browser icon. Crests use a common size and
 light canvas in the match centre and match dialogs.

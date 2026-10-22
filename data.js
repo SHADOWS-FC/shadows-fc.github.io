@@ -17,6 +17,7 @@ export const matches = [
   {
     id: 'legrena', round: 1, date: '29/09', time: '21:00',
     opponent: 'Legrena FC', initials: 'LFC', color: '#ad83e8',
+    logo: 'assets/logos/legrena.jpg', crestShape: 'legrena',
     goalsFor: 4, goalsAgainst: 5,
     scorers: [{ name: 'Gkoumas', goals: 1 }, { name: 'Dinos', goals: 1 },
       { name: 'Zachos', goals: 1 }, { name: 'Galanis', goals: 1 }],

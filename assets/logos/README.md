@@ -1,14 +1,16 @@
 # Club-supplied logos
 
 All eight files are original images from the club's `LOGOS.rar`, copied without
-alteration. The site uses SHADOWS FC's crest in the header, latest result,
-match cards and browser icon. Aston Voula, Unathletico and Savralliolid are
-matched to their existing results. Legrena retains its lettermark until its
-crest is supplied.
+alteration. The ninth file, `legrena.jpg`, is the original `1-Photo-1.jpg`
+attached separately by the club. The site uses SHADOWS FC's crest in the header,
+match cards and browser icon. Legrena, Aston Voula, Unathletico and Savralliolid
+are matched to their existing results. CSS frames Legrena's portrait canvas
+without its empty top/bottom margins; the source JPEG remains unaltered.
 
 | Saved filename | Original filename | Team |
 | --- | --- | --- |
 | shadows-fc.jpg | SHADOWS FC.jpg | SHADOWS FC |
+| legrena.jpg | 1-Photo-1.jpg (separate attachment) | Legrena FC |
 | aston-voula.png | ASTON VOULA.png | Aston Voula |
 | unathletico.jpg | UNATHLETIKO.jpg | Unathletico FC |
 | savralliolid.jpeg | IMG_0404.jpeg | Savralliolid FC |

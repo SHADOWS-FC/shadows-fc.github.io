@@ -222,3 +222,13 @@ dialog h2{color:#252019}
 .team-hero-caption .eyebrow{color:var(--gold-dark)}
 .team-home-mark,.results-order,.scorer-scope-note{color:#796f61}
 .player-position{color:var(--gold-dark)}
+
+/* Match outcomes use the same colours in cards, details and player histories. */
+[data-result="win"]{--result-color:#187442;--result-tint:#e8f5ed}
+[data-result="loss"]{--result-color:#ba303a;--result-tint:#fcebed}
+[data-result="draw"]{--result-color:#626974;--result-tint:#edf0f3}
+.match-row[data-result] .score-value,.match-row[data-result] .dash,
+.dialog-score[data-result],.history-score[data-result]{color:var(--result-color)}
+.match-row[data-result] .outcome-tag{background:var(--result-tint);color:var(--result-color);border-color:currentColor}
+/* Frame the supplied portrait logo without its large empty top/bottom margins. */
+.crest-frame img.crest-legrena{object-fit:cover;object-position:center 60%;mix-blend-mode:normal}
