@@ -40,7 +40,7 @@ browser validation here uses HTTP.
 - `editorial.css`: photo-led homepage, condensed typography, match cards and responsive layout.
 - `black-pink.css`: the black/pink club palette and striped background, dark cards and dialogs, and gold photograph frame.
 - `gallery.css`: the compact framed photo gallery and its responsive navigation controls.
-- `background-details.css`: thin gold lines at each black/pink stripe boundary.
+- `background-details.css`: decorative gold club crests and `16671` over the black/pink stripes.
 - `assets/`: self-hosted graphics and fonts, including the font licence.
 - `index.html`: team photo gallery, latest-first results, scorer leaderboard, and complete squad.
 
@@ -75,9 +75,10 @@ match details and browser icon. It is copied without alteration. Club crests
 use a black display canvas with normal blending; opponent crests retain light
 canvases so their supplied artwork stays legible. The black/pink theme covers
 both homepage and announcements, with brighter outcome colours for dark cards.
-Thin gold lines follow each boundary between the black and pink background
-stripes. Their spacing follows the stripe width on desktop and mobile. The
-previous repeated gold crests and `16671` background pattern have been removed.
+Small gold crests and `16671` form a decorative background pattern. The crest
+uses the original club image as a CSS luminance mask; the active pink logo and
+source photograph are unchanged. The decorative layer is hidden from assistive
+technology and cannot intercept pointer input.
 
 Matches are paginated at eight per page, always in descending round order.
 In match cards, details and player histories, a win colours only the SHADOWS
