@@ -1,4 +1,4 @@
-import { club, matches, squad, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261022-match-lineups';
+import { club, matches, squad, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261022-mvp-frame';
 
 const messages = {
   el: {
@@ -6,7 +6,7 @@ const messages = {
     coachingStaff: 'ΠΡΟΠΟΝΗΤΙΚΟ ΕΠΙΤΕΛΕΙΟ', headCoach: 'Προπονητής', lineupTitle: 'ΣΥΝΘΕΣΗ ΟΜΑΔΑΣ',
     lineupNotRecorded: 'Δεν έχει καταχωριστεί ακόμη η σύνθεση για αυτόν τον αγώνα.',
     injuryUpdate: 'ΤΡΑΥΜΑΤΙΣΜΟΣ', injuredInMatch: 'Τραυματίστηκε στον αγώνα με', estimatedAbsence: 'Εκτιμώμενη απουσία',
-    monthsUnit: 'μήνες', fromMatchDate: 'από τον αγώνα στις', estimatedReturn: 'Εκτιμώμενη επιστροφή',
+    monthsUnit: 'μήνες', estimatedReturn: 'Εκτιμώμενη επιστροφή',
     'mid-November': 'μέσα Νοεμβρίου',
 
     teamPhotoAlt: 'Η ομάδα των SHADOWS FC στο γήπεδο', newestFirst: 'Από τον πιο πρόσφατο αγώνα',
@@ -57,7 +57,7 @@ const messages = {
     coachingStaff: 'COACHING STAFF', headCoach: 'Head coach', lineupTitle: 'TEAM LINEUP',
     lineupNotRecorded: 'The lineup has not been recorded for this match yet.',
     injuryUpdate: 'INJURY UPDATE', injuredInMatch: 'Injured in the match against', estimatedAbsence: 'Estimated absence',
-    monthsUnit: 'months', fromMatchDate: 'from the match on', estimatedReturn: 'Estimated return',
+    monthsUnit: 'months', estimatedReturn: 'Estimated return',
     'mid-November': 'mid-November',
 
     teamPhotoAlt: 'The SHADOWS FC team on the pitch', newestFirst: 'Newest matches first',
@@ -225,7 +225,7 @@ function lineupMarkup(match) {
 
 function injuryMarkup(match, playerNumber = null) {
   const injuries = (match.injuries || []).filter(injury => playerNumber == null || injury.playerNumber === playerNumber);
-  return injuries.map(injury => `<aside class="injury-update"><h3>${t('injuryUpdate')}</h3><strong>${esc(injury.name)}</strong><p>${t('injuredInMatch')} ${esc(match.opponent)} · ${match.date}.</p><p>${t('estimatedAbsence')}: ${injury.absenceMonths.toLocaleString(language === 'el' ? 'el-GR' : 'en-GB')} ${t('monthsUnit')} ${t('fromMatchDate')} ${match.date}.</p><p class="injury-return">${t('estimatedReturn')}: <b>${t(injury.expectedReturn)}</b>.</p></aside>`).join('');
+  return injuries.map(injury => `<aside class="injury-update"><h3>${t('injuryUpdate')}</h3><strong>${esc(injury.name)}</strong><p>${t('injuredInMatch')} ${esc(match.opponent)} · ${match.date}.</p><p>${t('estimatedAbsence')}: ${injury.absenceMonths.toLocaleString(language === 'el' ? 'el-GR' : 'en-GB')} ${t('monthsUnit')}</p><p class="injury-return">${t('estimatedReturn')}: <b>${t(injury.expectedReturn)}</b>.</p></aside>`).join('');
 }
 
 function renderDialog() {

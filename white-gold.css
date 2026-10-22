@@ -255,3 +255,12 @@ dialog h2{color:#252019}
 .injury-update p{font-size:11px;line-height:1.9;color:#725b4e;margin:5px 0 0}
 .injury-update .injury-return{padding-top:9px;margin-top:10px;border-top:1px solid #ebd6ca;color:#63472f}
 @media(max-width:380px){.match-lineup-list li{grid-template-columns:34px minmax(0,1fr);gap:8px;padding-inline:11px}.lineup-name{font-size:12px}.lineup-marker{font-size:10px}.injury-update{padding:16px 14px}.match-staff-list li{font-size:12px}.match-staff-list small{font-size:9px}}
+
+/* A metallic gold picture frame around the original team photograph. */
+.team-photo-frame{
+  padding:12px;border:2px solid #89652e;
+  background:linear-gradient(135deg,#795721 0%,#ecd798 17%,#b18a44 33%,#f5e6bd 52%,#99743a 78%,#d9bd7d 100%);
+  box-shadow:0 0 0 1px #e3cb93,0 12px 30px #75551c26,inset 0 0 0 2px #f3dfaa,inset 0 0 0 4px #a07b3c;
+}
+.team-photo-frame .team-photo{border:1px solid #735322;box-shadow:0 0 0 1px #e1c787}
+@media(max-width:560px){.team-photo-frame{padding:7px;box-shadow:0 0 0 1px #e3cb93,0 8px 20px #75551c20,inset 0 0 0 1px #f3dfaa,inset 0 0 0 3px #a07b3c}}

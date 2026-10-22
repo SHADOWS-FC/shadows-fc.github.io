@@ -83,12 +83,14 @@ profile aliases or assuming a listed substitute came on. The supplied lineup
 graphics are not published as images.
 
 Zachos Giannis (#5) was injured against Legrena on 29/09. Match details and his
-profile record an estimated absence of 1.5 months from that match, with an
+profile show “Estimated absence: 1.5 months”, with the injury date stated
+separately and an
 approximate return in mid-November. The site does not infer a medical diagnosis,
 a season year or that he has already returned.
 
 The team photograph at `assets/team.jpg` is the original `1-Photo-1.jpg` supplied
-by the club. It is copied without alteration; responsive CSS frames the photo.
+by the club. It is copied without alteration; responsive CSS places it inside a bevelled
+gold frame.
 All player portraits and opponent crests are also the club-supplied originals.
 
 ### Confirmed information
@@ -103,7 +105,9 @@ All player portraits and opponent crests are also the club-supplied originals.
 The club confirmed that **Mike = Mixalis**, displayed as Mixalis. Original
 source names remain in the match data. Other aliases are not merged without
 confirmation. Duplicate screenshots are counted once. Gkoumas was confirmed
-as MVP against Savralliolid. Earlier MVPs are unknown, not presumed absent.
+as MVP against Savralliolid. The club subsequently confirmed Troka against
+Legrena, Rothos against Aston Voula, and Mike (the confirmed Mixalis alias)
+against Unathletico. MVP display names are kept as supplied by the club.
 
 ### Content still to add
 

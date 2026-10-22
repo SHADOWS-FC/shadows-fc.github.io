@@ -21,7 +21,7 @@ export const matches = [
     goalsFor: 4, goalsAgainst: 5,
     scorers: [{ name: 'Gkoumas', goals: 1 }, { name: 'Dinos', goals: 1 },
       { name: 'Zachos', goals: 1 }, { name: 'Galanis', goals: 1 }],
-    mvp: null,
+    mvp: 'Troka',
     source: 'First-game lineup and full-time posts. Match date from lineup, not post timestamp.',
     lineup: {
       type: 'starting',
@@ -43,7 +43,7 @@ export const matches = [
     logo: 'assets/logos/aston-voula.png',
     goalsFor: 5, goalsAgainst: 6,
     scorers: [{ name: 'Rothos', goals: 3 }, { name: 'Tasos', goals: 1 }, { name: 'Xatzi', goals: 1 }],
-    mvp: null,
+    mvp: 'Rothos',
     source: 'Second-game lineup and full-time posts. Scorer names retained as printed.',
     lineup: {
       type: 'starting',
@@ -66,7 +66,7 @@ export const matches = [
     goalsFor: 5, goalsAgainst: 8,
     scorers: [{ name: 'Mike', goals: 2 }, { name: 'Dinos', goals: 1 },
       { name: 'Gkoumas', goals: 1 }, { name: 'Stavros', goals: 1 }],
-    mvp: null,
+    mvp: 'Mike',
     source: 'Matchday post dated 12 October; full-time post dated 13 October. Duplicate screenshot counted once.',
     lineup: {
       type: 'starting',
