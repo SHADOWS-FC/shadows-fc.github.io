@@ -94,7 +94,10 @@ as well as other images and fonts; it requires no additional image requests.
 
 All eight original logos from `LOGOS.rar` are saved in `assets/logos/`; see
 [logo provenance](assets/logos/README.md) for the confirmed mappings.
-The club crest also appears as the browser icon. Unused logos are retained
+The club crest also appears as the browser icon. Crests use a common size and
+light canvas in the match centre, latest-result card and match dialogs.
+CSS keeps original image proportions and blends white image backgrounds into
+the card; the Unathletico canvas has its empty outer corners clipped for display. Unused logos are retained
 for future fixtures without creating results or standings.
 
 The night pitch background is generated atmospheric artwork, not a photograph

@@ -24,12 +24,83 @@ h1,h2,h3,.hero-score,.stat-number,.match-score,.mvp-name,.art-number,.top-scorer
 .has-mvp-photo{overflow:hidden}.has-mvp-photo .mvp-portrait{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 10%;z-index:0}.has-mvp-photo:after{inset:0;background:linear-gradient(0deg,#100b17ef,transparent 42%,#100b1777);z-index:1;pointer-events:none}.has-mvp-photo .art-label{color:var(--pink-light);padding-left:18px;z-index:3}.has-mvp-photo .art-number{z-index:2;color:#ff529bbb;top:auto;bottom:44px;right:12px;font-size:190px;line-height:1;letter-spacing:-10px}.has-mvp-photo .art-bottom{z-index:3;color:#fff;padding:0 18px}.has-mvp-photo .art-bottom>span:last-child{color:#f0d9e7}
 @media(max-width:720px){.has-mvp-photo .art-number{font-size:170px;bottom:45px}.has-mvp-photo .art-label{font-size:6px;letter-spacing:1px}.has-mvp-photo .art-bottom{padding-inline:15px}}
 
-/* Original club-supplied crests retain their full artwork and aspect ratio. */
-.brand-crest{display:block;width:54px;height:54px;object-fit:contain;border-radius:50%;flex:none}
-.hero-teams .team-crest{display:block;width:74px;height:74px;object-fit:contain;background:#fff;border-radius:10px;margin-bottom:14px}
-.hero-teams .club-crest{border-radius:50%}
-.match-team .match-crest{display:block;width:42px;height:46px;object-fit:contain;flex:none}
-.match-team .club-crest{height:42px;border-radius:50%}
-.competition-label{display:inline-flex;align-items:center;margin-top:24px;padding:9px 12px;border:1px solid #ff529b70;background:#17131dc9;color:#ffc2df;font-size:10px;letter-spacing:1.3px;font-weight:700}
-@media(max-width:800px){.brand-crest{width:46px;height:46px}.hero-teams .team-crest{width:62px;height:62px}.match-team .match-crest{width:34px;height:38px}.match-team .club-crest{height:34px}}
-@media(max-width:360px){.brand-crest{width:40px;height:40px}.match-team .match-crest{width:30px;height:34px}.match-team .club-crest{height:30px}}
+/* Club identity and match centre. Original crests share an unclipped,
+   light canvas; multiply blends their supplied white backgrounds into it. */
+:root{--scoreboard:#f5f4f0;--scoreboard-ink:#19171d;--scoreboard-muted:#6b6670;--scoreboard-line:#dcd8dc;--scoreboard-pink:#b92365}
+.site-header{height:104px;border-top:3px solid var(--pink)}
+.wordmark{gap:17px;font-size:28px}
+.brand-seal{display:grid;place-items:center;width:66px;height:66px;background:#fff;border-radius:50%;outline:1px solid #ff529b55;outline-offset:5px;flex:none}
+.brand-crest{display:block;width:62px;height:62px;object-fit:contain;border-radius:50%}
+.wordmark small{font-size:8px;letter-spacing:2.4px;margin-top:7px}
+.hero{grid-template-columns:minmax(0,1fr) 420px;gap:48px}
+.hero-actions{display:flex;align-items:center;flex-wrap:wrap;gap:18px;margin-top:31px}
+.hero-actions .button{flex:none}
+.competition-label{display:block;font-size:9px;font-weight:700;letter-spacing:1.3px;color:#e3d6df;padding-left:17px;border-left:1px solid #ffffff45;line-height:1.7}
+.hero-match{align-self:center;padding:0;margin:0;background:var(--scoreboard);color:var(--scoreboard-ink);border:0;border-top:4px solid var(--pink);backdrop-filter:none;box-shadow:0 18px 60px #0005;transform:none}
+.hero-match:hover{transform:none}
+.match-topline{padding:21px 24px 17px;border-bottom:1px solid var(--scoreboard-line)}
+.match-topline .eyebrow{color:var(--scoreboard-ink);font-size:9px;letter-spacing:1px}
+.result-badge{padding:5px 8px;font-size:8px;font-weight:700;letter-spacing:.7px;background:#25212a;color:#fff;border:0}
+.match-meta{margin:0;padding:18px 24px 0;color:var(--scoreboard-muted);font-size:8px;font-weight:700;letter-spacing:1px}
+.hero-teams{display:grid;grid-template-columns:minmax(0,1fr) 112px minmax(0,1fr);align-items:start;gap:4px;margin:26px 20px 0}
+.hero-teams>.hero-team{display:flex;flex-direction:column;align-items:center;width:auto;min-width:0;text-align:center}
+.crest-frame{display:flex;align-items:center;justify-content:center;width:80px;height:88px;flex:none}
+.crest-frame img{display:block;width:100%;height:100%;max-width:100%;max-height:100%;min-width:0;min-height:0;object-fit:contain;mix-blend-mode:multiply}
+.hero-teams .team-crest{width:100%;height:100%;margin:0;padding:0;border:0;border-radius:0;background:none}
+.hero-teams strong{font-family:var(--display);font-size:15px;letter-spacing:0;margin-top:13px;line-height:1.2}
+.hero-teams small{color:var(--scoreboard-muted);font-size:7px;letter-spacing:1.5px;margin-top:5px}
+.hero-teams .hero-score{display:flex;flex-direction:row;width:auto;align-items:center;justify-content:center;gap:8px;margin:0;padding-top:9px;font-size:76px;line-height:1;letter-spacing:-2px;white-space:nowrap;color:var(--scoreboard-ink)}
+.hero-score>span:first-child{color:var(--scoreboard-pink)}
+.hero-score i{font-size:28px;letter-spacing:0;color:#99909a}
+.scoreboard-venue{margin:22px 20px 0;color:var(--scoreboard-muted);font-size:7px;letter-spacing:1.3px;text-align:center}
+.hero-match .win-note{margin:21px 24px 0;padding:16px 0;border-top:1px solid var(--scoreboard-line);color:var(--scoreboard-pink);font-size:7px;font-weight:700;letter-spacing:.7px}
+.hero-scorers{padding:19px 24px;margin-top:0;background:#1b1720;border:0;color:#e1d6df;font-size:10px;gap:16px;justify-content:space-between}
+.hero-scorers>span{font-size:8px;color:#b9a9b5;margin:0}
+.hero-scorers strong{color:#e1d6df}
+.hero-scorers b{color:var(--pink-light)}
+.match-list{gap:20px}
+.match-row,.match-row:first-child{grid-template-columns:minmax(0,1fr) 112px minmax(0,1fr);grid-template-areas:'date date outcome' 'home score away' 'footer footer footer';gap:24px 10px;padding:19px 24px 0;min-height:280px;background:var(--scoreboard);color:var(--scoreboard-ink);border:1px solid #f5f4f0;border-top:3px solid #d1cbd2;box-shadow:0 4px 16px #0001}
+.match-row:first-child{border-top-color:var(--pink)}
+.match-row:hover,.match-row:first-child:hover{background:var(--scoreboard);border-color:var(--pink);transform:translateY(-3px);box-shadow:0 10px 24px #0003}
+.match-row:after{top:56px;left:24px;right:24px;background:var(--scoreboard-line)}
+.match-date{gap:12px}
+.match-date strong{font-family:var(--display);font-size:17px;letter-spacing:.4px}
+.match-date small{font-size:7px;color:var(--scoreboard-muted);letter-spacing:.7px}
+.match-team,.match-team.away{gap:10px;align-self:start;font-size:16px;line-height:1.2}
+.match-team .crest-frame{width:68px;height:74px}
+.match-team .match-crest{width:100%;height:100%;object-fit:contain;flex:none;border-radius:0}
+.match-score{display:flex;align-items:center;flex-direction:column;gap:9px;align-self:start;padding-top:18px;font-size:50px;line-height:1;letter-spacing:-1px;white-space:nowrap}
+.match-score .score-value{display:block}
+.match-score .dash{padding:0 7px;color:#9c939e}
+.match-score small{font-family:var(--font);font-size:7px;letter-spacing:1.4px;font-weight:700;color:var(--scoreboard-muted)}
+.outcome-tag{font-size:9px;border:1px solid #cfc9d1;color:#615765;background:transparent;padding:4px 8px;border-radius:0}
+.outcome-tag.win{background:#b92365;border-color:#b92365;color:white}
+.match-card-footer{grid-area:footer;display:flex;justify-content:space-between;align-items:center;gap:10px;align-self:end;padding:14px 0;border-top:1px solid var(--scoreboard-line);font-size:7px;font-weight:500;letter-spacing:.7px;color:var(--scoreboard-muted)}
+.match-card-footer>span:last-child{display:flex;align-items:center;gap:12px;color:var(--scoreboard-ink)}
+.match-card-footer .row-arrow{display:inline-flex;color:var(--scoreboard-pink)}
+.crest-fallback{display:grid;place-items:center;width:52px;height:62px;border:1px solid #c8c2cb;color:#7b707f;font-family:var(--display);font-size:21px;letter-spacing:.5px}
+.dialog-scoreboard{display:flex;justify-content:space-evenly;align-items:center;gap:12px;background:var(--scoreboard);color:var(--scoreboard-ink);padding:22px 15px;margin:25px 0}
+.dialog-scoreboard .dialog-score{margin:0;padding:0;font-size:60px;white-space:nowrap;line-height:1;color:var(--scoreboard-ink)}
+.dialog-scoreboard .crest-frame{width:74px;height:82px}
+.footer-brand{display:flex;align-items:center;gap:16px}
+.footer-seal{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:#fff;flex:none}
+.footer-seal img{display:block;width:48px;height:48px;object-fit:contain;border-radius:50%}
+.footer-wordmark{color:var(--text)!important;font-size:27px;line-height:1}
+.footer-wordmark small{display:block;margin-top:8px;font-family:var(--font);font-size:7px;letter-spacing:1.7px;font-weight:400;color:#b7a8b3}
+@media(min-width:1600px){.hero{grid-template-columns:minmax(0,1fr) 450px;gap:90px}.hero-match{padding:0}}
+@media(max-width:1100px){.hero{grid-template-columns:minmax(0,1fr) 360px;gap:28px}.hero h1{font-size:clamp(74px,8.7vw,95px)}.hero-teams{grid-template-columns:minmax(0,1fr) 100px minmax(0,1fr);margin-inline:16px}.hero-teams .hero-score{font-size:67px}.hero-teams strong{font-size:13px}.hero-teams .crest-frame{width:72px;height:80px}.hero-scorers{padding-inline:20px;font-size:9px;gap:10px}.match-row,.match-row:first-child{padding-inline:18px;gap:24px 5px;grid-template-columns:minmax(0,1fr) 92px minmax(0,1fr)}.match-row:after{left:18px;right:18px}.match-score{font-size:44px}.match-team,.match-team.away{font-size:14px}.match-date small{font-size:6px;letter-spacing:.3px}}
+@media(max-width:900px) and (min-width:721px){.hero{grid-template-columns:minmax(0,1fr) 320px;gap:20px}.hero h1{font-size:clamp(63px,8.8vw,78px)}.match-topline{padding-inline:18px}.hero-teams{grid-template-columns:minmax(0,1fr) 86px minmax(0,1fr);margin-inline:14px;gap:2px}.hero-teams .hero-score{font-size:60px;gap:6px;padding-top:12px}.hero-teams .crest-frame{width:64px;height:76px}.hero-teams strong{font-size:12px}.match-meta{padding-inline:18px;font-size:7px}.hero-scorers>span{display:none}.hero-scorers{font-size:9px;gap:8px}.match-row,.match-row:first-child{grid-template-columns:minmax(0,1fr) 76px minmax(0,1fr);padding-inline:14px}.match-score{font-size:36px}.match-score .dash{padding-inline:4px}.match-team .crest-frame{width:58px;height:68px}.match-team,.match-team.away{font-size:13px}.match-date{gap:8px}.match-date small{font-size:6px;letter-spacing:0}.match-card-footer{font-size:6px;letter-spacing:.3px}.match-row:after{left:14px;right:14px}}
+@media(max-width:800px){.site-header{height:88px}.site-header nav{top:85px}.brand-seal{width:52px;height:52px;outline-offset:3px}.brand-crest{width:50px;height:50px}.wordmark{font-size:25px;gap:13px}.wordmark small{font-size:7px;letter-spacing:2px}.competition-label{font-size:8px}.dialog-scoreboard .crest-frame{width:64px;height:74px}}
+@media(max-width:720px){.hero{grid-template-columns:minmax(0,1fr);gap:36px}.hero h1{font-size:clamp(68px,19vw,110px)}.hero-match{width:100%;max-width:440px;padding:0;align-self:auto}.hero-actions{margin-top:27px;gap:18px}.competition-label{font-size:8px;padding-left:13px;letter-spacing:.7px;max-width:115px}.hero .hero-bottom{margin-top:23px}.hero-teams{grid-template-columns:minmax(0,1fr) 100px minmax(0,1fr);margin:24px 18px 0;gap:3px}.hero-teams .hero-score{font-size:70px;padding-top:10px}.hero-teams .crest-frame{width:76px;height:82px}.hero-teams strong{font-size:14px}.match-topline{padding:19px 20px 16px}.match-meta{padding:17px 20px 0;font-size:7px}.hero-match .win-note{font-size:6px;letter-spacing:.5px;margin-inline:20px}.hero-scorers{padding:17px 20px;font-size:10px}.hero-scorers>span{display:block;font-size:7px}.match-list{gap:16px}.match-row,.match-row:first-child{grid-template-columns:minmax(0,1fr) 108px minmax(0,1fr);min-height:270px;padding:17px 20px 0;gap:24px 7px}.match-row:after{left:20px;right:20px;top:53px}.match-date strong{font-size:16px}.match-date small{font-size:6px;letter-spacing:.6px}.match-team,.match-team.away{font-size:15px}.match-team .crest-frame{width:70px;height:78px}.match-score{font-size:48px;padding-top:19px}.match-card-footer{padding-block:14px;font-size:6px;letter-spacing:.5px}.site-footer{display:grid;grid-template-columns:1fr auto;gap:24px}.site-footer>span{grid-column:1;grid-row:2}.site-footer .back-top{grid-column:2;grid-row:1/3}.footer-wordmark{font-size:24px}.footer-seal{width:46px;height:46px}.footer-seal img{width:44px;height:44px}}
+@media(max-width:380px){.site-header{padding-inline:20px}.wordmark{font-size:20px;gap:11px}.wordmark small{font-size:6px;letter-spacing:1.7px}.brand-seal{width:44px;height:44px}.brand-crest{width:42px;height:42px}.header-actions{gap:12px}.language-toggle{padding:10px}.hero-teams{grid-template-columns:minmax(0,1fr) 84px minmax(0,1fr);margin-inline:14px}.hero-teams .hero-score{font-size:60px;gap:5px;padding-top:14px}.hero-teams .crest-frame{width:64px;height:76px}.hero-teams strong{font-size:12px}.hero-teams small{font-size:6px}.match-topline .eyebrow{font-size:7px}.hero-scorers{font-size:9px;gap:8px;padding-inline:16px}.hero-match .win-note{font-size:5px;letter-spacing:.3px}.match-row,.match-row:first-child{padding-inline:15px;grid-template-columns:minmax(0,1fr) 85px minmax(0,1fr);gap:24px 5px}.match-row:after{left:15px;right:15px}.match-team .crest-frame{width:62px;height:74px}.match-team,.match-team.away{font-size:13px}.match-score{font-size:40px}.match-score .dash{padding-inline:4px}.match-date small{font-size:5px;letter-spacing:.3px}.dialog-scoreboard .dialog-score{font-size:44px}.dialog-scoreboard .crest-frame{width:52px;height:62px}.dialog-scoreboard{gap:8px;padding-inline:10px}}
+
+/* Clip only the empty corners of the supplied Unathletico crest canvas. */
+.crest-shield{clip-path:polygon(5% 5%,95% 5%,95% 47%,93% 62%,86% 75%,72% 88%,50% 98%,28% 88%,14% 75%,7% 62%,5% 47%)}
+.match-date small{font-size:8px;letter-spacing:.4px}
+.match-card-footer{font-size:9px;letter-spacing:.2px}
+.hero-match .match-meta{font-size:9px;letter-spacing:.6px}
+.scoreboard-venue{font-size:8px;letter-spacing:1px}
+.hero-match .win-note{font-size:8px;line-height:1.6;letter-spacing:.4px}
+@media(min-width:721px) and (max-width:900px){.match-date small{font-size:7px;letter-spacing:0}.match-card-footer{font-size:8px}.hero-match .match-meta{font-size:8px}}
+@media(max-width:720px){.match-date small{font-size:8px;letter-spacing:.2px}.match-card-footer{font-size:9px}.hero-match .match-meta{font-size:8px}.hero-match .win-note{font-size:8px;letter-spacing:.1px}.hero-scorers{font-size:11px}}
+@media(max-width:380px){.match-date{gap:8px}.match-date small{font-size:7px;letter-spacing:0}.match-card-footer{font-size:8px}.hero-match .win-note{font-size:7px}.hero-scorers{font-size:10px}}

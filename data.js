@@ -35,7 +35,7 @@ export const matches = [
   {
     id: 'unathletico', round: 3, date: '12/10', time: '21:00',
     opponent: 'Unathletico FC', initials: 'UFC', color: '#d6ddd7',
-    logo: 'assets/logos/unathletico.jpg',
+    logo: 'assets/logos/unathletico.jpg', crestShape: 'shield',
     goalsFor: 5, goalsAgainst: 8,
     scorers: [{ name: 'Mike', goals: 2 }, { name: 'Dinos', goals: 1 },
       { name: 'Gkoumas', goals: 1 }, { name: 'Stavros', goals: 1 }],

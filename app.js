@@ -88,16 +88,23 @@ function renderSummary() {
   $('#summary-stats').innerHTML = cards.map(([value, label, sub], index) => `<div class="stat"><strong class="stat-number${index === 1 ? ' pink' : ''}">${value}</strong><span class="stat-label">${t(label)}</span><small class="stat-sub">${sub}</small></div>`).join('');
 }
 
+// One shared crest area keeps different badge proportions aligned across views.
+function crestMarkup(logo, fallback = '', shape = '') {
+  return `<span class="crest-frame">${logo
+    ? `<img class="match-crest${shape === 'shield' ? ' crest-shield' : ''}" src="${esc(logo)}" alt="" loading="lazy">`
+    : `<span class="crest-fallback" aria-hidden="true">${esc(fallback)}</span>`}</span>`;
+}
+
 function renderMatches() {
   const visible = [...matches].reverse().filter(match => activeFilter === 'all' || outcome(match) === activeFilter);
   $('#match-list').innerHTML = visible.map(match => {
     const result = outcome(match);
     return `<button class="match-row" data-match="${match.id}" aria-label="${esc(t('detail'))}: SHADOWS FC ${match.goalsFor}–${match.goalsAgainst} ${esc(match.opponent)}, ${match.date}, ${t(result + 'Full')}">
-      <span class="match-date"><strong>${match.date.replace('/', '.')}</strong><small>MD ${String(match.round).padStart(2, '0')}<br>${match.time}</small></span>
-      <span class="match-team"><img class="match-crest club-crest" src="${esc(club.logo)}" alt="" width="600" height="600" loading="lazy"><span>SHADOWS FC</span></span>
-      <span class="match-score">${match.goalsFor}<span class="dash">–</span>${match.goalsAgainst}</span>
-      <span class="match-team away">${match.logo ? `<img class="match-crest" src="${esc(match.logo)}" alt="" loading="lazy">` : `<span class="mini-emblem opponent" style="--team-color:${match.color}" aria-hidden="true">${esc(match.initials)}</span>`}<span>${esc(match.opponent)}</span></span>
-      <span class="match-outcome"><span class="outcome-tag ${result}" aria-hidden="true">${t(result)}</span><span class="row-arrow" aria-hidden="true">↗</span></span></button>`;
+      <span class="match-date"><strong>${match.date.replace('/', '.')}</strong><small>MASTER LEAGUE · MD ${String(match.round).padStart(2, '0')}</small></span>
+      <span class="match-team">${crestMarkup(club.logo)}<span>SHADOWS FC</span></span>
+      <span class="match-score"><span class="score-value">${match.goalsFor}<span class="dash">–</span>${match.goalsAgainst}</span><small data-i18n="fullTime">${t('fullTime')}</small></span>
+      <span class="match-team away">${crestMarkup(match.logo, match.initials, match.crestShape)}<span>${esc(match.opponent)}</span></span>
+      <span class="match-outcome"><span class="outcome-tag ${result}" aria-hidden="true">${t(result)}</span></span><span class="match-card-footer"><span>${match.time} · STAR SPORT CLUB</span><span>${t('detail')} <span class="row-arrow" aria-hidden="true">↗</span></span></span></button>`;
   }).join('') || `<p class="empty-results">${t('noResults')}</p>`;
   $('#results-status').textContent = `${visible.length} ${t('matchCount')}`;
   document.querySelectorAll('[data-filter]').forEach(button => {
@@ -129,7 +136,7 @@ function renderDialog() {
   if (dialogContent.type === 'match') {
     const match = matches.find(item => item.id === dialogContent.id);
     $('#dialog-category').textContent = `${t('matchday')} ${String(match.round).padStart(2, '0')} / ${t('fullTime')}`;
-    $('#dialog-body').innerHTML = `<h2 id="dialog-title">SHADOWS FC<br>× ${esc(match.opponent)}</h2><p class="dialog-meta">${t('leagueDetail')}<br>${match.date} · ${match.time}<br>${esc(club.venue)}</p><div class="dialog-score">${match.goalsFor} – ${match.goalsAgainst}</div><h3 class="dialog-subhead">${t('scorerList')}</h3><ul class="dialog-scorers">${match.scorers.map(player => `<li><span>${esc(playerName(player.name))}</span><b>${player.goals}</b></li>`).join('')}</ul>${match.mvp ? `<p class="dialog-meta">${t('mvp')} <strong>${esc(match.mvp)}</strong></p>` : ''}`;
+    $('#dialog-body').innerHTML = `<h2 id="dialog-title">SHADOWS FC<br>× ${esc(match.opponent)}</h2><p class="dialog-meta">${t('leagueDetail')}<br>${match.date} · ${match.time}<br>${esc(club.venue)}</p><div class="dialog-scoreboard">${crestMarkup(club.logo)}<div class="dialog-score">${match.goalsFor} – ${match.goalsAgainst}</div>${crestMarkup(match.logo, match.initials, match.crestShape)}</div><h3 class="dialog-subhead">${t('scorerList')}</h3><ul class="dialog-scorers">${match.scorers.map(player => `<li><span>${esc(playerName(player.name))}</span><b>${player.goals}</b></li>`).join('')}</ul>${match.mvp ? `<p class="dialog-meta">${t('mvp')} <strong>${esc(match.mvp)}</strong></p>` : ''}`;
   } else {
     const player = squad.find(item => item.number === dialogContent.id);
     const scorer = getScorers().find(item => item.name === (player.scorerName || player.name));
