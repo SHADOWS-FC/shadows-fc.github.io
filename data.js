@@ -87,6 +87,35 @@ export const confirmedPlayers = [
 // entries remain above as match evidence, not additional current players.
 export const squad = confirmedPlayers;
 
+export const matchOutcome = match => match.goalsFor > match.goalsAgainst ? 'win'
+  : match.goalsFor < match.goalsAgainst ? 'loss' : 'draw';
+
+// Round is the chronological key: day/month alone cannot order a season
+// that crosses New Year. Never mutate the source records when browsing.
+export function selectMatches(list = matches, { query = '', month = '', result = 'all', sort = 'newest' } = {}) {
+  const normalize = value => String(value).normalize('NFD').replace(/\p{M}/gu, '').toLocaleLowerCase().trim();
+  const search = normalize(query);
+  return list.filter(match => (!search || normalize(match.opponent).includes(search))
+    && (!month || match.date.split('/')[1] === month)
+    && (result === 'all' || matchOutcome(match) === result))
+    .sort((a, b) => sort === 'oldest' ? a.round - b.round
+      : sort === 'goals' ? b.goalsFor - a.goalsFor || b.round - a.round : b.round - a.round);
+}
+
+export function getMatchMonths(list = matches) {
+  return [...new Set([...list].sort((a, b) => a.round - b.round).map(match => match.date.split('/')[1]))];
+}
+
+// These are games with recorded goals, not player appearances. Lineup and
+// assist data are incomplete, so neither appearances nor assists are inferred.
+export function getScoringHistory(name, list = matches) {
+  return selectMatches(list).flatMap(match => {
+    const goals = match.scorers.filter(scorer => playerName(scorer.name) === playerName(name))
+      .reduce((total, scorer) => total + scorer.goals, 0);
+    return goals ? [{ match, goals }] : [];
+  });
+}
+
 export function getSummary(list = matches) {
   return list.reduce((total, match) => ({
     played: total.played + 1,

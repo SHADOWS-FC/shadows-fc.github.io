@@ -45,6 +45,33 @@ All match records were transcribed from club screenshots. Scorer totals are
 computed from those records; joint leading scorers receive the same rank.
 Match scores and scorer totals are tested for consistency.
 
+### Browsing a full season
+
+The match centre supports opponent search, month and win/draw/loss filters,
+chronological or SHADOWS-goal sorting, and cards or compact list views. Results
+are paginated at eight matches per page. The selection summary and scorer table
+use **all filtered matches**, including those on other pages; the season summary
+and player histories always cover the full record. The scope is displayed next
+to each set of statistics.
+
+Filters, sort, view and page are kept in the URL. Refreshing or sharing the link
+restores them. Each match/player/scorer dialog has its own shareable URL; browser
+Back returns through the match-to-player drill-down. Copy-link has a selectable
+text fallback when the clipboard is unavailable. Recent-form buttons and scorer
+names link directly to match details and scoring histories.
+
+To add results, append records to `matches` in `data.js` with a unique `id`, an
+increasing `round`, the confirmed day/month, opponent, score and scorer list.
+The latest-result card, totals, month choices, form and rankings update from the
+records. Rounds determine chronology across New Year; no season year is inferred.
+The existing dated MVP feature remains a historical highlight. Player scoring
+histories count **games with recorded goals**, not appearances. Do not infer
+assists, lineups, or appearances from scorer lists.
+
+Data tests cover combined filters, draws, chronology across New Year, aliases,
+scoring-history reconciliation and a 40-game synthetic season. Browser checks
+also exercised 40 temporary fixtures without adding them to the published data.
+
 ### Confirmed information
 
 | Match date | Opponent | Score (SHADOWS first) | SHADOWS scorers |
