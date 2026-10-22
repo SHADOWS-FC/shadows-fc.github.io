@@ -25,7 +25,11 @@ css = css.replace(/--pitch-image:url\(['"]?assets\/night-pitch\.png['"]?\);/, ''
 for (const [full, asset] of [...css.matchAll(/url\(['"]?(assets\/[^'"\)]+)['"]?\)/g)]) {
   css = css.replaceAll(full, `url("${await embed(asset)}")`);
 }
-const script = `${data.replace(/^export /gm, '')}\n${app.replace(/^import .* from '\.\/data.js';\n/m, '')}`;
+let embeddedData = data;
+for (const [full, asset] of [...data.matchAll(/photo:\s*'(assets\/[^']+)'/g)]) {
+  embeddedData = embeddedData.replaceAll(full, `photo: ${JSON.stringify(await embed(asset))}`);
+}
+const script = `${embeddedData.replace(/^export /gm, '')}\n${app.replace(/^import .* from '\.\/data.js';\n/m, '')}`;
 let output = html
   .replace('<link rel="stylesheet" href="styles.css">', () => `<style>\n${css}\n</style>`)
   .replace('<link rel="stylesheet" href="editorial.css">', '')

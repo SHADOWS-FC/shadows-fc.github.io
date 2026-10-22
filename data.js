@@ -62,17 +62,17 @@ export const latestMatchdaySquad = [
 // Confirmed by the club. Portraits require original named photo files;
 // never substitute a generated likeness for a player.
 export const confirmedPlayers = [
-  { name: 'Sotiris Giotis', number: 1, position: 'GK', confirmed: true, photo: null },
-  { name: 'Chatziamanetoglou Giorgos', number: 82, position: 'GK', confirmed: true, photo: null },
-  { name: 'Troka Giorgos', number: 9, position: 'CB', confirmed: true, photo: null },
-  { name: 'Babakos Dimitris', number: 11, position: 'CB', confirmed: true, photo: null },
-  { name: 'Zachos Giannis', number: 5, position: 'CB', confirmed: true, photo: null, scorerName: 'Zachos' },
-  { name: 'Chatzinikolaou Christos', number: 28, position: 'CM', confirmed: true, photo: null },
-  { name: 'Chatziamanetoglou Dinos', number: 7, position: 'RW', confirmed: true, photo: null, scorerName: 'Dinos' },
-  { name: 'Marfa Mixalis', number: 8, position: 'LW', confirmed: true, photo: null, scorerName: 'Mixalis' },
-  { name: 'Stavros Kalogiropoulos', number: 14, position: 'CAM', confirmed: true, photo: null, scorerName: 'Stavros' },
-  { name: 'Kobas Gavrilos', number: 69, position: 'ST', confirmed: true, photo: null },
-  { name: 'Rothos Ioannis', number: 22, position: 'ST', confirmed: true, photo: null, scorerName: 'Rothos' },
+  { name: 'Sotiris Giotis', number: 1, position: 'GK', confirmed: true, photo: 'assets/players/1.jpeg' },
+  { name: 'Chatziamanetoglou Giorgos', number: 82, position: 'GK', confirmed: true, photo: 'assets/players/82.jpeg' },
+  { name: 'Troka Giorgos', number: 9, position: 'CB', confirmed: true, photo: 'assets/players/9.jpeg' },
+  { name: 'Babakos Dimitris', number: 11, position: 'CB', confirmed: true, photo: 'assets/players/11.jpeg' },
+  { name: 'Zachos Giannis', number: 5, position: 'CB', confirmed: true, photo: 'assets/players/5.jpeg', scorerName: 'Zachos' },
+  { name: 'Chatzinikolaou Christos', number: 28, position: 'CM', confirmed: true, photo: 'assets/players/28.jpeg' },
+  { name: 'Chatziamanetoglou Dinos', number: 7, position: 'RW', confirmed: true, photo: 'assets/players/7.jpeg', scorerName: 'Dinos' },
+  { name: 'Marfa Mixalis', number: 8, position: 'LW', confirmed: true, photo: 'assets/players/8.jpeg', scorerName: 'Mixalis' },
+  { name: 'Stavros Kalogiropoulos', number: 14, position: 'CAM', confirmed: true, photo: 'assets/players/14.jpeg', scorerName: 'Stavros' },
+  { name: 'Kobas Gavrilos', number: 69, position: 'ST', confirmed: true, photo: 'assets/players/69.jpeg' },
+  { name: 'Rothos Ioannis', number: 22, position: 'ST', confirmed: true, photo: 'assets/players/22.jpeg', scorerName: 'Rothos' },
   { name: 'Gkoumas Konstantinos', number: 6, position: 'ST', confirmed: true, photo: null, scorerName: 'Gkoumas' },
 ];
 

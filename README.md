@@ -61,10 +61,10 @@ as MVP against Savralliolid. Earlier MVPs are unknown, not presumed absent.
 
 ### Content still to add
 
-- Detailed player list, preferred spellings, and confirmed identity mappings.
-- Original club logo and labelled player/team photos. The screenshot attachments
-  were visible in chat but did not have downloadable file paths in the workspace.
-  Do not substitute generated images for the original club assets.
+- Original club logo and team photos as downloadable files.
+- Confirmation of the archive's `10.jpeg`: the complete roster contains #6,
+  but no #10, and the archive contains no `6.jpeg`. Eleven other portraits have
+  been matched by confirmed shirt numbers. Do not guess the remaining identity.
 - Confirmation of the season year; dates intentionally show day/month only.
 - The standalone selfie is excluded at the club's request.
 
@@ -83,12 +83,12 @@ Marfa Mixalis (#8, LW), Stavros Kalogiropoulos (#14, CAM), and Kobas Gavrilos
 (#69, ST), Rothos Ioannis (#22, ST), and Gkoumas Konstantinos (#6, ST).
 Mixalis is linked to the previously confirmed Mike alias; Stavros
 Kalogiropoulos is linked to the recorded scorer Stavros.
-Their named portrait images are visible in chat, but the originals have not
-been delivered as downloadable files to the execution workspace. Photos stay
-unset until an original-file upload (for example a ZIP of portraits) is provided.
-The UI supports original portraits as soon as `photo` paths are assigned.
-For the requested ZIP upload, filename stems should match shirt numbers:
-`1`, `82`, `9`, `11`, `5`, `28`, `7`, `8`, `14`, `69`, `22`, `6`.
+The club supplied `SHD.rar` containing 12 original JPEGs. Eleven are copied
+without alteration to `assets/players/` and displayed in player cards and
+profile dialogs. The unmatched `10.jpeg` stays outside the published checkout
+until the club confirms which player it depicts. The #6 profile remains
+without a photo in the meantime. The standalone build embeds the portraits
+as well as other images and fonts; it requires no additional image requests.
 
 ### Visual assets
 
