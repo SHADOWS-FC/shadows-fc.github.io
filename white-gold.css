@@ -223,12 +223,15 @@ dialog h2{color:#252019}
 .team-home-mark,.results-order,.scorer-scope-note{color:#796f61}
 .player-position{color:var(--gold-dark)}
 
-/* Match outcomes use the same colours in cards, details and player histories. */
+/* Colour the winning side only; both sides are grey for a draw. */
 [data-result="win"]{--result-color:#187442;--result-tint:#e8f5ed}
 [data-result="loss"]{--result-color:#ba303a;--result-tint:#fcebed}
 [data-result="draw"]{--result-color:#626974;--result-tint:#edf0f3}
-.match-row[data-result] .score-value,.match-row[data-result] .dash,
-.dialog-score[data-result],.history-score[data-result]{color:var(--result-color)}
+.score-value,.dialog-score[data-result],.history-score[data-result]{color:#29251d}
+.score-divider{color:#9c939e;margin-inline:.12em}
+[data-result="win"] .score-for{color:#187442}
+[data-result="loss"] .score-against{color:#ba303a}
+[data-result="draw"] .score-for,[data-result="draw"] .score-against{color:#626974}
 .match-row[data-result] .outcome-tag{background:var(--result-tint);color:var(--result-color);border-color:currentColor}
 /* Frame the supplied portrait logo without its large empty top/bottom margins. */
 .crest-frame img.crest-legrena{object-fit:cover;object-position:center 60%;mix-blend-mode:normal}

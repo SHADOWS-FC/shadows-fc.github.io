@@ -55,8 +55,9 @@ panels or intervening promotional sections. Player portraits retain their
 original photographic backgrounds.
 
 Matches are paginated at eight per page, always in descending round order.
-Scores use green for wins, red for losses and grey for draws in match cards,
-details and player histories. Result letters and accessible labels also convey
+In match cards, details and player histories, a win colours only the SHADOWS
+goal number green; a loss colours only the opponent number red. The other number
+stays neutral. A draw colours both numbers grey. Result letters and accessible labels also convey
 the outcome.
 Old search/filter/sort/view URL parameters are ignored and removed, so links
 from the earlier archive cannot silently hide matches or players. Scorer totals

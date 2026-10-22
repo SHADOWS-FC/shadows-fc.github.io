@@ -1,4 +1,4 @@
-import { club, matches, squad, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261022-result-colours';
+import { club, matches, squad, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261022-score-sides';
 
 const messages = {
   el: {
@@ -144,6 +144,10 @@ function crestMarkup(logo, fallback = '', shape = '') {
     : `<span class="crest-fallback" aria-hidden="true">${esc(fallback)}</span>`}</span>`;
 }
 
+function scoreMarkup(match) {
+  return `<span class="score-for">${match.goalsFor}</span><span class="score-divider">–</span><span class="score-against">${match.goalsAgainst}</span>`;
+}
+
 function renderMatches() {
   const visible = selectMatches();
   const pages = Math.max(1, Math.ceil(visible.length / PAGE_SIZE));
@@ -155,7 +159,7 @@ function renderMatches() {
     return `<button class="match-row" data-result="${result}" data-open-match="${esc(match.id)}" aria-label="${esc(t('detail'))}: SHADOWS FC ${match.goalsFor}–${match.goalsAgainst} ${esc(match.opponent)}, ${match.date}, ${t(result + 'Full')}">
       <span class="match-date"><strong>${match.date.replace('/', '.')}</strong><small>MASTER LEAGUE · MD ${String(match.round).padStart(2, '0')}</small></span>
       <span class="match-team">${crestMarkup(club.logo)}<span>SHADOWS FC</span></span>
-      <span class="match-score"><span class="score-value">${match.goalsFor}<span class="dash">–</span>${match.goalsAgainst}</span><small>${t('fullTime')}</small></span>
+      <span class="match-score"><span class="score-value">${scoreMarkup(match)}</span><small>${t('fullTime')}</small></span>
       <span class="match-team away">${crestMarkup(match.logo, match.initials, match.crestShape)}<span>${esc(match.opponent)}</span></span>
       <span class="match-outcome"><span class="outcome-tag ${result}" aria-hidden="true">${t(result)}</span></span><span class="match-card-footer"><span>${match.time} · STAR SPORT CLUB</span><span>${t('detail')} <span class="row-arrow" aria-hidden="true">↗</span></span></span></button>`;
   }).join('') || `<div class="empty-results"><p>${t('noResults')}</p></div>`;
@@ -193,7 +197,7 @@ function scoringHistoryMarkup(name) {
   const total = history.reduce((sum, entry) => sum + entry.goals, 0);
   return `${history.length ? `<div class="profile-stats history-totals"><div><strong>${total}</strong><small>${t('confirmedGoals')}</small></div><div><strong>${history.length}</strong><small>${t('scoringMatches')}</small></div></div>` : ''}
     <h3 class="dialog-subhead">${t('scoringHistory')}</h3><p class="dialog-note">${t('scopeNote')}</p>
-    <div class="scoring-history">${history.map(({ match, goals }) => `<button data-open-match="${esc(match.id)}"><span><small>${match.date} · MD ${String(match.round).padStart(2, '0')}</small><strong>${esc(match.opponent)}</strong></span><span class="history-score" data-result="${outcome(match)}">${match.goalsFor}–${match.goalsAgainst}</span><span class="history-goals"><b>${goals}</b> ${t('goalsUnit')} <span aria-hidden="true">↗</span></span></button>`).join('') || `<p class="dialog-note">${t('noScoringHistory')}</p>`}</div>`;
+    <div class="scoring-history">${history.map(({ match, goals }) => `<button data-open-match="${esc(match.id)}"><span><small>${match.date} · MD ${String(match.round).padStart(2, '0')}</small><strong>${esc(match.opponent)}</strong></span><span class="history-score" data-result="${outcome(match)}">${scoreMarkup(match)}</span><span class="history-goals"><b>${goals}</b> ${t('goalsUnit')} <span aria-hidden="true">↗</span></span></button>`).join('') || `<p class="dialog-note">${t('noScoringHistory')}</p>`}</div>`;
 }
 
 function renderDialog() {
@@ -204,7 +208,7 @@ function renderDialog() {
     const ordered = selectMatches(matches, { sort: 'oldest' });
     const index = ordered.findIndex(item => item.id === match.id);
     $('#dialog-category').textContent = `${t('matchday')} ${String(match.round).padStart(2, '0')} / ${t('fullTime')}`;
-    $('#dialog-body').innerHTML = `<h2 id="dialog-title">SHADOWS FC<br>× ${esc(match.opponent)}</h2><p class="dialog-meta">${t('leagueDetail')}<br>${match.date} · ${match.time}<br>${esc(club.venue)}</p><div class="dialog-scoreboard">${crestMarkup(club.logo)}<div class="dialog-score" data-result="${outcome(match)}">${match.goalsFor} – ${match.goalsAgainst}</div>${crestMarkup(match.logo, match.initials, match.crestShape)}</div>
+    $('#dialog-body').innerHTML = `<h2 id="dialog-title">SHADOWS FC<br>× ${esc(match.opponent)}</h2><p class="dialog-meta">${t('leagueDetail')}<br>${match.date} · ${match.time}<br>${esc(club.venue)}</p><div class="dialog-scoreboard">${crestMarkup(club.logo)}<div class="dialog-score" data-result="${outcome(match)}">${scoreMarkup(match)}</div>${crestMarkup(match.logo, match.initials, match.crestShape)}</div>
       <h3 class="dialog-subhead">${t('scorerList')}</h3><ul class="dialog-scorers">${match.scorers.map(player => `<li><button class="dialog-scorer-link" data-open-scorer="${esc(playerName(player.name))}">${esc(playerName(player.name))} <span aria-hidden="true">↗</span></button><b>${player.goals}</b></li>`).join('')}</ul>${match.mvp ? `<p class="dialog-meta">${t('mvp')} <strong>${esc(match.mvp)}</strong></p>` : ''}
       <nav class="match-navigation" aria-label="${t('browseMatches')}"><button data-step-match="${esc(ordered[index - 1]?.id || '')}" ${index === 0 ? 'disabled' : ''}>${t('previousMatch')}</button><span>${index + 1} / ${ordered.length}</span><button data-step-match="${esc(ordered[index + 1]?.id || '')}" ${index === ordered.length - 1 ? 'disabled' : ''}>${t('nextMatch')}</button></nav>`;
   } else if (dialogContent.type === 'player') {
