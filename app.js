@@ -1,4 +1,4 @@
-import { club, matches, squad, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261022-mvp-frame';
+import { club, matches, squad, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261022-mvp-label';
 
 const messages = {
   el: {
@@ -49,7 +49,7 @@ const messages = {
     attackingMidfielder: 'Επιτελικός μέσος', striker: 'Επιθετικός',
     confirmedGoals: 'ΚΑΤΑΓΕΓΡΑΜΜΕΝΑ ΓΚΟΛ', unknownGoals: 'Δεν έχει επιβεβαιωθεί αντιστοίχιση με τους σκόρερ των αναρτήσεων.',
     detail: 'Λεπτομέρειες', noResults: 'Δεν υπάρχουν ακόμη καταγεγραμμένοι αγώνες.',
-    scopeNote: 'Οι αριθμοί αφορούν τους καταγεγραμμένους αγώνες.', mvp: 'MVP ΤΟΥ ΑΓΩΝΑ',
+    scopeNote: 'Οι αριθμοί αφορούν τους καταγεγραμμένους αγώνες.', mvp: 'MVP',
     goalDifference: 'διαφορά γκολ', record: 'Ν–Ι–Η',
   },
   en: {
@@ -82,7 +82,7 @@ const messages = {
     goals: 'GOALS', soFar: 'THE STORY SO FAR', seasonNumbers: 'The team in numbers.',
     resultsTitle: 'Our matches.', allGames: 'All matches', wins: 'Wins', losses: 'Losses',
     clickMatch: 'Select a match to see the scorers ↗', mvpTitle: 'Three goals.\nOne big night.',
-    mvpDescription: 'A hat-trick in the 7–6 win against Savralliolid FC. Gkoumas was named player of the match.',
+    mvpDescription: 'A hat-trick in the 7–6 win against Savralliolid FC. Gkoumas was named MVP.',
     matchGoals: 'MATCH GOALS', recordedGoals: 'TOTAL RECORDED GOALS', allScorers: 'All goalscorers', scorersTitle: 'On the scoresheet.',
     jointLeaders: 'SHARING THE TOP SPOT', goalsEach: 'GOALS EACH',
     scoringNote: 'The goals matter. The team matters more.', scorerCaption: 'Player goals across the recorded matches', player: 'PLAYER',
@@ -99,7 +99,7 @@ const messages = {
     centerMidfielder: 'Central midfielder', rightWinger: 'Right winger', leftWinger: 'Left winger',
     attackingMidfielder: 'Attacking midfielder', striker: 'Striker',
     confirmedGoals: 'RECORDED GOALS', unknownGoals: 'A link to the scorer names in the club posts has not been confirmed.',
-    detail: 'Details', noResults: 'No matches have been recorded yet.', scopeNote: 'Statistics cover the recorded matches.', mvp: 'PLAYER OF THE MATCH',
+    detail: 'Details', noResults: 'No matches have been recorded yet.', scopeNote: 'Statistics cover the recorded matches.', mvp: 'MVP',
     goalDifference: 'goal difference', record: 'W–D–L',
   },
 };
