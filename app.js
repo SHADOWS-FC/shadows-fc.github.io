@@ -14,7 +14,8 @@ const messages = {
     scoringNote: 'Τα γκολ μετράνε. Η ομάδα περισσότερο.', scorerCaption: 'Γκολ ανά παίκτη στους καταγεγραμμένους αγώνες', player: 'ΠΑΙΚΤΗΣ',
     squadTitle: 'Η ομάδα μας.', squadNote: 'Οι παίκτες πίσω από τη φανέλα. Γνώρισε την ομάδα των SHADOWS FC.',
     searchLabel: 'Αναζήτηση παίκτη', searchPlaceholder: 'Αναζήτηση παίκτη…',
-    clubDescription: 'Οι SHADOWS FC είναι η δική μας παρέα στο γήπεδο. Μαύρο και ροζ, κοινές στιγμές και μια ιστορία που συνεχίζει να γράφεται.',
+    clubDescription: 'Οι SHADOWS FC αγωνίζονται στη Master League στη Βούλα. Μαύρο και ροζ, κοινές στιγμές και μια ιστορία που συνεχίζει να γράφεται.',
+    competition: 'ΤΟ ΠΡΩΤΑΘΛΗΜΑ', leagueLocation: 'MASTER LEAGUE · ΒΟΥΛΑ', leagueDetail: 'Master League · Βούλα',
     basedIn: 'Η ΒΑΣΗ ΜΑΣ', vouliagmeni: 'Βουλιαγμένη, Αθήνα', matchVenue: 'ΤΟ ΓΗΠΕΔΟ', newTab: ' (ανοίγει σε νέα καρτέλα)', backTop: 'Στην κορυφή',
     played: 'ΑΓΩΝΕΣ', victories: 'ΝΙΚΕΣ', goalsFor: 'ΓΚΟΛ ΥΠΕΡ', goalsAgainst: 'ΓΚΟΛ ΚΑΤΑ', draws: 'ισοπαλίες', defeats: 'ήττες',
     win: 'Ν', loss: 'Η', draw: 'Ι', winFull: 'Νίκη', lossFull: 'Ήττα', drawFull: 'Ισοπαλία', matchday: 'ΑΓΩΝΑΣ', scorerList: 'ΣΚΟΡΕΡ SHADOWS FC',
@@ -41,7 +42,8 @@ const messages = {
     scoringNote: 'The goals matter. The team matters more.', scorerCaption: 'Player goals across the recorded matches', player: 'PLAYER',
     squadTitle: 'Meet the squad.', squadNote: 'The people behind the shirt. Get to know SHADOWS FC.',
     searchLabel: 'Search players', searchPlaceholder: 'Search players…',
-    clubDescription: 'SHADOWS FC is our group of friends on the pitch. Black and pink, shared moments, and a story we’re still writing.',
+    clubDescription: 'SHADOWS FC play in the Master League in Voula. Black and pink, shared moments, and a story we’re still writing.',
+    competition: 'THE LEAGUE', leagueLocation: 'MASTER LEAGUE · VOULA', leagueDetail: 'Master League · Voula',
     basedIn: 'OUR HOME', vouliagmeni: 'Vouliagmeni, Athens', matchVenue: 'THE PITCH', newTab: ' (opens in a new tab)', backTop: 'Back to top',
     played: 'MATCHES', victories: 'WINS', goalsFor: 'GOALS FOR', goalsAgainst: 'GOALS AGAINST', draws: 'draws', defeats: 'losses',
     win: 'W', loss: 'L', draw: 'D', winFull: 'Win', lossFull: 'Loss', drawFull: 'Draw', matchday: 'MATCHDAY', scorerList: 'SHADOWS FC SCORERS',
@@ -92,9 +94,9 @@ function renderMatches() {
     const result = outcome(match);
     return `<button class="match-row" data-match="${match.id}" aria-label="${esc(t('detail'))}: SHADOWS FC ${match.goalsFor}–${match.goalsAgainst} ${esc(match.opponent)}, ${match.date}, ${t(result + 'Full')}">
       <span class="match-date"><strong>${match.date.replace('/', '.')}</strong><small>MD ${String(match.round).padStart(2, '0')}<br>${match.time}</small></span>
-      <span class="match-team"><span class="mini-emblem" aria-hidden="true">S</span><span>SHADOWS FC</span></span>
+      <span class="match-team"><img class="match-crest club-crest" src="${esc(club.logo)}" alt="" width="600" height="600" loading="lazy"><span>SHADOWS FC</span></span>
       <span class="match-score">${match.goalsFor}<span class="dash">–</span>${match.goalsAgainst}</span>
-      <span class="match-team away"><span class="mini-emblem opponent" style="--team-color:${match.color}" aria-hidden="true">${esc(match.initials)}</span><span>${esc(match.opponent)}</span></span>
+      <span class="match-team away">${match.logo ? `<img class="match-crest" src="${esc(match.logo)}" alt="" loading="lazy">` : `<span class="mini-emblem opponent" style="--team-color:${match.color}" aria-hidden="true">${esc(match.initials)}</span>`}<span>${esc(match.opponent)}</span></span>
       <span class="match-outcome"><span class="outcome-tag ${result}" aria-hidden="true">${t(result)}</span><span class="row-arrow" aria-hidden="true">↗</span></span></button>`;
   }).join('') || `<p class="empty-results">${t('noResults')}</p>`;
   $('#results-status').textContent = `${visible.length} ${t('matchCount')}`;
@@ -127,7 +129,7 @@ function renderDialog() {
   if (dialogContent.type === 'match') {
     const match = matches.find(item => item.id === dialogContent.id);
     $('#dialog-category').textContent = `${t('matchday')} ${String(match.round).padStart(2, '0')} / ${t('fullTime')}`;
-    $('#dialog-body').innerHTML = `<h2 id="dialog-title">SHADOWS FC<br>× ${esc(match.opponent)}</h2><p class="dialog-meta">${match.date} · ${match.time}<br>${esc(club.venue)}</p><div class="dialog-score">${match.goalsFor} – ${match.goalsAgainst}</div><h3 class="dialog-subhead">${t('scorerList')}</h3><ul class="dialog-scorers">${match.scorers.map(player => `<li><span>${esc(playerName(player.name))}</span><b>${player.goals}</b></li>`).join('')}</ul>${match.mvp ? `<p class="dialog-meta">${t('mvp')} <strong>${esc(match.mvp)}</strong></p>` : ''}`;
+    $('#dialog-body').innerHTML = `<h2 id="dialog-title">SHADOWS FC<br>× ${esc(match.opponent)}</h2><p class="dialog-meta">${t('leagueDetail')}<br>${match.date} · ${match.time}<br>${esc(club.venue)}</p><div class="dialog-score">${match.goalsFor} – ${match.goalsAgainst}</div><h3 class="dialog-subhead">${t('scorerList')}</h3><ul class="dialog-scorers">${match.scorers.map(player => `<li><span>${esc(playerName(player.name))}</span><b>${player.goals}</b></li>`).join('')}</ul>${match.mvp ? `<p class="dialog-meta">${t('mvp')} <strong>${esc(match.mvp)}</strong></p>` : ''}`;
   } else {
     const player = squad.find(item => item.number === dialogContent.id);
     const scorer = getScorers().find(item => item.name === (player.scorerName || player.name));

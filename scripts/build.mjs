@@ -4,8 +4,8 @@ import path from 'node:path';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const read = name => readFile(path.join(root, name), 'utf8');
-const [html, baseCss, designCss, data, app, icon] = await Promise.all([
-  read('index.html'), read('styles.css'), read('editorial.css'), read('data.js'), read('app.js'), read('favicon.svg'),
+const [html, baseCss, designCss, data, app] = await Promise.all([
+  read('index.html'), read('styles.css'), read('editorial.css'), read('data.js'), read('app.js'),
 ]);
 const embedded = new Map();
 async function embed(file) {
@@ -26,8 +26,8 @@ for (const [full, asset] of [...css.matchAll(/url\(['"]?(assets\/[^'"\)]+)['"]?\
   css = css.replaceAll(full, `url("${await embed(asset)}")`);
 }
 let embeddedData = data;
-for (const [full, asset] of [...data.matchAll(/photo:\s*'(assets\/[^']+)'/g)]) {
-  embeddedData = embeddedData.replaceAll(full, `photo: ${JSON.stringify(await embed(asset))}`);
+for (const [full, property, asset] of [...data.matchAll(/(photo|logo):\s*'(assets\/[^']+)'/g)]) {
+  embeddedData = embeddedData.replaceAll(full, `${property}: ${JSON.stringify(await embed(asset))}`);
 }
 const script = `${embeddedData.replace(/^export /gm, '')}\n${app.replace(/^import .* from '\.\/data.js';\n/m, '')}`;
 let output = html
@@ -35,10 +35,9 @@ let output = html
   .replace('<link rel="stylesheet" href="editorial.css">', '')
   .replace('<link rel="preload" as="image" href="assets/night-pitch.png">', '')
   .replace('<script type="module" src="app.js"></script>', '')
-  .replace('href="favicon.svg"', () => `href="data:image/svg+xml,${encodeURIComponent(icon.trim())}"`)
   .replace('</body>', () => `<script>\n${script.replace(/<\/script/gi, '<\\/script')}\n</script>\n</body>`);
-for (const [full, asset] of [...output.matchAll(/src="(assets\/[^"<>]+)"/g)]) {
-  output = output.replaceAll(full, `src="${await embed(asset)}"`);
+for (const [full, attribute, asset] of [...output.matchAll(/(src|href)="(assets\/[^"<>]+)"/g)]) {
+  output = output.replaceAll(full, `${attribute}="${await embed(asset)}"`);
 }
 await mkdir(path.join(root, 'dist'), { recursive: true });
 await writeFile(path.join(root, 'dist/index.html'), output);

@@ -61,7 +61,7 @@ as MVP against Savralliolid. Earlier MVPs are unknown, not presumed absent.
 
 ### Content still to add
 
-- Original club logo and team photos as downloadable files.
+- Legrena FC crest; no matching logo has been supplied yet.
 - Confirmation of the season year; dates intentionally show day/month only.
 - The standalone selfie is excluded at the club's request.
 
@@ -70,8 +70,9 @@ club confirmed that this is the complete current roster. The original matchday
 selection is stored separately and does not add unconfirmed players to the
 current squad or rewrite match history. Positions and permanent shirt numbers
 are added only when supplied by the club. Prior draft interview answers are not published as
-actual player quotes. Lettermarks are typographic placeholders, not the
-original club crests.
+actual player quotes. The club plays in **Master League in Voula**, as confirmed
+by the club. Supplied crests are used for SHADOWS FC, Aston Voula, Unathletico
+and Savralliolid. Legrena retains a typographic lettermark pending its crest.
 
 Confirmed so far: Sotiris Giotis (#1, GK), Chatziamanetoglou Giorgos (#82, GK),
 Troka Giorgos (#9, CB), Babakos Dimitris (#11, CB), Zachos Giannis (#5, CB),
@@ -90,6 +91,11 @@ The standalone build embeds the portraits
 as well as other images and fonts; it requires no additional image requests.
 
 ### Visual assets
+
+All eight original logos from `LOGOS.rar` are saved in `assets/logos/`; see
+[logo provenance](assets/logos/README.md) for the confirmed mappings.
+The club crest also appears as the browser icon. Unused logos are retained
+for future fixtures without creating results or standings.
 
 The night pitch background is generated atmospheric artwork, not a photograph
 of Star Sport Club. All player portraits and the MVP photo are the original

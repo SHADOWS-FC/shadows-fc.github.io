@@ -8,6 +8,9 @@ export const club = {
   instagram: 'https://www.instagram.com/shadows_fc0/',
   location: 'Vouliagmeni',
   venue: 'Star Sport Club · Voula',
+  league: 'Master League',
+  leagueLocation: 'Voula',
+  logo: 'assets/logos/shadows-fc.jpg',
 };
 
 export const matches = [
@@ -23,6 +26,7 @@ export const matches = [
   {
     id: 'aston-voula', round: 2, date: '06/10', time: '20:00',
     opponent: 'Aston Voula', initials: 'AV', color: '#8bc2e3',
+    logo: 'assets/logos/aston-voula.png',
     goalsFor: 5, goalsAgainst: 6,
     scorers: [{ name: 'Rothos', goals: 3 }, { name: 'Tasos', goals: 1 }, { name: 'Xatzi', goals: 1 }],
     mvp: null,
@@ -31,6 +35,7 @@ export const matches = [
   {
     id: 'unathletico', round: 3, date: '12/10', time: '21:00',
     opponent: 'Unathletico FC', initials: 'UFC', color: '#d6ddd7',
+    logo: 'assets/logos/unathletico.jpg',
     goalsFor: 5, goalsAgainst: 8,
     scorers: [{ name: 'Mike', goals: 2 }, { name: 'Dinos', goals: 1 },
       { name: 'Gkoumas', goals: 1 }, { name: 'Stavros', goals: 1 }],
@@ -40,6 +45,7 @@ export const matches = [
   {
     id: 'savralliolid', round: 4, date: '21/10', time: '22:00',
     opponent: 'Savralliolid FC', initials: 'SFC', color: '#efcc56',
+    logo: 'assets/logos/savralliolid.jpeg',
     goalsFor: 7, goalsAgainst: 6,
     scorers: [{ name: 'Gkoumas', goals: 3 }, { name: 'Dinos', goals: 2 }, { name: 'Rothos', goals: 2 }],
     mvp: 'Gkoumas',

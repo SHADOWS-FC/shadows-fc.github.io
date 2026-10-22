@@ -23,3 +23,13 @@ h1,h2,h3,.hero-score,.stat-number,.match-score,.mvp-name,.art-number,.top-scorer
 /* The MVP feature uses the club's original Gkoumas portrait. */
 .has-mvp-photo{overflow:hidden}.has-mvp-photo .mvp-portrait{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 10%;z-index:0}.has-mvp-photo:after{inset:0;background:linear-gradient(0deg,#100b17ef,transparent 42%,#100b1777);z-index:1;pointer-events:none}.has-mvp-photo .art-label{color:var(--pink-light);padding-left:18px;z-index:3}.has-mvp-photo .art-number{z-index:2;color:#ff529bbb;top:auto;bottom:44px;right:12px;font-size:190px;line-height:1;letter-spacing:-10px}.has-mvp-photo .art-bottom{z-index:3;color:#fff;padding:0 18px}.has-mvp-photo .art-bottom>span:last-child{color:#f0d9e7}
 @media(max-width:720px){.has-mvp-photo .art-number{font-size:170px;bottom:45px}.has-mvp-photo .art-label{font-size:6px;letter-spacing:1px}.has-mvp-photo .art-bottom{padding-inline:15px}}
+
+/* Original club-supplied crests retain their full artwork and aspect ratio. */
+.brand-crest{display:block;width:54px;height:54px;object-fit:contain;border-radius:50%;flex:none}
+.hero-teams .team-crest{display:block;width:74px;height:74px;object-fit:contain;background:#fff;border-radius:10px;margin-bottom:14px}
+.hero-teams .club-crest{border-radius:50%}
+.match-team .match-crest{display:block;width:42px;height:46px;object-fit:contain;flex:none}
+.match-team .club-crest{height:42px;border-radius:50%}
+.competition-label{display:inline-flex;align-items:center;margin-top:24px;padding:9px 12px;border:1px solid #ff529b70;background:#17131dc9;color:#ffc2df;font-size:10px;letter-spacing:1.3px;font-weight:700}
+@media(max-width:800px){.brand-crest{width:46px;height:46px}.hero-teams .team-crest{width:62px;height:62px}.match-team .match-crest{width:34px;height:38px}.match-team .club-crest{height:34px}}
+@media(max-width:360px){.brand-crest{width:40px;height:40px}.match-team .match-crest{width:30px;height:34px}.match-team .club-crest{height:30px}}
