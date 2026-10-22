@@ -200,3 +200,18 @@ h1,h2,h3,.hero-score,.stat-number,.match-score,.mvp-name,.art-number,.top-scorer
 
 /* Scorer bars stay inside the table even after a high-scoring full season. */
 .scorer-name:after{width:calc((100% - 43px)*var(--scoring-share,0))}
+
+/* Photo first, then matches, scorers and the complete squad. */
+.team-hero{padding:32px max(20px,calc((100vw - 1280px)/2)) 0;background:#0b0c0e}
+.team-photo-frame{margin:0 auto;max-width:960px;aspect-ratio:6/5;overflow:hidden;background:#080d0a}
+.team-photo{display:block;width:100%;height:100%;object-fit:cover;object-position:center 58%}
+.team-hero-caption{width:100%;max-width:960px;display:flex;align-items:flex-end;justify-content:space-between;gap:25px;padding:27px 0 30px;border-bottom:1px solid var(--line)}
+.team-hero-caption .eyebrow{font-size:9px;color:var(--pink-light);letter-spacing:1.8px}
+.team-hero-caption h1{margin:10px 0 0;font-family:var(--display);font-weight:900;font-size:66px;letter-spacing:-1.2px;line-height:1}
+.team-hero-caption h1 span{color:var(--pink)}
+.team-home-mark{font-size:9px;letter-spacing:2px;color:#b6a8b2;line-height:1.8;padding-bottom:4px}
+.results-order{font-size:11px;line-height:1.8;color:#bcadba;margin:-14px 0 25px}
+#results.results-section{padding-top:55px}
+.scorer-scope-note{font-size:11px;color:#c8b8c5;line-height:1.8;margin:-9px 0 25px}
+@media(max-width:800px){.team-hero{padding-top:24px;padding-inline:32px}.team-hero-caption h1{font-size:56px}.team-home-mark{font-size:8px;letter-spacing:1.5px}}
+@media(max-width:560px){.team-hero{padding:16px 20px 0}.team-photo-frame{aspect-ratio:4/5}.team-hero-caption{padding:23px 0 26px;align-items:flex-start;flex-direction:column;gap:13px}.team-hero-caption h1{font-size:49px}.team-hero-caption .eyebrow{font-size:8px;letter-spacing:1.3px}.team-home-mark{font-size:8px;padding:0}.results-order{font-size:10px;margin-top:-16px}#results.results-section{padding-top:42px}.scorer-scope-note{font-size:10px}}

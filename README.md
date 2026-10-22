@@ -39,38 +39,38 @@ browser validation here uses HTTP.
 - `styles.css`: base layout and responsive rules.
 - `editorial.css`: photographic hero, condensed typography, match cards, and visual identity.
 - `assets/`: self-hosted graphics and fonts, including the font licence.
-- `index.html`: homepage, results, MVP, leaderboard, latest squad, and club details.
+- `index.html`: team photograph, latest-first results, scorer leaderboard, and complete squad.
 
 All match records were transcribed from club screenshots. Scorer totals are
 computed from those records; joint leading scorers receive the same rank.
 Match scores and scorer totals are tested for consistency.
 
-### Browsing a full season
+### Homepage and navigation
 
-The match centre supports opponent search, month and win/draw/loss filters,
-chronological or SHADOWS-goal sorting, and cards or compact list views. Results
-are paginated at eight matches per page. The selection summary and scorer table
-use **all filtered matches**, including those on other pages; the season summary
-and player histories always cover the full record. The scope is displayed next
-to each set of statistics.
+The homepage has exactly four sections, in this order: the original team
+photograph, matches from newest to oldest, all-time recorded scorers, then all
+13 confirmed players. There are no search boxes, filter/sort controls, sponsor
+panels or intervening promotional sections. Player portraits retain their
+original photographic backgrounds.
 
-Filters, sort, view and page are kept in the URL. Refreshing or sharing the link
-restores them. Each match/player/scorer dialog has its own shareable URL; browser
-Back returns through the match-to-player drill-down. Copy-link has a selectable
-text fallback when the clipboard is unavailable. Recent-form buttons and scorer
-names link directly to match details and scoring histories.
+Matches are paginated at eight per page, always in descending round order.
+Old search/filter/sort/view URL parameters are ignored and removed, so links
+from the earlier archive cannot silently hide matches or players. Scorer totals
+always cover the complete recorded match list, including matches on other pages.
+
+Each match/player/scorer dialog retains its shareable URL. Browser Back returns
+through the match-to-player drill-down; the copy-link button has a selectable
+text fallback when clipboard access is unavailable. Click scorer names or player
+cards to explore their scoring histories and the corresponding matches.
 
 To add results, append records to `matches` in `data.js` with a unique `id`, an
-increasing `round`, the confirmed day/month, opponent, score and scorer list.
-The latest-result card, totals, month choices, form and rankings update from the
-records. Rounds determine chronology across New Year; no season year is inferred.
-The existing dated MVP feature remains a historical highlight. Player scoring
-histories count **games with recorded goals**, not appearances. Do not infer
-assists, lineups, or appearances from scorer lists.
+increasing chronological `round`, the confirmed day/month, opponent, score and
+scorers. Rounds determine chronology across New Year; no season year is inferred.
+Scoring histories count games with recorded goals, rather than appearances.
 
-Data tests cover combined filters, draws, chronology across New Year, aliases,
-scoring-history reconciliation and a 40-game synthetic season. Browser checks
-also exercised 40 temporary fixtures without adding them to the published data.
+The team photograph at `assets/team.jpg` is the original `1-Photo-1.jpg` supplied
+by the club. It is copied without alteration; responsive CSS frames the photo.
+All player portraits and opponent crests are also the club-supplied originals.
 
 ### Confirmed information
 
@@ -113,7 +113,7 @@ The club supplied an updated `SHD.rar` containing 13 original JPEGs. All 13 are 
 without alteration to `assets/players/` and displayed in player cards and
 profile dialogs. The club confirmed that `10.jpeg` is Tasos Babakos (#10),
 linked to the recorded scorer Tasos. The updated archive supplies `6.jpeg`
-for Gkoumas Konstantinos, used in his profile and the MVP feature.
+for Gkoumas Konstantinos, used in his profile.
 The standalone build embeds the portraits
 as well as other images and fonts; it requires no additional image requests.
 
@@ -127,14 +127,14 @@ The standalone builder accepts these versioned URLs.
 All eight original logos from `LOGOS.rar` are saved in `assets/logos/`; see
 [logo provenance](assets/logos/README.md) for the confirmed mappings.
 The club crest also appears as the browser icon. Crests use a common size and
-light canvas in the match centre, latest-result card and match dialogs.
+light canvas in the match centre and match dialogs.
 CSS keeps original image proportions and blends white image backgrounds into
 the card; the Unathletico canvas has its empty outer corners clipped for display. Unused logos are retained
 for future fixtures without creating results or standings.
 
-The night pitch background is generated atmospheric artwork, not a photograph
-of Star Sport Club. All player portraits and the MVP photo are the original
-club-supplied files. Roboto Condensed is bundled from
+The homepage uses the original team photograph supplied by the club.
+The older generated night-pitch artwork is retained as an unused asset.
+All displayed player portraits are the original club-supplied files. Roboto Condensed is bundled from
 Fontsource 5.3.0 under the SIL Open Font License (see `assets/FONT-LICENSE.txt`).
 The build embeds the graphics and fonts, so the downloadable HTML has no
 runtime CDN dependencies.
