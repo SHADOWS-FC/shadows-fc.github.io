@@ -1,5 +1,4 @@
-import { renderCrestMasks } from './crest-masks.js?v=20261023-clean-crests';
-import { club, matches, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261023-clean-crests';
+import { club, matches, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261023-original-crests';
 
 const messages = {
   el: {
@@ -165,7 +164,6 @@ const outcome = matchOutcome;
 const positionLabel = code => ({ GK: t('goalkeeper'), CB: t('centerBack'), CM: t('centerMidfielder'), RW: t('rightWinger'), LW: t('leftWinger'), CAM: t('attackingMidfielder'), ST: t('striker') })[code] || code || '';
 
 function renderArrows() {
-  renderCrestMasks();
   // Draw arrows as vectors so they don't depend on an installed symbol font.
   document.querySelectorAll('span[aria-hidden="true"]').forEach(span => {
     if (span.textContent.trim() !== '↗') return;
@@ -202,7 +200,7 @@ function writeUrl(push = false) {
 
 // One shared crest area keeps different badge proportions aligned across views.
 function crestMarkup(logo, fallback = '', shape = '') {
-  return `<span class="crest-frame${shape === 'shadows' ? ' crest-frame-shadows' : ''}">${logo
+  return `<span class="crest-frame${['shadows', 'legrena', 'shield'].includes(shape) ? ` crest-frame-${shape}` : ''}">${logo
     ? `<img class="match-crest${shape === 'shield' ? ' crest-shield' : shape === 'legrena' ? ' crest-legrena' : shape === 'shadows' ? ' crest-shadows' : ''}" src="${esc(logo)}" alt="" loading="lazy">`
     : `<span class="crest-fallback" aria-hidden="true">${esc(fallback)}</span>`}</span>`;
 }

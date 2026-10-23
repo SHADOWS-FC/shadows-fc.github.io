@@ -82,8 +82,9 @@ interface. There is no separate Museum page or photograph category browser.
 The active club crest is the supplied black/pink image at
 `assets/logos/shadows-fc-black-pink.jpg`, used in the header, footer, match cards,
 match details and browser icon. It is copied without alteration. Club crests
-use transparent display areas with normal blending. Cached alpha masks remove
-uniform edge-connected backgrounds while preserving enclosed club details. The black/pink theme covers
+use consistent padded display areas with their original artwork and colours.
+SHADOWS retains its black canvas; opponents use suitable white, cream or purple
+canvases. No background masking or automatic image modification is applied. The black/pink theme covers
 both homepage and announcements, with brighter outcome colours for dark cards.
 The background uses broad diagonal black/deep-pink stripes with unequal widths.
 
@@ -253,14 +254,11 @@ heading, loan label, goal column, or explanatory note. The same supplied lines
 appear in either interface language. Recorded-match scoring statistics remain
 separate and unchanged. Previous-club crests remain pending original files.
 
-### Crest backgrounds
+### Crest presentation
 
-crest-masks.js applies cached display-only alpha masks to original logos in
-the header, footer and match cards/details. It flood-fills a uniform background
-connected to image edges, preserving enclosed white/black club details and
-all original RGB artwork; original asset files are never overwritten. Existing
-alpha is retained. Non-uniform/cross-origin failures keep the original image.
-crest-display.css removes badge canvases and keeps white Legrena artwork legible
-in Light mode. The standalone build includes the masking code without imports.
-The generated experimental two-logo image was rejected because its artwork
-differed from the original; it is not used or published.
+crest-display.css presents original logos on consistent padded canvases.
+SHADOWS uses black, Legrena purple, Unathletico cream, and other opponents
+white. Artwork is contained without arbitrary shield clipping or blend modes.
+The prior automatic background masking was removed at the club’s request.
+The seven supplied career lines remain unchanged. Previous-club logo originals
+are still pending; altered generated substitutes are not published.

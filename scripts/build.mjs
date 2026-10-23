@@ -4,8 +4,8 @@ import path from 'node:path';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const read = name => readFile(path.join(root, name), 'utf8');
-const [html, baseCss, designCss, paletteCss, galleryCss, backgroundCss, themeCss, greekCss, careerCss, crestCss, crestCode, data, app] = await Promise.all([
-  read('index.html'), read('styles.css'), read('editorial.css'), read('black-pink.css'), read('gallery.css'), read('background-details.css'), read('theme.css'), read('greek-museum.css'), read('career.css'), read('crest-display.css'), read('crest-masks.js'), read('data.js'), read('app.js'),
+const [html, baseCss, designCss, paletteCss, galleryCss, backgroundCss, themeCss, greekCss, careerCss, crestCss, data, app] = await Promise.all([
+  read('index.html'), read('styles.css'), read('editorial.css'), read('black-pink.css'), read('gallery.css'), read('background-details.css'), read('theme.css'), read('greek-museum.css'), read('career.css'), read('crest-display.css'), read('data.js'), read('app.js'),
 ]);
 const embedded = new Map();
 async function embed(file) {
@@ -29,7 +29,7 @@ let embeddedData = data;
 for (const [full, property, asset] of [...data.matchAll(/(photo|logo):\s*'(assets\/[^']+)'/g)]) {
   embeddedData = embeddedData.replaceAll(full, `${property}: ${JSON.stringify(await embed(asset))}`);
 }
-const script = `${crestCode.replace(/^export /gm, '')}\n${embeddedData.replace(/^export /gm, '')}\n${app.replace(/^import .* from '[^']+';\n/gm, '')}`;
+const script = `${embeddedData.replace(/^export /gm, '')}\n${app.replace(/^import .* from '\.\/data\.js(?:\?[^']*)?';\n/m, '')}`;
 let output = html
   .replace(/<link rel="stylesheet" href="styles\.css(?:\?[^"]*)?">/, () => `<style>\n${css}\n</style>`)
   .replace(/<link rel="stylesheet" href="editorial\.css(?:\?[^"]*)?">/, '')

@@ -1,9 +1,11 @@
-/* Let authentic crests sit directly on the page, without rectangular canvases. */
-html .crest-frame,html .crest-frame-shadows,
-html[data-theme="light"] .crest-frame,html[data-theme="light"] .crest-frame-shadows{background:transparent;border:0}
-html .crest-frame img{mix-blend-mode:normal;clip-path:none}
-html .brand-seal,html .footer-seal,
-html[data-theme="light"] .brand-seal,html[data-theme="light"] .footer-seal{background:transparent;outline:0;box-shadow:none}
-html .crest-frame img.crest-legrena{filter:drop-shadow(0 1px 1px #0008)}
-html[data-theme="light"] .crest-frame img.crest-legrena{filter:drop-shadow(1px 0 0 #49324f) drop-shadow(-1px 0 0 #49324f) drop-shadow(0 1px 0 #49324f)}
-img[data-crest-mask="pending"]{opacity:0}
+/* Original artwork on consistent, unclipped badge canvases. */
+html .crest-frame,html[data-theme="light"] .crest-frame{
+  background:#fff;border:1px solid #b7a5b544;border-radius:7px;padding:5px;overflow:hidden;
+  box-shadow:0 2px 6px #00000012;
+}
+html .crest-frame img{mix-blend-mode:normal;clip-path:none;filter:none;object-fit:contain}
+html .crest-frame-shadows,html[data-theme="light"] .crest-frame-shadows{background:#000;border-color:#fa32994d;padding:3px}
+html .crest-frame-legrena,html[data-theme="light"] .crest-frame-legrena{background:#3b075d;border-color:#77459b;padding:0}
+html .crest-frame img.crest-legrena{object-fit:cover;object-position:center 60%;mix-blend-mode:normal}
+html .crest-frame-shield,html[data-theme="light"] .crest-frame-shield{background:#ece4d7}
+html .brand-seal,html .footer-seal,html[data-theme="light"] .brand-seal,html[data-theme="light"] .footer-seal{background:#000;outline:1px solid #fa329966;box-shadow:none}
