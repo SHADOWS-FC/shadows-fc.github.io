@@ -1,4 +1,5 @@
-import { club, matches, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261023-career-list';
+import { renderCrestMasks } from './crest-masks.js?v=20261023-clean-crests';
+import { club, matches, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261023-clean-crests';
 
 const messages = {
   el: {
@@ -164,6 +165,7 @@ const outcome = matchOutcome;
 const positionLabel = code => ({ GK: t('goalkeeper'), CB: t('centerBack'), CM: t('centerMidfielder'), RW: t('rightWinger'), LW: t('leftWinger'), CAM: t('attackingMidfielder'), ST: t('striker') })[code] || code || '';
 
 function renderArrows() {
+  renderCrestMasks();
   // Draw arrows as vectors so they don't depend on an installed symbol font.
   document.querySelectorAll('span[aria-hidden="true"]').forEach(span => {
     if (span.textContent.trim() !== '↗') return;

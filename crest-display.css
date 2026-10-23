@@ -1,0 +1,9 @@
+/* Let authentic crests sit directly on the page, without rectangular canvases. */
+html .crest-frame,html .crest-frame-shadows,
+html[data-theme="light"] .crest-frame,html[data-theme="light"] .crest-frame-shadows{background:transparent;border:0}
+html .crest-frame img{mix-blend-mode:normal;clip-path:none}
+html .brand-seal,html .footer-seal,
+html[data-theme="light"] .brand-seal,html[data-theme="light"] .footer-seal{background:transparent;outline:0;box-shadow:none}
+html .crest-frame img.crest-legrena{filter:drop-shadow(0 1px 1px #0008)}
+html[data-theme="light"] .crest-frame img.crest-legrena{filter:drop-shadow(1px 0 0 #49324f) drop-shadow(-1px 0 0 #49324f) drop-shadow(0 1px 0 #49324f)}
+img[data-crest-mask="pending"]{opacity:0}

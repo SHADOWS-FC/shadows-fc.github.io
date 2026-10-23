@@ -82,8 +82,8 @@ interface. There is no separate Museum page or photograph category browser.
 The active club crest is the supplied black/pink image at
 `assets/logos/shadows-fc-black-pink.jpg`, used in the header, footer, match cards,
 match details and browser icon. It is copied without alteration. Club crests
-use a black display canvas with normal blending; opponent crests retain light
-canvases so their supplied artwork stays legible. The black/pink theme covers
+use transparent display areas with normal blending. Cached alpha masks remove
+uniform edge-connected backgrounds while preserving enclosed club details. The black/pink theme covers
 both homepage and announcements, with brighter outcome colours for dark cards.
 The background uses broad diagonal black/deep-pink stripes with unequal widths.
 
@@ -252,3 +252,15 @@ A.O.Vouliagmenis; 2016/2017 - Astera Varis; 2018 - Frontistirio Prisma;
 heading, loan label, goal column, or explanatory note. The same supplied lines
 appear in either interface language. Recorded-match scoring statistics remain
 separate and unchanged. Previous-club crests remain pending original files.
+
+### Crest backgrounds
+
+crest-masks.js applies cached display-only alpha masks to original logos in
+the header, footer and match cards/details. It flood-fills a uniform background
+connected to image edges, preserving enclosed white/black club details and
+all original RGB artwork; original asset files are never overwritten. Existing
+alpha is retained. Non-uniform/cross-origin failures keep the original image.
+crest-display.css removes badge canvases and keeps white Legrena artwork legible
+in Light mode. The standalone build includes the masking code without imports.
+The generated experimental two-logo image was rejected because its artwork
+differed from the original; it is not used or published.

@@ -26,3 +26,14 @@ without its empty top/bottom margins; the source JPEG remains unaltered.
 Unused logos are retained for future content. They do not imply fixtures or
 standings. The club confirmed its competition is **Master League in Voula**;
 no league crest was identified in this archive.
+
+## Display backgrounds
+
+Add future original crest files here and reference them through the existing
+logo fields and shared crest markup. crest-masks.js automatically applies a
+cached alpha mask for a uniform edge-connected background. Already transparent
+files retain their alpha. This display treatment preserves enclosed white or
+black details and never overwrites supplied artwork. Non-uniform photographic
+backgrounds need a verified transparent original rather than an automatic guess.
+Header, footer and match cards/details share transparent canvases, with a small
+contrast shadow for the white Legrena mark in Light mode.
