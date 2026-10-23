@@ -241,3 +241,15 @@ Directional artwork movement and room parallax simulate moving between exhibits.
 Navigation queues only the latest destination; closing cancels pending movement.
 Reduced-motion users see immediate photo changes, and resizing settles movement.
 Original team photographs, homepage, match records and Dark/Light choices are unchanged.
+
+### Player careers
+
+Zachos (#5) has a bilingual biography and calendar-year timeline supplied by the
+club: Vouliagmenis 2006–2016, Asteras Varis on loan in 2017, inactive in 2018
+(Panhellenic exams) and 2019–2020, Klassiko in Chios 2021–2022, inactive in
+2023, SHADOWS 2024–2026. Career goal totals are null until supplied, never
+zero or inferred from the current recorded-match totals. Only the supplied
+SHADOWS crest is currently used; external research sites returned HTTP 403
+and previous-club logos remain pending verification. No invented badges are used.
+The optional biography/career fields in data.js and career.css affect only
+profiles with supplied histories. Other profiles and original match data stay intact.
