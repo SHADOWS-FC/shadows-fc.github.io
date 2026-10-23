@@ -152,11 +152,18 @@ export const latestMatchdaySquad = [
 
 // Confirmed by the club. Portraits require original named photo files;
 // never substitute a generated likeness for a player.
+// Temporary club-approved biography entry for players awaiting their histories.
+// A fresh entry is returned per player so later edits stay independent.
+const currentShadowsCareer = () => [{
+  from: 2026, to: 2026, label: 'Shadows FC', kind: 'club',
+  logo: club.logo, logoCanvas: 'dark', goals: null,
+}];
+
 export const confirmedPlayers = [
-  { name: 'Sotiris Giotis', number: 1, position: 'GK', confirmed: true, photo: 'assets/players/1.jpeg' },
-  { name: 'Chatziamanetoglou Giorgos', number: 82, position: 'GK', confirmed: true, photo: 'assets/players/82.jpeg' },
-  { name: 'Troka Giorgos', number: 9, position: 'CB', confirmed: true, photo: 'assets/players/9.jpeg' },
-  { name: 'Babakos Dimitris', number: 11, position: 'CB', confirmed: true, photo: 'assets/players/11.jpeg' },
+  { name: 'Sotiris Giotis', number: 1, position: 'GK', confirmed: true, photo: 'assets/players/1.jpeg', career: currentShadowsCareer() },
+  { name: 'Chatziamanetoglou Giorgos', number: 82, position: 'GK', confirmed: true, photo: 'assets/players/82.jpeg', career: currentShadowsCareer() },
+  { name: 'Troka Giorgos', number: 9, position: 'CB', confirmed: true, photo: 'assets/players/9.jpeg', career: currentShadowsCareer() },
+  { name: 'Babakos Dimitris', number: 11, position: 'CB', confirmed: true, photo: 'assets/players/11.jpeg', career: currentShadowsCareer() },
   {
     name: 'Zachos Giannis', number: 5, position: 'CB', confirmed: true,
     photo: 'assets/players/5.jpeg', scorerName: 'Zachos',
@@ -171,14 +178,14 @@ export const confirmedPlayers = [
       { from: 2024, to: 2026, label: 'Shadows FC', kind: 'club', logo: 'assets/logos/shadows-fc-black-pink.jpg', logoCanvas: 'dark', goals: null },
     ],
   },
-  { name: 'Chatzinikolaou Christos', number: 28, position: 'CM', confirmed: true, photo: 'assets/players/28.jpeg' },
-  { name: 'Chatziamanetoglou Dinos', number: 7, position: 'RW', confirmed: true, photo: 'assets/players/7.jpeg', scorerName: 'Dinos' },
-  { name: 'Marfa Mixalis', number: 8, position: 'LW', confirmed: true, photo: 'assets/players/8.jpeg', scorerName: 'Mixalis' },
-  { name: 'Stavros Kalogiropoulos', number: 14, position: 'CAM', confirmed: true, photo: 'assets/players/14.jpeg', scorerName: 'Stavros' },
-  { name: 'Kobas Gavrilos', number: 69, position: 'ST', confirmed: true, photo: 'assets/players/69.jpeg' },
-  { name: 'Rothos Ioannis', number: 22, position: 'ST', confirmed: true, photo: 'assets/players/22.jpeg', scorerName: 'Rothos' },
-  { name: 'Gkoumas Konstantinos', number: 6, position: 'ST', confirmed: true, photo: 'assets/players/6.jpeg', scorerName: 'Gkoumas' },
-  { name: 'Tasos Babakos', number: 10, position: 'ST', confirmed: true, photo: 'assets/players/10.jpeg', scorerName: 'Tasos' },
+  { name: 'Chatzinikolaou Christos', number: 28, position: 'CM', confirmed: true, photo: 'assets/players/28.jpeg', career: currentShadowsCareer() },
+  { name: 'Chatziamanetoglou Dinos', number: 7, position: 'RW', confirmed: true, photo: 'assets/players/7.jpeg', scorerName: 'Dinos', career: currentShadowsCareer() },
+  { name: 'Marfa Mixalis', number: 8, position: 'LW', confirmed: true, photo: 'assets/players/8.jpeg', scorerName: 'Mixalis', career: currentShadowsCareer() },
+  { name: 'Stavros Kalogiropoulos', number: 14, position: 'CAM', confirmed: true, photo: 'assets/players/14.jpeg', scorerName: 'Stavros', career: currentShadowsCareer() },
+  { name: 'Kobas Gavrilos', number: 69, position: 'ST', confirmed: true, photo: 'assets/players/69.jpeg', career: currentShadowsCareer() },
+  { name: 'Rothos Ioannis', number: 22, position: 'ST', confirmed: true, photo: 'assets/players/22.jpeg', scorerName: 'Rothos', career: currentShadowsCareer() },
+  { name: 'Gkoumas Konstantinos', number: 6, position: 'ST', confirmed: true, photo: 'assets/players/6.jpeg', scorerName: 'Gkoumas', career: currentShadowsCareer() },
+  { name: 'Tasos Babakos', number: 10, position: 'ST', confirmed: true, photo: 'assets/players/10.jpeg', scorerName: 'Tasos', career: currentShadowsCareer() },
 ];
 
 // The club confirmed this is the complete current roster. Historical lineup

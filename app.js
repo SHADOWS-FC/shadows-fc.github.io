@@ -1,4 +1,4 @@
-import { club, matches, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261023-career-logos';
+import { club, matches, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261023-squad-careers';
 
 const messages = {
   el: {

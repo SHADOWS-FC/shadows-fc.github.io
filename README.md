@@ -265,3 +265,9 @@ The seven supplied career lines remain unchanged. The three club-uploaded career
 Career logos were supplied directly through GitHub upload commit 672c4da.
 Their artwork is unmodified and contained in small neutral, navy or black
 canvases. Non-playing rows have no invented organisation badges.
+
+As a temporary club-approved entry, each of the other twelve profiles displays
+`2026 - Shadows FC` with the original SHADOWS crest. Their goal totals are not
+invented. `currentShadowsCareer()` returns independent data for each profile;
+replace its call with the supplied history when that player’s details arrive.
+Zachos retains his complete seven-line career and its four supplied crests.
