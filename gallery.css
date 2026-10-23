@@ -58,18 +58,70 @@
 .gallery-hint{text-align:center;font-size:10px;line-height:1.7;color:var(--muted);margin:8px 0 0}
 .team-hero-caption{max-width:760px}
 
-/* The native dialog keeps both portrait and landscape images fully visible. */
-dialog.photo-dialog{width:min(1100px,calc(100% - 32px));max-width:1100px;height:min(900px,90dvh);max-height:calc(100dvh - 24px);padding:18px;overflow:hidden;border:1px solid #9a3e70;border-radius:12px;background:#09080c;color:var(--text);box-shadow:0 25px 100px #000c}
-dialog.photo-dialog[open]{display:flex;flex-direction:column;gap:14px}
-dialog.photo-dialog::backdrop{background:#020103eb;backdrop-filter:blur(8px)}
-.photo-viewer-top{display:flex;flex:none;align-items:center;justify-content:space-between;gap:16px;min-width:0}
-.photo-viewer-top h2{font-family:var(--display);font-size:clamp(18px,2.3vw,27px);font-weight:700;line-height:1.2;overflow-wrap:anywhere}
-.photo-viewer-top .close-dialog{display:grid;place-items:center;flex:none;width:40px;height:40px;border:1px solid #623049;border-radius:6px;background:#1d101a;color:var(--pink-light)}
-.photo-viewer-top .close-dialog:hover{background:#35152a}
-.photo-viewer-stage{display:flex;flex:1;align-items:center;justify-content:center;min-width:0;min-height:0;overflow:hidden;border:1px solid #332331;border-radius:7px;background:#030304}
-#photo-viewer-image{display:block;width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain;object-position:center;user-select:none}
-.photo-viewer-controls{display:flex;flex:none;align-items:center;justify-content:center;gap:25px}
-.photo-viewer-top .close-dialog:focus-visible{outline:2px solid var(--pink-light);outline-offset:3px}
+/* Opening a team photograph enters a full-screen virtual museum room. */
+:root{
+  --museum-wall:#211b25;--museum-panel:#4c3a4b;--museum-light:#f9e6ed;
+  --museum-floor:#151018;--museum-floor-line:#584352;--museum-frame:#9b7387;
+  --museum-frame-dark:#241721;--museum-frame-light:#c09aaa;--museum-mat:#110d14;
+  --museum-ink:#f9edf5;--museum-muted:#d5bdcc;--museum-plate:#1a131c;--museum-shadow:#0008;
+}
+dialog.photo-dialog{
+  position:fixed;inset:0;isolation:isolate;width:100%;max-width:none;
+  height:100dvh;max-height:none;margin:0;padding:27px 42px 30px;
+  overflow:hidden;border:0;border-radius:0;color:var(--museum-ink);box-shadow:none;
+  background:
+    radial-gradient(ellipse 48% 75% at 50% -15%,color-mix(in srgb,var(--museum-light) 16%,transparent),transparent 80%),
+    repeating-linear-gradient(90deg,transparent 0 calc(25% - 1px),color-mix(in srgb,var(--museum-panel) 45%,transparent) calc(25% - 1px) 25%),
+    var(--museum-wall);
+}
+dialog.photo-dialog[open]{display:flex;flex-direction:column;gap:0}
+dialog.photo-dialog::backdrop{background:var(--museum-wall)}
+dialog.photo-dialog:before{
+  content:'';position:absolute;z-index:-1;left:0;right:0;bottom:0;height:15%;
+  border-top:5px double var(--museum-panel);
+  background:
+    repeating-conic-gradient(from -90deg at 50% -70%,transparent 0deg 13deg,color-mix(in srgb,var(--museum-floor-line) 38%,transparent) 13deg 13.25deg),
+    repeating-linear-gradient(0deg,transparent 0 29px,color-mix(in srgb,var(--museum-floor-line) 26%,transparent) 30px 31px),
+    var(--museum-floor);
+  box-shadow:0 -10px 20px var(--museum-shadow);
+}
+dialog.photo-dialog:after{
+  content:'';position:absolute;z-index:-1;left:8%;right:8%;top:87px;height:1px;
+  background:var(--museum-panel);box-shadow:0 3px 0 color-mix(in srgb,var(--museum-light) 3%,transparent);
+}
+.photo-viewer-top{position:relative;z-index:2;display:flex;flex:none;align-items:center;justify-content:space-between;gap:20px;min-width:0}
+.photo-viewer-heading{min-width:0}
+.photo-viewer-heading .eyebrow{font-size:9px;letter-spacing:2.3px;color:var(--pink)}
+.photo-viewer-top h2{font-family:var(--display);font-size:clamp(18px,2vw,26px);font-weight:700;line-height:1.2;overflow-wrap:anywhere;margin-top:6px;color:var(--museum-ink)}
+.photo-viewer-actions{display:flex;align-items:center;gap:18px;flex:none}
+.photo-viewer-top .close-dialog{display:grid;place-items:center;flex:none;width:40px;height:40px;border:1px solid var(--museum-panel);border-radius:3px;background:var(--museum-plate);color:var(--museum-ink)}
+.photo-viewer-top .close-dialog:hover{border-color:var(--pink);color:var(--pink)}
+.photo-viewer-stage{position:relative;display:flex;flex:1;align-items:center;justify-content:center;min-width:0;min-height:0;padding:48px 18px 65px;overflow:visible;border:0;border-radius:0;background:none}
+.photo-viewer-stage:before{
+  content:'';position:absolute;pointer-events:none;top:31px;left:calc(50% - 32px);width:64px;height:5px;
+  border-radius:5px;background:var(--museum-light);box-shadow:0 0 16px color-mix(in srgb,var(--museum-light) 55%,transparent);
+}
+.photo-viewer-stage:after{
+  content:'';position:absolute;pointer-events:none;z-index:-1;top:36px;left:10%;right:10%;bottom:20%;
+  background:radial-gradient(ellipse at 50% 0,color-mix(in srgb,var(--museum-light) 9%,transparent),transparent 73%);
+  clip-path:polygon(47% 0,53% 0,100% 100%,0 100%);
+}
+.museum-artwork{
+  position:relative;display:flex;flex:none;align-items:center;justify-content:center;margin:0;
+  width:min(67vw,calc((100dvh - 285px)*var(--artwork-ratio,.6664)),850px);
+  aspect-ratio:var(--artwork-ratio,.6664);padding:clamp(9px,1.35vw,19px);
+  border:2px solid var(--museum-frame);border-radius:1px;
+  background:linear-gradient(135deg,var(--museum-frame-light),var(--museum-frame-dark) 25%,var(--museum-frame) 53%,var(--museum-frame-dark) 76%,var(--museum-frame-light));
+  box-shadow:0 18px 26px var(--museum-shadow),0 4px 8px var(--museum-shadow),inset 0 0 0 3px var(--museum-frame-dark),inset 0 0 0 4px var(--museum-frame-light);
+}
+.museum-artwork:after{content:'';position:absolute;inset:7px;border:1px solid var(--museum-frame-dark);pointer-events:none}
+#photo-viewer-image{display:block;width:100%;height:100%;max-width:100%;max-height:100%;min-width:0;min-height:0;object-fit:contain;object-position:center;background:var(--museum-mat);user-select:none;box-shadow:0 0 0 1px var(--museum-frame-dark)}
+.photo-viewer-controls{position:relative;z-index:2;display:flex;flex:none;align-items:center;justify-content:center;gap:25px;align-self:center;max-width:100%;padding:12px 18px;border:1px solid var(--museum-panel);background:var(--museum-plate);box-shadow:0 4px 14px var(--museum-shadow)}
+.photo-viewer-controls .gallery-counter{color:var(--museum-muted);font-size:10px;letter-spacing:1.4px}
+.photo-dialog .gallery-arrow{background:var(--museum-wall);color:var(--pink);border-color:var(--museum-panel);border-radius:3px}
+.photo-dialog .gallery-arrow:hover:enabled{background:var(--museum-plate);border-color:var(--pink);color:var(--pink)}
+.photo-dialog .gallery-arrow:disabled{background:var(--museum-wall);border-color:var(--museum-panel);color:var(--museum-muted);opacity:.45}
+.photo-viewer-top .close-dialog:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
 @media(prefers-reduced-motion:no-preference){.gallery-viewport{scroll-behavior:smooth}}
 @media(max-width:560px){
   .team-gallery{max-width:440px;padding:55px 12px 18px}
@@ -82,7 +134,30 @@ dialog.photo-dialog::backdrop{background:#020103eb;backdrop-filter:blur(8px)}
   .gallery-counter{font-size:9px;letter-spacing:1px}
   .team-hero-caption{max-width:440px}
   .gallery-thumbnail{flex-basis:72px;width:72px;height:55px}
-  dialog.photo-dialog{width:calc(100% - 20px);height:94dvh;max-height:calc(100dvh - 16px);padding:12px;border-radius:10px}
-  dialog.photo-dialog[open]{gap:11px}
-  .photo-viewer-top h2{font-size:18px}
+  dialog.photo-dialog{padding:18px 18px 25px}
+  .photo-viewer-top{gap:10px;align-items:flex-start}
+  .photo-viewer-heading{max-width:calc(100% - 142px)}
+  .photo-viewer-heading .eyebrow{font-size:7px;letter-spacing:1px}
+  .photo-viewer-top h2{font-size:17px;line-height:1.2}
+  .photo-viewer-actions{gap:8px}
+  .photo-viewer-top .close-dialog{width:34px;height:34px}
+  dialog.photo-dialog:after{top:91px;left:6%;right:6%}
+  .photo-viewer-stage{padding:56px 2px 63px}
+  .photo-viewer-stage:before{top:34px;width:48px;left:calc(50% - 24px)}
+  .photo-viewer-stage:after{top:39px;left:0;right:0}
+  .museum-artwork{width:min(83vw,calc((100dvh - 290px)*var(--artwork-ratio,.6664)));padding:10px}
+  .photo-viewer-controls{gap:17px;padding:10px 13px}
+  .photo-viewer-controls .gallery-counter{font-size:9px;letter-spacing:.7px}
+}
+@media(max-height:600px){
+  dialog.photo-dialog{padding:12px 24px 15px}
+  .photo-viewer-top h2{font-size:17px}
+  .photo-viewer-heading .eyebrow{font-size:7px}
+  dialog.photo-dialog:after{top:65px}
+  .photo-viewer-stage{padding:22px 20px 23px}
+  .photo-viewer-stage:before{top:6px;width:44px;left:calc(50% - 22px)}
+  .photo-viewer-stage:after{top:11px}
+  .museum-artwork{width:min(65vw,calc((100dvh - 177px)*var(--artwork-ratio,.6664)));padding:8px}
+  .photo-viewer-controls{padding:6px 12px;gap:20px}
+  .photo-viewer-controls .gallery-arrow{width:32px;height:32px}
 }

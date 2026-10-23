@@ -1,13 +1,15 @@
-import { club, matches, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261023-team-museum';
+import { club, matches, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261023-museum-modes';
 
 const messages = {
   el: {
+    themeLabel: 'Εμφάνιση', themeDark: 'Σκοτεινή εμφάνιση', themeLight: 'Φωτεινή εμφάνιση',
+    museumTeamTitle: 'Η ομάδα στο γήπεδο', museumCelebrationTitle: 'Κύπελλο και μετάλλια',
     squadGoalkeepers: 'Τερματοφύλακες', squadDefenders: 'Αμυντικοί', squadMidfielders: 'Μέσοι', squadForwards: 'Επιθετικοί',
     galleryLabel: 'Φωτογραφίες ομάδας', galleryRole: 'συλλογή φωτογραφιών', gallerySlide: 'φωτογραφία',
-    galleryInstructions: 'Σύρε ή χρησιμοποίησε τα βέλη για αλλαγή φωτογραφίας. Πάτησε Enter για μεγέθυνση.',
+    galleryInstructions: 'Σύρε ή χρησιμοποίησε τα βέλη για αλλαγή φωτογραφίας. Πάτησε Enter για προβολή στο μουσείο.',
     galleryPrevious: 'Προηγούμενη φωτογραφία', galleryNext: 'Επόμενη φωτογραφία', galleryPhoto: 'Φωτογραφία', galleryOf: 'από',
-    galleryHint: 'Σύρε, διάλεξε φωτογραφία ή πάτησε για μεγέθυνση', celebrationPhotoAlt: 'Η ομάδα των SHADOWS FC στο γήπεδο με κύπελλο και μετάλλια',
-    galleryExpand: 'Μεγέθυνση', galleryClose: 'Κλείσιμο φωτογραφίας', galleryThumbnails: 'Επιλογή φωτογραφίας',
+    galleryHint: 'Σύρε, διάλεξε φωτογραφία ή μπες στο μουσείο', celebrationPhotoAlt: 'Η ομάδα των SHADOWS FC στο γήπεδο με κύπελλο και μετάλλια',
+    galleryExpand: 'Στο μουσείο', galleryClose: 'Κλείσιμο μουσείου', galleryThumbnails: 'Επιλογή φωτογραφίας',
     navAnnouncements: 'Ανακοινώσεις', announcementsTitle: 'Ανακοινώσεις ομάδας.',
     announcementsIntro: 'Όλες οι επίσημες ενημερώσεις της ομάδας, σε ένα σημείο.',
     officialAnnouncement: 'ΕΠΙΣΗΜΗ ΑΝΑΚΟΙΝΩΣΗ', announcementCount: 'ανακοινώσεις', announcementSingular: 'ανακοίνωση',
@@ -63,12 +65,14 @@ const messages = {
     goalDifference: 'διαφορά γκολ', record: 'Ν–Ι–Η',
   },
   en: {
+    themeLabel: 'Appearance', themeDark: 'Dark mode', themeLight: 'Light mode',
+    museumTeamTitle: 'The team on the pitch', museumCelebrationTitle: 'Trophy and medals',
     squadGoalkeepers: 'Goalkeepers', squadDefenders: 'Defenders', squadMidfielders: 'Midfielders', squadForwards: 'Forwards',
     galleryLabel: 'Team photographs', galleryRole: 'photo gallery', gallerySlide: 'slide',
-    galleryInstructions: 'Swipe or use the arrow keys to change photograph. Press Enter to view the full photo.',
+    galleryInstructions: 'Swipe or use the arrow keys to change photograph. Press Enter to view it in the museum.',
     galleryPrevious: 'Previous photograph', galleryNext: 'Next photograph', galleryPhoto: 'Photograph', galleryOf: 'of',
-    galleryHint: 'Swipe, choose a photo or tap to enlarge', celebrationPhotoAlt: 'The SHADOWS FC team on the pitch with a trophy and medals',
-    galleryExpand: 'View full photo', galleryClose: 'Close photograph', galleryThumbnails: 'Choose a photograph',
+    galleryHint: 'Swipe, choose a photo or enter the museum', celebrationPhotoAlt: 'The SHADOWS FC team on the pitch with a trophy and medals',
+    galleryExpand: 'Enter museum', galleryClose: 'Close museum', galleryThumbnails: 'Choose a photograph',
     navAnnouncements: 'Announcements', announcementsTitle: 'Club announcements.',
     announcementsIntro: 'Every official team update, in one place.',
     officialAnnouncement: 'OFFICIAL ANNOUNCEMENT', announcementCount: 'announcements', announcementSingular: 'announcement',
@@ -134,6 +138,24 @@ let dialogTrigger = null;
 let closingFromHistory = false;
 const $ = selector => document.querySelector(selector);
 const t = key => messages[language][key];
+let theme = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
+
+function renderTheme() {
+  document.documentElement.dataset.theme = theme;
+  $('meta[name="theme-color"]').content = theme === 'light' ? '#ffffff' : '#08070b';
+  document.querySelectorAll('.theme-control').forEach(control => control.setAttribute('aria-label', t('themeLabel')));
+  document.querySelectorAll('[data-theme-choice]').forEach(button => {
+    button.setAttribute('aria-pressed', String(button.dataset.themeChoice === theme));
+    button.setAttribute('aria-label', t(button.dataset.themeChoice === 'light' ? 'themeLight' : 'themeDark'));
+  });
+}
+
+function setTheme(next) {
+  if (!['dark', 'light'].includes(next)) return;
+  theme = next;
+  try { localStorage.setItem('shadows-theme', theme); } catch { /* The choice still works without storage. */ }
+  renderTheme();
+}
 const esc = value => String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
 const initials = name => name.replace(/[^\p{L}\s]/gu, '').split(/\s+/).slice(0, 2).map(word => word[0]).join('').toUpperCase();
 const outcome = matchOutcome;
@@ -282,7 +304,8 @@ function renderPhotoViewer() {
   image.alt = source.alt;
   image.width = Number(source.getAttribute('width'));
   image.height = Number(source.getAttribute('height'));
-  $('#photo-viewer-title').textContent = t('galleryLabel');
+  $('.museum-artwork').style.setProperty('--artwork-ratio', Number(source.getAttribute('width')) / Number(source.getAttribute('height')));
+  $('#photo-viewer-title').textContent = t(photoIndex === 0 ? 'museumTeamTitle' : 'museumCelebrationTitle');
   $('#close-photo-dialog').setAttribute('aria-label', t('galleryClose'));
   $('#photo-viewer-prev').setAttribute('aria-label', t('galleryPrevious'));
   $('#photo-viewer-next').setAttribute('aria-label', t('galleryNext'));
@@ -518,7 +541,7 @@ function render() {
   $('#navigation').setAttribute('aria-label', language === 'el' ? 'Κύρια πλοήγηση' : 'Main navigation');
   $('#menu-toggle').setAttribute('aria-label', t($('#menu-toggle').getAttribute('aria-expanded') === 'true' ? 'closeMenu' : 'openMenu'));
   document.querySelectorAll('[data-i18n-alt]').forEach(image => { image.alt = t(image.dataset.i18nAlt); });
-  renderGallery(); renderMatches(); renderScorers(); renderSquad(); renderAnnouncements(); renderPageView(); renderDialog();
+  renderTheme(); renderGallery(); renderMatches(); renderScorers(); renderSquad(); renderAnnouncements(); renderPageView(); renderDialog();
 }
 
 $('#language-toggle').addEventListener('click', () => {
@@ -537,7 +560,8 @@ for (const [id, step] of [['previous-page', -1], ['next-page', 1]]) {
 document.addEventListener('click', async event => {
   const button = event.target.closest('button');
   if (!button) return;
-  if (button.hasAttribute('data-open-photo')) openPhoto(Number(button.dataset.openPhoto), button);
+  if (button.hasAttribute('data-theme-choice')) setTheme(button.dataset.themeChoice);
+  else if (button.hasAttribute('data-open-photo')) openPhoto(Number(button.dataset.openPhoto), button);
   else if (button.hasAttribute('data-open-announcement')) openDialog({ type: 'announcement', id: button.dataset.openAnnouncement }, button);
   else if (button.hasAttribute('data-open-match')) openDialog({ type: 'match', id: button.dataset.openMatch }, button);
   else if (button.hasAttribute('data-open-scorer')) showScorer(button.dataset.openScorer, button);

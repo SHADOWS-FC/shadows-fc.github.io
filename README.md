@@ -39,7 +39,8 @@ browser validation here uses HTTP.
 - `styles.css`: base layout and responsive rules.
 - `editorial.css`: photo-led homepage, condensed typography, match cards and responsive layout.
 - `black-pink.css`: the black/pink club palette, dark cards and match/player dialogs.
-- `gallery.css`: the photo gallery, thumbnail navigation and full-photo viewer.
+- `gallery.css`: the two-photo gallery and full-viewport museum room.
+- `theme.css`: Dark/Light controls and the white/pink Light palette.
 - `background-details.css`: broad diagonal black/pink background stripes.
 - `assets/`: self-hosted graphics and fonts, including the font licence.
 - `index.html`: team photo gallery, latest-first results, scorer leaderboard, and complete squad.
@@ -64,16 +65,17 @@ All 13 profiles remain available: 2 goalkeepers, 3 defenders, 2 midfielders and
 The compact gallery uses a black/pink photo card with thumbnail navigation.
 Visitors can use arrows, indicator buttons, thumbnails, horizontal scrolling,
 touch swipes or mouse dragging; the focused gallery supports Left/Right and
-Home/End. Clicking a photograph or its expand button opens the full original
-image in an immersive viewer, with previous/next controls, arrow keys and Escape
-to close. Enter on the focused gallery opens the selected photograph. The viewer
+Home/End. Clicking a photograph or its museum button opens a full-viewport
+exhibition room: the complete original image is framed on a museum wall,
+with spotlights, panel details and a perspective floor. Previous/next controls,
+arrow keys and Escape remain available. Enter on the focused gallery opens the selected photograph. The viewer
 restores focus on closing and keeps the gallery selection in sync. There is no
 automatic advancement. Controls follow reduced-motion settings, announce the
 current photograph and retain the selected image across layout/language changes.
 
 Only the two team photographs are presented in a compact SHADOWS Museum
-setting within the existing homepage gallery. The dark exhibition wall,
-spotlight and frame are decorative CSS. Player portraits remain in the squad
+setting within the existing homepage gallery, with an immersive room on opening
+either photo. The exhibition wall, spotlight, floor and frame are decorative CSS. Player portraits remain in the squad
 section; the navigation, matches, scorers and announcements retain their earlier
 interface. There is no separate Museum page or photograph category browser.
 
@@ -84,6 +86,15 @@ use a black display canvas with normal blending; opponent crests retain light
 canvases so their supplied artwork stays legible. The black/pink theme covers
 both homepage and announcements, with brighter outcome colours for dark cards.
 The background uses broad diagonal black/deep-pink stripes with unequal widths.
+
+The upper-right Dark/Light buttons switch the existing interface between the
+original dark palette (default) and white/pink surfaces. Photographs and supplied
+logos retain their original colours. The same controls are available inside
+the museum. The choice is stored under `shadows-theme` when browser storage is
+available, and applied in the document head before styles load to avoid a
+dark flash on a returning Light visit. With storage disabled, switching still
+works for the current page. Language, navigation and content are independent
+of the selected appearance.
 
 Matches are paginated at eight per page, always in descending round order.
 In match cards, details and player histories, a win colours only the SHADOWS
