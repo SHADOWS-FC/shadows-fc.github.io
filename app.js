@@ -1,8 +1,8 @@
-import { club, matches, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261023-zachos-career';
+import { club, matches, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261023-career-list';
 
 const messages = {
   el: {
-    playerBiography: 'Ποδοσφαιρικό βιογραφικό', careerJourney: 'Η διαδρομή', careerLoan: 'Δανεισμός', careerInactive: 'Δεν αγωνίστηκε', careerGoals: 'ΓΚΟΛ', careerUnknownGoals: 'Δεν έχουν δοθεί στοιχεία για τα γκολ', careerScope: 'Δεν έχουν δοθεί γκολ ανά ομάδα. Τα στατιστικά SHADOWS παρακάτω αφορούν μόνο τους καταγεγραμμένους αγώνες.',
+    playerBiography: 'Ποδοσφαιρικό βιογραφικό',
     themeLabel: 'Εμφάνιση', themeDark: 'Σκοτεινή εμφάνιση', themeLight: 'Φωτεινή εμφάνιση',
     museumTeamTitle: 'Η ομάδα στο γήπεδο', museumCelebrationTitle: 'Κύπελλο και μετάλλια',
     squadGoalkeepers: 'Τερματοφύλακες', squadDefenders: 'Αμυντικοί', squadMidfielders: 'Μέσοι', squadForwards: 'Επιθετικοί',
@@ -66,7 +66,7 @@ const messages = {
     goalDifference: 'διαφορά γκολ', record: 'Ν–Ι–Η',
   },
   en: {
-    playerBiography: 'Football biography', careerJourney: 'The journey', careerLoan: 'Loan', careerInactive: 'Did not play', careerGoals: 'GOALS', careerUnknownGoals: 'Goal totals have not been supplied', careerScope: 'Club-by-club goal totals have not been supplied. The SHADOWS statistics below cover recorded matches only.',
+    playerBiography: 'Football biography',
     themeLabel: 'Appearance', themeDark: 'Dark mode', themeLight: 'Light mode',
     museumTeamTitle: 'The team on the pitch', museumCelebrationTitle: 'Trophy and medals',
     squadGoalkeepers: 'Goalkeepers', squadDefenders: 'Defenders', squadMidfielders: 'Midfielders', squadForwards: 'Forwards',
@@ -584,13 +584,10 @@ function injuryMarkup(match, playerNumber = null) {
 
 function playerCareerMarkup(player) {
   if (!player.career?.length) return '';
-  const localized = value => value?.[language] ?? value?.el ?? value?.en ?? '';
-  return `<section class="player-biography" aria-labelledby="career-title"><p class="eyebrow">${t('playerBiography')}</p><p class="career-intro">${esc(localized(player.biography))}</p><h3 id="career-title">${t('careerJourney')}</h3><ol class="career-timeline">${player.career.map(entry => {
-    const inactive = entry.kind === 'inactive';
-    const period = entry.from === entry.to ? entry.from : `${entry.from}–${entry.to}`;
-    const name = inactive ? t('careerInactive') : localized(entry.club);
-    return `<li class="career-entry${inactive ? ' career-entry--inactive' : ''}"><span class="career-period">${period}</span><span class="career-badge" aria-hidden="true">${entry.logo ? `<img src="${esc(entry.logo)}" alt="" width="44" height="44" loading="lazy">` : `<span class="career-marker">${inactive ? '–' : '•'}</span>`}</span><span class="career-club"><strong>${esc(name)}</strong>${entry.kind === 'loan' ? `<small class="career-loan">${t('careerLoan')}</small>` : ''}${entry.reason ? `<small>${esc(localized(entry.reason))}</small>` : ''}</span>${inactive ? '' : `<span class="career-goals"${entry.goals == null ? ` aria-label="${t('careerUnknownGoals')}"` : ''}><small>${t('careerGoals')}</small><strong>${entry.goals == null ? '—' : esc(entry.goals)}</strong></span>`}</li>`;
-  }).join('')}</ol><p class="career-scope">${t('careerScope')}</p></section>`;
+  return `<section class="player-biography" aria-label="${t('playerBiography')}"><ol class="career-timeline">${player.career.map(entry => {
+    const period = entry.from === entry.to ? entry.from : `${entry.from}/${entry.to}`;
+    return `<li class="career-entry"><span class="career-period">${period}</span> - <span class="career-club">${esc(entry.label)}</span></li>`;
+  }).join('')}</ol></section>`;
 }
 
 function renderDialog() {

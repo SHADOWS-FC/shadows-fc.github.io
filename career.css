@@ -1,28 +1,7 @@
-/* Career content is available only on profiles with a club-supplied history. */
-.player-biography{margin-top:30px;padding-top:25px;border-top:1px solid var(--line)}
-.player-biography>.eyebrow{color:var(--pink-light);font-size:9px;letter-spacing:1.2px}
-.career-intro{margin-top:14px;font-size:13px;line-height:1.9;color:var(--text)}
-.player-biography h3{font-family:var(--display);font-size:27px;margin-top:24px;color:var(--text)}
-.career-timeline{list-style:none;margin:16px 0 0;padding:0;border-top:1px solid var(--line)}
-.career-entry{display:grid;grid-template-columns:80px 44px minmax(0,1fr) 42px;align-items:center;gap:12px;padding:19px 0;border-bottom:1px solid var(--line)}
-.career-period{font-size:11px;font-weight:700;color:var(--pink-light);font-variant-numeric:tabular-nums;white-space:nowrap}
-.career-badge{display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--line);background:var(--surface);border-radius:5px;overflow:hidden}
-.career-badge img{width:100%;height:100%;object-fit:contain;mix-blend-mode:normal}
-.career-marker{font-size:22px;color:var(--pink-light)}
-.career-club{min-width:0;display:flex;flex-direction:column;gap:6px}
-.career-club strong{font-family:var(--display);font-size:20px;line-height:1.2;overflow-wrap:anywhere;color:var(--text)}
-.career-club small{font-size:10px;line-height:1.6;color:var(--muted)}
-.career-club .career-loan{color:var(--pink-light)}
-.career-entry--inactive .career-club strong{font-family:var(--font);font-size:12px;font-weight:400;color:var(--muted)}
-.career-entry--inactive .career-marker{color:var(--muted)}
-.career-goals{display:flex;align-items:center;flex-direction:column;gap:6px}
-.career-goals small{font-size:7px;letter-spacing:1px;color:var(--muted)}
-.career-goals strong{font-family:var(--display);font-size:24px;line-height:1;color:var(--text)}
-.career-scope{font-size:10px;line-height:1.8;margin-top:16px;color:var(--muted)}
-@media(max-width:560px){
- .career-entry{grid-template-columns:34px minmax(0,1fr) 34px;gap:10px;padding-block:16px}
- .career-period{grid-column:1/-1;padding-left:44px;font-size:10px}
- .career-badge{width:34px;height:34px}
- .career-club strong{font-size:19px}
- .career-intro{font-size:12px}
-}
+/* Club-supplied career: one simple line per period. */
+.player-biography{margin-top:26px;padding-top:12px;border-top:1px solid var(--line)}
+.career-timeline{list-style:none;margin:0;padding:0}
+.career-entry{padding:14px 0;border-bottom:1px solid var(--line);font-size:14px;line-height:1.7;color:var(--text);overflow-wrap:break-word}
+.career-period{color:var(--pink-light);font-weight:700;font-variant-numeric:tabular-nums}
+.career-club{font-weight:500}
+@media(max-width:560px){.career-entry{font-size:13px;padding-block:13px}}

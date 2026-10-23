@@ -160,20 +160,15 @@ export const confirmedPlayers = [
   {
     name: 'Zachos Giannis', number: 5, position: 'CB', confirmed: true,
     photo: 'assets/players/5.jpeg', scorerName: 'Zachos',
-    biography: {
-      el: 'Από τον Α.Ο. Βουλιαγμένης το 2006, στον Αστέρα Βάρης με δανεισμό το 2017 και στο Klassiko της Χίου το 2021–2022. Αγωνίζεται στους SHADOWS FC το 2024, το 2025 και το 2026.',
-      en: 'From A.O. Vouliagmenis in 2006 to a loan at Asteras Varis in 2017 and Klassiko in Chios in 2021–2022. He plays for SHADOWS FC in 2024, 2025 and 2026.',
-    },
-    // Calendar years supplied by the club, not inferred football seasons.
-    // Historical goal totals and previous-club crests have not been verified.
+    // Career labels and year ranges reproduced exactly as supplied by the club.
     career: [
-      { from: 2006, to: 2016, kind: 'club', club: { el: 'Α.Ο. Βουλιαγμένης', en: 'A.O. Vouliagmenis' }, goals: null },
-      { from: 2017, to: 2017, kind: 'loan', club: { el: 'Αστέρας Βάρης', en: 'Asteras Varis' }, goals: null },
-      { from: 2018, to: 2018, kind: 'inactive', reason: { el: 'Πανελλήνιες εξετάσεις', en: 'Panhellenic university entrance exams' } },
-      { from: 2019, to: 2020, kind: 'inactive' },
-      { from: 2021, to: 2022, kind: 'club', club: { el: 'Klassiko · Χίος', en: 'Klassiko · Chios' }, goals: null },
-      { from: 2023, to: 2023, kind: 'inactive' },
-      { from: 2024, to: 2026, kind: 'club', club: { el: 'SHADOWS FC', en: 'SHADOWS FC' }, logo: 'assets/logos/shadows-fc-black-pink.jpg', goals: null },
+      { from: 2006, to: 2016, label: 'A.O.Vouliagmenis', kind: 'club', goals: null },
+      { from: 2016, to: 2017, label: 'Astera Varis', kind: 'loan', goals: null },
+      { from: 2018, to: 2018, label: 'Frontistirio Prisma', kind: 'inactive' },
+      { from: 2019, to: 2020, label: 'Covid 19', kind: 'inactive' },
+      { from: 2021, to: 2022, label: 'Klassiko Chiou', kind: 'club', goals: null },
+      { from: 2023, to: 2023, label: 'DNP', kind: 'inactive' },
+      { from: 2024, to: 2026, label: 'Shadows FC', kind: 'club', logo: 'assets/logos/shadows-fc-black-pink.jpg', goals: null },
     ],
   },
   { name: 'Chatzinikolaou Christos', number: 28, position: 'CM', confirmed: true, photo: 'assets/players/28.jpeg' },

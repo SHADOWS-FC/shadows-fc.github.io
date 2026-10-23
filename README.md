@@ -244,12 +244,11 @@ Original team photographs, homepage, match records and Dark/Light choices are un
 
 ### Player careers
 
-Zachos (#5) has a bilingual biography and calendar-year timeline supplied by the
-club: Vouliagmenis 2006–2016, Asteras Varis on loan in 2017, inactive in 2018
-(Panhellenic exams) and 2019–2020, Klassiko in Chios 2021–2022, inactive in
-2023, SHADOWS 2024–2026. Career goal totals are null until supplied, never
-zero or inferred from the current recorded-match totals. Only the supplied
-SHADOWS crest is currently used; external research sites returned HTTP 403
-and previous-club logos remain pending verification. No invented badges are used.
-The optional biography/career fields in data.js and career.css affect only
-profiles with supplied histories. Other profiles and original match data stay intact.
+Zachos (#5) has a seven-line career list, with labels and slash-separated ranges
+reproduced exactly as subsequently supplied by the club: 2006/2016 -
+A.O.Vouliagmenis; 2016/2017 - Astera Varis; 2018 - Frontistirio Prisma;
+2019/2020 - Covid 19; 2021/2022 - Klassiko Chiou; 2023 - DNP;
+2024/2026 - Shadows FC. There is no biography paragraph, additional career
+heading, loan label, goal column, or explanatory note. The same supplied lines
+appear in either interface language. Recorded-match scoring statistics remain
+separate and unchanged. Previous-club crests remain pending original files.
