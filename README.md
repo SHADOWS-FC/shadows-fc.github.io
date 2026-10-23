@@ -1,6 +1,6 @@
 # SHADOWS FC
 
-A responsive Greek / English club website. Plain HTML, CSS, and JavaScript;
+A responsive Greek / English / Albanian / Spanish club website. Plain HTML, CSS, and JavaScript;
 no framework, package downloads, API keys, or database required.
 
 ## Run locally
@@ -35,7 +35,9 @@ browser validation here uses HTTP.
 ## Content and updates
 
 - `data.js`: matches, scorer names, confirmed player profiles, historical matchday squad, shirt numbers, aliases, and club announcements.
-- `app.js`: Greek and English translations and interactions.
+- `app.js`: rendering, language selection and interactions.
+- `i18n.js`: Greek (`el`), English (`en`), Albanian (`sq`) and Spanish (`es`) text, display names and announcement translations.
+- `language.css`: compact accessible four-language menu.
 - `styles.css`: base layout and responsive rules.
 - `editorial.css`: photo-led homepage, condensed typography, match cards and responsive layout.
 - `black-pink.css`: the black/pink club palette, dark cards and match/player dialogs.
@@ -126,8 +128,8 @@ with its original photograph.
 
 The first entry is the official statement regarding Sotiris, transcribed from
 the club-supplied Instagram caption screenshot. Its original Greek wording,
-paragraphs and closing signature are retained, including when the interface is
-in English. No publication date is inferred. The accompanying embroidered-crest
+paragraphs and closing signature are retained as the source. English, Albanian
+and Spanish display translations are provided in `i18n.js`. No publication date is inferred. The accompanying embroidered-crest
 photograph at `assets/announcements/sotiris-statement.jpg` is the separate image
 supplied with the statement, copied without alteration; the caption screenshot
 is used only as the text source.
@@ -253,15 +255,16 @@ reproduced exactly as subsequently supplied by the club: 2006/2016 -
 A.O.Vouliagmenis; 2016/2017 - Astera Varis; 2018 - Frontistirio Prisma;
 2019/2020 - Covid 19; 2021/2022 - Klassiko Chiou; 2023 - DNP;
 2024/2026 - Shadows FC. There is no biography paragraph, additional career
-heading, loan label, goal column, or explanatory note. The same supplied lines
-appear in either interface language. Recorded-match scoring statistics remain
+heading, loan label, goal column, or explanatory note. The seven source records retain their supplied year ranges; their display
+labels follow the selected interface language. Recorded-match scoring statistics remain
 separate and unchanged. The club-uploaded originals AOV.jpeg, ASTERAS.png and KLASIKO.jpeg are shown beside their matching career lines, together with the SHADOWS crest.
 
 ### Crest presentation
 
 crest-display.css presents original logos on consistent padded canvases.
-SHADOWS uses black, Legrena purple, Unathletico cream, and other opponents
-white. Artwork is contained without arbitrary shield clipping or blend modes.
+Original SHADOWS branding uses black and Legrena uses purple. In match
+cards and details, SHADOWS, Aston Voula, Unathletico and Savralliolid use
+transparent cutouts without surrounding boxes. Artwork is contained without arbitrary shield clipping or blend modes.
 The prior automatic background masking was removed at the club’s request.
 The seven supplied career lines remain unchanged. The three club-uploaded career logos are displayed with their original backgrounds. Altered generated substitutes are not published.
 
@@ -274,3 +277,19 @@ As a temporary club-approved entry, each of the other twelve profiles displays
 invented. `currentShadowsCareer()` returns independent data for each profile;
 replace its call with the supplied history when that player’s details arrive.
 Zachos retains his complete seven-line career and its four supplied crests.
+
+### Languages and names
+
+The header menu offers Ελληνικά, English, Shqip and Español. The choice is
+stored under `shadows-language`; invalid values default to Greek. All four
+interfaces include navigation, accessible labels, positions, museum controls,
+match details, injury notices and the full Sotiris announcement. Official club
+branding and the requested MVP label remain unchanged.
+
+Player, scorer, MVP, lineup, coaching and injury names use Greek script in
+Greek, and Latin script in English, Albanian and Spanish. Display localization
+never rewrites canonical player identifiers, scoring aliases, historical
+selections or shareable URLs. Unknown Greek-script names have a Latin-script
+transliteration fallback. New Latin-script names should have an explicit Greek
+spelling in `i18n.js`. Career organisation labels are localized for display;
+their dates, logos and goal records retain their source values.

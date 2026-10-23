@@ -1,137 +1,8 @@
-import { club, matches, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261023-match-cutouts';
-
-const messages = {
-  el: {
-    playerBiography: 'Ποδοσφαιρικό βιογραφικό',
-    themeLabel: 'Εμφάνιση', themeDark: 'Σκοτεινή εμφάνιση', themeLight: 'Φωτεινή εμφάνιση',
-    museumTeamTitle: 'Η ομάδα στο γήπεδο', museumCelebrationTitle: 'Κύπελλο και μετάλλια',
-    squadGoalkeepers: 'Τερματοφύλακες', squadDefenders: 'Αμυντικοί', squadMidfielders: 'Μέσοι', squadForwards: 'Επιθετικοί',
-    galleryLabel: 'Φωτογραφίες ομάδας', galleryRole: 'συλλογή φωτογραφιών', gallerySlide: 'φωτογραφία',
-    galleryInstructions: 'Σύρε ή χρησιμοποίησε τα βέλη για αλλαγή φωτογραφίας. Πάτησε Enter για προβολή στο μουσείο.',
-    galleryPrevious: 'Προηγούμενη φωτογραφία', galleryNext: 'Επόμενη φωτογραφία', galleryPhoto: 'Φωτογραφία', galleryOf: 'από',
-    galleryHint: 'Σύρε, διάλεξε φωτογραφία ή μπες στο μουσείο', celebrationPhotoAlt: 'Η ομάδα των SHADOWS FC στο γήπεδο με κύπελλο και μετάλλια',
-    galleryExpand: 'Στο μουσείο', galleryClose: 'Κλείσιμο μουσείου', galleryThumbnails: 'Επιλογή φωτογραφίας',
-    navAnnouncements: 'Ανακοινώσεις', announcementsTitle: 'Ανακοινώσεις ομάδας.',
-    announcementsIntro: 'Όλες οι επίσημες ενημερώσεις της ομάδας, σε ένα σημείο.',
-    officialAnnouncement: 'ΕΠΙΣΗΜΗ ΑΝΑΚΟΙΝΩΣΗ', announcementCount: 'ανακοινώσεις', announcementSingular: 'ανακοίνωση',
-    readAnnouncement: 'Διάβασε την ανακοίνωση', noAnnouncements: 'Οι ανακοινώσεις της ομάδας θα εμφανίζονται εδώ.', backHome: 'Αρχική σελίδα',
-    startingSeven: 'ΑΡΧΙΚΗ ΕΠΤΑΔΑ', matchdayPlayers: 'ΑΠΟΣΤΟΛΗ ΑΓΩΝΑ', substitutes: 'ΑΝΑΠΛΗΡΩΜΑΤΙΚΟΙ',
-    coachingStaff: 'ΠΡΟΠΟΝΗΤΙΚΟ ΕΠΙΤΕΛΕΙΟ', headCoach: 'Προπονητής', lineupTitle: 'ΣΥΝΘΕΣΗ ΟΜΑΔΑΣ',
-    lineupNotRecorded: 'Δεν έχει καταχωριστεί ακόμη η σύνθεση για αυτόν τον αγώνα.',
-    injuryUpdate: 'ΤΡΑΥΜΑΤΙΣΜΟΣ', injuredInMatch: 'Τραυματίστηκε στον αγώνα με', estimatedAbsence: 'Εκτιμώμενη απουσία',
-    monthsUnit: 'μήνες', estimatedReturn: 'Εκτιμώμενη επιστροφή',
-    'mid-November': 'μέσα Νοεμβρίου',
-
-    teamPhotoAlt: 'Η ομάδα των SHADOWS FC στο γήπεδο', newestFirst: 'Από τον πιο πρόσφατο αγώνα',
-    opponentSearch: 'Αναζήτηση αντιπάλου', matchSearchPlaceholder: 'π.χ. Savralliolid', monthLabel: 'Μήνας', allMonths: 'Όλοι οι μήνες',
-    sortLabel: 'Ταξινόμηση', newest: 'Πιο πρόσφατα', oldest: 'Παλαιότερα πρώτα', mostGoals: 'Περισσότερα γκολ SHADOWS',
-    drawsLabel: 'Ισοπαλίες', cardsView: 'Κάρτες', listView: 'Λίστα', resetFilters: 'Καθαρισμός φίλτρων',
-    recentForm: 'ΠΡΟΣΦΑΤΗ ΦΟΡΜΑ', formHint: 'Πάτησε ένα αποτέλεσμα για τον αγώνα',
-    previousPage: 'Προηγούμενη', nextPage: 'Επόμενη', selectedMatches: 'ΑΓΩΝΕΣ ΣΤΗΝ ΕΠΙΛΟΓΗ',
-    selectionRecord: 'Ν–Ι–Η ΣΤΗΝ ΕΠΙΛΟΓΗ', selectionGoals: 'ΓΚΟΛ ΥΠΕΡ / ΚΑΤΑ', averageGoals: 'ΓΚΟΛ ΥΠΕΡ / ΑΓΩΝΑ',
-    selectionScope: 'Στατιστικά για την παραπάνω επιλογή αγώνων.', fullScope: 'Στατιστικά για όλους τους καταγεγραμμένους αγώνες.',
-    changeSelection: 'Αλλαγή επιλογής αγώνων ↑', topScorer: 'ΣΤΗΝ ΚΟΡΥΦΗ', noScoring: 'Δεν υπάρχουν καταγεγραμμένα γκολ.',
-    goalsUnit: 'γκολ', scoringMatches: 'ΑΓΩΝΕΣ ΜΕ ΚΑΤΑΓΕΓΡΑΜΜΕΝΑ ΓΚΟΛ', scoringHistory: 'ΤΑ ΓΚΟΛ ΑΝΑ ΑΓΩΝΑ',
-    scorerHistory: 'ΙΣΤΟΡΙΚΟ ΣΚΟΡΕΡ', noScoringHistory: 'Δεν υπάρχουν καταγεγραμμένα γκολ για αυτόν τον παίκτη.',
-    previousMatch: '← Προηγούμενος αγώνας', nextMatch: 'Επόμενος αγώνας →', copyLink: 'Αντιγραφή συνδέσμου',
-    linkCopied: 'Ο σύνδεσμος αντιγράφηκε.', copyManually: 'Αντίγραψε αυτόν τον σύνδεσμο:', backToPlayer: '← Επιστροφή στον παίκτη',
-    browseMatches: 'Περιήγηση αγώνων', viewLabel: 'Προβολή αγώνων', paginationLabel: 'Σελίδες αγώνων',
-
-    skip: 'Μετάβαση στο περιεχόμενο', navResults: 'Αποτελέσματα', navScorers: 'Σκόρερ', navSquad: 'Ομάδα', navClub: 'Ο σύλλογος',
-
-    heroDescription: 'Από τη Βουλιαγμένη. Για το έμβλημα. Μια ομάδα, μια κοινή ιστορία.', viewResults: 'Δες τους αγώνες',
-    heroFootnote: 'ΑΠΟ ΤΗ ΒΟΥΛΙΑΓΜΕΝΗ. ΓΙΑ ΤΗΝ ΟΜΑΔΑ.', latestResult: 'ΤΕΛΕΥΤΑΙΟ ΑΠΟΤΕΛΕΣΜΑ', fullTime: 'ΤΕΛΙΚΟ',
-    firstWin: 'Η ΠΡΩΤΗ ΝΙΚΗ. ΚΑΙ ΣΥΝΕΧΙΖΟΥΜΕ.', goals: 'ΓΚΟΛ', soFar: 'Η ΠΟΡΕΙΑ ΜΑΣ', seasonNumbers: 'Η ομάδα σε αριθμούς.',
-    resultsTitle: 'Οι αγώνες μας.',
-    allGames: 'Όλοι οι αγώνες', wins: 'Νίκες', losses: 'Ήττες', clickMatch: 'Επίλεξε αγώνα για τους σκόρερ ↗',
-    mvpTitle: 'Τρία γκολ.\nΜια μεγάλη βραδιά.', mvpDescription: 'Χατ τρικ στη νίκη με 7–6 απέναντι στη Savralliolid FC. Ο Γκούμας αναδείχθηκε MVP του αγώνα.',
-    matchGoals: 'ΓΚΟΛ ΣΤΟΝ ΑΓΩΝΑ', recordedGoals: 'ΣΥΝΟΛΙΚΑ ΓΚΟΛ', allScorers: 'Όλοι οι σκόρερ', scorersTitle: 'Οι σκόρερ μας.',
-    jointLeaders: 'ΣΤΗΝ ΚΟΡΥΦΗ ΜΑΖΙ', goalsEach: 'ΓΚΟΛ Ο ΚΑΘΕΝΑΣ',
-    scoringNote: 'Τα γκολ μετράνε. Η ομάδα περισσότερο.', scorerCaption: 'Γκολ ανά παίκτη στους καταγεγραμμένους αγώνες', player: 'ΠΑΙΚΤΗΣ',
-    squadTitle: 'Η ομάδα μας.', squadNote: 'Οι παίκτες πίσω από τη φανέλα. Γνώρισε την ομάδα των SHADOWS FC.',
-    searchLabel: 'Αναζήτηση παίκτη', searchPlaceholder: 'Αναζήτηση παίκτη…',
-    clubDescription: 'Οι SHADOWS FC αγωνίζονται στη Master League στη Βούλα. Μαύρο και ροζ, κοινές στιγμές και μια ιστορία που συνεχίζει να γράφεται.',
-    competition: 'ΤΟ ΠΡΩΤΑΘΛΗΜΑ', leagueLocation: 'MASTER LEAGUE · ΒΟΥΛΑ', leagueDetail: 'Master League · Βούλα',
-    basedIn: 'Η ΒΑΣΗ ΜΑΣ', vouliagmeni: 'Βουλιαγμένη, Αθήνα', matchVenue: 'ΤΟ ΓΗΠΕΔΟ', newTab: ' (ανοίγει σε νέα καρτέλα)', backTop: 'Στην κορυφή',
-    played: 'ΑΓΩΝΕΣ', victories: 'ΝΙΚΕΣ', goalsFor: 'ΓΚΟΛ ΥΠΕΡ', goalsAgainst: 'ΓΚΟΛ ΚΑΤΑ', draws: 'ισοπαλίες', defeats: 'ήττες',
-    win: 'Ν', loss: 'Η', draw: 'Ι', winFull: 'Νίκη', lossFull: 'Ήττα', drawFull: 'Ισοπαλία', matchday: 'ΑΓΩΝΑΣ', scorerList: 'ΣΚΟΡΕΡ SHADOWS FC',
-    close: 'Κλείσιμο', openMenu: 'Άνοιγμα μενού', closeMenu: 'Κλείσιμο μενού', matchCount: 'αγώνες', noPlayers: 'Δεν βρέθηκε παίκτης.',
-    playerCount: 'παίκτες', squadProfile: 'ΑΠΟΣΤΟΛΗ / 21.10', shirtNumber: 'Αριθμός φανέλας στο τελευταίο ματς',
-    playerProfile: 'ΠΡΟΦΙΛ ΠΑΙΚΤΗ', confirmedShirtNumber: 'Αριθμός φανέλας', goalkeeper: 'Τερματοφύλακας', centerBack: 'Κεντρικός αμυντικός', position: 'ΘΕΣΗ',
-    centerMidfielder: 'Κεντρικός μέσος', rightWinger: 'Δεξιός εξτρέμ', leftWinger: 'Αριστερός εξτρέμ',
-    attackingMidfielder: 'Επιτελικός μέσος', striker: 'Επιθετικός',
-    confirmedGoals: 'ΚΑΤΑΓΕΓΡΑΜΜΕΝΑ ΓΚΟΛ', unknownGoals: 'Δεν έχει επιβεβαιωθεί αντιστοίχιση με τους σκόρερ των αναρτήσεων.',
-    detail: 'Λεπτομέρειες', noResults: 'Δεν υπάρχουν ακόμη καταγεγραμμένοι αγώνες.',
-    scopeNote: 'Οι αριθμοί αφορούν τους καταγεγραμμένους αγώνες.', mvp: 'MVP',
-    goalDifference: 'διαφορά γκολ', record: 'Ν–Ι–Η',
-  },
-  en: {
-    playerBiography: 'Football biography',
-    themeLabel: 'Appearance', themeDark: 'Dark mode', themeLight: 'Light mode',
-    museumTeamTitle: 'The team on the pitch', museumCelebrationTitle: 'Trophy and medals',
-    squadGoalkeepers: 'Goalkeepers', squadDefenders: 'Defenders', squadMidfielders: 'Midfielders', squadForwards: 'Forwards',
-    galleryLabel: 'Team photographs', galleryRole: 'photo gallery', gallerySlide: 'slide',
-    galleryInstructions: 'Swipe or use the arrow keys to change photograph. Press Enter to view it in the museum.',
-    galleryPrevious: 'Previous photograph', galleryNext: 'Next photograph', galleryPhoto: 'Photograph', galleryOf: 'of',
-    galleryHint: 'Swipe, choose a photo or enter the museum', celebrationPhotoAlt: 'The SHADOWS FC team on the pitch with a trophy and medals',
-    galleryExpand: 'Enter museum', galleryClose: 'Close museum', galleryThumbnails: 'Choose a photograph',
-    navAnnouncements: 'Announcements', announcementsTitle: 'Club announcements.',
-    announcementsIntro: 'Every official team update, in one place.',
-    officialAnnouncement: 'OFFICIAL ANNOUNCEMENT', announcementCount: 'announcements', announcementSingular: 'announcement',
-    readAnnouncement: 'Read announcement', noAnnouncements: 'Team announcements will appear here.', backHome: 'Back to home',
-    startingSeven: 'STARTING SEVEN', matchdayPlayers: 'MATCHDAY SQUAD', substitutes: 'SUBSTITUTES',
-    coachingStaff: 'COACHING STAFF', headCoach: 'Head coach', lineupTitle: 'TEAM LINEUP',
-    lineupNotRecorded: 'The lineup has not been recorded for this match yet.',
-    injuryUpdate: 'INJURY UPDATE', injuredInMatch: 'Injured in the match against', estimatedAbsence: 'Estimated absence',
-    monthsUnit: 'months', estimatedReturn: 'Estimated return',
-    'mid-November': 'mid-November',
-
-    teamPhotoAlt: 'The SHADOWS FC team on the pitch', newestFirst: 'Newest matches first',
-    opponentSearch: 'Search opponents', matchSearchPlaceholder: 'e.g. Savralliolid', monthLabel: 'Month', allMonths: 'All months',
-    sortLabel: 'Sort by', newest: 'Newest first', oldest: 'Oldest first', mostGoals: 'Most SHADOWS goals',
-    drawsLabel: 'Draws', cardsView: 'Cards', listView: 'List', resetFilters: 'Clear filters',
-    recentForm: 'RECENT FORM', formHint: 'Select a result to explore the match',
-    previousPage: 'Previous', nextPage: 'Next', selectedMatches: 'MATCHES SELECTED',
-    selectionRecord: 'W–D–L IN SELECTION', selectionGoals: 'GOALS FOR / AGAINST', averageGoals: 'GOALS FOR / MATCH',
-    selectionScope: 'Statistics for the match selection above.', fullScope: 'Statistics for all recorded matches.',
-    changeSelection: 'Change match selection ↑', topScorer: 'TOP SCORER', noScoring: 'No goals have been recorded.',
-    goalsUnit: 'goals', scoringMatches: 'GAMES WITH RECORDED GOALS', scoringHistory: 'GOALS BY MATCH',
-    scorerHistory: 'SCORER HISTORY', noScoringHistory: 'No goals have been recorded for this player.',
-    previousMatch: '← Previous match', nextMatch: 'Next match →', copyLink: 'Copy link',
-    linkCopied: 'Link copied.', copyManually: 'Copy this link:', backToPlayer: '← Back to player',
-    browseMatches: 'Browse matches', viewLabel: 'Match view', paginationLabel: 'Match pages',
-
-    skip: 'Skip to content', navResults: 'Results', navScorers: 'Scorers', navSquad: 'Squad', navClub: 'The club',
-
-    heroDescription: 'Built in Vouliagmeni. Driven by the badge. One team, one shared story.', viewResults: 'Explore the matches',
-    heroFootnote: 'FROM VOULIAGMENI. FOR THE TEAM.', latestResult: 'LATEST RESULT', fullTime: 'FULL TIME', firstWin: 'THE FIRST WIN. WE GO AGAIN.',
-    goals: 'GOALS', soFar: 'THE STORY SO FAR', seasonNumbers: 'The team in numbers.',
-    resultsTitle: 'Our matches.', allGames: 'All matches', wins: 'Wins', losses: 'Losses',
-    clickMatch: 'Select a match to see the scorers ↗', mvpTitle: 'Three goals.\nOne big night.',
-    mvpDescription: 'A hat-trick in the 7–6 win against Savralliolid FC. Gkoumas was named MVP.',
-    matchGoals: 'MATCH GOALS', recordedGoals: 'TOTAL RECORDED GOALS', allScorers: 'All goalscorers', scorersTitle: 'On the scoresheet.',
-    jointLeaders: 'SHARING THE TOP SPOT', goalsEach: 'GOALS EACH',
-    scoringNote: 'The goals matter. The team matters more.', scorerCaption: 'Player goals across the recorded matches', player: 'PLAYER',
-    squadTitle: 'Meet the squad.', squadNote: 'The people behind the shirt. Get to know SHADOWS FC.',
-    searchLabel: 'Search players', searchPlaceholder: 'Search players…',
-    clubDescription: 'SHADOWS FC play in the Master League in Voula. Black and pink, shared moments, and a story we’re still writing.',
-    competition: 'THE LEAGUE', leagueLocation: 'MASTER LEAGUE · VOULA', leagueDetail: 'Master League · Voula',
-    basedIn: 'OUR HOME', vouliagmeni: 'Vouliagmeni, Athens', matchVenue: 'THE PITCH', newTab: ' (opens in a new tab)', backTop: 'Back to top',
-    played: 'MATCHES', victories: 'WINS', goalsFor: 'GOALS FOR', goalsAgainst: 'GOALS AGAINST', draws: 'draws', defeats: 'losses',
-    win: 'W', loss: 'L', draw: 'D', winFull: 'Win', lossFull: 'Loss', drawFull: 'Draw', matchday: 'MATCHDAY', scorerList: 'SHADOWS FC SCORERS',
-    close: 'Close', openMenu: 'Open menu', closeMenu: 'Close menu', matchCount: 'matches', noPlayers: 'No player found.',
-    playerCount: 'players', squadProfile: 'MATCHDAY SQUAD / 21.10', shirtNumber: 'Shirt number in the latest match',
-    playerProfile: 'PLAYER PROFILE', confirmedShirtNumber: 'Shirt number', goalkeeper: 'Goalkeeper', centerBack: 'Centre-back', position: 'POSITION',
-    centerMidfielder: 'Central midfielder', rightWinger: 'Right winger', leftWinger: 'Left winger',
-    attackingMidfielder: 'Attacking midfielder', striker: 'Striker',
-    confirmedGoals: 'RECORDED GOALS', unknownGoals: 'A link to the scorer names in the club posts has not been confirmed.',
-    detail: 'Details', noResults: 'No matches have been recorded yet.', scopeNote: 'Statistics cover the recorded matches.', mvp: 'MVP',
-    goalDifference: 'goal difference', record: 'W–D–L',
-  },
-};
+import { club, matches, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261023-four-languages';
+import { messages, localizedName, localizedCareer, localizedOpponent, languageLocales, announcementTranslations } from './i18n.js?v=20261023-four-languages';
 
 let language = 'el';
-try { if (localStorage.getItem('shadows-language') === 'en') language = 'en'; } catch { /* Storage may be disabled. */ }
+try { const saved = localStorage.getItem('shadows-language'); if (Object.hasOwn(messages, saved)) language = saved; } catch { /* Storage may be disabled. */ }
 const PAGE_SIZE = 8;
 const archive = { page: 1 };
 let galleryIndex = 0;
@@ -140,6 +11,8 @@ let dialogTrigger = null;
 let closingFromHistory = false;
 const $ = selector => document.querySelector(selector);
 const t = key => messages[language][key];
+const displayName = name => localizedName(name, language);
+const displayOpponent = name => localizedOpponent(name, language);
 let theme = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
 
 function renderTheme() {
@@ -147,6 +20,7 @@ function renderTheme() {
   $('meta[name="theme-color"]').content = theme === 'light' ? '#ffffff' : '#08070b';
   document.querySelectorAll('.theme-control').forEach(control => control.setAttribute('aria-label', t('themeLabel')));
   document.querySelectorAll('[data-theme-choice]').forEach(button => {
+    button.textContent = t(button.dataset.themeChoice === 'light' ? 'themeLightShort' : 'themeDarkShort');
     button.setAttribute('aria-pressed', String(button.dataset.themeChoice === theme));
     button.setAttribute('aria-label', t(button.dataset.themeChoice === 'light' ? 'themeLight' : 'themeDark'));
   });
@@ -217,14 +91,14 @@ function renderMatches() {
   const pageMatches = visible.slice(start, start + PAGE_SIZE);
   $('#match-list').innerHTML = pageMatches.map(match => {
     const result = outcome(match);
-    return `<button class="match-row" data-result="${result}" data-open-match="${esc(match.id)}" aria-label="${esc(t('detail'))}: SHADOWS FC ${match.goalsFor}–${match.goalsAgainst} ${esc(match.opponent)}, ${match.date}, ${t(result + 'Full')}">
-      <span class="match-date"><strong>${match.date.replace('/', '.')}</strong><small>MASTER LEAGUE · MD ${String(match.round).padStart(2, '0')}</small></span>
+    return `<button class="match-row" data-result="${result}" data-open-match="${esc(match.id)}" aria-label="${esc(t('detail'))}: SHADOWS FC ${match.goalsFor}–${match.goalsAgainst} ${esc(displayOpponent(match.opponent))}, ${match.date}, ${t(result + 'Full')}">
+      <span class="match-date"><strong>${match.date.replace('/', '.')}</strong><small>${t('leagueLocation')} · ${t('matchdayShort')} ${String(match.round).padStart(2, '0')}</small></span>
       <span class="match-team">${crestMarkup(club.matchLogo || club.logo, '', club.crestShape)}<span>SHADOWS FC</span></span>
       <span class="match-score"><span class="score-value">${scoreMarkup(match)}</span><small>${t('fullTime')}</small></span>
-      <span class="match-team away">${crestMarkup(match.logo, match.initials, match.crestShape)}<span>${esc(match.opponent)}</span></span>
-      <span class="match-outcome"><span class="outcome-tag ${result}" aria-hidden="true">${t(result)}</span></span><span class="match-card-footer"><span>${match.time} · STAR SPORT CLUB</span><span>${t('detail')} <span class="row-arrow" aria-hidden="true">↗</span></span></span></button>`;
+      <span class="match-team away">${crestMarkup(match.logo, match.initials, match.crestShape)}<span>${esc(displayOpponent(match.opponent))}</span></span>
+      <span class="match-outcome"><span class="outcome-tag ${result}" aria-hidden="true">${t(result)}</span></span><span class="match-card-footer"><span>${match.time} · ${t('venueShort')}</span><span>${t('detail')} <span class="row-arrow" aria-hidden="true">↗</span></span></span></button>`;
   }).join('') || `<div class="empty-results"><p>${t('noResults')}</p></div>`;
-  $('#results-status').textContent = language === 'el' ? `${visible.length} αγώνες · από τον πιο πρόσφατο` : `${visible.length} matches · newest first`;
+  $('#results-status').textContent = `${visible.length} ${t('matchCount')} · ${t('newestFirst')}`;
   $('#archive-total').textContent = `${visible.length} ${t('matchCount').toLocaleUpperCase()}`;
   $('.archive-pagination').hidden = pages === 1;
   $('.archive-pagination').setAttribute('aria-label', t('paginationLabel'));
@@ -241,8 +115,8 @@ function renderScorers() {
   const total = getSummary(selected).goalsFor;
   $('#scorers-total').textContent = `${total} ${t('goals')} · ${selected.length} ${t('matchCount').toLocaleUpperCase()}`;
   $('#scorer-scope-note').textContent = t('fullScope');
-  $('#scoring-leaders').innerHTML = leaders.length ? `<span class="eyebrow">${t(leaders.length > 1 ? 'jointLeaders' : 'topScorer')}</span><div class="top-scorer-number">${leaders[0].goals}<span>${t(leaders.length > 1 ? 'goalsEach' : 'goals')}</span></div><h3>${leaders.map(player => esc(player.name).toLocaleUpperCase()).join('<br><span>&</span> ')}</h3><p>${t('scoringNote')}</p>` : `<p class="eyebrow">${t('topScorer')}</p><h3>—</h3><p>${t('noScoring')}</p>`;
-  $('#scorer-rows').innerHTML = rankings.map(player => `<tr style="--goals:${player.goals};--scoring-share:${player.goals / (rankings[0]?.goals || 1)}"><td>${String(player.rank).padStart(2, '0')}</td><td><button class="scorer-name scorer-link" data-open-scorer="${esc(player.name)}"><span class="scorer-initials" aria-hidden="true">${initials(player.name)}</span>${esc(player.name)}<span class="scorer-chevron" aria-hidden="true">↗</span></button></td><td>${player.goals}</td></tr>`).join('') || `<tr><td colspan="3" class="empty-scorers">${t('noScoring')}</td></tr>`;
+  $('#scoring-leaders').innerHTML = leaders.length ? `<span class="eyebrow">${t(leaders.length > 1 ? 'jointLeaders' : 'topScorer')}</span><div class="top-scorer-number">${leaders[0].goals}<span>${t(leaders.length > 1 ? 'goalsEach' : 'goals')}</span></div><h3>${leaders.map(player => esc(displayName(player.name)).toLocaleUpperCase()).join('<br><span>&</span> ')}</h3><p>${t('scoringNote')}</p>` : `<p class="eyebrow">${t('topScorer')}</p><h3>—</h3><p>${t('noScoring')}</p>`;
+  $('#scorer-rows').innerHTML = rankings.map(player => `<tr style="--goals:${player.goals};--scoring-share:${player.goals / (rankings[0]?.goals || 1)}"><td>${String(player.rank).padStart(2, '0')}</td><td><button class="scorer-name scorer-link" data-open-scorer="${esc(player.name)}"><span class="scorer-initials" aria-hidden="true">${initials(displayName(player.name))}</span>${esc(displayName(player.name))}<span class="scorer-chevron" aria-hidden="true">↗</span></button></td><td>${player.goals}</td></tr>`).join('') || `<tr><td colspan="3" class="empty-scorers">${t('noScoring')}</td></tr>`;
 }
 
 function renderSquad() {
@@ -252,7 +126,7 @@ function renderSquad() {
     { id: 'midfielders', title: 'squadMidfielders', positions: ['CM', 'CAM'] },
     { id: 'forwards', title: 'squadForwards', positions: ['RW', 'LW', 'ST'] },
   ];
-  const playerCard = player => `<button class="player-card${player.photo ? ' has-photo' : ''}" data-player="${player.number}" aria-label="${esc(player.name)}, ${t(player.confirmed ? 'confirmedShirtNumber' : 'shirtNumber')} ${player.number}${player.position ? `, ${esc(positionLabel(player.position))}` : ''}"><span class="player-card-art">${player.photo ? `<img class="player-portrait" src="${esc(player.photo)}" alt="${esc(player.name)}" loading="lazy" width="450" height="560">` : ''}<span class="small-brand">SHADOWS / FC</span><span class="player-number" aria-hidden="true">${String(player.number).padStart(2, '0')}</span></span><span class="player-info"><span class="player-name-group"><strong>${esc(player.name)}</strong>${player.position ? `<small class="player-position">${esc(positionLabel(player.position))}</small>` : ''}</span><span aria-hidden="true">↗</span></span></button>`;
+  const playerCard = player => `<button class="player-card${player.photo ? ' has-photo' : ''}" data-player="${player.number}" aria-label="${esc(displayName(player.name))}, ${t(player.confirmed ? 'confirmedShirtNumber' : 'shirtNumber')} ${player.number}${player.position ? `, ${esc(positionLabel(player.position))}` : ''}"><span class="player-card-art">${player.photo ? `<img class="player-portrait" src="${esc(player.photo)}" alt="${esc(displayName(player.name))}" loading="lazy" width="450" height="560">` : ''}<span class="small-brand">SHADOWS / FC</span><span class="player-number" aria-hidden="true">${String(player.number).padStart(2, '0')}</span></span><span class="player-info"><span class="player-name-group"><strong>${esc(displayName(player.name))}</strong>${player.position ? `<small class="player-position">${esc(positionLabel(player.position))}</small>` : ''}</span><span aria-hidden="true">↗</span></span></button>`;
   $('#squad-grid').innerHTML = groups.map(group => {
     const players = squad.filter(player => group.positions.includes(player.position));
     return `<section class="squad-group" data-squad-group="${group.id}" aria-labelledby="squad-group-${group.id}"><div class="squad-group-heading"><h3 id="squad-group-${group.id}">${t(group.title)}</h3><span class="squad-group-count">${players.length} ${t('playerCount')}</span></div><div class="squad-group-grid squad-grid">${players.map(playerCard).join('')}</div></section>`;
@@ -536,7 +410,7 @@ photoDialog.addEventListener('close', () => {
 if ('ResizeObserver' in window) new ResizeObserver(() => showGalleryPhoto(galleryIndex, true)).observe(galleryTrack);
 else window.addEventListener('resize', () => showGalleryPhoto(galleryIndex, true));
 
-const announcementText = (item, field) => item[field]?.[language] ?? item[field]?.el ?? item[field]?.en;
+const announcementText = (item, field) => announcementTranslations[item.id]?.[language]?.[field] ?? item[field]?.[language] ?? item[field]?.el ?? item[field]?.en;
 
 function announcementPhotoMarkup(item, card = false) {
   return item.photo ? `<img class="announcement-photo${card ? ' announcement-card-photo' : ''}" src="${esc(item.photo)}" alt="${esc(announcementText(item, 'photoAlt') || announcementText(item, 'title'))}" width="1280" height="1232"${card ? ' loading="lazy"' : ''}>` : '';
@@ -565,28 +439,28 @@ function scoringHistoryMarkup(name) {
   const total = history.reduce((sum, entry) => sum + entry.goals, 0);
   return `${history.length ? `<div class="profile-stats history-totals"><div><strong>${total}</strong><small>${t('confirmedGoals')}</small></div><div><strong>${history.length}</strong><small>${t('scoringMatches')}</small></div></div>` : ''}
     <h3 class="dialog-subhead">${t('scoringHistory')}</h3><p class="dialog-note">${t('scopeNote')}</p>
-    <div class="scoring-history">${history.map(({ match, goals }) => `<button data-open-match="${esc(match.id)}"><span><small>${match.date} · MD ${String(match.round).padStart(2, '0')}</small><strong>${esc(match.opponent)}</strong></span><span class="history-score" data-result="${outcome(match)}">${scoreMarkup(match)}</span><span class="history-goals"><b>${goals}</b> ${t('goalsUnit')} <span aria-hidden="true">↗</span></span></button>`).join('') || `<p class="dialog-note">${t('noScoringHistory')}</p>`}</div>`;
+    <div class="scoring-history">${history.map(({ match, goals }) => `<button data-open-match="${esc(match.id)}"><span><small>${match.date} · ${t('matchdayShort')} ${String(match.round).padStart(2, '0')}</small><strong>${esc(displayOpponent(match.opponent))}</strong></span><span class="history-score" data-result="${outcome(match)}">${scoreMarkup(match)}</span><span class="history-goals"><b>${goals}</b> ${t('goalsUnit')} <span aria-hidden="true">↗</span></span></button>`).join('') || `<p class="dialog-note">${t('noScoringHistory')}</p>`}</div>`;
 }
 
 function lineupMarkup(match) {
   if (!match.lineup) return `<section class="match-lineup-section"><h3 class="dialog-subhead">${t('lineupTitle')}</h3><p class="dialog-note">${t('lineupNotRecorded')}</p></section>`;
   const lineup = match.lineup;
-  const players = entries => `<ul class="match-lineup-list">${entries.map(player => `<li><span class="lineup-marker">${player.position ? esc(player.position) : player.number != null ? '#' + player.number : '—'}</span><span class="lineup-name">${esc(player.name)}</span></li>`).join('')}</ul>`;
+  const players = entries => `<ul class="match-lineup-list">${entries.map(player => `<li><span class="lineup-marker">${player.position ? esc(language === 'el' ? ({GK:'ΤΦ',CB:'ΚΑ',CM:'ΚΜ',RW:'ΔΕ',LW:'ΑΕ',CAM:'ΕΜ',ST:'ΕΠ'}[player.position] || player.position) : player.position) : player.number != null ? '#' + player.number : '—'}</span><span class="lineup-name">${esc(displayName(player.name))}</span></li>`).join('')}</ul>`;
   return `<section class="match-lineup-section"><h3 class="dialog-subhead">${t(lineup.type === 'starting' ? 'startingSeven' : 'matchdayPlayers')}</h3>${players(lineup.players)}
     ${lineup.substitutes?.length ? `<h4 class="lineup-subheading">${t('substitutes')}</h4>${players(lineup.substitutes)}` : ''}
-    ${lineup.staff?.length ? `<h4 class="lineup-subheading">${t('coachingStaff')}</h4><ul class="match-staff-list">${lineup.staff.map(person => `<li><span>${esc(person.name)}</span>${person.role ? `<small>${t(person.role)}</small>` : ''}</li>`).join('')}</ul>` : ''}</section>`;
+    ${lineup.staff?.length ? `<h4 class="lineup-subheading">${t('coachingStaff')}</h4><ul class="match-staff-list">${lineup.staff.map(person => `<li><span>${esc(displayName(person.name))}</span>${person.role ? `<small>${t(person.role)}</small>` : ''}</li>`).join('')}</ul>` : ''}</section>`;
 }
 
 function injuryMarkup(match, playerNumber = null) {
   const injuries = (match.injuries || []).filter(injury => playerNumber == null || injury.playerNumber === playerNumber);
-  return injuries.map(injury => `<aside class="injury-update"><h3>${t('injuryUpdate')}</h3><strong>${esc(injury.name)}</strong><p>${t('injuredInMatch')} ${esc(match.opponent)} · ${match.date}.</p><p>${t('estimatedAbsence')}: ${injury.absenceMonths.toLocaleString(language === 'el' ? 'el-GR' : 'en-GB')} ${t('monthsUnit')}</p><p class="injury-return">${t('estimatedReturn')}: <b>${t(injury.expectedReturn)}</b>.</p></aside>`).join('');
+  return injuries.map(injury => `<aside class="injury-update"><h3>${t('injuryUpdate')}</h3><strong>${esc(displayName(injury.name))}</strong><p>${t('injuredInMatch')} ${esc(displayOpponent(match.opponent))} · ${match.date}.</p><p>${t('estimatedAbsence')}: ${injury.absenceMonths.toLocaleString(languageLocales[language])} ${t('monthsUnit')}</p><p class="injury-return">${t('estimatedReturn')}: <b>${t(injury.expectedReturn)}</b>.</p></aside>`).join('');
 }
 
 function playerCareerMarkup(player) {
   if (!player.career?.length) return '';
   return `<section class="player-biography" aria-label="${t('playerBiography')}"><ol class="career-timeline">${player.career.map(entry => {
     const period = entry.from === entry.to ? entry.from : `${entry.from}/${entry.to}`;
-    return `<li class="career-entry"><span class="career-line"><span class="career-period">${period}</span> - <span class="career-club">${esc(entry.label)}</span></span>${entry.logo ? `<span class="career-logo${entry.logoCanvas ? ` career-logo--${esc(entry.logoCanvas)}` : ''}"><img src="${esc(entry.logo)}" alt="" width="44" height="44" loading="lazy"></span>` : ''}</li>`;
+    return `<li class="career-entry"><span class="career-line"><span class="career-period">${period}</span> - <span class="career-club">${esc(localizedCareer(entry.label, language))}</span></span>${entry.logo ? `<span class="career-logo${entry.logoCanvas ? ` career-logo--${esc(entry.logoCanvas)}` : ''}"><img src="${esc(entry.logo)}" alt="" width="44" height="44" loading="lazy"></span>` : ''}</li>`;
   }).join('')}</ol></section>`;
 }
 
@@ -603,17 +477,17 @@ function renderDialog() {
     const ordered = selectMatches(matches, { sort: 'oldest' });
     const index = ordered.findIndex(item => item.id === match.id);
     $('#dialog-category').textContent = `${t('matchday')} ${String(match.round).padStart(2, '0')} / ${t('fullTime')}`;
-    $('#dialog-body').innerHTML = `<h2 id="dialog-title">SHADOWS FC<br>× ${esc(match.opponent)}</h2><p class="dialog-meta">${t('leagueDetail')}<br>${match.date} · ${match.time}<br>${esc(club.venue)}</p><div class="dialog-scoreboard">${crestMarkup(club.matchLogo || club.logo, '', club.crestShape)}<div class="dialog-score" data-result="${outcome(match)}">${scoreMarkup(match)}</div>${crestMarkup(match.logo, match.initials, match.crestShape)}</div>
-      ${lineupMarkup(match)}${injuryMarkup(match)}<h3 class="dialog-subhead">${t('scorerList')}</h3><ul class="dialog-scorers">${match.scorers.map(player => `<li><button class="dialog-scorer-link" data-open-scorer="${esc(playerName(player.name))}">${esc(playerName(player.name))} <span aria-hidden="true">↗</span></button><b>${player.goals}</b></li>`).join('')}</ul>${match.mvp ? `<p class="dialog-meta">${t('mvp')} <strong>${esc(match.mvp)}</strong></p>` : ''}
+    $('#dialog-body').innerHTML = `<h2 id="dialog-title">SHADOWS FC<br>× ${esc(displayOpponent(match.opponent))}</h2><p class="dialog-meta">${t('leagueDetail')}<br>${match.date} · ${match.time}<br>${esc(t('matchVenueName'))}</p><div class="dialog-scoreboard">${crestMarkup(club.matchLogo || club.logo, '', club.crestShape)}<div class="dialog-score" data-result="${outcome(match)}">${scoreMarkup(match)}</div>${crestMarkup(match.logo, match.initials, match.crestShape)}</div>
+      ${lineupMarkup(match)}${injuryMarkup(match)}<h3 class="dialog-subhead">${t('scorerList')}</h3><ul class="dialog-scorers">${match.scorers.map(player => `<li><button class="dialog-scorer-link" data-open-scorer="${esc(playerName(player.name))}">${esc(displayName(playerName(player.name)))} <span aria-hidden="true">↗</span></button><b>${player.goals}</b></li>`).join('')}</ul>${match.mvp ? `<p class="dialog-meta">${t('mvp')} <strong>${esc(displayName(match.mvp))}</strong></p>` : ''}
       <nav class="match-navigation" aria-label="${t('browseMatches')}"><button data-step-match="${esc(ordered[index - 1]?.id || '')}" ${index === 0 ? 'disabled' : ''}>${t('previousMatch')}</button><span>${index + 1} / ${ordered.length}</span><button data-step-match="${esc(ordered[index + 1]?.id || '')}" ${index === ordered.length - 1 ? 'disabled' : ''}>${t('nextMatch')}</button></nav>`;
   } else if (dialogContent.type === 'player') {
     const player = squad.find(item => item.number === dialogContent.id);
     if (!player) return;
     $('#dialog-category').textContent = t('playerProfile');
-    $('#dialog-body').innerHTML = `<h2 id="dialog-title">${esc(player.name)}</h2>${player.photo ? `<img class="profile-portrait" src="${esc(player.photo)}" alt="${esc(player.name)}" width="450" height="560">` : ''}<div class="profile-number">#${player.number}</div><p class="dialog-meta">${t('confirmedShirtNumber')}</p>${player.position ? `<p class="profile-position"><span>${t('position')}</span><strong>${esc(positionLabel(player.position))}</strong></p>` : ''}${playerCareerMarkup(player)}${matches.map(match => injuryMarkup(match, player.number)).join('')}${scoringHistoryMarkup(player.scorerName || player.name)}`;
+    $('#dialog-body').innerHTML = `<h2 id="dialog-title">${esc(displayName(player.name))}</h2>${player.photo ? `<img class="profile-portrait" src="${esc(player.photo)}" alt="${esc(displayName(player.name))}" width="450" height="560">` : ''}<div class="profile-number">#${player.number}</div><p class="dialog-meta">${t('confirmedShirtNumber')}</p>${player.position ? `<p class="profile-position"><span>${t('position')}</span><strong>${esc(positionLabel(player.position))}</strong></p>` : ''}${playerCareerMarkup(player)}${matches.map(match => injuryMarkup(match, player.number)).join('')}${scoringHistoryMarkup(player.scorerName || player.name)}`;
   } else {
     $('#dialog-category').textContent = t('scorerHistory');
-    $('#dialog-body').innerHTML = `<h2 id="dialog-title">${esc(dialogContent.name)}</h2>${scoringHistoryMarkup(dialogContent.name)}`;
+    $('#dialog-body').innerHTML = `<h2 id="dialog-title">${esc(displayName(dialogContent.name))}</h2>${scoringHistoryMarkup(dialogContent.name)}`;
   }
   $('#dialog-body').insertAdjacentHTML('beforeend', `<div class="share-detail"><button id="copy-detail-link">${t('copyLink')} <span aria-hidden="true">↗</span></button><p id="share-status" role="status" aria-live="polite"></p><label class="share-fallback" hidden><span>${t('copyManually')}</span><input type="text" readonly aria-label="${t('copyLink')}"></label></div>`);
   renderArrows();
@@ -653,20 +527,40 @@ function render() {
       element.replaceChildren(...value.split('\n').flatMap((line, index) => index ? [document.createElement('br'), document.createTextNode(line)] : [document.createTextNode(line)]));
     } else element.textContent = value;
   });
-  $('#language-toggle').innerHTML = `${language === 'el' ? 'EN' : 'ΕΛ'} <span aria-hidden="true">↗</span>`;
-  $('#language-toggle').setAttribute('aria-label', language === 'el' ? 'Switch to English' : 'Αλλαγή στα Ελληνικά');
+  $('#language-toggle').innerHTML = `${{ el: 'ΕΛ', en: 'EN', sq: 'SQ', es: 'ES' }[language]} <span aria-hidden="true">⌄</span>`;
+  $('#language-toggle').setAttribute('aria-label', t('languageLabel'));
+  $('#language-options').setAttribute('aria-label', t('languageLabel'));
+  document.querySelectorAll('[data-language-choice]').forEach(button => button.setAttribute('aria-checked', String(button.dataset.languageChoice === language)));
+  $('.wordmark').setAttribute('aria-label', t('homeLabel'));
+  document.title = `SHADOWS FC — ${t('locationMark')}`;
+  $('meta[name="description"]').content = t('clubDescription');
   $('#close-dialog').setAttribute('aria-label', t('close'));
-  $('#navigation').setAttribute('aria-label', language === 'el' ? 'Κύρια πλοήγηση' : 'Main navigation');
+  $('#navigation').setAttribute('aria-label', t('mainNavigation'));
   $('#menu-toggle').setAttribute('aria-label', t($('#menu-toggle').getAttribute('aria-expanded') === 'true' ? 'closeMenu' : 'openMenu'));
   document.querySelectorAll('[data-i18n-alt]').forEach(image => { image.alt = t(image.dataset.i18nAlt); });
   renderTheme(); renderGallery(); renderMatches(); renderScorers(); renderSquad(); renderAnnouncements(); renderPageView(); renderDialog();
 }
 
-$('#language-toggle').addEventListener('click', () => {
-  language = language === 'el' ? 'en' : 'el';
-  try { localStorage.setItem('shadows-language', language); } catch { /* Keep the toggle usable without storage. */ }
-  render();
+function setLanguageMenu(open, focusChoice = false) {
+  $('#language-options').hidden = !open;
+  $('#language-toggle').setAttribute('aria-expanded', String(open));
+  if (open && focusChoice) document.querySelector(`[data-language-choice="${language}"]`).focus();
+}
+$('#language-toggle').addEventListener('click', () => setLanguageMenu($('#language-options').hidden, true));
+$('.language-picker').addEventListener('keydown', event => {
+  const buttons = [...document.querySelectorAll('[data-language-choice]')];
+  if (event.key === 'Escape') {
+    setLanguageMenu(false); $('#language-toggle').focus(); event.stopPropagation();
+  } else if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
+    event.preventDefault(); setLanguageMenu(true);
+    const current = buttons.indexOf(document.activeElement);
+    const next = event.key === 'Home' ? 0 : event.key === 'End' ? buttons.length - 1
+      : (current + (event.key === 'ArrowDown' ? 1 : -1) + buttons.length) % buttons.length;
+    buttons[next].focus();
+  }
 });
+document.addEventListener('click', event => { if (!event.target.closest('.language-picker')) setLanguageMenu(false); });
+$('.language-picker').addEventListener('focusout', event => { if (!event.currentTarget.contains(event.relatedTarget)) setLanguageMenu(false); });
 for (const [id, step] of [['previous-page', -1], ['next-page', 1]]) {
   $('#' + id).addEventListener('click', () => {
     archive.page += step; renderMatches(); writeUrl();
@@ -678,7 +572,13 @@ for (const [id, step] of [['previous-page', -1], ['next-page', 1]]) {
 document.addEventListener('click', async event => {
   const button = event.target.closest('button');
   if (!button) return;
-  if (button.hasAttribute('data-theme-choice')) setTheme(button.dataset.themeChoice);
+  if (button.hasAttribute('data-language-choice')) {
+    const next = button.dataset.languageChoice;
+    if (!Object.hasOwn(messages, next)) return;
+    language = next;
+    try { localStorage.setItem('shadows-language', language); } catch { /* Selection works without storage. */ }
+    setLanguageMenu(false); render(); $('#language-toggle').focus();
+  } else if (button.hasAttribute('data-theme-choice')) setTheme(button.dataset.themeChoice);
   else if (button.hasAttribute('data-open-photo')) openPhoto(Number(button.dataset.openPhoto), button);
   else if (button.hasAttribute('data-open-announcement')) openDialog({ type: 'announcement', id: button.dataset.openAnnouncement }, button);
   else if (button.hasAttribute('data-open-match')) openDialog({ type: 'match', id: button.dataset.openMatch }, button);
