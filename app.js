@@ -1,4 +1,4 @@
-import { club, matches, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261023-squad-careers';
+import { club, matches, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261023-refreshed-crests';
 
 const messages = {
   el: {
@@ -200,7 +200,7 @@ function writeUrl(push = false) {
 
 // One shared crest area keeps different badge proportions aligned across views.
 function crestMarkup(logo, fallback = '', shape = '') {
-  return `<span class="crest-frame${['shadows', 'legrena', 'shield'].includes(shape) ? ` crest-frame-${shape}` : ''}">${logo
+  return `<span class="crest-frame${['shadows', 'legrena', 'shield', 'black'].includes(shape) ? ` crest-frame-${shape}` : ''}">${logo
     ? `<img class="match-crest${shape === 'shield' ? ' crest-shield' : shape === 'legrena' ? ' crest-legrena' : shape === 'shadows' ? ' crest-shadows' : ''}" src="${esc(logo)}" alt="" loading="lazy">`
     : `<span class="crest-fallback" aria-hidden="true">${esc(fallback)}</span>`}</span>`;
 }
