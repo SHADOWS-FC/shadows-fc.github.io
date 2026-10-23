@@ -34,13 +34,14 @@ browser validation here uses HTTP.
 
 ## Content and updates
 
-- `data.js`: matches, scorer names, confirmed player profiles, historical matchday squad, shirt numbers, aliases, and club announcements.
+- `data.js`: matches, scorer names, confirmed player profiles, historical matchday squad, shirt numbers, aliases, club announcements and curated museum photographs.
 - `app.js`: Greek and English translations and interactions.
 - `styles.css`: base layout and responsive rules.
 - `editorial.css`: photo-led homepage, condensed typography, match cards and responsive layout.
 - `black-pink.css`: the black/pink club palette, dark cards and match/player dialogs.
 - `gallery.css`: the photo gallery, thumbnail navigation and full-photo viewer.
-- `background-details.css`: broad, softly blended black/pink background bands.
+- `background-details.css`: wide black/pink stripes with softly blended edges.
+- `museum.css`: virtual exhibition walls, spotlights, framed photographs and album controls.
 - `assets/`: self-hosted graphics and fonts, including the font licence.
 - `index.html`: team photo gallery, latest-first results, scorer leaderboard, and complete squad.
 
@@ -71,13 +72,27 @@ restores focus on closing and keeps the gallery selection in sync. There is no
 automatic advancement. Controls follow reduced-motion settings, announce the
 current photograph and retain the selected image across layout/language changes.
 
+The Museum navigation link and gallery entry open `#museum`, a virtual SHADOWS
+Museum. It contains all 16 currently published club photographs: 2 team images,
+13 player portraits and the embroidered crest photograph. Visitors can browse
+the whole collection or select Team, Players or Crest. Every exhibit opens in
+the full-photo viewer; previous/next and keyboard navigation follow the selected
+collection. The original images remain unaltered and fully visible. Exhibit
+walls, spotlights and floor details are decorative CSS rather than claims about
+a physical museum. Instagram screenshots, opponent logos and the disregarded
+selfie are excluded from the collection.
+
+To add photographs, append curated records to `museumPhotos` in `data.js` with
+a unique `id`, `category`, `photo` path, intrinsic `width`/`height` and Greek/English
+`title`/`alt` objects. Portrait records are derived from the confirmed squad.
+
 The active club crest is the supplied black/pink image at
 `assets/logos/shadows-fc-black-pink.jpg`, used in the header, footer, match cards,
 match details and browser icon. It is copied without alteration. Club crests
 use a black display canvas with normal blending; opponent crests retain light
 canvases so their supplied artwork stays legible. The black/pink theme covers
 both homepage and announcements, with brighter outcome colours for dark cards.
-The background softly blends the same black and deep pink into broad bands.
+The background uses wider black/deep-pink stripes with soft edges.
 
 Matches are paginated at eight per page, always in descending round order.
 In match cards, details and player histories, a win colours only the SHADOWS

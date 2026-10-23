@@ -1,9 +1,10 @@
-/* Broad, softly blended club colours leave the photography in focus. */
+/* Wide shirt stripes with softened edges in the original black and pink. */
+:root{--stripe-width:160px}
 body{
   position:relative;isolation:isolate;
   background:
-    radial-gradient(ellipse 85% 650px at 12% 180px,#200b19 0%,#200b1900 76%),
-    radial-gradient(ellipse 75% 850px at 100% 75%,#200b19 0%,#200b1900 78%),
-    linear-gradient(115deg,#070709 8%,#200b19 42%,#070709 79%);
+    radial-gradient(ellipse 90% 640px at 50% 0,#07070900,#07070933 76%),
+    repeating-linear-gradient(90deg,#070709 0 calc(var(--stripe-width) - 12px),#200b19 calc(var(--stripe-width) + 12px) calc(var(--stripe-width)*2 - 12px),#070709 calc(var(--stripe-width)*2 + 12px));
   background-attachment:fixed;
 }
+@media(max-width:760px){:root{--stripe-width:80px}}

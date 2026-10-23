@@ -4,16 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#08070b">
-  <meta name="description" content="SHADOWS FC — Η ομάδα της Βουλιαγμένης. Master League, Βούλα. Αποτελέσματα, σκόρερ, ομάδα και ανακοινώσεις.">
+  <meta name="description" content="SHADOWS FC — Η ομάδα της Βουλιαγμένης. Master League, Βούλα. Αγώνες, σκόρερ, παίκτες, ανακοινώσεις και SHADOWS Museum.">
   <title>SHADOWS FC — Vouliagmeni 16671</title>
   <link rel="icon" href="assets/logos/shadows-fc-black-pink.jpg" type="image/jpeg">
-  <link rel="stylesheet" href="styles.css?v=20261023-interactive-gallery">
-  <link rel="stylesheet" href="editorial.css?v=20261023-interactive-gallery">
-  <link rel="stylesheet" href="black-pink.css?v=20261023-interactive-gallery">
-  <link rel="stylesheet" href="gallery.css?v=20261023-interactive-gallery">
-  <link rel="stylesheet" href="background-details.css?v=20261023-interactive-gallery">
+  <link rel="stylesheet" href="styles.css?v=20261023-museum">
+  <link rel="stylesheet" href="editorial.css?v=20261023-museum">
+  <link rel="stylesheet" href="black-pink.css?v=20261023-museum">
+  <link rel="stylesheet" href="gallery.css?v=20261023-museum">
+  <link rel="stylesheet" href="background-details.css?v=20261023-museum">
+  <link rel="stylesheet" href="museum.css?v=20261023-museum">
   <link rel="preload" as="image" href="assets/team.jpg">
-  <script type="module" src="app.js?v=20261023-interactive-gallery"></script>
+  <script type="module" src="app.js?v=20261023-museum"></script>
 </head>
 <body>
   <a class="skip-link" href="#main" data-i18n="skip">Μετάβαση στο περιεχόμενο</a>
@@ -24,6 +25,7 @@
       <a href="#results" data-i18n="navResults">Αποτελέσματα</a>
       <a href="#scorers" data-i18n="navScorers">Σκόρερ</a>
       <a href="#squad" data-i18n="navSquad">Ομάδα</a>
+      <a href="#museum" data-i18n="navMuseum">Μουσείο</a>
       <a href="#announcements" data-i18n="navAnnouncements">Ανακοινώσεις</a>
     </nav>
     <div class="header-actions">
@@ -50,6 +52,7 @@
         <div class="gallery-thumbnails" aria-label="Επιλογή φωτογραφίας"><button class="gallery-thumbnail" type="button" data-gallery-thumbnail="0" aria-controls="team-gallery-track" aria-current="true"><img src="assets/team.jpg" alt="" width="853" height="1280" loading="lazy" draggable="false"></button><button class="gallery-thumbnail" type="button" data-gallery-thumbnail="1" aria-controls="team-gallery-track"><img src="assets/team-celebration.jpg" alt="" width="1280" height="1180" loading="lazy" draggable="false"></button></div>
         <p class="gallery-hint" data-i18n="galleryHint">Σύρε, διάλεξε φωτογραφία ή πάτησε για μεγέθυνση</p>
         <p id="gallery-status" class="sr-only" aria-live="polite" aria-atomic="true"></p>
+        <a class="museum-entry" href="#museum"><span>SHADOWS MUSEUM</span><span data-i18n="museumVisit">Δες όλες τις φωτογραφίες →</span></a>
       </div>
       <div class="team-hero-caption container"><div><p class="eyebrow" data-i18n="leagueLocation">MASTER LEAGUE · ΒΟΥΛΑ</p><h1 id="hero-title">SHADOWS <span>FC</span></h1></div><span class="team-home-mark">VOULIAGMENI · 16671</span></div>
     </section>
@@ -81,6 +84,21 @@
       <div id="announcement-list" class="announcement-list"></div>
     </section>
 
+    <section id="museum" class="museum-section" aria-labelledby="museum-title" hidden>
+      <div class="museum-shell container">
+        <a class="news-home-link" href="#home"><span aria-hidden="true">←</span> <span data-i18n="backHome">Αρχική σελίδα</span></a>
+        <header class="museum-intro">
+          <div class="museum-sign"><img src="assets/logos/shadows-fc-black-pink.jpg" alt="" width="1254" height="1254"><span>SHADOWS<br><b>MUSEUM</b><small>VOULIAGMENI · 16671</small></span></div>
+          <p class="eyebrow" data-i18n="museumEyebrow">Η ΣΥΛΛΟΓΗ ΤΗΣ ΟΜΑΔΑΣ</p>
+          <h1 id="museum-title" tabindex="-1" data-i18n="museumTitle">Η ιστορία μας σε εικόνες.</h1>
+          <p class="museum-description" data-i18n="museumDescription">Περιηγήσου στο ψηφιακό μουσείο των SHADOWS FC. Στιγμές της ομάδας, πορτρέτα παικτών και το έμβλημά μας, σε μία συλλογή.</p>
+          <span id="museum-total" class="museum-total"></span>
+        </header>
+        <nav id="museum-filters" class="museum-filters" aria-label="Συλλογές φωτογραφιών"><button type="button" data-museum-category="all" aria-pressed="true">Όλες</button><button type="button" data-museum-category="team" aria-pressed="false">Ομάδα</button><button type="button" data-museum-category="players" aria-pressed="false">Παίκτες</button><button type="button" data-museum-category="club" aria-pressed="false">Έμβλημα</button></nav>
+        <p id="museum-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+        <div class="museum-wall"><div id="museum-grid" class="museum-grid"></div></div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer container"><a href="#home" class="footer-brand"><span class="footer-seal"><img src="assets/logos/shadows-fc-black-pink.jpg" alt="" width="1254" height="1254" loading="lazy"></span><span class="footer-wordmark">SHADOWS<span> FC</span><small>MASTER LEAGUE · VOULA</small></span></a><span>VOULIAGMENI · 16671</span><a href="#home" class="back-top"><span data-i18n="backTop">Στην κορυφή</span><span aria-hidden="true">↑</span></a></footer>

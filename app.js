@@ -1,7 +1,10 @@
-import { club, matches, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261023-interactive-gallery';
+import { club, matches, squad, announcements, museumPhotos, teamPhotos, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261023-museum';
 
 const messages = {
   el: {
+    navMuseum: 'Μουσείο', museumVisit: 'Δες όλες τις φωτογραφίες →', museumEyebrow: 'Η ΣΥΛΛΟΓΗ ΤΗΣ ΟΜΑΔΑΣ',
+    museumTitle: 'Η ιστορία μας σε εικόνες.', museumDescription: 'Περιηγήσου στο ψηφιακό μουσείο των SHADOWS FC. Στιγμές της ομάδας, πορτρέτα παικτών και το έμβλημά μας, σε μία συλλογή.',
+    museumAll: 'Όλες', museumTeam: 'Ομάδα', museumPlayers: 'Παίκτες', museumClub: 'Έμβλημα', museumPhotoCount: 'φωτογραφίες', museumCollections: 'Συλλογές φωτογραφιών',
     squadGoalkeepers: 'Τερματοφύλακες', squadDefenders: 'Αμυντικοί', squadMidfielders: 'Μέσοι', squadForwards: 'Επιθετικοί',
     galleryLabel: 'Φωτογραφίες ομάδας', galleryRole: 'συλλογή φωτογραφιών', gallerySlide: 'φωτογραφία',
     galleryInstructions: 'Σύρε ή χρησιμοποίησε τα βέλη για αλλαγή φωτογραφίας. Πάτησε Enter για μεγέθυνση.',
@@ -63,6 +66,9 @@ const messages = {
     goalDifference: 'διαφορά γκολ', record: 'Ν–Ι–Η',
   },
   en: {
+    navMuseum: 'Museum', museumVisit: 'View all photographs →', museumEyebrow: 'THE CLUB COLLECTION',
+    museumTitle: 'Our story in pictures.', museumDescription: 'Explore the SHADOWS FC digital museum. Team moments, player portraits and our crest, together in one collection.',
+    museumAll: 'All photos', museumTeam: 'Team', museumPlayers: 'Players', museumClub: 'Crest', museumPhotoCount: 'photographs', museumCollections: 'Photo collections',
     squadGoalkeepers: 'Goalkeepers', squadDefenders: 'Defenders', squadMidfielders: 'Midfielders', squadForwards: 'Forwards',
     galleryLabel: 'Team photographs', galleryRole: 'photo gallery', gallerySlide: 'slide',
     galleryInstructions: 'Swipe or use the arrow keys to change photograph. Press Enter to view the full photo.',
@@ -128,6 +134,7 @@ let language = 'el';
 try { if (localStorage.getItem('shadows-language') === 'en') language = 'en'; } catch { /* Storage may be disabled. */ }
 const PAGE_SIZE = 8;
 const archive = { page: 1 };
+const museum = { category: 'all' };
 let galleryIndex = 0;
 let dialogContent = null;
 let dialogTrigger = null;
@@ -138,6 +145,24 @@ const esc = value => String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', 
 const initials = name => name.replace(/[^\p{L}\s]/gu, '').split(/\s+/).slice(0, 2).map(word => word[0]).join('').toUpperCase();
 const outcome = matchOutcome;
 const positionLabel = code => ({ GK: t('goalkeeper'), CB: t('centerBack'), CM: t('centerMidfielder'), RW: t('rightWinger'), LW: t('leftWinger'), CAM: t('attackingMidfielder'), ST: t('striker') })[code] || code || '';
+const museumText = (photo, key) => typeof photo[key] === 'string' ? photo[key] : photo[key]?.[language] ?? photo[key]?.el ?? photo[key]?.en ?? '';
+const museumCollection = () => museumPhotos.filter(photo => museum.category === 'all' || photo.category === museum.category);
+
+function renderMuseum() {
+  const photos = museumCollection();
+  const categoryLabels = { all: 'museumAll', team: 'museumTeam', players: 'museumPlayers', club: 'museumClub' };
+  $('#museum-total').textContent = `${museumPhotos.length} ${t('museumPhotoCount')}`;
+  $('#museum-filters').setAttribute('aria-label', t('museumCollections'));
+  document.querySelectorAll('[data-museum-category]').forEach(button => {
+    const category = button.dataset.museumCategory;
+    const count = category === 'all' ? museumPhotos.length : museumPhotos.filter(photo => photo.category === category).length;
+    button.innerHTML = `${t(categoryLabels[category])} <span class="museum-filter-count">${count}</span>`;
+    button.setAttribute('aria-pressed', String(category === museum.category));
+  });
+  $('#museum-status').textContent = `${t(categoryLabels[museum.category])}: ${photos.length} ${t('museumPhotoCount')}`;
+  $('#museum-grid').innerHTML = photos.map(photo => `<button class="museum-exhibit" type="button" data-museum-photo="${esc(photo.id)}" aria-haspopup="dialog"><span class="museum-picture"><img src="${esc(photo.photo)}" alt="${esc(museumText(photo, 'alt'))}" width="${photo.width}" height="${photo.height}" loading="lazy"></span><span class="museum-placard"><span class="museum-exhibit-number">${String(museumPhotos.findIndex(item => item.id === photo.id) + 1).padStart(2, '0')}</span><span><strong>${esc(museumText(photo, 'title'))}</strong><small>${t(categoryLabels[photo.category])}</small></span><span class="museum-open-icon" aria-hidden="true">↗</span></span></button>`).join('');
+  renderArrows();
+}
 
 function renderArrows() {
   // Draw arrows as vectors so they don't depend on an installed symbol font.
@@ -241,6 +266,7 @@ const galleryTrack = $('#team-gallery-track');
 const gallerySlides = [...galleryTrack.querySelectorAll('.gallery-slide')];
 const photoDialog = $('#photo-dialog');
 let photoIndex = 0;
+let activePhotoCollection = teamPhotos;
 let photoTrigger = null;
 let suppressGalleryClick = false;
 
@@ -276,28 +302,34 @@ function renderGallery() {
 
 function renderPhotoViewer() {
   const focusedControl = document.activeElement;
-  const source = gallerySlides[photoIndex].querySelector('.team-photo');
+  const source = activePhotoCollection[photoIndex];
   const image = $('#photo-viewer-image');
-  image.src = source.src;
-  image.alt = source.alt;
-  image.width = Number(source.getAttribute('width'));
-  image.height = Number(source.getAttribute('height'));
-  $('#photo-viewer-title').textContent = t('galleryLabel');
+  image.src = source.photo;
+  image.alt = museumText(source, 'alt');
+  image.width = source.width;
+  image.height = source.height;
+  $('#photo-viewer-title').textContent = museumText(source, 'title');
   $('#close-photo-dialog').setAttribute('aria-label', t('galleryClose'));
   $('#photo-viewer-prev').setAttribute('aria-label', t('galleryPrevious'));
   $('#photo-viewer-next').setAttribute('aria-label', t('galleryNext'));
   $('#photo-viewer-prev').disabled = photoIndex === 0;
-  $('#photo-viewer-next').disabled = photoIndex === gallerySlides.length - 1;
+  $('#photo-viewer-next').disabled = photoIndex === activePhotoCollection.length - 1;
   if (photoDialog.open && photoDialog.contains(focusedControl) && focusedControl.disabled) {
     $('#close-photo-dialog').focus({ preventScroll: true });
   }
-  $('#photo-viewer-counter').textContent = `${t('galleryPhoto')} ${photoIndex + 1} ${t('galleryOf')} ${gallerySlides.length}`;
+  $('#photo-viewer-counter').textContent = `${t('galleryPhoto')} ${photoIndex + 1} ${t('galleryOf')} ${activePhotoCollection.length}`;
 }
 
-function openPhoto(index = galleryIndex, trigger = galleryTrack) {
-  photoIndex = Math.max(0, Math.min(gallerySlides.length - 1, index));
+function syncPhotoSelection() {
+  const index = teamPhotos.findIndex(photo => photo.id === activePhotoCollection[photoIndex].id);
+  if (index >= 0) { galleryIndex = index; showGalleryPhoto(index, true); }
+}
+
+function openPhoto(index = galleryIndex, trigger = galleryTrack, collection = teamPhotos) {
+  activePhotoCollection = collection;
+  photoIndex = Math.max(0, Math.min(collection.length - 1, index));
   photoTrigger = trigger;
-  showGalleryPhoto(photoIndex, true);
+  syncPhotoSelection();
   renderPhotoViewer();
   if (!photoDialog.open) photoDialog.showModal();
   document.body.style.overflow = 'hidden';
@@ -305,8 +337,8 @@ function openPhoto(index = galleryIndex, trigger = galleryTrack) {
 }
 
 function stepPhoto(step) {
-  photoIndex = Math.max(0, Math.min(gallerySlides.length - 1, photoIndex + step));
-  showGalleryPhoto(photoIndex, true);
+  photoIndex = Math.max(0, Math.min(activePhotoCollection.length - 1, photoIndex + step));
+  syncPhotoSelection();
   renderPhotoViewer();
 }
 
@@ -384,7 +416,7 @@ document.addEventListener('keydown', event => {
   if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
   event.preventDefault();
   if (event.key === 'Home') photoIndex = 0;
-  else if (event.key === 'End') photoIndex = gallerySlides.length - 1;
+  else if (event.key === 'End') photoIndex = activePhotoCollection.length - 1;
   else photoIndex += event.key === 'ArrowLeft' ? -1 : 1;
   stepPhoto(0);
 });
@@ -397,7 +429,8 @@ photoDialog.addEventListener('close', () => {
   if (photoDialog.open) return;
   document.body.style.overflow = dialog.open ? 'hidden' : '';
   if (dialog.open) return;
-  const target = photoTrigger?.isConnected && !photoTrigger.closest('[aria-hidden="true"]') ? photoTrigger : galleryTrack;
+  const fallback = $('#museum').hidden ? galleryTrack : $('#museum-title');
+  const target = photoTrigger?.isConnected && !photoTrigger.closest('[aria-hidden="true"]') ? photoTrigger : fallback;
   if (target.isConnected && target.getBoundingClientRect().width) target.focus({ preventScroll: true });
 });
 if ('ResizeObserver' in window) new ResizeObserver(() => showGalleryPhoto(galleryIndex, true)).observe(galleryTrack);
@@ -418,11 +451,15 @@ function renderAnnouncements() {
 
 function renderPageView() {
   const isNews = location.hash === '#announcements' || dialogContent?.type === 'announcement';
-  document.querySelectorAll('[data-home-section]').forEach(section => { section.hidden = isNews; });
+  const isMuseum = !isNews && location.hash === '#museum';
+  document.querySelectorAll('[data-home-section]').forEach(section => { section.hidden = isNews || isMuseum; });
   $('#announcements').hidden = !isNews;
-  const newsLink = $('#navigation a[href="#announcements"]');
-  if (isNews) newsLink.setAttribute('aria-current', 'page');
-  else newsLink.removeAttribute('aria-current');
+  $('#museum').hidden = !isMuseum;
+  for (const [hash, active] of [['#announcements', isNews], ['#museum', isMuseum]]) {
+    const link = $(`#navigation a[href="${hash}"]`);
+    if (active) link.setAttribute('aria-current', 'page');
+    else link.removeAttribute('aria-current');
+  }
 }
 
 const dialog = $('#detail-dialog');
@@ -518,7 +555,7 @@ function render() {
   $('#navigation').setAttribute('aria-label', language === 'el' ? 'Κύρια πλοήγηση' : 'Main navigation');
   $('#menu-toggle').setAttribute('aria-label', t($('#menu-toggle').getAttribute('aria-expanded') === 'true' ? 'closeMenu' : 'openMenu'));
   document.querySelectorAll('[data-i18n-alt]').forEach(image => { image.alt = t(image.dataset.i18nAlt); });
-  renderGallery(); renderMatches(); renderScorers(); renderSquad(); renderAnnouncements(); renderPageView(); renderDialog();
+  renderGallery(); renderMatches(); renderScorers(); renderSquad(); renderAnnouncements(); renderMuseum(); renderPageView(); renderDialog();
 }
 
 $('#language-toggle').addEventListener('click', () => {
@@ -537,7 +574,14 @@ for (const [id, step] of [['previous-page', -1], ['next-page', 1]]) {
 document.addEventListener('click', async event => {
   const button = event.target.closest('button');
   if (!button) return;
-  if (button.hasAttribute('data-open-photo')) openPhoto(Number(button.dataset.openPhoto), button);
+  if (button.hasAttribute('data-museum-category')) {
+    museum.category = button.dataset.museumCategory;
+    renderMuseum();
+  } else if (button.hasAttribute('data-museum-photo')) {
+    const photos = museumCollection();
+    const index = photos.findIndex(photo => photo.id === button.dataset.museumPhoto);
+    if (index >= 0) openPhoto(index, button, photos);
+  } else if (button.hasAttribute('data-open-photo')) openPhoto(Number(button.dataset.openPhoto), button);
   else if (button.hasAttribute('data-open-announcement')) openDialog({ type: 'announcement', id: button.dataset.openAnnouncement }, button);
   else if (button.hasAttribute('data-open-match')) openDialog({ type: 'match', id: button.dataset.openMatch }, button);
   else if (button.hasAttribute('data-open-scorer')) showScorer(button.dataset.openScorer, button);
@@ -571,6 +615,7 @@ window.addEventListener('hashchange', () => {
   if (target && !target.hidden) {
     target.scrollIntoView({ block: 'start' });
     if (target.id === 'announcements') $('#announcements-title').focus({ preventScroll: true });
+    if (target.id === 'museum') $('#museum-title').focus({ preventScroll: true });
   }
 });
 $('#close-dialog').addEventListener('click', () => dialog.close());
