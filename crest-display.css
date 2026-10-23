@@ -6,6 +6,7 @@ html .crest-frame,html[data-theme="light"] .crest-frame{
 html .crest-frame img{mix-blend-mode:normal;clip-path:none;filter:none;object-fit:contain}
 html .crest-frame-shadows,html[data-theme="light"] .crest-frame-shadows{background:#000;border-color:#fa32994d;padding:3px}
 html .crest-frame-black,html[data-theme="light"] .crest-frame-black{background:#000;border-color:#b7a5b566;padding:3px}
+html .crest-frame-cutout,html[data-theme="light"] .crest-frame-cutout{background:transparent;border:0;border-radius:0;box-shadow:none;padding:3px;overflow:visible}
 html .crest-frame-legrena,html[data-theme="light"] .crest-frame-legrena{background:#3b075d;border-color:#77459b;padding:0}
 html .crest-frame img.crest-legrena{object-fit:cover;object-position:center 60%;mix-blend-mode:normal}
 html .crest-frame-shield,html[data-theme="light"] .crest-frame-shield{background:#ece4d7}

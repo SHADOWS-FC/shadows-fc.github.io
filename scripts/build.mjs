@@ -26,7 +26,7 @@ for (const [full, asset] of [...css.matchAll(/url\(['"]?(assets\/[^'"\)]+)['"]?\
   css = css.replaceAll(full, `url("${await embed(asset)}")`);
 }
 let embeddedData = data;
-for (const [full, property, asset] of [...data.matchAll(/(photo|logo):\s*'(assets\/[^']+)'/g)]) {
+for (const [full, property, asset] of [...data.matchAll(/(photo|logo|matchLogo):\s*'(assets\/[^']+)'/g)]) {
   embeddedData = embeddedData.replaceAll(full, `${property}: ${JSON.stringify(await embed(asset))}`);
 }
 const script = `${embeddedData.replace(/^export /gm, '')}\n${app.replace(/^import .* from '\.\/data\.js(?:\?[^']*)?';\n/m, '')}`;

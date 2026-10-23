@@ -11,7 +11,8 @@ export const club = {
   league: 'Master League',
   leagueLocation: 'Voula',
   logo: 'assets/logos/shadows-fc-2026.jpeg',
-  crestShape: 'shadows',
+  matchLogo: 'assets/logos/shadows-fc-match-cutout.png',
+  crestShape: 'cutout',
 };
 
 // Publish only club-supplied statements. Higher order values appear first.
@@ -68,7 +69,7 @@ export const matches = [
   {
     id: 'aston-voula', round: 2, date: '06/10', time: '20:00',
     opponent: 'Aston Voula', initials: 'AV', color: '#8bc2e3',
-    logo: 'assets/logos/aston-voula-2026.jpeg', crestShape: 'black',
+    logo: 'assets/logos/aston-voula-match-cutout.png', crestShape: 'cutout',
     goalsFor: 5, goalsAgainst: 6,
     scorers: [{ name: 'Rothos', goals: 3 }, { name: 'Tasos', goals: 1 }, { name: 'Xatzi', goals: 1 }],
     mvp: 'Rothos',
@@ -90,7 +91,7 @@ export const matches = [
   {
     id: 'unathletico', round: 3, date: '12/10', time: '21:00',
     opponent: 'Unathletico FC', initials: 'UFC', color: '#d6ddd7',
-    logo: 'assets/logos/unathletico-2026.jpeg', crestShape: 'black',
+    logo: 'assets/logos/unathletico-match-cutout.png', crestShape: 'cutout',
     goalsFor: 5, goalsAgainst: 8,
     scorers: [{ name: 'Mike', goals: 2 }, { name: 'Dinos', goals: 1 },
       { name: 'Gkoumas', goals: 1 }, { name: 'Stavros', goals: 1 }],
@@ -115,7 +116,7 @@ export const matches = [
   {
     id: 'savralliolid', round: 4, date: '21/10', time: '22:00',
     opponent: 'Savralliolid FC', initials: 'SFC', color: '#efcc56',
-    logo: 'assets/logos/savralliolid-2026.jpeg', crestShape: 'black',
+    logo: 'assets/logos/savralliolid-match-cutout.png', crestShape: 'cutout',
     goalsFor: 7, goalsAgainst: 6,
     scorers: [{ name: 'Gkoumas', goals: 3 }, { name: 'Dinos', goals: 2 }, { name: 'Rothos', goals: 2 }],
     mvp: 'Gkoumas',

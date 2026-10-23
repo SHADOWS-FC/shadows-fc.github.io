@@ -83,8 +83,11 @@ The active club crest is the supplied black/pink image at
 `assets/logos/shadows-fc-2026.jpeg`, used in the header, footer, match cards,
 match details and browser icon. It is copied without alteration. Club crests
 use consistent padded display areas with their original artwork and colours.
-The refreshed 2026 club crests retain their black canvases; Legrena keeps
-its purple canvas. The other supplied crests are retained for future fixtures. No background masking or automatic image modification is applied. The black/pink theme covers
+The original crests retain their canvases outside the match views. In match
+cards and details only, SHADOWS, Aston Voula, Unathletico and Savralliolid use
+separate transparent PNG cutouts without a surrounding badge box. Legrena keeps
+its purple canvas. The other supplied crests are retained for future fixtures.
+The black/pink theme covers
 both homepage and announcements, with brighter outcome colours for dark cards.
 The background uses broad diagonal black/deep-pink stripes with unequal widths.
 

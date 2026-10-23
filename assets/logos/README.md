@@ -26,7 +26,7 @@ without its empty top/bottom margins; the source JPEG remains unaltered.
 | savralliolid-2026.jpeg | 5.08.01 PM | Savralliolid FC |
 
 All original archive names start with `WhatsApp Image 2026-10-23 at `
-and end with `.jpeg`. The ten files are byte-for-byte copies of those uploads.
+and end with `.jpeg`. The ten `*-2026.jpeg` files are byte-for-byte copies of those uploads.
 The current SHADOWS crest also appears in player career entries. Updated logos
 for opponents without recorded fixtures are saved for future use.
 
@@ -51,10 +51,15 @@ no league crest was identified in this archive.
 
 ## Presentation
 
-Original files retain their backgrounds and internal details. crest-display.css
-uses appropriately coloured, padded canvases without clipping or masking the
-artwork. Add verified future original files here and reference their logo paths
-through shared crest markup. No generated substitute crests are published.
+Original files retain their backgrounds and internal details. At the club's
+request, separate `shadows-fc-match-cutout.png`, `aston-voula-match-cutout.png`,
+`unathletico-match-cutout.png` and `savralliolid-match-cutout.png` are background
+removal edits made with the image editing tool. These are used only in match
+cards and match details, on transparent frames. The SHADOWS edit removes black
+negative space; the three opponents retain the enclosed colours of their badges.
+Header, footer, browser icon, player careers, announcement photograph and all
+other crests retain their existing files and presentation. No CSS background
+masking or blend modes are applied.
 
 ## Zachos career uploads
 
