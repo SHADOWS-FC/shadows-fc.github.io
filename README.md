@@ -252,7 +252,7 @@ A.O.Vouliagmenis; 2016/2017 - Astera Varis; 2018 - Frontistirio Prisma;
 2024/2026 - Shadows FC. There is no biography paragraph, additional career
 heading, loan label, goal column, or explanatory note. The same supplied lines
 appear in either interface language. Recorded-match scoring statistics remain
-separate and unchanged. Previous-club crests remain pending original files.
+separate and unchanged. The club-uploaded originals AOV.jpeg, ASTERAS.png and KLASIKO.jpeg are shown beside their matching career lines, together with the SHADOWS crest.
 
 ### Crest presentation
 
@@ -260,5 +260,8 @@ crest-display.css presents original logos on consistent padded canvases.
 SHADOWS uses black, Legrena purple, Unathletico cream, and other opponents
 white. Artwork is contained without arbitrary shield clipping or blend modes.
 The prior automatic background masking was removed at the club’s request.
-The seven supplied career lines remain unchanged. Previous-club logo originals
-are still pending; altered generated substitutes are not published.
+The seven supplied career lines remain unchanged. The three club-uploaded career logos are displayed with their original backgrounds. Altered generated substitutes are not published.
+
+Career logos were supplied directly through GitHub upload commit 672c4da.
+Their artwork is unmodified and contained in small neutral, navy or black
+canvases. Non-playing rows have no invented organisation badges.

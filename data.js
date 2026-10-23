@@ -162,13 +162,13 @@ export const confirmedPlayers = [
     photo: 'assets/players/5.jpeg', scorerName: 'Zachos',
     // Career labels and year ranges reproduced exactly as supplied by the club.
     career: [
-      { from: 2006, to: 2016, label: 'A.O.Vouliagmenis', kind: 'club', goals: null },
-      { from: 2016, to: 2017, label: 'Astera Varis', kind: 'loan', goals: null },
+      { from: 2006, to: 2016, label: 'A.O.Vouliagmenis', kind: 'club', logo: 'assets/logos/AOV.jpeg', logoCanvas: 'navy', goals: null },
+      { from: 2016, to: 2017, label: 'Astera Varis', kind: 'loan', logo: 'assets/logos/ASTERAS.png', goals: null },
       { from: 2018, to: 2018, label: 'Frontistirio Prisma', kind: 'inactive' },
       { from: 2019, to: 2020, label: 'Covid 19', kind: 'inactive' },
-      { from: 2021, to: 2022, label: 'Klassiko Chiou', kind: 'club', goals: null },
+      { from: 2021, to: 2022, label: 'Klassiko Chiou', kind: 'club', logo: 'assets/logos/KLASIKO.jpeg', goals: null },
       { from: 2023, to: 2023, label: 'DNP', kind: 'inactive' },
-      { from: 2024, to: 2026, label: 'Shadows FC', kind: 'club', logo: 'assets/logos/shadows-fc-black-pink.jpg', goals: null },
+      { from: 2024, to: 2026, label: 'Shadows FC', kind: 'club', logo: 'assets/logos/shadows-fc-black-pink.jpg', logoCanvas: 'dark', goals: null },
     ],
   },
   { name: 'Chatzinikolaou Christos', number: 28, position: 'CM', confirmed: true, photo: 'assets/players/28.jpeg' },

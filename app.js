@@ -1,4 +1,4 @@
-import { club, matches, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261023-original-crests';
+import { club, matches, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261023-career-logos';
 
 const messages = {
   el: {
@@ -586,7 +586,7 @@ function playerCareerMarkup(player) {
   if (!player.career?.length) return '';
   return `<section class="player-biography" aria-label="${t('playerBiography')}"><ol class="career-timeline">${player.career.map(entry => {
     const period = entry.from === entry.to ? entry.from : `${entry.from}/${entry.to}`;
-    return `<li class="career-entry"><span class="career-period">${period}</span> - <span class="career-club">${esc(entry.label)}</span></li>`;
+    return `<li class="career-entry"><span class="career-line"><span class="career-period">${period}</span> - <span class="career-club">${esc(entry.label)}</span></span>${entry.logo ? `<span class="career-logo${entry.logoCanvas ? ` career-logo--${esc(entry.logoCanvas)}` : ''}"><img src="${esc(entry.logo)}" alt="" width="44" height="44" loading="lazy"></span>` : ''}</li>`;
   }).join('')}</ol></section>`;
 }
 

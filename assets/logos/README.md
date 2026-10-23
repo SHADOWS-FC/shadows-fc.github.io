@@ -33,3 +33,10 @@ Original files retain their backgrounds and internal details. crest-display.css
 uses appropriately coloured, padded canvases without clipping or masking the
 artwork. Add verified future original files here and reference their logo paths
 through shared crest markup. No generated substitute crests are published.
+
+## Zachos career uploads
+
+The club uploaded AOV.jpeg (A.O.Vouliagmenis), ASTERAS.png (Astera Varis)
+and KLASIKO.jpeg (Klassiko Chiou) directly in commit 672c4da. These original
+files appear beside 2006/2016, 2016/2017 and 2021/2022 respectively.
+No background removal, redrawing or substitute logos are used.
