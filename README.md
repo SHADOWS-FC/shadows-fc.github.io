@@ -38,9 +38,9 @@ browser validation here uses HTTP.
 - `app.js`: Greek and English translations and interactions.
 - `styles.css`: base layout and responsive rules.
 - `editorial.css`: photo-led homepage, condensed typography, match cards and responsive layout.
-- `black-pink.css`: the black/pink club palette and striped background, dark cards and dialogs, and gold photograph frame.
-- `gallery.css`: the compact framed photo gallery and its responsive navigation controls.
-- `background-details.css`: decorative gold club crests and `16671` over the black/pink stripes.
+- `black-pink.css`: the black/pink club palette, dark cards and match/player dialogs.
+- `gallery.css`: the photo gallery, thumbnail navigation and full-photo viewer.
+- `background-details.css`: broad, softly blended black/pink background bands.
 - `assets/`: self-hosted graphics and fonts, including the font licence.
 - `index.html`: team photo gallery, latest-first results, scorer leaderboard, and complete squad.
 
@@ -61,13 +61,15 @@ and forwards (RW/LW/ST), preserving the confirmed position on each player card.
 All 13 profiles remain available: 2 goalkeepers, 3 defenders, 2 midfielders and
 6 forwards.
 
-The opening gallery is narrower than the original photograph display. Its
-black and gold frame has pink corner accents and an engraved club mark.
-Visitors can use arrows, indicator buttons, horizontal scrolling, touch swipes
-or mouse dragging; the focused gallery also supports Left/Right and Home/End.
-There is no automatic advancement. The gallery follows reduced-motion settings,
-announces the current photograph and retains the selected image across layout
-and language changes.
+The compact gallery uses a black/pink photo card with thumbnail navigation.
+Visitors can use arrows, indicator buttons, thumbnails, horizontal scrolling,
+touch swipes or mouse dragging; the focused gallery supports Left/Right and
+Home/End. Clicking a photograph or its expand button opens the full original
+image in an immersive viewer, with previous/next controls, arrow keys and Escape
+to close. Enter on the focused gallery opens the selected photograph. The viewer
+restores focus on closing and keeps the gallery selection in sync. There is no
+automatic advancement. Controls follow reduced-motion settings, announce the
+current photograph and retain the selected image across layout/language changes.
 
 The active club crest is the supplied black/pink image at
 `assets/logos/shadows-fc-black-pink.jpg`, used in the header, footer, match cards,
@@ -75,10 +77,7 @@ match details and browser icon. It is copied without alteration. Club crests
 use a black display canvas with normal blending; opponent crests retain light
 canvases so their supplied artwork stays legible. The black/pink theme covers
 both homepage and announcements, with brighter outcome colours for dark cards.
-Small gold crests and `16671` form a decorative background pattern. The crest
-uses the original club image as a CSS luminance mask; the active pink logo and
-source photograph are unchanged. The decorative layer is hidden from assistive
-technology and cannot intercept pointer input.
+The background softly blends the same black and deep pink into broad bands.
 
 Matches are paginated at eight per page, always in descending round order.
 In match cards, details and player histories, a win colours only the SHADOWS

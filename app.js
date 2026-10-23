@@ -1,12 +1,13 @@
-import { club, matches, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261022-gold-details';
+import { club, matches, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261023-interactive-gallery';
 
 const messages = {
   el: {
     squadGoalkeepers: 'Τερματοφύλακες', squadDefenders: 'Αμυντικοί', squadMidfielders: 'Μέσοι', squadForwards: 'Επιθετικοί',
     galleryLabel: 'Φωτογραφίες ομάδας', galleryRole: 'συλλογή φωτογραφιών', gallerySlide: 'φωτογραφία',
-    galleryInstructions: 'Σύρε ή χρησιμοποίησε τα πλήκτρα με τα βέλη για αλλαγή φωτογραφίας',
+    galleryInstructions: 'Σύρε ή χρησιμοποίησε τα βέλη για αλλαγή φωτογραφίας. Πάτησε Enter για μεγέθυνση.',
     galleryPrevious: 'Προηγούμενη φωτογραφία', galleryNext: 'Επόμενη φωτογραφία', galleryPhoto: 'Φωτογραφία', galleryOf: 'από',
-    galleryHint: 'Σύρε ή πάτησε τα βελάκια', celebrationPhotoAlt: 'Η ομάδα των SHADOWS FC στο γήπεδο με κύπελλο και μετάλλια',
+    galleryHint: 'Σύρε, διάλεξε φωτογραφία ή πάτησε για μεγέθυνση', celebrationPhotoAlt: 'Η ομάδα των SHADOWS FC στο γήπεδο με κύπελλο και μετάλλια',
+    galleryExpand: 'Μεγέθυνση', galleryClose: 'Κλείσιμο φωτογραφίας', galleryThumbnails: 'Επιλογή φωτογραφίας',
     navAnnouncements: 'Ανακοινώσεις', announcementsTitle: 'Ανακοινώσεις ομάδας.',
     announcementsIntro: 'Όλες οι επίσημες ενημερώσεις της ομάδας, σε ένα σημείο.',
     officialAnnouncement: 'ΕΠΙΣΗΜΗ ΑΝΑΚΟΙΝΩΣΗ', announcementCount: 'ανακοινώσεις', announcementSingular: 'ανακοίνωση',
@@ -64,9 +65,10 @@ const messages = {
   en: {
     squadGoalkeepers: 'Goalkeepers', squadDefenders: 'Defenders', squadMidfielders: 'Midfielders', squadForwards: 'Forwards',
     galleryLabel: 'Team photographs', galleryRole: 'photo gallery', gallerySlide: 'slide',
-    galleryInstructions: 'Swipe or use the arrow keys to change photograph',
+    galleryInstructions: 'Swipe or use the arrow keys to change photograph. Press Enter to view the full photo.',
     galleryPrevious: 'Previous photograph', galleryNext: 'Next photograph', galleryPhoto: 'Photograph', galleryOf: 'of',
-    galleryHint: 'Swipe or use the arrows', celebrationPhotoAlt: 'The SHADOWS FC team on the pitch with a trophy and medals',
+    galleryHint: 'Swipe, choose a photo or tap to enlarge', celebrationPhotoAlt: 'The SHADOWS FC team on the pitch with a trophy and medals',
+    galleryExpand: 'View full photo', galleryClose: 'Close photograph', galleryThumbnails: 'Choose a photograph',
     navAnnouncements: 'Announcements', announcementsTitle: 'Club announcements.',
     announcementsIntro: 'Every official team update, in one place.',
     officialAnnouncement: 'OFFICIAL ANNOUNCEMENT', announcementCount: 'announcements', announcementSingular: 'announcement',
@@ -237,6 +239,10 @@ function renderSquad() {
 
 const galleryTrack = $('#team-gallery-track');
 const gallerySlides = [...galleryTrack.querySelectorAll('.gallery-slide')];
+const photoDialog = $('#photo-dialog');
+let photoIndex = 0;
+let photoTrigger = null;
+let suppressGalleryClick = false;
 
 function renderGallery() {
   $('.team-gallery').setAttribute('aria-label', t('galleryLabel'));
@@ -246,19 +252,62 @@ function renderGallery() {
   $('#gallery-next').setAttribute('aria-label', t('galleryNext'));
   $('#gallery-prev').disabled = galleryIndex === 0;
   $('#gallery-next').disabled = galleryIndex === gallerySlides.length - 1;
+  $('.gallery-thumbnails').setAttribute('aria-label', t('galleryThumbnails'));
   gallerySlides.forEach((slide, index) => {
     const label = `${t('galleryPhoto')} ${index + 1} ${t('galleryOf')} ${gallerySlides.length}`;
     slide.setAttribute('aria-label', label);
     slide.setAttribute('aria-roledescription', t('gallerySlide'));
     slide.setAttribute('aria-hidden', String(index !== galleryIndex));
+    slide.querySelector('.gallery-zoom').tabIndex = index === galleryIndex ? 0 : -1;
     const dot = $(`[data-gallery-index="${index}"]`);
     dot.setAttribute('aria-label', label);
     dot.querySelector('.sr-only').textContent = label;
     if (index === galleryIndex) dot.setAttribute('aria-current', 'true');
     else dot.removeAttribute('aria-current');
+    const thumbnail = $(`[data-gallery-thumbnail="${index}"]`);
+    thumbnail.setAttribute('aria-label', label);
+    if (index === galleryIndex) thumbnail.setAttribute('aria-current', 'true');
+    else thumbnail.removeAttribute('aria-current');
   });
   $('#gallery-counter').textContent = `${String(galleryIndex + 1).padStart(2, '0')} / ${String(gallerySlides.length).padStart(2, '0')}`;
   $('#gallery-status').textContent = `${t('galleryPhoto')} ${galleryIndex + 1} ${t('galleryOf')} ${gallerySlides.length}`;
+  if (photoDialog.open) renderPhotoViewer();
+}
+
+function renderPhotoViewer() {
+  const focusedControl = document.activeElement;
+  const source = gallerySlides[photoIndex].querySelector('.team-photo');
+  const image = $('#photo-viewer-image');
+  image.src = source.src;
+  image.alt = source.alt;
+  image.width = Number(source.getAttribute('width'));
+  image.height = Number(source.getAttribute('height'));
+  $('#photo-viewer-title').textContent = t('galleryLabel');
+  $('#close-photo-dialog').setAttribute('aria-label', t('galleryClose'));
+  $('#photo-viewer-prev').setAttribute('aria-label', t('galleryPrevious'));
+  $('#photo-viewer-next').setAttribute('aria-label', t('galleryNext'));
+  $('#photo-viewer-prev').disabled = photoIndex === 0;
+  $('#photo-viewer-next').disabled = photoIndex === gallerySlides.length - 1;
+  if (photoDialog.open && photoDialog.contains(focusedControl) && focusedControl.disabled) {
+    $('#close-photo-dialog').focus({ preventScroll: true });
+  }
+  $('#photo-viewer-counter').textContent = `${t('galleryPhoto')} ${photoIndex + 1} ${t('galleryOf')} ${gallerySlides.length}`;
+}
+
+function openPhoto(index = galleryIndex, trigger = galleryTrack) {
+  photoIndex = Math.max(0, Math.min(gallerySlides.length - 1, index));
+  photoTrigger = trigger;
+  showGalleryPhoto(photoIndex, true);
+  renderPhotoViewer();
+  if (!photoDialog.open) photoDialog.showModal();
+  document.body.style.overflow = 'hidden';
+  $('#close-photo-dialog').focus({ preventScroll: true });
+}
+
+function stepPhoto(step) {
+  photoIndex = Math.max(0, Math.min(gallerySlides.length - 1, photoIndex + step));
+  showGalleryPhoto(photoIndex, true);
+  renderPhotoViewer();
 }
 
 function showGalleryPhoto(index, instant = false) {
@@ -285,7 +334,13 @@ galleryTrack.addEventListener('scroll', () => {
 $('#gallery-prev').addEventListener('click', () => showGalleryPhoto(galleryIndex - 1));
 $('#gallery-next').addEventListener('click', () => showGalleryPhoto(galleryIndex + 1));
 document.querySelectorAll('[data-gallery-index]').forEach(dot => dot.addEventListener('click', () => showGalleryPhoto(Number(dot.dataset.galleryIndex))));
+document.querySelectorAll('[data-gallery-thumbnail]').forEach(thumbnail => thumbnail.addEventListener('click', () => showGalleryPhoto(Number(thumbnail.dataset.galleryThumbnail))));
 galleryTrack.addEventListener('keydown', event => {
+  if ((event.key === 'Enter' || event.key === ' ') && event.target === galleryTrack) {
+    event.preventDefault();
+    openPhoto(galleryIndex, galleryTrack);
+    return;
+  }
   const target = { ArrowLeft: galleryIndex - 1, ArrowRight: galleryIndex + 1, Home: 0, End: gallerySlides.length - 1 }[event.key];
   if (target == null) return;
   event.preventDefault();
@@ -293,16 +348,22 @@ galleryTrack.addEventListener('keydown', event => {
 });
 let galleryDrag = null;
 galleryTrack.addEventListener('pointerdown', event => {
+  suppressGalleryClick = false;
   if (event.pointerType !== 'mouse' || event.button !== 0) return;
-  galleryDrag = { x: event.clientX, left: galleryTrack.scrollLeft };
+  if (event.target.closest('button')) return;
+  galleryDrag = { x: event.clientX, left: galleryTrack.scrollLeft, moved: false };
   galleryTrack.classList.add('is-dragging');
   galleryTrack.setPointerCapture(event.pointerId);
 });
 galleryTrack.addEventListener('pointermove', event => {
-  if (galleryDrag) galleryTrack.scrollLeft = galleryDrag.left + galleryDrag.x - event.clientX;
+  if (galleryDrag) {
+    if (Math.abs(galleryDrag.x - event.clientX) > 6) galleryDrag.moved = true;
+    galleryTrack.scrollLeft = galleryDrag.left + galleryDrag.x - event.clientX;
+  }
 });
 function finishGalleryDrag() {
   if (!galleryDrag) return;
+  suppressGalleryClick = galleryDrag.moved;
   galleryDrag = null;
   galleryTrack.classList.remove('is-dragging');
   if (!galleryTrack.clientWidth) return;
@@ -311,6 +372,34 @@ function finishGalleryDrag() {
 galleryTrack.addEventListener('pointerup', finishGalleryDrag);
 galleryTrack.addEventListener('pointercancel', finishGalleryDrag);
 galleryTrack.addEventListener('lostpointercapture', finishGalleryDrag);
+galleryTrack.addEventListener('click', event => {
+  if (suppressGalleryClick) { suppressGalleryClick = false; event.preventDefault(); return; }
+  if (!event.target.closest('button')) openPhoto(galleryIndex, galleryTrack);
+});
+$('#close-photo-dialog').addEventListener('click', () => photoDialog.close());
+$('#photo-viewer-prev').addEventListener('click', () => stepPhoto(-1));
+$('#photo-viewer-next').addEventListener('click', () => stepPhoto(1));
+document.addEventListener('keydown', event => {
+  if (!photoDialog.open) return;
+  if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+  event.preventDefault();
+  if (event.key === 'Home') photoIndex = 0;
+  else if (event.key === 'End') photoIndex = gallerySlides.length - 1;
+  else photoIndex += event.key === 'ArrowLeft' ? -1 : 1;
+  stepPhoto(0);
+});
+photoDialog.addEventListener('click', event => {
+  if (event.target !== photoDialog) return;
+  const rect = photoDialog.getBoundingClientRect();
+  if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) photoDialog.close();
+});
+photoDialog.addEventListener('close', () => {
+  if (photoDialog.open) return;
+  document.body.style.overflow = dialog.open ? 'hidden' : '';
+  if (dialog.open) return;
+  const target = photoTrigger?.isConnected && !photoTrigger.closest('[aria-hidden="true"]') ? photoTrigger : galleryTrack;
+  if (target.isConnected && target.getBoundingClientRect().width) target.focus({ preventScroll: true });
+});
 if ('ResizeObserver' in window) new ResizeObserver(() => showGalleryPhoto(galleryIndex, true)).observe(galleryTrack);
 else window.addEventListener('resize', () => showGalleryPhoto(galleryIndex, true));
 
@@ -448,7 +537,8 @@ for (const [id, step] of [['previous-page', -1], ['next-page', 1]]) {
 document.addEventListener('click', async event => {
   const button = event.target.closest('button');
   if (!button) return;
-  if (button.hasAttribute('data-open-announcement')) openDialog({ type: 'announcement', id: button.dataset.openAnnouncement }, button);
+  if (button.hasAttribute('data-open-photo')) openPhoto(Number(button.dataset.openPhoto), button);
+  else if (button.hasAttribute('data-open-announcement')) openDialog({ type: 'announcement', id: button.dataset.openAnnouncement }, button);
   else if (button.hasAttribute('data-open-match')) openDialog({ type: 'match', id: button.dataset.openMatch }, button);
   else if (button.hasAttribute('data-open-scorer')) showScorer(button.dataset.openScorer, button);
   else if (button.hasAttribute('data-player')) openDialog({ type: 'player', id: Number(button.dataset.player) }, button);
@@ -468,6 +558,7 @@ document.addEventListener('click', async event => {
   }
 });
 window.addEventListener('popstate', () => {
+  if (photoDialog.open) photoDialog.close();
   readArchiveUrl(); renderMatches();
   const requested = dialogFromUrl();
   if (requested) openDialog(requested, null, false);
@@ -490,7 +581,7 @@ dialog.addEventListener('click', event => {
 });
 dialog.addEventListener('close', () => {
   if (dialog.open) { closingFromHistory = false; return; }
-  document.body.style.overflow = '';
+  document.body.style.overflow = photoDialog.open ? 'hidden' : '';
   dialogContent = null;
   if (!closingFromHistory) writeUrl();
   renderPageView();

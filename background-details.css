@@ -1,37 +1,9 @@
-/* Quiet gold club marks over the existing black and pink shirt stripes. */
-body{position:relative;isolation:isolate}
-.club-background{
-  position:fixed;inset:30px -30px -40px;z-index:-1;overflow:hidden;
-  display:grid;grid-template-columns:repeat(6,minmax(0,1fr));
-  grid-template-rows:repeat(3,minmax(220px,1fr));
-  pointer-events:none;user-select:none;
-}
-.club-background-mark{
-  display:flex;align-items:center;justify-content:center;flex-direction:column;
-  min-width:0;gap:12px;transform:rotate(-12deg);
-}
-.club-background-mark:nth-child(even){transform:translateY(60px) rotate(12deg)}
-.gold-crest{
-  display:block;width:56px;height:56px;flex:none;opacity:.9;
-  background:linear-gradient(135deg,#f2d692,#b7924d 58%,#e0bc72);
-  -webkit-mask-image:url('assets/logos/shadows-fc-black-pink.jpg');
-  mask-image:url('assets/logos/shadows-fc-black-pink.jpg');
-  -webkit-mask-size:contain;mask-size:contain;
-  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
-  -webkit-mask-position:center;mask-position:center;mask-mode:luminance;
-}
-.gold-postcode{
-  display:block;color:#d6b675;opacity:.24;font-family:var(--display);
-  font-size:15px;font-weight:700;line-height:1;letter-spacing:5px;
-  padding-left:5px;
-}
-@media(max-width:1100px){
-  .club-background{grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:none;grid-auto-rows:240px}
-}
-@media(max-width:600px){
-  .club-background{inset:30px -12px -30px;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:215px}
-  .club-background-mark{gap:10px}
-  .club-background-mark:nth-child(even){transform:translateY(50px) rotate(12deg)}
-  .gold-crest{width:46px;height:46px;opacity:.85}
-  .gold-postcode{font-size:13px;letter-spacing:4px;padding-left:4px;opacity:.23}
+/* Broad, softly blended club colours leave the photography in focus. */
+body{
+  position:relative;isolation:isolate;
+  background:
+    radial-gradient(ellipse 85% 650px at 12% 180px,#200b19 0%,#200b1900 76%),
+    radial-gradient(ellipse 75% 850px at 100% 75%,#200b19 0%,#200b1900 78%),
+    linear-gradient(115deg,#070709 8%,#200b19 42%,#070709 79%);
+  background-attachment:fixed;
 }
