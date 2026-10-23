@@ -1,4 +1,4 @@
-import { club, matches, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261023-museum-modes';
+import { club, matches, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261023-classical-museum';
 
 const messages = {
   el: {
@@ -263,6 +263,113 @@ const galleryTrack = $('#team-gallery-track');
 const gallerySlides = [...galleryTrack.querySelectorAll('.gallery-slide')];
 const photoDialog = $('#photo-dialog');
 let photoIndex = 0;
+let requestedPhotoIndex = 0;
+let museumGeneration = 0;
+let museumMoving = false;
+let museumAnimations = [];
+const museumMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+function museumView(index) {
+  $('.museum-room-architecture').style.transform = `translate3d(${index ? -2.5 : 2.5}%,0,0) scale(1.06)`;
+  $('.museum-room-depth').style.transform = `translate3d(${index ? -4 : 4}%,0,0) scale(1.10)`;
+}
+function clearMuseumAnimations() {
+  museumAnimations.forEach(animation => animation.cancel());
+  museumAnimations = [];
+}
+function stopMuseumTravel() {
+  museumGeneration++;
+  clearMuseumAnimations();
+  museumMoving = false;
+  requestedPhotoIndex = photoIndex;
+  photoDialog.setAttribute('aria-busy', 'false');
+  museumView(photoIndex);
+}
+function commitMuseumPhoto(index) {
+  photoIndex = index;
+  showGalleryPhoto(index, true);
+  renderPhotoViewer();
+}
+function museumAnimate(element, frames, duration) {
+  const animation = element.animate(frames, { duration, easing: 'cubic-bezier(.4,0,.2,1)', fill: 'both' });
+  animation.finished.catch(() => {});
+  museumAnimations.push(animation);
+  return animation;
+}
+async function travelMuseum() {
+  if (museumMoving) return;
+  museumMoving = true;
+  const generation = ++museumGeneration;
+  photoDialog.setAttribute('aria-busy', 'true');
+  try {
+    while (photoDialog.open && generation === museumGeneration && requestedPhotoIndex !== photoIndex) {
+      const target = requestedPhotoIndex;
+      const source = gallerySlides[target].querySelector('.team-photo');
+      const preload = new Image(); preload.src = source.src;
+      await preload.decode().catch(() => {});
+      if (!photoDialog.open || generation !== museumGeneration) return;
+      if (target !== requestedPhotoIndex) continue;
+      const direction = target > photoIndex ? 1 : -1;
+      const distance = Math.min(260, Math.max(110, innerWidth * .2));
+      const start = photoIndex ? -2.5 : 2.5, end = target ? -2.5 : 2.5;
+      const room = museumAnimate($('.museum-room-architecture'), [
+        { transform: `translate3d(${start}%,0,0) scale(1.06)` },
+        { transform: `translate3d(${(start + end) / 2}%,0,0) scale(1.11)`, offset: .45 },
+        { transform: `translate3d(${end}%,0,0) scale(1.06)` }
+      ], 880);
+      const depth = museumAnimate($('.museum-room-depth'), [
+        { transform: `translate3d(${start * 1.6}%,0,0) scale(1.10)` },
+        { transform: `translate3d(${end * 1.6}%,0,0) scale(1.10)` }
+      ], 880);
+      const exit = museumAnimate($('.museum-artwork'), [
+        { transform: 'perspective(1400px) translate3d(0,0,0) rotateY(0deg)', opacity: 1 },
+        { transform: `perspective(1400px) translate3d(${-direction * distance}px,8px,-160px) rotateY(${direction * 14}deg)`, opacity: 0 }
+      ], 320);
+      await exit.finished;
+      if (!photoDialog.open || generation !== museumGeneration) return;
+      commitMuseumPhoto(target);
+      const enter = museumAnimate($('.museum-artwork'), [
+        { transform: `perspective(1400px) translate3d(${direction * distance}px,8px,-160px) rotateY(${-direction * 14}deg)`, opacity: 0 },
+        { transform: 'perspective(1400px) translate3d(0,0,0) rotateY(0deg)', opacity: 1 }
+      ], 560);
+      await Promise.all([enter.finished, room.finished, depth.finished]);
+      if (!photoDialog.open || generation !== museumGeneration) return;
+      clearMuseumAnimations();
+      museumView(photoIndex);
+    }
+  } catch {
+    if (photoDialog.open && generation === museumGeneration) commitMuseumPhoto(requestedPhotoIndex);
+  } finally {
+    if (generation === museumGeneration) {
+      clearMuseumAnimations();
+      museumMoving = false;
+      photoDialog.setAttribute('aria-busy', 'false');
+      museumView(photoIndex);
+    }
+  }
+}
+function goToMuseumPhoto(index) {
+  requestedPhotoIndex = Math.max(0, Math.min(gallerySlides.length - 1, index));
+  if (museumMotion.matches || typeof $('.museum-artwork').animate !== 'function') {
+    const target = requestedPhotoIndex;
+    stopMuseumTravel();
+    requestedPhotoIndex = target;
+    commitMuseumPhoto(target);
+    museumView(target);
+  } else if (requestedPhotoIndex !== photoIndex || museumMoving) {
+    void travelMuseum();
+  }
+}
+function settleMuseumTravel() {
+  if (!museumMoving) return;
+  const target = requestedPhotoIndex;
+  stopMuseumTravel();
+  requestedPhotoIndex = target;
+  commitMuseumPhoto(target);
+  museumView(target);
+}
+museumMotion.addEventListener('change', () => { if (museumMotion.matches) settleMuseumTravel(); });
+window.addEventListener('resize', settleMuseumTravel);
 let photoTrigger = null;
 let suppressGalleryClick = false;
 
@@ -318,7 +425,10 @@ function renderPhotoViewer() {
 }
 
 function openPhoto(index = galleryIndex, trigger = galleryTrack) {
+  stopMuseumTravel();
   photoIndex = Math.max(0, Math.min(gallerySlides.length - 1, index));
+  requestedPhotoIndex = photoIndex;
+  museumView(photoIndex);
   photoTrigger = trigger;
   showGalleryPhoto(photoIndex, true);
   renderPhotoViewer();
@@ -328,9 +438,7 @@ function openPhoto(index = galleryIndex, trigger = galleryTrack) {
 }
 
 function stepPhoto(step) {
-  photoIndex = Math.max(0, Math.min(gallerySlides.length - 1, photoIndex + step));
-  showGalleryPhoto(photoIndex, true);
-  renderPhotoViewer();
+  goToMuseumPhoto(requestedPhotoIndex + step);
 }
 
 function showGalleryPhoto(index, instant = false) {
@@ -406,10 +514,9 @@ document.addEventListener('keydown', event => {
   if (!photoDialog.open) return;
   if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
   event.preventDefault();
-  if (event.key === 'Home') photoIndex = 0;
-  else if (event.key === 'End') photoIndex = gallerySlides.length - 1;
-  else photoIndex += event.key === 'ArrowLeft' ? -1 : 1;
-  stepPhoto(0);
+  if (event.key === 'Home') goToMuseumPhoto(0);
+  else if (event.key === 'End') goToMuseumPhoto(gallerySlides.length - 1);
+  else stepPhoto(event.key === 'ArrowLeft' ? -1 : 1);
 });
 photoDialog.addEventListener('click', event => {
   if (event.target !== photoDialog) return;
@@ -418,6 +525,7 @@ photoDialog.addEventListener('click', event => {
 });
 photoDialog.addEventListener('close', () => {
   if (photoDialog.open) return;
+  stopMuseumTravel();
   document.body.style.overflow = dialog.open ? 'hidden' : '';
   if (dialog.open) return;
   const target = photoTrigger?.isConnected && !photoTrigger.closest('[aria-hidden="true"]') ? photoTrigger : galleryTrack;

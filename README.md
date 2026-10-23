@@ -232,3 +232,12 @@ command required, or run `npm run build` and publish `dist/` for a single-file
 deployment. The site is live at https://zachos7.github.io/SHADOWS-FC/ using
 GitHub Pages from main and the root folder. No custom domain is configured.
 Use the existing checkout in cloud tasks; no Git worktree is needed.
+
+### Classical museum room
+
+The two-photo museum uses a self-hosted generated virtual Greek gallery background
+with marble columns and statues. `greek-museum.css` affects only the open museum.
+Directional artwork movement and room parallax simulate moving between exhibits.
+Navigation queues only the latest destination; closing cancels pending movement.
+Reduced-motion users see immediate photo changes, and resizing settles movement.
+Original team photographs, homepage, match records and Dark/Light choices are unchanged.
