@@ -1,17 +1,25 @@
-/* A compact, interactive club gallery with a larger photo viewer. */
-.team-gallery{width:100%;max-width:760px;margin-inline:auto}
+/* The original two-photo gallery, displayed on a compact museum wall. */
+.team-gallery{
+  position:relative;isolation:isolate;width:100%;max-width:760px;margin-inline:auto;
+  padding:62px 25px 22px;border:1px solid #49303f;border-radius:3px;
+  background:radial-gradient(ellipse 65% 340px at 50% 62px,#b7a0b52b,transparent 76%),linear-gradient(90deg,#ffffff04 1px,transparent 1px) 0 0/25% 100%,linear-gradient(90deg,#141016,#211922 50%,#141016);
+  box-shadow:0 18px 44px #0005,inset 0 0 32px #0003;
+}
+.team-gallery:before{content:'';position:absolute;top:43px;left:calc(50% - 25px);width:50px;height:3px;border-radius:2px;background:#d9cad5;box-shadow:0 3px 11px #ead5e68c;pointer-events:none}
+.team-gallery:after{content:'';position:absolute;bottom:0;left:0;right:0;height:8px;border-top:1px solid #513d4b;background:linear-gradient(#2b202b,#100d12);pointer-events:none}
+.gallery-museum-label{position:absolute;top:18px;left:20px;right:20px;margin:0;text-align:center;font-size:10px;font-weight:700;letter-spacing:3px;color:#efb4d4;line-height:1.4}
 .team-photo-frame.gallery-frame{
   position:relative;isolation:isolate;max-width:none;aspect-ratio:auto;
-  margin:0;padding:8px;overflow:hidden;border:1px solid #71304f;border-radius:12px;
-  background:#0b090e;
-  box-shadow:0 18px 46px #0008,0 0 32px #fa32990c;
+  margin:0;padding:11px;overflow:hidden;border:1px solid #916578;border-radius:2px;
+  background:linear-gradient(135deg,#342631,#0b080d 35%,#251b24);
+  box-shadow:0 14px 30px #0009,inset 0 0 0 3px #08060b,inset 0 0 0 4px #6e4d5e;
 }
 .gallery-frame:before,.gallery-frame:after{content:none;display:none}
 .gallery-viewport{
   display:flex;position:relative;aspect-ratio:6/5;width:100%;min-width:0;
   overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;
   overscroll-behavior-x:contain;scrollbar-width:none;cursor:grab;
-  background:#050506;border:0;border-radius:6px;box-shadow:none;
+  background:#050506;border:1px solid #100c11;border-radius:0;box-shadow:none;
 }
 .gallery-viewport::-webkit-scrollbar{display:none}
 .gallery-viewport:focus-visible{outline:2px solid var(--pink-light);outline-offset:4px}
@@ -64,8 +72,10 @@ dialog.photo-dialog::backdrop{background:#020103eb;backdrop-filter:blur(8px)}
 .photo-viewer-top .close-dialog:focus-visible{outline:2px solid var(--pink-light);outline-offset:3px}
 @media(prefers-reduced-motion:no-preference){.gallery-viewport{scroll-behavior:smooth}}
 @media(max-width:560px){
-  .team-gallery{max-width:440px}
-  .team-photo-frame.gallery-frame{padding:5px;box-shadow:0 10px 25px #0007}
+  .team-gallery{max-width:440px;padding:55px 12px 18px}
+  .team-gallery:before{top:39px;width:42px;left:calc(50% - 21px)}
+  .gallery-museum-label{top:16px;font-size:9px;letter-spacing:2.4px}
+  .team-photo-frame.gallery-frame{padding:7px;box-shadow:0 10px 25px #0007,inset 0 0 0 2px #08060b,inset 0 0 0 3px #6e4d5e;}
   .gallery-viewport{aspect-ratio:1}
   .gallery-zoom{right:10px;bottom:10px;min-height:38px;padding:9px 11px;font-size:10px}
   .gallery-controls{gap:13px;padding-top:13px}

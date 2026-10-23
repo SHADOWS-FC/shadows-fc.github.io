@@ -172,42 +172,6 @@ export const confirmedPlayers = [
 // entries remain above as match evidence, not additional current players.
 export const squad = confirmedPlayers;
 
-// Curated museum: only originals already published by the club on this site.
-// Excludes the ignored selfie, Instagram lineup/result graphics, opponent
-// logos and generated artwork. Captions do not infer a season or competition.
-export const museumPhotos = [
-  {
-    id: 'team-original', category: 'team',
-    title: { el: 'Η ομάδα στο γήπεδο', en: 'The team on the pitch' },
-    alt: { el: 'Η ομάδα των SHADOWS FC στο γήπεδο', en: 'The SHADOWS FC team on the pitch' },
-    photo: 'assets/team.jpg', width: 853, height: 1280,
-  },
-  {
-    id: 'team-celebration', category: 'team',
-    title: { el: 'Κύπελλο και μετάλλια', en: 'Trophy and medals' },
-    alt: { el: 'Οι παίκτες των SHADOWS FC στο γήπεδο με κύπελλο και μετάλλια', en: 'SHADOWS FC players on the pitch with a trophy and medals' },
-    photo: 'assets/team-celebration.jpg', width: 1280, height: 1180,
-  },
-  ...squad.map(player => ({
-    id: 'player-' + player.number, category: 'players',
-    title: { el: player.name, en: player.name },
-    alt: {
-      el: `Πορτρέτο του ${player.name}, αριθμός φανέλας ${player.number}`,
-      en: `Portrait of ${player.name}, shirt number ${player.number}`,
-    },
-    photo: player.photo, width: player.number === 69 ? 1024 : 1122,
-    height: player.number === 69 ? 1536 : 1402,
-  })),
-  {
-    id: 'club-crest', category: 'club',
-    title: { el: 'Το έμβλημά μας', en: 'Our crest' },
-    alt: { el: 'Το ροζ κεντημένο έμβλημα των SHADOWS FC πάνω σε μαύρο ύφασμα', en: 'The embroidered pink SHADOWS FC crest on black fabric' },
-    photo: 'assets/announcements/sotiris-statement.jpg', width: 1280, height: 1232,
-  },
-];
-
-export const teamPhotos = museumPhotos.filter(photo => photo.category === 'team');
-
 export const matchOutcome = match => match.goalsFor > match.goalsAgainst ? 'win'
   : match.goalsFor < match.goalsAgainst ? 'loss' : 'draw';
 

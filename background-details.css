@@ -1,10 +1,11 @@
-/* Wide shirt stripes with softened edges in the original black and pink. */
-:root{--stripe-width:160px}
+/* Broad diagonal club stripes: a new direction in the same black/pink palette. */
+:root{--stripe-dark-span:176px;--stripe-period:264px}
 body{
   position:relative;isolation:isolate;
+  background-color:#070709;
   background:
-    radial-gradient(ellipse 90% 640px at 50% 0,#07070900,#07070933 76%),
-    repeating-linear-gradient(90deg,#070709 0 calc(var(--stripe-width) - 12px),#200b19 calc(var(--stripe-width) + 12px) calc(var(--stripe-width)*2 - 12px),#070709 calc(var(--stripe-width)*2 + 12px));
+    linear-gradient(180deg,#07070900,#07070933),
+    repeating-linear-gradient(135deg,#070709 0 var(--stripe-dark-span),#5d1b40 var(--stripe-dark-span) calc(var(--stripe-dark-span) + 1px),#331026 calc(var(--stripe-dark-span) + 1px) var(--stripe-period));
   background-attachment:fixed;
 }
-@media(max-width:760px){:root{--stripe-width:80px}}
+@media(max-width:760px){:root{--stripe-dark-span:104px;--stripe-period:160px}}
