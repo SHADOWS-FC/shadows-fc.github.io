@@ -4,8 +4,8 @@ import path from 'node:path';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const read = name => readFile(path.join(root, name), 'utf8');
-const [html, baseCss, designCss, paletteCss, galleryCss, backgroundCss, themeCss, greekCss, careerCss, crestCss, languageCss, competitionCss, data, i18n, app] = await Promise.all([
-  read('index.html'), read('styles.css'), read('editorial.css'), read('black-pink.css'), read('gallery.css'), read('background-details.css'), read('theme.css'), read('greek-museum.css'), read('career.css'), read('crest-display.css'), read('language.css'), read('competition.css'), read('data.js'), read('i18n.js'), read('app.js'),
+const [html, baseCss, designCss, paletteCss, galleryCss, backgroundCss, themeCss, greekCss, careerCss, crestCss, languageCss, competitionCss, storyCss, data, i18n, storyExport, app] = await Promise.all([
+  read('index.html'), read('styles.css'), read('editorial.css'), read('black-pink.css'), read('gallery.css'), read('background-details.css'), read('theme.css'), read('greek-museum.css'), read('career.css'), read('crest-display.css'), read('language.css'), read('competition.css'), read('story.css'), read('data.js'), read('i18n.js'), read('story-export.js'), read('app.js'),
 ]);
 const embedded = new Map();
 async function embed(file) {
@@ -16,7 +16,7 @@ async function embed(file) {
   }
   return embedded.get(file);
 }
-let css = `${baseCss}\n${designCss}\n${paletteCss}\n${galleryCss}\n${backgroundCss}\n${themeCss}\n${greekCss}\n${careerCss}\n${crestCss}\n${languageCss}\n${competitionCss}`;
+let css = `${baseCss}\n${designCss}\n${paletteCss}\n${galleryCss}\n${backgroundCss}\n${themeCss}\n${greekCss}\n${careerCss}\n${crestCss}\n${languageCss}\n${competitionCss}\n${storyCss}`;
 // CSS custom-property values have a browser size limit. The PNG data URL is
 // larger than that limit: embed it directly into the background declarations
 // instead of routing it through --pitch-image in the standalone build.
@@ -29,7 +29,7 @@ let embeddedData = data;
 for (const [full, property, asset] of [...data.matchAll(/(photo|logo|matchLogo):\s*'(assets\/[^']+)'/g)]) {
   embeddedData = embeddedData.replaceAll(full, `${property}: ${JSON.stringify(await embed(asset))}`);
 }
-const script = `${embeddedData.replace(/^export /gm, '')}\n${i18n.replace(/^export /gm, '')}\n${app.replace(/^import .* from '\.\/(?:data|i18n)\.js(?:\?[^']*)?';\n/gm, '')}`;
+const script = `${embeddedData.replace(/^export /gm, '')}\n${i18n.replace(/^export /gm, '')}\n${storyExport.replace(/^export /gm, '')}\n${app.replace(/^import .* from '\.\/(?:data|i18n|story-export)\.js(?:\?[^']*)?';\n/gm, '')}`;
 let output = html
   .replace(/<link rel="stylesheet" href="styles\.css(?:\?[^"]*)?">/, () => `<style>\n${css}\n</style>`)
   .replace(/<link rel="stylesheet" href="editorial\.css(?:\?[^"]*)?">/, '')
@@ -42,6 +42,7 @@ let output = html
   .replace(/<link rel="stylesheet" href="crest-display\.css(?:\?[^"]*)?">/, '')
   .replace(/<link rel="stylesheet" href="language\.css(?:\?[^"]*)?">/, '')
   .replace(/<link rel="stylesheet" href="competition\.css(?:\?[^"]*)?">/, '')
+  .replace(/<link rel="stylesheet" href="story\.css(?:\?[^"]*)?">/, '')
   .replace(/<link rel="preload" as="image" href="assets\/[^"]+">/, '')
   .replace(/<script type="module" src="app\.js(?:\?[^"]*)?"><\/script>/, '')
   .replace('</body>', () => `<script>\n${script.replace(/<\/script/gi, '<\\/script')}\n</script>\n</body>`);

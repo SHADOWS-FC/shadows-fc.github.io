@@ -399,3 +399,48 @@ Object.assign(messages.el, { playedShort: 'ΑΓ', winsShort: 'Ν', lossesShort: 
 Object.assign(messages.en, { playedShort: 'P', winsShort: 'W', lossesShort: 'L', drawsShort: 'D', pointsShort: 'Pts' });
 Object.assign(messages.sq, { playedShort: 'N', winsShort: 'F', lossesShort: 'H', drawsShort: 'B', pointsShort: 'Pk' });
 Object.assign(messages.es, { playedShort: 'PJ', winsShort: 'V', lossesShort: 'D', drawsShort: 'E', pointsShort: 'Pts' });
+
+Object.assign(messages.el, {
+  storyCreate: 'Instagram Story', storyTitle: 'Έτοιμο για το story σου',
+  storyDescription: 'Κατέβασε την εικόνα και ανέβασέ την στο Instagram Story σου.',
+  storyPreparing: 'Ετοιμασία εικόνας…', storyDownload: 'Αποθήκευση εικόνας', storyShare: 'Κοινοποίηση εικόνας',
+  storyCopyLink: 'Αντιγραφή συνδέσμου για το story', storyLinkLabel: 'Σύνδεσμος για το αυτοκόλλητο',
+  storyStickerHelp: 'Για να ανοίγει το site με ένα πάτημα: στο Instagram επίλεξε το αυτοκόλλητο «Σύνδεσμος» και επικόλλησε αυτό το link. Η εικόνα μόνη της δεν είναι πατήσιμος σύνδεσμος.',
+  storyPreviewAlt: 'Προεπισκόπηση Instagram Story των SHADOWS FC', storyExportError: 'Δεν δημιουργήθηκε η εικόνα. Δοκίμασε ξανά.',
+  storyRetry: 'Δοκίμασε ξανά', storyShareFailed: 'Η κοινοποίηση δεν άνοιξε. Αποθήκευσε την εικόνα και ανέβασέ την στο Instagram.',
+  storyShareDone: 'Η εικόνα κοινοποιήθηκε στην επιλεγμένη εφαρμογή. Πρόσθεσε το αυτοκόλλητο «Σύνδεσμος» στο Instagram.',
+  storyVisitWebsite: 'Όλα τα νέα στο site μας',
+});
+Object.assign(messages.en, {
+  storyCreate: 'Instagram Story', storyTitle: 'Ready for your story',
+  storyDescription: 'Save the image and upload it to your Instagram Story.',
+  storyPreparing: 'Preparing image…', storyDownload: 'Save image', storyShare: 'Share image',
+  storyCopyLink: 'Copy story link', storyLinkLabel: 'Link for the sticker',
+  storyStickerHelp: 'To let viewers open the website: in Instagram, add the “Link” sticker and paste this link. The image itself is not a clickable link.',
+  storyPreviewAlt: 'SHADOWS FC Instagram Story preview', storyExportError: 'The image could not be created. Try again.',
+  storyRetry: 'Try again', storyShareFailed: 'Sharing could not open. Save the image and upload it to Instagram.',
+  storyShareDone: 'The image was shared to the selected app. Add the “Link” sticker in Instagram.',
+  storyVisitWebsite: 'More on our website',
+});
+Object.assign(messages.sq, {
+  storyCreate: 'Instagram Story', storyTitle: 'Gati për story-n tënd',
+  storyDescription: 'Ruaj imazhin dhe ngarkoje në Instagram Story.',
+  storyPreparing: 'Duke përgatitur imazhin…', storyDownload: 'Ruaj imazhin', storyShare: 'Ndaj imazhin',
+  storyCopyLink: 'Kopjo lidhjen e story-t', storyLinkLabel: 'Lidhja për ngjitësen',
+  storyStickerHelp: 'Që shikuesit të hapin faqen: në Instagram shto ngjitësen “Link” dhe ngjit këtë lidhje. Vetë imazhi nuk është lidhje e klikueshme.',
+  storyPreviewAlt: 'Pamje paraprake e Instagram Story të SHADOWS FC', storyExportError: 'Imazhi nuk u krijua. Provo sërish.',
+  storyRetry: 'Provo sërish', storyShareFailed: 'Ndarja nuk u hap. Ruaj imazhin dhe ngarkoje në Instagram.',
+  storyShareDone: 'Imazhi u nda me aplikacionin e zgjedhur. Shto ngjitësen “Link” në Instagram.',
+  storyVisitWebsite: 'Më shumë në faqen tonë',
+});
+Object.assign(messages.es, {
+  storyCreate: 'Instagram Story', storyTitle: 'Todo listo para tu historia',
+  storyDescription: 'Guarda la imagen y súbela a tu historia de Instagram.',
+  storyPreparing: 'Preparando imagen…', storyDownload: 'Guardar imagen', storyShare: 'Compartir imagen',
+  storyCopyLink: 'Copiar enlace para la historia', storyLinkLabel: 'Enlace para el sticker',
+  storyStickerHelp: 'Para que los espectadores abran la web: añade el sticker “Enlace” en Instagram y pega este enlace. La imagen por sí sola no es un enlace pulsable.',
+  storyPreviewAlt: 'Vista previa de la historia de Instagram de SHADOWS FC', storyExportError: 'No se ha podido crear la imagen. Inténtalo de nuevo.',
+  storyRetry: 'Intentar de nuevo', storyShareFailed: 'No se ha podido abrir la opción de compartir. Guarda la imagen y súbela a Instagram.',
+  storyShareDone: 'La imagen se ha compartido con la aplicación elegida. Añade el sticker “Enlace” en Instagram.',
+  storyVisitWebsite: 'Más en nuestra web',
+});

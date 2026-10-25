@@ -1,0 +1,29 @@
+/* Story images are generated locally; the Instagram Link sticker is added by the owner. */
+.fixture-with-story+.fixture-with-story{margin-top:24px}
+.story-section-actions{display:flex;justify-content:flex-end;margin:14px 0 24px}
+.story-open-button{border:1px solid var(--pink);background:#fa329914;color:var(--pink);padding:11px 16px;font:inherit;font-size:12px;font-weight:700}
+.story-open-button:hover{background:#fa329929}
+.story-open-button:focus-visible,.story-action:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+.story-dialog{width:min(770px,calc(100% - 32px));max-height:90dvh;overflow:auto}
+.story-export-layout{display:grid;grid-template-columns:minmax(0,240px) minmax(0,1fr);gap:26px;margin-top:22px;align-items:start}
+.story-preview-wrap{aspect-ratio:9/16;background:#08070b;border:1px solid var(--line);border-radius:5px}
+.story-preview-wrap img{width:100%;height:auto;display:block;border-radius:4px}
+.story-preview-wrap img[hidden]{display:none}
+.story-export-controls{min-width:0;font-size:12px;line-height:1.7}
+#story-export-status{color:var(--muted);margin-bottom:12px}
+#story-export-status:empty,#story-link-status:empty{display:none}
+.story-action{display:block;width:100%;padding:12px 14px;margin-bottom:10px;border:1px solid var(--line);background:transparent;color:var(--text);font:inherit;font-weight:700;text-align:center;text-decoration:none;line-height:1.5}
+.story-action[hidden]{display:none}
+.story-action-primary{background:var(--pink);border-color:var(--pink);color:#08070b}
+.story-action:hover{border-color:var(--pink)}
+.story-link-label{display:block;margin:20px 0 12px;color:var(--muted);font-size:11px}
+.story-link-label input{display:block;width:100%;min-width:0;margin-top:6px;padding:11px 9px;border:1px solid var(--line);border-radius:0;background:var(--surface);color:var(--text);font:inherit;font-size:11px;letter-spacing:0}
+.story-sticker-help{padding:14px;border-left:2px solid var(--pink);background:#fa329910;color:var(--text);font-size:12px;line-height:1.8}
+#story-link-status{margin-top:12px;color:var(--pink)}
+html[data-theme="light"] .story-dialog{background:#fff;color:var(--text)}
+@media(max-width:560px){
+  .story-export-layout{grid-template-columns:minmax(0,1fr);gap:18px}
+  .story-preview-wrap{width:min(100%,180px);justify-self:center}
+  .story-dialog{padding:20px}.story-dialog h2{font-size:25px}
+  .story-section-actions{justify-content:flex-start}
+}

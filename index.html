@@ -12,19 +12,20 @@
   <meta name="description" content="SHADOWS FC — Η ομάδα της Βουλιαγμένης. Master League, Βούλα. Αποτελέσματα, σκόρερ, ομάδα και ανακοινώσεις.">
   <title>SHADOWS FC — Vouliagmeni 16671</title>
   <link rel="icon" href="assets/logos/shadows-fc-2026.jpeg" type="image/jpeg">
-  <link rel="stylesheet" href="styles.css?v=20261025-home-standings">
-  <link rel="stylesheet" href="editorial.css?v=20261025-home-standings">
-  <link rel="stylesheet" href="black-pink.css?v=20261025-home-standings">
-  <link rel="stylesheet" href="gallery.css?v=20261025-home-standings">
-  <link rel="stylesheet" href="background-details.css?v=20261025-home-standings">
-  <link rel="stylesheet" href="theme.css?v=20261025-home-standings">
-  <link rel="stylesheet" href="greek-museum.css?v=20261025-home-standings">
-  <link rel="stylesheet" href="career.css?v=20261025-home-standings">
-  <link rel="stylesheet" href="crest-display.css?v=20261025-home-standings">
-  <link rel="stylesheet" href="language.css?v=20261025-home-standings">
-  <link rel="stylesheet" href="competition.css?v=20261025-home-standings">
+  <link rel="stylesheet" href="styles.css?v=20261025-instagram-story">
+  <link rel="stylesheet" href="editorial.css?v=20261025-instagram-story">
+  <link rel="stylesheet" href="black-pink.css?v=20261025-instagram-story">
+  <link rel="stylesheet" href="gallery.css?v=20261025-instagram-story">
+  <link rel="stylesheet" href="background-details.css?v=20261025-instagram-story">
+  <link rel="stylesheet" href="theme.css?v=20261025-instagram-story">
+  <link rel="stylesheet" href="greek-museum.css?v=20261025-instagram-story">
+  <link rel="stylesheet" href="career.css?v=20261025-instagram-story">
+  <link rel="stylesheet" href="crest-display.css?v=20261025-instagram-story">
+  <link rel="stylesheet" href="language.css?v=20261025-instagram-story">
+  <link rel="stylesheet" href="competition.css?v=20261025-instagram-story">
+  <link rel="stylesheet" href="story.css?v=20261025-instagram-story">
   <link rel="preload" as="image" href="assets/team.jpg">
-  <script type="module" src="app.js?v=20261025-home-standings"></script>
+  <script type="module" src="app.js?v=20261025-instagram-story"></script>
 </head>
 <body>
   <a class="skip-link" href="#main" data-i18n="skip">Μετάβαση στο περιεχόμενο</a>
@@ -87,6 +88,7 @@
 
     <section id="standings" class="standings-section container" data-home-section aria-labelledby="standings-title">
       <div class="section-heading"><div><p class="eyebrow"><span class="section-number">02 /</span> <span data-i18n="leagueLocation">MASTER LEAGUE · ΒΟΥΛΑ</span></p><h2 id="standings-title" tabindex="-1" data-i18n="standingsTitle">Βαθμολογία πρωταθλήματος.</h2></div></div>
+      <div class="story-section-actions"><button type="button" class="story-open-button" data-story-kind="standings" data-i18n="storyCreate">Instagram Story</button></div>
       <p class="standings-intro" data-i18n="standingsIntro">Η κατάταξη των ομάδων στο Master League της Βούλας.</p>
       <div class="standings-table-wrap">
         <table class="standings-table">
@@ -136,6 +138,24 @@
 
   <footer class="site-footer container"><a href="#home" class="footer-brand"><span class="footer-seal"><img src="assets/logos/shadows-fc-2026.jpeg" alt="" width="1254" height="1254" loading="lazy"></span><span class="footer-wordmark">SHADOWS<span> FC</span><small data-i18n="leagueLocation">MASTER LEAGUE · ΒΟΥΛΑ</small></span></a><span data-i18n="locationMark">ΒΟΥΛΙΑΓΜΕΝΗ · 16671</span><a href="#home" class="back-top"><span data-i18n="backTop">Στην κορυφή</span><span aria-hidden="true">↑</span></a></footer>
   <dialog id="detail-dialog" aria-labelledby="dialog-title"><div class="dialog-top"><span class="eyebrow" id="dialog-category"></span><button id="close-dialog" class="close-dialog" aria-label="Κλείσιμο">×</button></div><div id="dialog-body"></div></dialog>
+  <dialog id="story-dialog" class="story-dialog" aria-labelledby="story-title" aria-describedby="story-description">
+    <div class="dialog-top"><span class="eyebrow">INSTAGRAM STORY</span><button id="close-story-dialog" type="button" class="close-dialog" data-i18n-title="close" aria-label="Κλείσιμο">×</button></div>
+    <h2 id="story-title" tabindex="-1" data-i18n="storyTitle">Έτοιμο για το story σου</h2>
+    <p id="story-description" class="dialog-meta" data-i18n="storyDescription">Κατέβασε την εικόνα και ανέβασέ την στο Instagram Story σου.</p>
+    <div class="story-export-layout">
+      <div class="story-preview-wrap"><img id="story-preview" data-i18n-alt="storyPreviewAlt" alt="Προεπισκόπηση Instagram Story των SHADOWS FC" width="1080" height="1920" hidden></div>
+      <div class="story-export-controls">
+        <p id="story-export-status" role="status" aria-live="polite"></p>
+        <a id="story-download" class="story-action story-action-primary" download hidden data-i18n="storyDownload">Αποθήκευση εικόνας</a>
+        <button id="story-native-share" class="story-action" type="button" hidden data-i18n="storyShare">Κοινοποίηση εικόνας</button>
+        <button id="story-retry" class="story-action" type="button" hidden data-i18n="storyRetry">Δοκίμασε ξανά</button>
+        <button id="story-copy-link" class="story-action" type="button" data-i18n="storyCopyLink">Αντιγραφή συνδέσμου για το story</button>
+        <label class="story-link-label"><span data-i18n="storyLinkLabel">Σύνδεσμος για το αυτοκόλλητο</span><input id="story-target-link" type="url" readonly spellcheck="false"></label>
+        <p class="story-sticker-help" data-i18n="storyStickerHelp">Στο Instagram πρόσθεσε το αυτοκόλλητο «Σύνδεσμος» και επικόλλησε το link.</p>
+        <p id="story-link-status" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+  </dialog>
   <dialog id="photo-dialog" class="photo-dialog" aria-labelledby="photo-viewer-title" aria-busy="false"><div class="museum-room-scene" aria-hidden="true"><div class="museum-room-architecture"></div><div class="museum-room-depth"></div></div><div class="photo-viewer-top"><div class="photo-viewer-heading"><p class="eyebrow" data-i18n="museumLabel">ΜΟΥΣΕΙΟ SHADOWS</p><h2 id="photo-viewer-title">Η ομάδα στο γήπεδο</h2></div><div class="photo-viewer-actions"><div class="theme-control" role="group" aria-label="Εμφάνιση"><button type="button" data-theme-choice="dark" aria-pressed="true">Dark</button><button type="button" data-theme-choice="light" aria-pressed="false">Light</button></div><button id="close-photo-dialog" class="close-dialog" type="button" aria-label="Κλείσιμο μουσείου">×</button></div></div><div class="photo-viewer-stage"><figure class="museum-artwork"><img id="photo-viewer-image" alt="" width="853" height="1280"></figure></div><div class="photo-viewer-controls"><button id="photo-viewer-prev" class="gallery-arrow" type="button" aria-label="Προηγούμενη φωτογραφία"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m14 6-6 6 6 6" stroke="currentColor" stroke-width="1.6"/></svg></button><span id="photo-viewer-counter" class="gallery-counter" aria-live="polite" aria-atomic="true">01 / 02</span><button id="photo-viewer-next" class="gallery-arrow" type="button" aria-label="Επόμενη φωτογραφία"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m10 6 6 6-6 6" stroke="currentColor" stroke-width="1.6"/></svg></button></div></dialog>
 </body>
 </html>

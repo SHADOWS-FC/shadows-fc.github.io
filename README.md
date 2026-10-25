@@ -316,3 +316,26 @@ The supplied standings record SHADOWS with 20 goals for; the four recorded
 match reports total 21. The league snapshot and match statistics deliberately
 retain their respective source values, pending a club-confirmed correction.
 Do not silently reconcile the table, scorers or historical match scores.
+
+### Instagram Story exports
+
+The Instagram Story buttons beside the next fixture and league standings open
+a preview with a downloadable 1080×1920 PNG. `story-export.js` renders the
+current records, localized names and supplied crests directly in the browser;
+it needs no external service or Instagram credentials. Exports always use the
+club's black/pink artwork and follow the selected interface language. Standings
+exports retain all twelve rows and all supplied statistics. Scheduled-game
+exports include the date and time without inventing a score.
+
+The dialog provides a canonical public website link for Instagram's **Link**
+sticker: `club.website` with `#standings`, or the fixture's `?fixture=…#results`
+URL. Local development and standalone exports also produce public links rather
+than local/blob URLs. The image itself does not contain an interactive link.
+The owner saves/uploads the PNG, adds Instagram's Link sticker and pastes the
+copied link. The site never claims to publish a story or add a sticker itself.
+
+On browsers supporting file sharing, a separate Share image button invokes the
+system share sheet after the PNG is ready. Download and manually selectable
+link fallbacks remain available. Cancellation is silent, failed generation can
+be retried, and closing a preview releases its object URL. Story CSS and the
+renderer are also embedded in the standalone build.
