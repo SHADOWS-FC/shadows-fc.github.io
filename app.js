@@ -1,6 +1,5 @@
-import { club, matches, upcomingMatches, leagueStandings, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261025-instagram-story';
-import { messages, localizedName, localizedCareer, localizedOpponent, languageLocales, announcementTranslations } from './i18n.js?v=20261025-instagram-story';
-import { createStoryImage } from './story-export.js?v=20261025-instagram-story';
+import { club, matches, upcomingMatches, leagueStandings, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261025-clean-home';
+import { messages, localizedName, localizedCareer, localizedOpponent, languageLocales, announcementTranslations } from './i18n.js?v=20261025-clean-home';
 
 let language = 'el';
 try { const saved = localStorage.getItem('shadows-language'); if (Object.hasOwn(messages, saved)) language = saved; } catch { /* Storage may be disabled. */ }
@@ -86,14 +85,14 @@ function scoreMarkup(match) {
 }
 
 function renderUpcomingMatches() {
-  $('#upcoming-match-list').innerHTML = upcomingMatches.map(match => `<div class="fixture-with-story"><button class="match-row fixture-card" data-open-fixture="${esc(match.id)}" aria-label="${esc(t('nextFixture'))}: SHADOWS FC × ${esc(displayOpponent(match.opponent))}, ${t(match.weekday)} ${match.date}, ${match.time}">
+  $('#upcoming-match-list').innerHTML = upcomingMatches.map(match => `<button class="match-row fixture-card" data-open-fixture="${esc(match.id)}" aria-label="${esc(t('nextFixture'))}: SHADOWS FC × ${esc(displayOpponent(match.opponent))}, ${t(match.weekday)} ${match.date}, ${match.time}">
     <span class="match-date"><strong><time datetime="${esc(match.calendarDate)}">${match.date.replace('/', '.')}</time></strong><small>${t('nextFixture')}</small></span>
     <span class="match-team">${crestMarkup(club.matchLogo || club.logo, '', club.crestShape)}<span>SHADOWS FC</span></span>
     <span class="fixture-time"><strong>${match.time}</strong><small>${t(match.weekday)}</small></span>
     <span class="match-team away">${crestMarkup(match.logo, '', match.crestShape)}<span>${esc(displayOpponent(match.opponent))}</span></span>
     <span class="match-outcome"><span class="fixture-status">${t('scheduled')}</span></span>
     <span class="match-card-footer"><span>${t('leagueLocation')}</span><span>${t('detail')} <span class="row-arrow" aria-hidden="true">↗</span></span></span>
-  </button><div class="story-section-actions"><button type="button" class="story-open-button" data-story-kind="fixture" data-story-fixture="${esc(match.id)}">${t('storyCreate')}</button></div></div>`).join('');
+  </button>`).join('');
   $('#upcoming-match-list').hidden = !upcomingMatches.length;
   $('#completed-fixtures-heading').hidden = !upcomingMatches.length;
 }
@@ -459,117 +458,6 @@ function renderPageView() {
 }
 
 const dialog = $('#detail-dialog');
-const storyDialog = $('#story-dialog');
-let activeStory = null;
-let storyGeneration = 0;
-
-function clearStoryImage() {
-  $('#story-preview').hidden = true;
-  $('#story-preview').removeAttribute('src');
-  $('#story-download').hidden = true;
-  $('#story-download').removeAttribute('href');
-  $('#story-native-share').hidden = true;
-  if (activeStory?.objectURL) URL.revokeObjectURL(activeStory.objectURL);
-}
-
-async function openStory(kind, fixtureId, trigger) {
-  if (!['standings', 'fixture'].includes(kind)) return;
-  const fixture = kind === 'fixture' ? upcomingMatches.find(match => match.id === fixtureId) : null;
-  if (kind === 'fixture' && !fixture) return;
-  const generation = ++storyGeneration;
-  clearStoryImage();
-  const exportLanguage = language;
-  const target = new URL(club.website);
-  if (fixture) target.searchParams.set('fixture', fixture.id);
-  target.hash = fixture ? 'results' : 'standings';
-  const state = activeStory = { kind, fixtureId, trigger, link: target.href, file: null, objectURL: null };
-  $('#story-target-link').value = state.link;
-  $('#story-link-status').textContent = '';
-  $('#story-export-status').textContent = t('storyPreparing');
-  $('#story-retry').hidden = true;
-  storyDialog.setAttribute('aria-busy', 'true');
-  if (!storyDialog.open) storyDialog.showModal();
-  document.body.style.overflow = 'hidden';
-  $('#story-title').focus({ preventScroll: true });
-  try {
-    const blob = await createStoryImage({
-      kind, language: exportLanguage, club, fixture, standings: leagueStandings,
-      displayTeam: name => localizedOpponent(name, exportLanguage),
-      labels: {
-        title: t(kind === 'standings' ? 'navStandings' : 'nextFixture'), league: t('leagueLocation'),
-        weekday: fixture ? t(fixture.weekday) : '', nextMatch: t('nextFixture'), scheduled: t('scheduled'),
-        team: t('teamLabel'), played: t('playedShort'), wins: t('winsShort'), losses: t('lossesShort'), draws: t('drawsShort'),
-        goalsFor: t('goalsForShort'), goalsAgainst: t('goalsAgainstShort'), points: t('pointsShort'),
-        website: target.host + target.pathname, linkHint: t('storyVisitWebsite'),
-      },
-    });
-    if (generation !== storyGeneration || !storyDialog.open) return;
-    state.objectURL = URL.createObjectURL(blob);
-    $('#story-preview').src = state.objectURL;
-    await $('#story-preview').decode();
-    if (generation !== storyGeneration || !storyDialog.open) return;
-    const filename = `shadows-${fixture ? fixture.id : 'standings'}-${exportLanguage}.png`;
-    state.file = new File([blob], filename, { type: 'image/png' });
-    $('#story-preview').hidden = false;
-    $('#story-download').href = state.objectURL;
-    $('#story-download').download = filename;
-    $('#story-download').hidden = false;
-    try {
-      $('#story-native-share').hidden = !(typeof navigator.share === 'function' && navigator.canShare?.({ files: [state.file] }));
-    } catch { /* Image download remains available when file sharing is unsupported. */ }
-    $('#story-export-status').textContent = '';
-  } catch {
-    if (generation !== storyGeneration || !storyDialog.open) return;
-    clearStoryImage();
-    $('#story-export-status').textContent = t('storyExportError');
-    $('#story-retry').hidden = false;
-  } finally {
-    if (generation === storyGeneration) storyDialog.setAttribute('aria-busy', 'false');
-  }
-}
-
-$('#close-story-dialog').addEventListener('click', () => storyDialog.close());
-$('#story-retry').addEventListener('click', () => {
-  if (activeStory) openStory(activeStory.kind, activeStory.fixtureId, activeStory.trigger);
-});
-$('#story-copy-link').addEventListener('click', async () => {
-  const state = activeStory;
-  if (!state) return;
-  try {
-    await navigator.clipboard.writeText(state.link);
-    if (activeStory === state) $('#story-link-status').textContent = t('linkCopied');
-  } catch {
-    if (activeStory !== state) return;
-    $('#story-target-link').focus(); $('#story-target-link').select();
-    $('#story-link-status').textContent = t('copyManually');
-  }
-});
-$('#story-native-share').addEventListener('click', async () => {
-  const state = activeStory;
-  if (!state?.file) return;
-  try {
-    // A separate click preserves the user activation required by mobile browsers.
-    await navigator.share({ files: [state.file] });
-    if (activeStory === state) $('#story-link-status').textContent = t('storyShareDone');
-  } catch (error) {
-    if (activeStory === state && error.name !== 'AbortError') $('#story-link-status').textContent = t('storyShareFailed');
-  }
-});
-storyDialog.addEventListener('click', event => {
-  if (event.target !== storyDialog) return;
-  const rect = storyDialog.getBoundingClientRect();
-  if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) storyDialog.close();
-});
-storyDialog.addEventListener('close', () => {
-  if (storyDialog.open) return;
-  ++storyGeneration;
-  clearStoryImage();
-  const trigger = activeStory?.trigger;
-  activeStory = null;
-  storyDialog.setAttribute('aria-busy', 'false');
-  document.body.style.overflow = dialog.open || photoDialog.open ? 'hidden' : '';
-  if (trigger?.isConnected && !trigger.closest('[hidden]')) trigger.focus({ preventScroll: true });
-});
 
 function scoringHistoryMarkup(name) {
   const history = getScoringHistory(name);
@@ -612,7 +500,7 @@ function renderDialog() {
     const match = upcomingMatches.find(item => item.id === dialogContent.id);
     if (!match) return;
     $('#dialog-category').textContent = t('nextFixture');
-    $('#dialog-body').innerHTML = `<h2 id="dialog-title">SHADOWS FC<br>× ${esc(displayOpponent(match.opponent))}</h2><p class="dialog-meta">${t('leagueDetail')}<br><time datetime="${esc(match.calendarDate)}">${t(match.weekday)} ${match.date}</time> · ${match.time}</p><div class="dialog-scoreboard fixture-scoreboard">${crestMarkup(club.matchLogo || club.logo, '', club.crestShape)}<div class="fixture-time"><strong>${match.time}</strong><small>${t('scheduled')}</small></div>${crestMarkup(match.logo, '', match.crestShape)}</div><p class="dialog-note">${t('fixturePending')}</p><div class="story-section-actions"><button type="button" class="story-open-button" data-story-kind="fixture" data-story-fixture="${esc(match.id)}">${t('storyCreate')}</button></div>`;
+    $('#dialog-body').innerHTML = `<h2 id="dialog-title">SHADOWS FC<br>× ${esc(displayOpponent(match.opponent))}</h2><p class="dialog-meta">${t('leagueDetail')}<br><time datetime="${esc(match.calendarDate)}">${t(match.weekday)} ${match.date}</time> · ${match.time}</p><div class="dialog-scoreboard fixture-scoreboard">${crestMarkup(club.matchLogo || club.logo, '', club.crestShape)}<div class="fixture-time"><strong>${match.time}</strong><small>${t('scheduled')}</small></div>${crestMarkup(match.logo, '', match.crestShape)}</div><p class="dialog-note">${t('fixturePending')}</p>`;
   } else if (dialogContent.type === 'match') {
     const match = matches.find(item => item.id === dialogContent.id);
     if (!match) return;
@@ -721,7 +609,6 @@ document.addEventListener('click', async event => {
     try { localStorage.setItem('shadows-language', language); } catch { /* Selection works without storage. */ }
     setLanguageMenu(false); render(); $('#language-toggle').focus();
   } else if (button.hasAttribute('data-theme-choice')) setTheme(button.dataset.themeChoice);
-  else if (button.hasAttribute('data-story-kind')) openStory(button.dataset.storyKind, button.dataset.storyFixture, button);
   else if (button.hasAttribute('data-open-photo')) openPhoto(Number(button.dataset.openPhoto), button);
   else if (button.hasAttribute('data-open-announcement')) openDialog({ type: 'announcement', id: button.dataset.openAnnouncement }, button);
   else if (button.hasAttribute('data-open-match')) openDialog({ type: 'match', id: button.dataset.openMatch }, button);
@@ -744,7 +631,6 @@ document.addEventListener('click', async event => {
   }
 });
 window.addEventListener('popstate', () => {
-  if (storyDialog.open) storyDialog.close();
   if (photoDialog.open) photoDialog.close();
   readArchiveUrl(); renderMatches();
   const requested = dialogFromUrl();

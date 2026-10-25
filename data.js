@@ -5,7 +5,6 @@ export const playerAliases = { Mike: 'Mixalis' };
 export const playerName = name => playerAliases[name] || name;
 export const club = {
   name: 'SHADOWS FC',
-  website: 'https://zachos7.github.io/SHADOWS-FC/',
   instagram: 'https://www.instagram.com/shadows_fc0/',
   location: 'Vouliagmeni',
   venue: 'Star Sport Club · Voula',
