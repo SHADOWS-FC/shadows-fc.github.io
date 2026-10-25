@@ -1,5 +1,5 @@
-import { club, matches, upcomingMatches, leagueStandings, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261025-competition';
-import { messages, localizedName, localizedCareer, localizedOpponent, languageLocales, announcementTranslations } from './i18n.js?v=20261025-competition';
+import { club, matches, upcomingMatches, leagueStandings, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261025-home-standings';
+import { messages, localizedName, localizedCareer, localizedOpponent, languageLocales, announcementTranslations } from './i18n.js?v=20261025-home-standings';
 
 let language = 'el';
 try { const saved = localStorage.getItem('shadows-language'); if (Object.hasOwn(messages, saved)) language = saved; } catch { /* Storage may be disabled. */ }
@@ -102,8 +102,7 @@ function renderStandings() {
     <td class="standings-position">${team.position}</td><th scope="row"><span class="standings-team">${crestMarkup(team.logo, initials(displayOpponent(team.name)), team.crestShape)}<span>${esc(displayOpponent(team.name))}</span></span></th>
     <td>${team.played}</td><td>${team.won}</td><td>${team.lost}</td><td>${team.drawn}</td><td>${team.goalsFor}</td><td>${team.goalsAgainst}</td><td class="standings-points">${team.points}</td>
   </tr>`).join('');
-  $('.standings-table-scroll').setAttribute('aria-label', t('standingsCaption'));
-  document.querySelectorAll('[data-i18n-title]').forEach(element => { element.title = t(element.dataset.i18nTitle); });
+  document.querySelectorAll('[data-i18n-title]').forEach(element => { element.title = t(element.dataset.i18nTitle); element.setAttribute('aria-label', t(element.dataset.i18nTitle)); });
 }
 
 function renderMatches() {
@@ -449,9 +448,8 @@ function renderAnnouncements() {
 function renderPageView() {
   const isNews = location.hash === '#announcements' || dialogContent?.type === 'announcement';
   const isStandings = !isNews && location.hash === '#standings';
-  document.querySelectorAll('[data-home-section]').forEach(section => { section.hidden = isNews || isStandings; });
+  document.querySelectorAll('[data-home-section]').forEach(section => { section.hidden = isNews; });
   $('#announcements').hidden = !isNews;
-  $('#standings').hidden = !isStandings;
   for (const [hash, active] of [['announcements', isNews], ['standings', isStandings]]) {
     const link = $(`#navigation a[href="#${hash}"]`);
     if (active) link.setAttribute('aria-current', 'page');

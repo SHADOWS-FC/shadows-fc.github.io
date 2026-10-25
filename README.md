@@ -53,9 +53,9 @@ Match scores and scorer totals are tested for consistency.
 
 ### Homepage and navigation
 
-The homepage has four sections, in this order: a gallery of the two supplied
-team photographs, matches from newest to oldest, all-time recorded scorers, then
-all 13 confirmed players. There are no search boxes, filter/sort controls, sponsor
+The homepage has five sections, in this order: a gallery of the two supplied
+team photographs, scheduled and completed matches, league standings, all-time
+recorded scorers, then all 13 confirmed players. There are no search boxes, filter/sort controls, sponsor
 panels or intervening promotional sections. Player portraits retain their
 original photographic backgrounds.
 
@@ -303,11 +303,12 @@ The next confirmed fixture is SHADOWS FC × Blue Fish on Tuesday 27/10/2026 at
 inferred venue/lineup; it does not count toward results, goals or player totals.
 Move a fixture into completed results only when the actual outcome is supplied.
 
-The Standings menu opens `#standings`, a separate category alongside the
-existing announcements category. `leagueStandings` preserves the club's
+The Standings menu links to `#standings` on the homepage, directly below
+the matches and above the scorers. `leagueStandings` preserves the club's
 12-team table in the supplied order, including tied-team order, played counts
-and the Aston Voula B suffix. SHADOWS is highlighted; the table scrolls
-horizontally on narrow screens and keeps the position and team columns visible.
+and the Aston Voula B suffix. SHADOWS is highlighted. All nine columns fit without horizontal scrolling;
+compact translated headings and an abbreviation key keep the table readable
+on narrow screens.
 All controls, headings and names follow the four language choices. Existing
 team crests are reused; Bunker Parthenr has initials until its crest is supplied.
 
