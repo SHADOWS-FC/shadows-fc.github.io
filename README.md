@@ -293,3 +293,25 @@ selections or shareable URLs. Unknown Greek-script names have a Latin-script
 transliteration fallback. New Latin-script names should have an explicit Greek
 spelling in `i18n.js`. Career organisation labels are localized for display;
 their dates, logos and goal records retain their source values.
+
+### Scheduled fixtures and league standings
+
+`upcomingMatches` contains scheduled games separately from completed `matches`.
+The next confirmed fixture is SHADOWS FC × Blue Fish on Tuesday 27/10/2026 at
+22:00. Its card precedes the recorded results and opens a shareable
+`?fixture=blue-fish-20261027` detail view. It has no score, scorer list or
+inferred venue/lineup; it does not count toward results, goals or player totals.
+Move a fixture into completed results only when the actual outcome is supplied.
+
+The Standings menu opens `#standings`, a separate category alongside the
+existing announcements category. `leagueStandings` preserves the club's
+12-team table in the supplied order, including tied-team order, played counts
+and the Aston Voula B suffix. SHADOWS is highlighted; the table scrolls
+horizontally on narrow screens and keeps the position and team columns visible.
+All controls, headings and names follow the four language choices. Existing
+team crests are reused; Bunker Parthenr has initials until its crest is supplied.
+
+The supplied standings record SHADOWS with 20 goals for; the four recorded
+match reports total 21. The league snapshot and match statistics deliberately
+retain their respective source values, pending a club-confirmed correction.
+Do not silently reconcile the table, scorers or historical match scores.

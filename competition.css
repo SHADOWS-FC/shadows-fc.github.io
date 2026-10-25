@@ -1,0 +1,49 @@
+/* Scheduled fixtures share the match layout without presenting a fake score. */
+.upcoming-match-list{margin-bottom:38px}
+.upcoming-match-list[hidden],.completed-fixtures-heading[hidden]{display:none}
+.fixture-card{width:100%;border-color:var(--pink);background:linear-gradient(120deg,#fa32991a,transparent 75%)}
+.fixture-card:before{background:var(--pink)}
+.fixture-time{grid-column:2;grid-row:2;align-self:center;text-align:center;line-height:1.1}
+.fixture-time strong{display:block;font-family:var(--display);font-size:46px;color:var(--pink);letter-spacing:-1px}
+.fixture-time small{display:block;font-size:9px;color:var(--muted);letter-spacing:1px;margin-top:12px}
+.fixture-status{color:var(--pink);font-size:9px;letter-spacing:1px}
+.completed-fixtures-heading{font-family:var(--display);font-size:25px;margin-bottom:10px}
+.fixture-scoreboard .fixture-time{grid-column:auto;grid-row:auto}
+.fixture-scoreboard .fixture-time strong{font-size:52px}
+.fixture-scoreboard .fixture-time small{font-size:8px}
+
+/* The league snapshot retains the supplied positions, values and tie order. */
+.standings-section{padding-block:54px 85px;min-height:70vh}
+.standings-section[hidden]{display:none}
+.standings-section .section-heading{margin-bottom:20px}
+.standings-section h1{font-family:var(--display);font-size:clamp(36px,4vw,60px);line-height:1.12;letter-spacing:-1px;margin-top:14px}
+.standings-intro{color:var(--muted);font-size:13px;line-height:1.7;margin-bottom:28px}
+.standings-scroll-hint{display:none;color:var(--muted);font-size:11px;line-height:1.6;margin-bottom:12px}
+.standings-table-scroll{max-width:100%;overflow:auto;border:1px solid var(--line);background:var(--surface);isolation:isolate}
+.standings-table-scroll:focus-visible{outline:2px solid var(--pink);outline-offset:4px}
+.standings-table{border-collapse:separate;border-spacing:0;min-width:820px;width:100%;font-variant-numeric:tabular-nums}
+.standings-table thead th{font-size:10px;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);padding:20px 12px;border-bottom:1px solid var(--line);text-align:center}
+.standings-table tbody td,.standings-table tbody th{padding:14px 12px;border-bottom:1px solid var(--line);font-size:14px;text-align:center}
+.standings-table tbody tr:last-child>*{border-bottom:0}
+.standings-table th:nth-child(2){text-align:left;min-width:254px}
+.standings-table th:first-child,.standings-table td:first-child{position:sticky;left:0;width:46px;min-width:46px;background:var(--surface);z-index:2}
+.standings-table th:nth-child(2){position:sticky;left:46px;background:var(--surface);z-index:2;box-shadow:5px 0 9px -7px #0008}
+.standings-team{display:flex;gap:14px;align-items:center;font-size:13px;line-height:1.35}
+.standings-team .crest-frame{width:42px;height:46px;padding:2px;flex:none}
+.standings-team .crest-fallback{color:var(--muted);font-size:11px}
+.standings-table .standings-points{color:var(--pink);font-weight:800;font-size:19px}
+.standings-table .standings-position{color:var(--muted)}
+.standings-table .standings-our-team>*{background:color-mix(in srgb,var(--surface),var(--pink) 11%);font-weight:800}
+.standings-table .standings-our-team>th:nth-child(2){background:color-mix(in srgb,var(--surface),var(--pink) 11%)}
+.standings-table .standings-our-team>:first-child{box-shadow:inset 3px 0 var(--pink);color:var(--pink)}
+.standings-our-team .standings-team{color:var(--pink)}
+@media(max-width:900px){.standings-scroll-hint{display:block}}
+@media(max-width:560px){
+  .fixture-time strong{font-size:39px}.fixture-time small{font-size:8px;letter-spacing:.3px}.fixture-status{font-size:7px;letter-spacing:.4px}
+  .fixture-scoreboard .fixture-time strong{font-size:43px}.standings-section{padding-block:35px 60px}
+  .standings-table th:first-child,.standings-table td:first-child{width:36px;min-width:36px}
+  .standings-table th:nth-child(2){left:36px;width:166px;min-width:166px;max-width:166px}.standings-team{gap:9px;font-size:11px}
+  .standings-team>span:last-child{min-width:0;overflow-wrap:anywhere}
+  .standings-team .crest-frame{width:34px;height:38px}.standings-table tbody td,.standings-table tbody th{padding:12px 8px}
+  .standings-table{min-width:720px;table-layout:fixed}.standings-table thead th{padding-inline:8px;font-size:9px}
+}

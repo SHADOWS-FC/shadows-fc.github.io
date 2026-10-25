@@ -15,6 +15,33 @@ export const club = {
   crestShape: 'cutout',
 };
 
+// Scheduled fixtures are separate from completed results and scoring totals.
+export const upcomingMatches = [
+  {
+    id: 'blue-fish-20261027', date: '27/10', calendarDate: '2026-10-27',
+    weekday: 'tuesday', time: '22:00', opponent: 'Blue Fish',
+    logo: 'assets/logos/blue-fish-2026.jpeg', crestShape: 'black',
+  },
+];
+
+// Club-supplied league snapshot, in the supplied order. Do not derive it from
+// our four match reports: this snapshot records 20 SHADOWS goals, versus 21
+// across the reports. Preserve both sources until a correction is confirmed.
+export const leagueStandings = [
+  { position: 1, id: 'champminions', name: 'CHAMPMINIONS', played: 4, won: 4, lost: 0, drawn: 0, goalsFor: 25, goalsAgainst: 9, points: 12, logo: 'assets/logos/champminions-2026.jpeg', crestShape: 'black' },
+  { position: 2, id: 'legrena', name: 'LEGRENA FC', played: 4, won: 4, lost: 0, drawn: 0, goalsFor: 17, goalsAgainst: 11, points: 12, logo: 'assets/logos/legrena.jpg', crestShape: 'legrena' },
+  { position: 3, id: 'unathletico', name: 'UNATLETICO', played: 4, won: 3, lost: 0, drawn: 1, goalsFor: 22, goalsAgainst: 12, points: 10, logo: 'assets/logos/unathletico-2026.jpeg', crestShape: 'black' },
+  { position: 4, id: 'blyzz', name: 'BLYZZ', played: 4, won: 3, lost: 1, drawn: 0, goalsFor: 24, goalsAgainst: 17, points: 9, logo: 'assets/logos/blyzz-2026.jpeg', crestShape: 'black' },
+  { position: 5, id: 'fiorepeina', name: 'ΦΙΟΡΕΠΕΙΝΑ', played: 4, won: 2, lost: 1, drawn: 1, goalsFor: 16, goalsAgainst: 14, points: 7, logo: 'assets/logos/fiorepeina-2026.jpeg', crestShape: 'black' },
+  { position: 6, id: 'savralliolid', name: 'SAVRALLIOLID', played: 3, won: 1, lost: 2, drawn: 0, goalsFor: 15, goalsAgainst: 16, points: 3, logo: 'assets/logos/savralliolid-2026.jpeg', crestShape: 'black' },
+  { position: 7, id: 'shadows', name: 'SHADOWS', played: 4, won: 1, lost: 3, drawn: 0, goalsFor: 20, goalsAgainst: 25, points: 3, logo: 'assets/logos/shadows-fc-2026.jpeg', crestShape: 'shadows' },
+  { position: 8, id: 'blue-fish', name: 'BLUE FISH', played: 4, won: 1, lost: 3, drawn: 0, goalsFor: 16, goalsAgainst: 21, points: 3, logo: 'assets/logos/blue-fish-2026.jpeg', crestShape: 'black' },
+  { position: 9, id: 'aston-voula-b', name: 'ASTON VOULA B', played: 3, won: 1, lost: 2, drawn: 0, goalsFor: 10, goalsAgainst: 17, points: 3, logo: 'assets/logos/aston-voula-2026.jpeg', crestShape: 'black' },
+  { position: 10, id: 'bunker-parthenr', name: 'BUNKER PARTHENR', played: 4, won: 1, lost: 3, drawn: 0, goalsFor: 17, goalsAgainst: 23, points: 3 },
+  { position: 11, id: 'gates-of-olympus', name: 'GATES OF OLYMPUS', played: 4, won: 0, lost: 2, drawn: 2, goalsFor: 13, goalsAgainst: 19, points: 2, logo: 'assets/logos/gate-of-olympus-2026.jpeg', crestShape: 'black' },
+  { position: 12, id: 'flap-fc', name: 'ΦΛΑΠ FC', played: 4, won: 0, lost: 4, drawn: 0, goalsFor: 6, goalsAgainst: 17, points: 0, logo: 'assets/logos/flap-fc-2026.jpeg', crestShape: 'black' },
+];
+
 // Publish only club-supplied statements. Higher order values appear first.
 // Each entry has id, order, title/summary { el, en }, body { el: [], en: [] },
 // optional photo/photoAlt, and an optional confirmed date.

@@ -294,7 +294,7 @@ const greekOpponents = {
   'Legrena FC': 'Λεγκρενά', 'Aston Voula': 'Άστον Βούλας',
   'Unathletico FC': 'Αναθλέτικο', 'Savralliolid FC': 'Σαβραλιολίδ',
 };
-export const localizedOpponent = (name, language = 'el') => language === 'el' ? greekOpponents[name] || name : name;
+export const localizedOpponent = (name, language = 'el') => language === 'el' ? greekOpponents[name] || name : ({ 'ΦΙΟΡΕΠΕΙΝΑ': 'Fiorepeina', 'ΦΛΑΠ FC': 'FLAP FC' }[name] || name);
 const careerLabels = {
   'A.O.Vouliagmenis': { el: 'Α.Ο. Βουλιαγμένης' },
   'Astera Varis': { el: 'Αστέρας Βάρης' },
@@ -354,3 +354,47 @@ export const announcementTranslations = {
     },
   },
 };
+
+Object.assign(messages.el, {
+  navStandings: 'Βαθμολογία', standingsTitle: 'Βαθμολογία πρωταθλήματος.',
+  standingsIntro: 'Η κατάταξη των ομάδων στο Master League της Βούλας.',
+  standingsCaption: 'Βαθμολογία Master League — θέσεις, αγώνες, αποτελέσματα, γκολ και βαθμοί',
+  standingsScrollHint: 'Σύρε οριζόντια για να δεις όλες τις στήλες.',
+  teamLabel: 'Ομάδα', rankLabel: 'Θέση', pointsLabel: 'Βαθμοί', goalsForShort: 'ΓΥ', goalsAgainstShort: 'ΓΚ',
+  nextFixture: 'Επόμενος αγώνας', completedFixtures: 'Αποτελέσματα', scheduled: 'ΠΡΟΣΕΧΩΣ', tuesday: 'Τρίτη',
+  fixturePending: 'Δεν έχει καταχωριστεί αποτέλεσμα για αυτόν τον αγώνα.',
+});
+Object.assign(messages.en, {
+  navStandings: 'Standings', standingsTitle: 'League standings.',
+  standingsIntro: 'The team rankings in the Master League in Voula.',
+  standingsCaption: 'Master League standings — positions, matches, results, goals and points',
+  standingsScrollHint: 'Scroll sideways to view all columns.',
+  teamLabel: 'Team', rankLabel: 'Position', pointsLabel: 'Points', goalsForShort: 'GF', goalsAgainstShort: 'GA',
+  nextFixture: 'Next match', completedFixtures: 'Results', scheduled: 'UPCOMING', tuesday: 'Tuesday',
+  fixturePending: 'No result has been recorded for this match.',
+});
+Object.assign(messages.sq, {
+  navStandings: 'Renditja', standingsTitle: 'Renditja e kampionatit.',
+  standingsIntro: 'Renditja e ekipeve në Master League në Voula.',
+  standingsCaption: 'Renditja e Master League — vendet, ndeshjet, rezultatet, golat dhe pikët',
+  standingsScrollHint: 'Rrëshqit horizontalisht për të parë të gjitha kolonat.',
+  teamLabel: 'Ekipi', rankLabel: 'Vendi', pointsLabel: 'Pikë', goalsForShort: 'GS', goalsAgainstShort: 'GP',
+  nextFixture: 'Ndeshja e radhës', completedFixtures: 'Rezultate', scheduled: 'SË SHPEJTI', tuesday: 'E martë',
+  fixturePending: 'Nuk është regjistruar rezultat për këtë ndeshje.',
+});
+Object.assign(messages.es, {
+  navStandings: 'Clasificación', standingsTitle: 'Clasificación de la liga.',
+  standingsIntro: 'La clasificación de los equipos de la Master League de Voula.',
+  standingsCaption: 'Clasificación de la Master League — puestos, partidos, resultados, goles y puntos',
+  standingsScrollHint: 'Desliza horizontalmente para ver todas las columnas.',
+  teamLabel: 'Equipo', rankLabel: 'Puesto', pointsLabel: 'Puntos', goalsForShort: 'GF', goalsAgainstShort: 'GC',
+  nextFixture: 'Próximo partido', completedFixtures: 'Resultados', scheduled: 'PRÓXIMAMENTE', tuesday: 'Martes',
+  fixturePending: 'Todavía no se ha registrado un resultado para este partido.',
+});
+
+Object.assign(greekOpponents, {
+  'Blue Fish': 'Μπλου Φις', 'CHAMPMINIONS': 'Τσαμπμίνιονς', 'LEGRENA FC': 'Λεγκρενά',
+  'UNATLETICO': 'Αναθλέτικο', BLYZZ: 'Μπλιζ', 'ΦΙΟΡΕΠΕΙΝΑ': 'Φιορεπείνα',
+  SAVRALLIOLID: 'Σαβραλιολίδ', 'BLUE FISH': 'Μπλου Φις', 'ASTON VOULA B': 'Άστον Βούλας Β',
+  'BUNKER PARTHENR': 'Μπάνκερ Παρθένρ', 'GATES OF OLYMPUS': 'Πύλες Ολύμπου', 'ΦΛΑΠ FC': 'Φλαπ FC',
+});

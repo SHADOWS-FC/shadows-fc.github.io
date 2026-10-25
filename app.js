@@ -1,5 +1,5 @@
-import { club, matches, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261023-four-languages';
-import { messages, localizedName, localizedCareer, localizedOpponent, languageLocales, announcementTranslations } from './i18n.js?v=20261023-four-languages';
+import { club, matches, upcomingMatches, leagueStandings, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261025-competition';
+import { messages, localizedName, localizedCareer, localizedOpponent, languageLocales, announcementTranslations } from './i18n.js?v=20261025-competition';
 
 let language = 'el';
 try { const saved = localStorage.getItem('shadows-language'); if (Object.hasOwn(messages, saved)) language = saved; } catch { /* Storage may be disabled. */ }
@@ -56,6 +56,7 @@ function dialogFromUrl() {
   const params = new URL(location.href).searchParams;
   if (announcements.some(item => item.id === params.get('announcement'))) return { type: 'announcement', id: params.get('announcement') };
   if (matches.some(match => match.id === params.get('match'))) return { type: 'match', id: params.get('match') };
+  if (upcomingMatches.some(match => match.id === params.get('fixture'))) return { type: 'fixture', id: params.get('fixture') };
   if (squad.some(player => String(player.number) === params.get('player'))) return { type: 'player', id: Number(params.get('player')) };
   if (getScorers().some(scorer => scorer.name === params.get('scorer'))) return { type: 'scorer', name: params.get('scorer') };
   return null;
@@ -63,7 +64,7 @@ function dialogFromUrl() {
 
 function writeUrl(push = false) {
   const url = new URL(location.href);
-  for (const key of ['q', 'month', 'result', 'sort', 'view', 'page', 'match', 'player', 'scorer', 'announcement']) url.searchParams.delete(key);
+  for (const key of ['q', 'month', 'result', 'sort', 'view', 'page', 'match', 'fixture', 'player', 'scorer', 'announcement']) url.searchParams.delete(key);
   if (archive.page > 1) url.searchParams.set('page', archive.page);
   if (dialogContent) url.searchParams.set(dialogContent.type, dialogContent.id ?? dialogContent.name);
   if (dialogContent?.type === 'announcement') url.hash = 'announcements';
@@ -81,6 +82,28 @@ function crestMarkup(logo, fallback = '', shape = '') {
 
 function scoreMarkup(match) {
   return `<span class="score-for">${match.goalsFor}</span><span class="score-divider">–</span><span class="score-against">${match.goalsAgainst}</span>`;
+}
+
+function renderUpcomingMatches() {
+  $('#upcoming-match-list').innerHTML = upcomingMatches.map(match => `<button class="match-row fixture-card" data-open-fixture="${esc(match.id)}" aria-label="${esc(t('nextFixture'))}: SHADOWS FC × ${esc(displayOpponent(match.opponent))}, ${t(match.weekday)} ${match.date}, ${match.time}">
+    <span class="match-date"><strong><time datetime="${esc(match.calendarDate)}">${match.date.replace('/', '.')}</time></strong><small>${t('nextFixture')}</small></span>
+    <span class="match-team">${crestMarkup(club.matchLogo || club.logo, '', club.crestShape)}<span>SHADOWS FC</span></span>
+    <span class="fixture-time"><strong>${match.time}</strong><small>${t(match.weekday)}</small></span>
+    <span class="match-team away">${crestMarkup(match.logo, '', match.crestShape)}<span>${esc(displayOpponent(match.opponent))}</span></span>
+    <span class="match-outcome"><span class="fixture-status">${t('scheduled')}</span></span>
+    <span class="match-card-footer"><span>${t('leagueLocation')}</span><span>${t('detail')} <span class="row-arrow" aria-hidden="true">↗</span></span></span>
+  </button>`).join('');
+  $('#upcoming-match-list').hidden = !upcomingMatches.length;
+  $('#completed-fixtures-heading').hidden = !upcomingMatches.length;
+}
+
+function renderStandings() {
+  $('#standings-rows').innerHTML = leagueStandings.map(team => `<tr data-standing-team="${esc(team.id)}"${team.id === 'shadows' ? ' class="standings-our-team"' : ''}>
+    <td class="standings-position">${team.position}</td><th scope="row"><span class="standings-team">${crestMarkup(team.logo, initials(displayOpponent(team.name)), team.crestShape)}<span>${esc(displayOpponent(team.name))}</span></span></th>
+    <td>${team.played}</td><td>${team.won}</td><td>${team.lost}</td><td>${team.drawn}</td><td>${team.goalsFor}</td><td>${team.goalsAgainst}</td><td class="standings-points">${team.points}</td>
+  </tr>`).join('');
+  $('.standings-table-scroll').setAttribute('aria-label', t('standingsCaption'));
+  document.querySelectorAll('[data-i18n-title]').forEach(element => { element.title = t(element.dataset.i18nTitle); });
 }
 
 function renderMatches() {
@@ -425,11 +448,15 @@ function renderAnnouncements() {
 
 function renderPageView() {
   const isNews = location.hash === '#announcements' || dialogContent?.type === 'announcement';
-  document.querySelectorAll('[data-home-section]').forEach(section => { section.hidden = isNews; });
+  const isStandings = !isNews && location.hash === '#standings';
+  document.querySelectorAll('[data-home-section]').forEach(section => { section.hidden = isNews || isStandings; });
   $('#announcements').hidden = !isNews;
-  const newsLink = $('#navigation a[href="#announcements"]');
-  if (isNews) newsLink.setAttribute('aria-current', 'page');
-  else newsLink.removeAttribute('aria-current');
+  $('#standings').hidden = !isStandings;
+  for (const [hash, active] of [['announcements', isNews], ['standings', isStandings]]) {
+    const link = $(`#navigation a[href="#${hash}"]`);
+    if (active) link.setAttribute('aria-current', 'page');
+    else link.removeAttribute('aria-current');
+  }
 }
 
 const dialog = $('#detail-dialog');
@@ -471,6 +498,11 @@ function renderDialog() {
     if (!item) return;
     $('#dialog-category').textContent = t('officialAnnouncement');
     $('#dialog-body').innerHTML = `<article class="announcement-detail"><h2 id="dialog-title">${esc(announcementText(item, 'title'))}</h2><p class="announcement-byline">SHADOWS FC${item.date ? ` · ${esc(item.date)}` : ''}</p>${announcementPhotoMarkup(item)}<div class="announcement-body">${(announcementText(item, 'body') || []).map(paragraph => `<p>${esc(paragraph)}</p>`).join('')}</div></article>`;
+  } else if (dialogContent.type === 'fixture') {
+    const match = upcomingMatches.find(item => item.id === dialogContent.id);
+    if (!match) return;
+    $('#dialog-category').textContent = t('nextFixture');
+    $('#dialog-body').innerHTML = `<h2 id="dialog-title">SHADOWS FC<br>× ${esc(displayOpponent(match.opponent))}</h2><p class="dialog-meta">${t('leagueDetail')}<br><time datetime="${esc(match.calendarDate)}">${t(match.weekday)} ${match.date}</time> · ${match.time}</p><div class="dialog-scoreboard fixture-scoreboard">${crestMarkup(club.matchLogo || club.logo, '', club.crestShape)}<div class="fixture-time"><strong>${match.time}</strong><small>${t('scheduled')}</small></div>${crestMarkup(match.logo, '', match.crestShape)}</div><p class="dialog-note">${t('fixturePending')}</p>`;
   } else if (dialogContent.type === 'match') {
     const match = matches.find(item => item.id === dialogContent.id);
     if (!match) return;
@@ -538,7 +570,7 @@ function render() {
   $('#navigation').setAttribute('aria-label', t('mainNavigation'));
   $('#menu-toggle').setAttribute('aria-label', t($('#menu-toggle').getAttribute('aria-expanded') === 'true' ? 'closeMenu' : 'openMenu'));
   document.querySelectorAll('[data-i18n-alt]').forEach(image => { image.alt = t(image.dataset.i18nAlt); });
-  renderTheme(); renderGallery(); renderMatches(); renderScorers(); renderSquad(); renderAnnouncements(); renderPageView(); renderDialog();
+  renderTheme(); renderGallery(); renderUpcomingMatches(); renderMatches(); renderScorers(); renderSquad(); renderStandings(); renderAnnouncements(); renderPageView(); renderDialog();
 }
 
 function setLanguageMenu(open, focusChoice = false) {
@@ -582,6 +614,7 @@ document.addEventListener('click', async event => {
   else if (button.hasAttribute('data-open-photo')) openPhoto(Number(button.dataset.openPhoto), button);
   else if (button.hasAttribute('data-open-announcement')) openDialog({ type: 'announcement', id: button.dataset.openAnnouncement }, button);
   else if (button.hasAttribute('data-open-match')) openDialog({ type: 'match', id: button.dataset.openMatch }, button);
+  else if (button.hasAttribute('data-open-fixture')) openDialog({ type: 'fixture', id: button.dataset.openFixture }, button);
   else if (button.hasAttribute('data-open-scorer')) showScorer(button.dataset.openScorer, button);
   else if (button.hasAttribute('data-player')) openDialog({ type: 'player', id: Number(button.dataset.player) }, button);
   else if (button.hasAttribute('data-step-match') && button.dataset.stepMatch) {
@@ -612,7 +645,7 @@ window.addEventListener('hashchange', () => {
   const target = document.getElementById(location.hash.slice(1));
   if (target && !target.hidden) {
     target.scrollIntoView({ block: 'start' });
-    if (target.id === 'announcements') $('#announcements-title').focus({ preventScroll: true });
+    if (['announcements', 'standings'].includes(target.id)) $(`#${target.id}-title`).focus({ preventScroll: true });
   }
 });
 $('#close-dialog').addEventListener('click', () => dialog.close());

@@ -12,18 +12,19 @@
   <meta name="description" content="SHADOWS FC — Η ομάδα της Βουλιαγμένης. Master League, Βούλα. Αποτελέσματα, σκόρερ, ομάδα και ανακοινώσεις.">
   <title>SHADOWS FC — Vouliagmeni 16671</title>
   <link rel="icon" href="assets/logos/shadows-fc-2026.jpeg" type="image/jpeg">
-  <link rel="stylesheet" href="styles.css?v=20261023-four-languages">
-  <link rel="stylesheet" href="editorial.css?v=20261023-four-languages">
-  <link rel="stylesheet" href="black-pink.css?v=20261023-four-languages">
-  <link rel="stylesheet" href="gallery.css?v=20261023-four-languages">
-  <link rel="stylesheet" href="background-details.css?v=20261023-four-languages">
-  <link rel="stylesheet" href="theme.css?v=20261023-four-languages">
-  <link rel="stylesheet" href="greek-museum.css?v=20261023-four-languages">
-  <link rel="stylesheet" href="career.css?v=20261023-four-languages">
-  <link rel="stylesheet" href="crest-display.css?v=20261023-four-languages">
-  <link rel="stylesheet" href="language.css?v=20261023-four-languages">
+  <link rel="stylesheet" href="styles.css?v=20261025-competition">
+  <link rel="stylesheet" href="editorial.css?v=20261025-competition">
+  <link rel="stylesheet" href="black-pink.css?v=20261025-competition">
+  <link rel="stylesheet" href="gallery.css?v=20261025-competition">
+  <link rel="stylesheet" href="background-details.css?v=20261025-competition">
+  <link rel="stylesheet" href="theme.css?v=20261025-competition">
+  <link rel="stylesheet" href="greek-museum.css?v=20261025-competition">
+  <link rel="stylesheet" href="career.css?v=20261025-competition">
+  <link rel="stylesheet" href="crest-display.css?v=20261025-competition">
+  <link rel="stylesheet" href="language.css?v=20261025-competition">
+  <link rel="stylesheet" href="competition.css?v=20261025-competition">
   <link rel="preload" as="image" href="assets/team.jpg">
-  <script type="module" src="app.js?v=20261023-four-languages"></script>
+  <script type="module" src="app.js?v=20261025-competition"></script>
 </head>
 <body>
   <a class="skip-link" href="#main" data-i18n="skip">Μετάβαση στο περιεχόμενο</a>
@@ -32,6 +33,7 @@
     <a class="wordmark" href="#home" aria-label="SHADOWS FC home"><span class="brand-seal"><img class="brand-crest" src="assets/logos/shadows-fc-2026.jpeg" alt="" width="1254" height="1254"></span><span>SHADOWS<span class="brand-fc"> FC</span><small data-i18n="locationMark">ΒΟΥΛΙΑΓΜΕΝΗ · 16671</small></span></a>
     <nav id="navigation" aria-label="Main navigation">
       <a href="#results" data-i18n="navResults">Αποτελέσματα</a>
+      <a href="#standings" data-i18n="navStandings">Βαθμολογία</a>
       <a href="#scorers" data-i18n="navScorers">Σκόρερ</a>
       <a href="#squad" data-i18n="navSquad">Ομάδα</a>
       <a href="#announcements" data-i18n="navAnnouncements">Ανακοινώσεις</a>
@@ -75,6 +77,8 @@
 
     <section id="results" class="results-section container" data-home-section aria-labelledby="results-title">
       <div class="section-heading"><div><p class="eyebrow"><span class="section-number">01 /</span> <span data-i18n="matchCentre">ΚΕΝΤΡΟ ΑΓΩΝΩΝ</span></p><h2 id="results-title" data-i18n="resultsTitle">Οι αγώνες μας.</h2></div><span class="section-aside" id="archive-total"></span></div>
+      <div id="upcoming-match-list" class="upcoming-match-list"></div>
+      <h3 id="completed-fixtures-heading" class="completed-fixtures-heading" data-i18n="completedFixtures">Αποτελέσματα</h3>
       <p class="results-order" data-i18n="newestFirst">Από τον πιο πρόσφατο αγώνα</p>
       <p id="results-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
       <div id="match-list" class="match-list"></div>
@@ -91,6 +95,26 @@
       <div class="section-heading"><div><p class="eyebrow"><span class="section-number">03 /</span> <span data-i18n="squadEyebrow">ΟΙ ΑΝΘΡΩΠΟΙ ΠΙΣΩ ΑΠΟ ΤΗ ΦΑΝΕΛΑ</span></p><h2 id="squad-title" data-i18n="squadTitle">Η ομάδα μας.</h2></div><span class="section-aside" id="squad-count"></span></div>
       <p class="squad-note" data-i18n="squadNote">Οι παίκτες πίσω από τη φανέλα. Γνώρισε την ομάδα των SHADOWS FC.</p>
       <div id="squad-grid" class="squad-groups"></div>
+    </section>
+
+    <section id="standings" class="standings-section container" aria-labelledby="standings-title" hidden>
+      <a class="news-home-link" href="#home"><span aria-hidden="true">←</span> <span data-i18n="backHome">Αρχική σελίδα</span></a>
+      <div class="section-heading"><div><p class="eyebrow" data-i18n="leagueLocation">MASTER LEAGUE · ΒΟΥΛΑ</p><h1 id="standings-title" tabindex="-1" data-i18n="standingsTitle">Βαθμολογία πρωταθλήματος.</h1></div></div>
+      <p class="standings-intro" data-i18n="standingsIntro">Η κατάταξη των ομάδων στο Master League της Βούλας.</p>
+      <p class="standings-scroll-hint" data-i18n="standingsScrollHint">Σύρε οριζόντια για να δεις όλες τις στήλες.</p>
+      <div class="standings-table-scroll" role="region" aria-label="Βαθμολογία Master League" tabindex="0">
+        <table class="standings-table">
+          <caption class="sr-only" data-i18n="standingsCaption">Βαθμολογία Master League</caption>
+          <thead><tr>
+            <th scope="col" data-i18n-title="rankLabel">#</th><th scope="col" data-i18n="teamLabel">Ομάδα</th>
+            <th scope="col" data-i18n="played">Αγώνες</th><th scope="col" data-i18n="wins">Νίκες</th>
+            <th scope="col" data-i18n="losses">Ήττες</th><th scope="col" data-i18n="drawsLabel">Ισοπαλίες</th>
+            <th scope="col" data-i18n="goalsForShort" data-i18n-title="goalsFor">ΓΥ</th><th scope="col" data-i18n="goalsAgainstShort" data-i18n-title="goalsAgainst">ΓΚ</th>
+            <th scope="col" data-i18n="pointsLabel">Βαθμοί</th>
+          </tr></thead>
+          <tbody id="standings-rows"></tbody>
+        </table>
+      </div>
     </section>
 
     <section id="announcements" class="announcements-section container" aria-labelledby="announcements-title" hidden>
