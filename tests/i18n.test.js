@@ -19,7 +19,7 @@ test('all recorded personal names use Greek in Greek and Latin in the other lang
     ...(match.lineup.substitutes || []).map(player => player.name),
     ...(match.lineup.staff || []).map(person => person.name),
     ...(match.injuries || []).map(injury => injury.name),
-  ])];
+  ])].filter(Boolean);
   for (const name of names) {
     assert.doesNotMatch(localizedName(name, 'el'), /[A-Za-z]/, name);
     for (const language of ['en', 'sq', 'es']) assert.doesNotMatch(localizedName(name, language), /\p{Script=Greek}/u, `${language}: ${name}`);

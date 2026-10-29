@@ -3,20 +3,34 @@ import assert from 'node:assert/strict';
 import { upcomingMatches, leagueStandings, matches, getSummary, getScorers } from '../data.js';
 import { localizedOpponent } from '../i18n.js';
 
-test('the next Blue Fish game is scheduled for Tuesday 27 October at 22:00 without a result', () => {
-  assert.equal(upcomingMatches.length, 1);
-  const fixture = upcomingMatches[0];
+test('Blue Fish moves from the schedule to a single completed Tuesday result', () => {
+  assert.equal(upcomingMatches.length, 0);
+  const fixture = matches.find(match => match.id === 'blue-fish-20261027');
+  assert.ok(fixture);
   assert.equal(fixture.opponent, 'Blue Fish');
   assert.equal(fixture.date, '27/10');
   assert.equal(fixture.time, '22:00');
   assert.equal(fixture.weekday, 'tuesday');
   assert.equal(new Date(`${fixture.calendarDate}T12:00:00Z`).getUTCDay(), 2);
   assert.equal(fixture.logo, 'assets/logos/blue-fish-2026.jpeg');
-  assert.ok(!('goalsFor' in fixture) && !('goalsAgainst' in fixture));
-  assert.ok(!matches.some(match => match.id === fixture.id));
-  assert.equal(getSummary().played, 4);
-  assert.equal(getSummary().goalsFor, 21);
-  assert.equal(getScorers().reduce((sum, player) => sum + player.goals, 0), 21);
+  assert.deepEqual([fixture.goalsFor, fixture.goalsAgainst], [7, 4]);
+  assert.equal(matches.filter(match => match.id === fixture.id).length, 1);
+  assert.equal(getSummary().played, 5);
+  assert.equal(getSummary().goalsFor, 28);
+  assert.equal(getScorers().reduce((sum, player) => sum + player.goals, 0), 28);
+});
+
+test('the Blue Fish report preserves all seven participants without invented positions, staff or MVP', () => {
+  const fixture = matches.find(match => match.id === 'blue-fish-20261027');
+  assert.deepEqual(fixture.scorers, [{ name: 'Manousos', goals: 3 }, { name: 'Zachos', goals: 2 }, { name: 'Tasos', goals: 2 }]);
+  assert.equal(fixture.lineup.type, 'played');
+  assert.deepEqual(fixture.lineup.players, [
+    { name: 'Dinos' }, { name: 'Babakos T.' }, { name: 'Babakos D.' },
+    { name: 'Zachos' }, { name: 'Manousos' }, { name: 'Rothos' }, { name: 'Vlachos' },
+  ]);
+  assert.ok(!('mvp' in fixture));
+  assert.ok(!('staff' in fixture.lineup));
+  assert.ok(!('substitutes' in fixture.lineup));
 });
 
 test('the standings retain every supplied statistic and the supplied tied-team order', () => {
@@ -41,7 +55,7 @@ test('the standings retain every supplied statistic and the supplied tied-team o
   }
   assert.equal(new Set(leagueStandings.map(team => team.id)).size, 12);
   assert.equal(leagueStandings.find(team => team.id === 'shadows').goalsFor, 20);
-  assert.equal(getSummary().goalsFor, 21);
+  assert.equal(getSummary().goalsFor, 28);
 });
 
 test('league names follow the language while keeping original source names and the B side distinct', () => {

@@ -273,7 +273,7 @@ const greekNames = {
   Chatzinikolaou: 'Χατζηνικολάου', Christos: 'Χρήστος', Dinos: 'Ντίνος', Marfa: 'Μάρφα', Mixalis: 'Μιχάλης', Mike: 'Μάικ',
   Stavros: 'Σταύρος', Kalogiropoulos: 'Καλογηρόπουλος', Kobas: 'Κόμπας', Gavrilos: 'Γαβρίλος',
   Rothos: 'Ρόθος', Ioannis: 'Ιωάννης', Gkoumas: 'Γκούμας', Konstantinos: 'Κωνσταντίνος', Tasos: 'Τάσος',
-  Galanis: 'Γαλάνης', Xatzi: 'Χάτζι', Mitsos: 'Μήτσος', Manousos: 'Μανούσος', Karvounis: 'Καρβούνης',
+  Galanis: 'Γαλάνης', Xatzi: 'Χάτζι', Mitsos: 'Μήτσος', Manousos: 'Μανούσος', Vlachos: 'Βλάχος', Karvounis: 'Καρβούνης',
   G: 'Γ', D: 'Δ', K: 'Κ', T: 'Τ',
 };
 // Display names are separate from the source keys used by scoring, URLs and aliases.
@@ -399,3 +399,8 @@ Object.assign(messages.el, { playedShort: 'ΑΓ', winsShort: 'Ν', lossesShort: 
 Object.assign(messages.en, { playedShort: 'P', winsShort: 'W', lossesShort: 'L', drawsShort: 'D', pointsShort: 'Pts' });
 Object.assign(messages.sq, { playedShort: 'N', winsShort: 'F', lossesShort: 'H', drawsShort: 'B', pointsShort: 'Pk' });
 Object.assign(messages.es, { playedShort: 'PJ', winsShort: 'V', lossesShort: 'D', drawsShort: 'E', pointsShort: 'Pts' });
+
+Object.assign(messages.el, { playersPlayed: 'ΠΑΙΚΤΕΣ ΠΟΥ ΑΓΩΝΙΣΤΗΚΑΝ' });
+Object.assign(messages.en, { playersPlayed: 'PLAYERS WHO PLAYED' });
+Object.assign(messages.sq, { playersPlayed: 'LOJTARËT QË LUAJTËN' });
+Object.assign(messages.es, { playersPlayed: 'JUGADORES QUE PARTICIPARON' });

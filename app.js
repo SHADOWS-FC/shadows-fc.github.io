@@ -1,5 +1,5 @@
-import { club, matches, upcomingMatches, leagueStandings, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261025-clean-home';
-import { messages, localizedName, localizedCareer, localizedOpponent, languageLocales, announcementTranslations } from './i18n.js?v=20261025-clean-home';
+import { club, matches, upcomingMatches, leagueStandings, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261029-blue-fish-result';
+import { messages, localizedName, localizedCareer, localizedOpponent, languageLocales, announcementTranslations } from './i18n.js?v=20261029-blue-fish-result';
 
 let language = 'el';
 try { const saved = localStorage.getItem('shadows-language'); if (Object.hasOwn(messages, saved)) language = saved; } catch { /* Storage may be disabled. */ }
@@ -56,6 +56,7 @@ function dialogFromUrl() {
   const params = new URL(location.href).searchParams;
   if (announcements.some(item => item.id === params.get('announcement'))) return { type: 'announcement', id: params.get('announcement') };
   if (matches.some(match => match.id === params.get('match'))) return { type: 'match', id: params.get('match') };
+  if (matches.some(match => match.id === params.get('fixture'))) return { type: 'match', id: params.get('fixture') };
   if (upcomingMatches.some(match => match.id === params.get('fixture'))) return { type: 'fixture', id: params.get('fixture') };
   if (squad.some(player => String(player.number) === params.get('player'))) return { type: 'player', id: Number(params.get('player')) };
   if (getScorers().some(scorer => scorer.name === params.get('scorer'))) return { type: 'scorer', name: params.get('scorer') };
@@ -471,7 +472,7 @@ function lineupMarkup(match) {
   if (!match.lineup) return `<section class="match-lineup-section"><h3 class="dialog-subhead">${t('lineupTitle')}</h3><p class="dialog-note">${t('lineupNotRecorded')}</p></section>`;
   const lineup = match.lineup;
   const players = entries => `<ul class="match-lineup-list">${entries.map(player => `<li><span class="lineup-marker">${player.position ? esc(language === 'el' ? ({GK:'ΤΦ',CB:'ΚΑ',CM:'ΚΜ',RW:'ΔΕ',LW:'ΑΕ',CAM:'ΕΜ',ST:'ΕΠ'}[player.position] || player.position) : player.position) : player.number != null ? '#' + player.number : '—'}</span><span class="lineup-name">${esc(displayName(player.name))}</span></li>`).join('')}</ul>`;
-  return `<section class="match-lineup-section"><h3 class="dialog-subhead">${t(lineup.type === 'starting' ? 'startingSeven' : 'matchdayPlayers')}</h3>${players(lineup.players)}
+  return `<section class="match-lineup-section"><h3 class="dialog-subhead">${t(lineup.type === 'starting' ? 'startingSeven' : lineup.type === 'played' ? 'playersPlayed' : 'matchdayPlayers')}</h3>${players(lineup.players)}
     ${lineup.substitutes?.length ? `<h4 class="lineup-subheading">${t('substitutes')}</h4>${players(lineup.substitutes)}` : ''}
     ${lineup.staff?.length ? `<h4 class="lineup-subheading">${t('coachingStaff')}</h4><ul class="match-staff-list">${lineup.staff.map(person => `<li><span>${esc(displayName(person.name))}</span>${person.role ? `<small>${t(person.role)}</small>` : ''}</li>`).join('')}</ul>` : ''}</section>`;
 }

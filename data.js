@@ -16,17 +16,12 @@ export const club = {
 };
 
 // Scheduled fixtures are separate from completed results and scoring totals.
-export const upcomingMatches = [
-  {
-    id: 'blue-fish-20261027', date: '27/10', calendarDate: '2026-10-27',
-    weekday: 'tuesday', time: '22:00', opponent: 'Blue Fish',
-    logo: 'assets/logos/blue-fish-2026.jpeg', crestShape: 'black',
-  },
-];
+export const upcomingMatches = [];
 
 // Club-supplied league snapshot, in the supplied order. Do not derive it from
-// our four match reports: this snapshot records 20 SHADOWS goals, versus 21
-// across the reports. Preserve both sources until a correction is confirmed.
+// the original four match reports: this pre-Blue-Fish snapshot records 20
+// SHADOWS goals, versus 21 in those reports. Keep this supplied snapshot until
+// an updated league table is confirmed; later results live below separately.
 export const leagueStandings = [
   { position: 1, id: 'champminions', name: 'CHAMPMINIONS', played: 4, won: 4, lost: 0, drawn: 0, goalsFor: 25, goalsAgainst: 9, points: 12, logo: 'assets/logos/champminions-2026.jpeg', crestShape: 'black' },
   { position: 2, id: 'legrena', name: 'LEGRENA FC', played: 4, won: 4, lost: 0, drawn: 0, goalsFor: 17, goalsAgainst: 11, points: 12, logo: 'assets/logos/legrena.jpg', crestShape: 'legrena' },
@@ -163,6 +158,22 @@ export const matches = [
       staff: [{ name: 'Zachos' }, { name: 'Chatzinikolaou' }, { name: 'Καρβούνης' }],
       source: 'Eight-player matchday squad transcribed from the supplied graphic; club subsequently corrected the coaching staff, replacing Giotis with Καρβούνης.',
     },
+  },
+  {
+    id: 'blue-fish-20261027', round: 5, date: '27/10', time: '22:00',
+    calendarDate: '2026-10-27', weekday: 'tuesday',
+    opponent: 'Blue Fish', initials: 'BF', color: '#1d60ae',
+    logo: 'assets/logos/blue-fish-2026.jpeg', crestShape: 'black',
+    goalsFor: 7, goalsAgainst: 4,
+    scorers: [{ name: 'Manousos', goals: 3 }, { name: 'Zachos', goals: 2 }, { name: 'Tasos', goals: 2 }],
+    lineup: {
+      type: 'played',
+      players: [
+        { name: 'Dinos' }, { name: 'Babakos T.' }, { name: 'Babakos D.' },
+        { name: 'Zachos' }, { name: 'Manousos' }, { name: 'Rothos' }, { name: 'Vlachos' },
+      ],
+    },
+    source: 'Result, scorers and seven participants confirmed by the club in chat. Date and time retained from the previously confirmed fixture. No positions, shirt numbers, MVP or coaching staff were supplied.',
   },
 ];
 

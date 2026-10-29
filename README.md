@@ -153,7 +153,8 @@ Zachos Giannis (#5) was injured against Legrena on 29/09. Match details and his
 profile show “Estimated absence: 1.5 months”, with the injury date stated
 separately and an
 approximate return in mid-November. The site does not infer a medical diagnosis,
-a season year or that he has already returned.
+a medical clearance or revise the original estimate. The club subsequently
+confirmed that Zachos played against Blue Fish on 27/10.
 
 The team photographs at `assets/team.jpg` and `assets/team-celebration.jpg` are
 the original attachments supplied by the club. Both are copied without
@@ -170,6 +171,7 @@ All player portraits and opponent crests are also the club-supplied originals.
 | 06/10 | Aston Voula | 5–6 | Rothos 3, Tasos 1, Xatzi 1 |
 | 12/10 | Unathletico FC | 5–8 | Mike 2, Dinos 1, Gkoumas 1, Stavros 1 |
 | 21/10 | Savralliolid FC | 7–6 | Gkoumas 3, Dinos 2, Rothos 2 |
+| 27/10 | Blue Fish | 7–4 | Manousos 3, Zachos 2, Tasos 2 |
 
 The club confirmed that **Mike = Mixalis**, displayed as Mixalis. Original
 source names remain in the match data. Other aliases are not merged without
@@ -297,11 +299,17 @@ their dates, logos and goal records retain their source values.
 ### Scheduled fixtures and league standings
 
 `upcomingMatches` contains scheduled games separately from completed `matches`.
-The next confirmed fixture is SHADOWS FC × Blue Fish on Tuesday 27/10/2026 at
-22:00. Its card precedes the recorded results and opens a shareable
-`?fixture=blue-fish-20261027` detail view. It has no score, scorer list or
-inferred venue/lineup; it does not count toward results, goals or player totals.
-Move a fixture into completed results only when the actual outcome is supplied.
+Blue Fish on Tuesday 27/10/2026 at 22:00 is now a completed 7–4 win, with
+Manousos 3, Zachos 2 and Tasos 2. Its seven confirmed participants are Dinos,
+Babakos T., Babakos D., Zachos, Manousos, Rothos and Vlachos. No positions,
+shirt numbers, coaching staff, substitutes or MVP were supplied. The lineup
+is labelled as players who played, rather than an inferred starting lineup.
+No new roster profile or unconfirmed name alias is created for these records.
+The result brings the match totals to five played, two wins, three losses,
+28 goals for and 29 against. No next fixture is currently confirmed.
+
+The former `?fixture=blue-fish-20261027` link opens the completed result and
+normalizes to `?match=blue-fish-20261027`, preserving previously shared links.
 
 The Standings menu links to `#standings` on the homepage, directly below
 the matches and above the scorers. `leagueStandings` preserves the club's
@@ -312,7 +320,8 @@ on narrow screens.
 All controls, headings and names follow the four language choices. Existing
 team crests are reused; Bunker Parthenr has initials until its crest is supplied.
 
-The supplied standings record SHADOWS with 20 goals for; the four recorded
-match reports total 21. The league snapshot and match statistics deliberately
+The last supplied standings snapshot predates Blue Fish and records SHADOWS
+with 20 goals for; the first four match reports total 21. The five completed
+results now total 28 goals for. No newer league table has been supplied. The league snapshot and match statistics deliberately
 retain their respective source values, pending a club-confirmed correction.
 Do not silently reconcile the table, scorers or historical match scores.

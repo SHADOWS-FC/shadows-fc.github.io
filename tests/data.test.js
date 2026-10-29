@@ -2,10 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { matches, squad, latestMatchdaySquad, confirmedPlayers, getSummary, getScorers, getRankings, playerName, selectMatches, getMatchMonths, getScoringHistory } from '../data.js';
 
-test('four unique results; duplicate screenshot is not a fifth fixture', () => {
-  assert.equal(matches.length, 4);
-  assert.equal(new Set(matches.map(match => match.id)).size, 4);
-  assert.deepEqual(matches.map(match => [match.goalsFor, match.goalsAgainst]), [[4, 5], [5, 6], [5, 8], [7, 6]]);
+test('five unique results preserve the original four games and add Blue Fish once', () => {
+  assert.equal(matches.length, 5);
+  assert.equal(new Set(matches.map(match => match.id)).size, 5);
+  assert.deepEqual(matches.map(match => [match.goalsFor, match.goalsAgainst]), [[4, 5], [5, 6], [5, 8], [7, 6], [7, 4]]);
 });
 
 test('each scorer list reconciles to the actual team score', () => {
@@ -14,14 +14,14 @@ test('each scorer list reconciles to the actual team score', () => {
   }
 });
 
-test('record and goals reflect the four supplied games', () => {
-  assert.deepEqual(getSummary(), { played: 4, won: 1, drawn: 0, lost: 3, goalsFor: 21, goalsAgainst: 25 });
+test('record and goals include the confirmed Blue Fish win', () => {
+  assert.deepEqual(getSummary(), { played: 5, won: 2, drawn: 0, lost: 3, goalsFor: 28, goalsAgainst: 29 });
 });
 
 test('joint leaders have equal ranks; player totals reconcile to team goals', () => {
   const scorers = getScorers();
   assert.deepEqual(scorers.slice(0, 3), [{ name: 'Gkoumas', goals: 5 }, { name: 'Rothos', goals: 5 }, { name: 'Dinos', goals: 4 }]);
-  assert.equal(scorers.reduce((sum, player) => sum + player.goals, 0), 21);
+  assert.equal(scorers.reduce((sum, player) => sum + player.goals, 0), 28);
   assert.deepEqual(getRankings().slice(0, 3).map(player => player.rank), [1, 1, 3]);
 });
 
@@ -32,9 +32,10 @@ test('only confirmed name aliases are merged, preserving original match evidence
   assert.equal(playerName('Xatzi'), 'Xatzi');
 });
 
-test('last-match MVP and shirt numbers match the supplied information', () => {
-  assert.equal(matches.at(-1).mvp, 'Gkoumas');
-  assert.equal(matches.at(-1).scorers.find(player => player.name === 'Gkoumas').goals, 3);
+test('Savralliolid MVP and historical shirt numbers retain the supplied information', () => {
+  const match = matches.find(match => match.id === 'savralliolid');
+  assert.equal(match.mvp, 'Gkoumas');
+  assert.equal(match.scorers.find(player => player.name === 'Gkoumas').goals, 3);
   assert.deepEqual(latestMatchdaySquad.map(player => player.number), [82, 6, 11, 77, 7, 8, 10, 22]);
 });
 
@@ -78,8 +79,10 @@ test('chronology follows rounds across New Year, with stable goal-sort ties', ()
 });
 
 test('filtered rankings and totals use every selected match, not one UI page', () => {
+  const win = matches.find(match => match.id === 'savralliolid');
+  const loss = matches.find(match => match.id === 'legrena');
   const history = Array.from({ length: 40 }, (_, index) => ({
-    ...matches[index % matches.length], id: 'fixture-' + index, round: index + 1,
+    ...(index % 4 === 0 ? win : loss), id: 'fixture-' + index, round: index + 1,
   }));
   const wins = selectMatches(history, { result: 'win' });
   assert.equal(wins.length, 10);
@@ -99,6 +102,21 @@ test('scoring histories reconcile aliases and totals without implying appearance
   assert.equal(gkoumas.reduce((sum, entry) => sum + entry.goals, 0), 5);
   assert.equal(getScoringHistory('Galanis')[0].goals, 1);
   assert.deepEqual(getScoringHistory('Sotiris Giotis'), []);
+});
+
+test('Blue Fish scorers update their own goal histories without inferring new identities', () => {
+  const matchId = 'blue-fish-20261027';
+  assert.deepEqual(getScoringHistory('Manousos').map(({ match, goals }) => [match.id, goals]), [[matchId, 3]]);
+  for (const name of ['Zachos', 'Tasos']) {
+    const history = getScoringHistory(name);
+    assert.equal(history[0].match.id, matchId);
+    assert.equal(history[0].goals, 2);
+    assert.equal(history.reduce((sum, entry) => sum + entry.goals, 0), 3);
+    assert.equal(getScorers().find(player => player.name === name).goals, 3);
+  }
+  assert.equal(squad.length, 13);
+  assert.ok(!squad.some(player => ['Manousos', 'Vlachos'].includes(player.name)));
+  assert.deepEqual(getScoringHistory('Vlachos'), []);
 });
 
 test('lineups preserve historical positions and the handwritten Aston correction', () => {
