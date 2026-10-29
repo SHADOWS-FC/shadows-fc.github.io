@@ -46,6 +46,10 @@ export const announcements = [
     "id": "blue-fish-two-wins",
     "order": 2,
     "category": "matchReport",
+    photo: 'assets/announcements/coaching-staff.png',
+    photoWidth: 1122,
+    photoHeight: 1402,
+    photoAlt: { el: 'Ο Χατζηνικολάου και ο Καρβούνης σε δηλώσεις με φόντο τα σήματα των SHADOWS FC.' },
     "title": {
       "el": "2 στα 2 η ομάδα μας με το καινούργιο τεχνικό επιτελείο. Ήταν μήπως η αλλαγή προπονητή αυτό που έλειπε από την ομάδα;"
     },
@@ -65,7 +69,7 @@ export const announcements = [
         "Αφηγηματική αναπαράσταση: τα λεπτά των γκολ, η περιγραφή της εξέλιξης και το σχόλιο του προπονητή αποτελούν φανταστικό σενάριο. Το τελικό σκορ, οι σκόρερ και οι συμμετοχές είναι επιβεβαιωμένα στοιχεία."
       ]
     },
-    "source": "Club-requested creative match report and authored coach comment. Final score, scorers, participants and coaches are confirmed. The club confirmed a match duration of two 20-minute halves plus stoppage time; all goal minutes, score progression, descriptions of play and the coach comment are fictional narrative. The club supplied a photograph in chat; the original image file is pending upload to the workspace. Fictional events do not enter match statistics."
+    "source": "Club-requested creative match report and authored coach comment. Final score, scorers, participants and coaches are confirmed. The club confirmed a match duration of two 20-minute halves plus stoppage time; all goal minutes, score progression, descriptions of play and the coach comment are fictional narrative. Paired with the exact coaching-staff photograph supplied by the club via GitHub. Fictional events do not enter match statistics."
   },
   {
     id: 'sotiris', order: 1,

@@ -414,6 +414,7 @@ announcementTranslations['blue-fish-two-wins'] = {
   "en": {
     "title": "2 from 2 for our team under the new coaching staff. Was a change of coach what the team had been missing?",
     "summary": "SHADOWS FC beat Blue Fish 7–4, with a Manousos hat-trick and two goals each from Zachos and Tasos. A second consecutive win and a performance full of character.",
+    "photoAlt": "Chatzinikolaou and Karvounis speaking to the press, with SHADOWS FC crests in the background.",
     "body": [
       "Two games, two wins and a team starting to believe in itself again. After beating Savralliolid 7–6, SHADOWS FC followed up with a 7–4 win over Blue Fish on 27/10. With Chatzinikolaou and Karvounis on the coaching staff, the response to difficult moments and the determination in front of goal made the difference.",
       "The match was played over two 20-minute halves, plus stoppage time. The opening exchanges were intense and fast-paced. Manousos opened the scoring at 3′ for 1–0, but Blue Fish responded at 6′ and took the lead at 10′: 1–2. SHADOWS kept their composure. Zachos brought the teams level at 14′, before the opponents found the net again at 18′ to make it 2–3.",
@@ -429,6 +430,7 @@ announcementTranslations['blue-fish-two-wins'] = {
   "sq": {
     "title": "2 në 2 për ekipin tonë me stafin e ri teknik. Mos vallë ndryshimi i trajnerit ishte ajo që i mungonte ekipit?",
     "summary": "SHADOWS FC mundi Blue Fish 7–4, me një trigolësh të Manousos dhe nga dy gola të Zachos e Tasos. Fitorja e dytë radhazi dhe një paraqitje me karakter.",
+    "photoAlt": "Chatzinikolaou dhe Karvounis duke dhënë deklarata, me stemat e SHADOWS FC në sfond.",
     "body": [
       "Dy ndeshje, dy fitore dhe një ekip që po fillon të besojë sërish te vetja. Pas fitores 7–6 ndaj Savralliolid, SHADOWS FC vazhdoi me suksesin 7–4 kundër Blue Fish më 27/10. Me Chatzinikolaou dhe Karvounis në stafin teknik, reagimi në çastet e vështira dhe vendosmëria përpara portës bënë diferencën.",
       "Ndeshja u luajt në dy pjesë nga 20 minuta, plus kohën shtesë. Fillimi ishte intensiv dhe me ritëm të shpejtë. Në 3′, Manousos hapi rezultatin për 1–0, por Blue Fish u përgjigj në 6′ dhe kaloi në epërsi në 10′: 1–2. SHADOWS nuk e humbi qetësinë. Zachos barazoi në 14′, përpara se kundërshtarët të gjenin sërish rrjetën në 18′ për 2–3.",
@@ -444,6 +446,7 @@ announcementTranslations['blue-fish-two-wins'] = {
   "es": {
     "title": "2 de 2 para nuestro equipo con el nuevo cuerpo técnico. ¿Era el cambio de entrenador lo que le faltaba al equipo?",
     "summary": "SHADOWS FC se impuso por 7–4 a Blue Fish, con un triplete de Manousos y dos goles de Zachos y otros dos de Tasos. Segunda victoria consecutiva y una actuación con carácter.",
+    "photoAlt": "Chatzinikolaou y Karvounis durante unas declaraciones, con los escudos de SHADOWS FC al fondo.",
     "body": [
       "Dos partidos, dos victorias y un equipo que empieza a creer de nuevo en sí mismo. Tras el 7–6 frente a Savralliolid, SHADOWS FC dio continuidad a su buena racha con un 7–4 ante Blue Fish el 27/10. Con Chatzinikolaou y Karvounis en el cuerpo técnico, la reacción en los momentos difíciles y la determinación ante la portería marcaron la diferencia.",
       "El partido se disputó en dos tiempos de 20 minutos, más el tiempo añadido. El inicio tuvo intensidad y un ritmo alto. En el 3′, Manousos abrió el marcador para el 1–0, pero Blue Fish respondió en el 6′ y se adelantó en el 10′: 1–2. SHADOWS mantuvo la calma. Zachos igualó el encuentro en el 14′, antes de que los rivales volvieran a encontrar la red en el 18′ para el 2–3.",

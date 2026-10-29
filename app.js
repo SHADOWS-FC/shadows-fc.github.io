@@ -1,5 +1,5 @@
-import { club, matches, upcomingMatches, leagueStandings, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261029-coach-comment';
-import { messages, localizedName, localizedCareer, localizedOpponent, languageLocales, announcementTranslations } from './i18n.js?v=20261029-coach-comment';
+import { club, matches, upcomingMatches, leagueStandings, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261029-coaching-photo';
+import { messages, localizedName, localizedCareer, localizedOpponent, languageLocales, announcementTranslations } from './i18n.js?v=20261029-coaching-photo';
 
 let language = 'el';
 try { const saved = localStorage.getItem('shadows-language'); if (Object.hasOwn(messages, saved)) language = saved; } catch { /* Storage may be disabled. */ }
@@ -438,7 +438,7 @@ const announcementText = (item, field) => announcementTranslations[item.id]?.[la
 const announcementCategory = item => t(item.category || 'officialAnnouncement');
 
 function announcementPhotoMarkup(item, card = false) {
-  return item.photo ? `<img class="announcement-photo${card ? ' announcement-card-photo' : ''}" src="${esc(item.photo)}" alt="${esc(announcementText(item, 'photoAlt') || announcementText(item, 'title'))}" width="1280" height="1232"${card ? ' loading="lazy"' : ''}>` : '';
+  return item.photo ? `<img class="announcement-photo${card ? ' announcement-card-photo' : ''}" src="${esc(item.photo)}" alt="${esc(announcementText(item, 'photoAlt') || announcementText(item, 'title'))}" width="${item.photoWidth || 1280}" height="${item.photoHeight || 1232}"${card ? ' loading="lazy"' : ''}>` : '';
 }
 
 function renderAnnouncements() {
