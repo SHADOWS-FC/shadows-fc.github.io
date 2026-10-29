@@ -61,10 +61,11 @@ export const announcements = [
         "Η εικόνα του τελευταίου κομματιού του αγώνα ήταν το μεγάλο κέρδος. Αντί να αρκεστεί στο προβάδισμα, η ομάδα συνέχισε να κυκλοφορεί την μπάλα και να ψάχνει τη σωστή επιλογή. Οι οδηγίες του Χατζηνικολάου και του Καρβούνη βρήκαν ανταπόκριση, με καθαρό μυαλό και αλληλοκάλυψη τη στιγμή που το παιχνίδι απαιτούσε συγκέντρωση.",
         "Η νίκη είχε πρωταγωνιστές στο σκοράρισμα, αλλά ήταν δουλειά όλων. Μαζί με τον Μανούσο, τον Ζάχο και τον Τάσο, αγωνίστηκαν ο Ντίνος, ο Δημήτρης Μπαμπάκος, ο Ρόθος και ο Βλάχος. Τρέξιμο, μονομαχίες και βοήθειες χωρίς την μπάλα έδωσαν τη βάση για να έρθουν τα γκολ. Ο Μανούσος τελείωσε με τρία, ο Ζάχος με δύο και ο Τάσος με δύο.",
         "Το 2 στα 2 δεν σημαίνει ότι λύθηκαν όλα. Σημαίνει, όμως, ότι υπάρχει αντίδραση, μεγαλύτερη συνοχή και λόγος να κοιτάμε το επόμενο παιχνίδι με αισιοδοξία. Ήταν τελικά η αλλαγή προπονητή αυτό που έλειπε; Οι δύο συνεχόμενες νίκες ανοίγουν την κουβέντα. Η συνέχεια θα δώσει την απάντηση.",
-        "Αφηγηματική αναπαράσταση: τα λεπτά των γκολ και η περιγραφή της εξέλιξης αποτελούν φανταστικό σενάριο. Το τελικό σκορ, οι σκόρερ και οι συμμετοχές είναι επιβεβαιωμένα στοιχεία."
+        "Ο Χατζηνικολάου για τον νέο του βοηθό, Καρβούνη: «Ο Καρβούνης έχει ήδη φέρει ενέργεια, φρέσκες ιδέες και καλύτερη επικοινωνία με τους παίκτες. Η συμβολή του στο καλό ξεκίνημά μας είναι σημαντική. Βλέπω έναν συνεργάτη με διάθεση να εξελιχθεί και πιστεύω ότι μπορεί να παίξει ουσιαστικό ρόλο στο μέλλον του τεχνικού μας επιτελείου. Συνεχίζουμε μαζί, με δουλειά και προσήλωση στην ομάδα».",
+        "Αφηγηματική αναπαράσταση: τα λεπτά των γκολ, η περιγραφή της εξέλιξης και το σχόλιο του προπονητή αποτελούν φανταστικό σενάριο. Το τελικό σκορ, οι σκόρερ και οι συμμετοχές είναι επιβεβαιωμένα στοιχεία."
       ]
     },
-    "source": "Club-requested creative match report. Final score, scorers, participants and coaches are confirmed. The club confirmed a match duration of two 20-minute halves plus stoppage time; all goal minutes, score progression and descriptions of play are fictional narrative. No photo supplied yet. Fictional events do not enter match statistics."
+    "source": "Club-requested creative match report and authored coach comment. Final score, scorers, participants and coaches are confirmed. The club confirmed a match duration of two 20-minute halves plus stoppage time; all goal minutes, score progression, descriptions of play and the coach comment are fictional narrative. The club supplied a photograph in chat; the original image file is pending upload to the workspace. Fictional events do not enter match statistics."
   },
   {
     id: 'sotiris', order: 1,

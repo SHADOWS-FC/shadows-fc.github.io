@@ -422,7 +422,8 @@ announcementTranslations['blue-fish-two-wins'] = {
       "The way the team played in the closing stages was the biggest positive. Rather than settling for the lead, the players kept moving the ball and looking for the right option. Chatzinikolaou and Karvounis saw their instructions put into practice, with clear heads and cover for one another when the game demanded concentration.",
       "There were standout goalscorers, but this was a team effort. Alongside Manousos, Zachos and Tasos, Dinos, Dimitris Babakos, Rothos and Vlachos also played. Running, challenges and support off the ball provided the platform for the goals. Manousos finished with three, Zachos with two and Tasos with two.",
       "Two wins from two does not mean everything has been solved. It does, however, show a response, greater togetherness and a reason to approach the next game with optimism. Was a change of coach what the team had been missing after all? Two consecutive wins have opened the discussion. What comes next will provide the answer.",
-      "Narrative reconstruction: the goal times and the account of how the match unfolded are fictional. The final score, goalscorers and participants are confirmed facts."
+      "Chatzinikolaou on his new assistant, Karvounis: “Karvounis has already brought energy, fresh ideas and better communication with the players. His contribution to our strong start has been important. I see a colleague who is eager to develop, and I believe he can play a significant role in the future of our coaching staff. We keep working together, with commitment to the team.”",
+      "Narrative reconstruction: the goal times, the account of how the match unfolded and the coach’s comment are fictional. The final score, goalscorers and participants are confirmed facts."
     ]
   },
   "sq": {
@@ -436,7 +437,8 @@ announcementTranslations['blue-fish-two-wins'] = {
       "Paraqitja në pjesën e fundit të ndeshjes ishte fitimi më i madh. Në vend që të kënaqej me epërsinë, ekipi vazhdoi të qarkullonte topin dhe të kërkonte zgjedhjen e duhur. Udhëzimet e Chatzinikolaou dhe Karvounis gjetën zbatim, me mendje të kthjellët dhe mbulim të ndërsjellë në çastet kur loja kërkonte përqendrim.",
       "Fitorja pati protagonistë në shënimin e golave, por ishte punë e të gjithëve. Krahas Manousos, Zachos dhe Tasos, luajtën edhe Dinos, Dimitris Babakos, Rothos dhe Vlachos. Vrapimi, duelet dhe ndihma pa top krijuan bazën që të vinin golat. Manousos përfundoi me tre, Zachos me dy dhe Tasos me dy.",
       "Dy fitore në dy ndeshje nuk do të thotë se gjithçka është zgjidhur. Do të thotë, megjithatë, se ka reagim, më shumë unitet dhe arsye për ta parë ndeshjen e ardhshme me optimizëm. A ishte vërtet ndryshimi i trajnerit ajo që i mungonte ekipit? Dy fitoret radhazi e hapin këtë diskutim. Vazhdimi do të japë përgjigjen.",
-      "Rindërtim narrativ: minutat e golave dhe përshkrimi i rrjedhës së ndeshjes përbëjnë një skenar imagjinar. Rezultati përfundimtar, golashënuesit dhe pjesëmarrësit janë të dhëna të konfirmuara."
+      "Chatzinikolaou për ndihmësin e tij të ri, Karvounis: «Karvounis ka sjellë tashmë energji, ide të reja dhe komunikim më të mirë me lojtarët. Kontributi i tij në nisjen tonë të mirë është i rëndësishëm. Shoh një bashkëpunëtor me dëshirë për t’u zhvilluar dhe besoj se ai mund të luajë një rol të rëndësishëm në të ardhmen e stafit tonë teknik. Vazhdojmë së bashku, me punë dhe përkushtim ndaj ekipit».",
+      "Rindërtim narrativ: minutat e golave, përshkrimi i rrjedhës së ndeshjes dhe komenti i trajnerit janë pjesë e një skenari imagjinar. Rezultati përfundimtar, golashënuesit dhe pjesëmarrësit janë të dhëna të konfirmuara."
     ]
   },
   "es": {
@@ -450,7 +452,8 @@ announcementTranslations['blue-fish-two-wins'] = {
       "La imagen del equipo en el tramo final fue la gran noticia. En lugar de conformarse con la ventaja, siguió moviendo el balón y buscando la mejor opción. Las indicaciones de Chatzinikolaou y Karvounis encontraron respuesta, con claridad de ideas y coberturas mutuas en los momentos en que el partido exigía concentración.",
       "La victoria tuvo protagonistas ante la portería, pero fue obra de todos. Junto a Manousos, Zachos y Tasos, también participaron Dinos, Dimitris Babakos, Rothos y Vlachos. El esfuerzo, los duelos y las ayudas sin balón pusieron la base para que llegaran los goles. Manousos terminó con tres, Zachos con dos y Tasos con dos.",
       "Dos victorias en dos partidos no significan que todo esté resuelto. Sí muestran, en cambio, capacidad de reacción, mayor cohesión y motivos para mirar al próximo encuentro con optimismo. ¿Era, al final, el cambio de entrenador lo que le faltaba al equipo? Las dos victorias consecutivas abren el debate. Lo que venga después dará la respuesta.",
-      "Recreación narrativa: los minutos de los goles y la descripción del desarrollo del partido son un escenario ficticio. El resultado final, los goleadores y los participantes son datos confirmados."
+      "Chatzinikolaou sobre su nuevo ayudante, Karvounis: «Karvounis ya ha aportado energía, ideas nuevas y una mejor comunicación con los jugadores. Su contribución a nuestro buen inicio es importante. Veo a un compañero con ganas de seguir creciendo y creo que puede desempeñar un papel importante en el futuro de nuestro cuerpo técnico. Seguimos juntos, trabajando y comprometidos con el equipo».",
+      "Recreación narrativa: los minutos de los goles, la descripción del desarrollo del partido y el comentario del entrenador son ficticios. El resultado final, los goleadores y los participantes son datos confirmados."
     ]
   }
 };
