@@ -237,8 +237,12 @@ runtime CDN dependencies.
 
 This is a static site: deploy the repository root to a static host, with no build
 command required, or run `npm run build` and publish `dist/` for a single-file
-deployment. The site is live at https://zachos7.github.io/SHADOWS-FC/ using
-GitHub Pages from main and the root folder. No custom domain is configured.
+deployment. The team repository is `shadows-fc/shadows-fc.github.io`; publish
+`main` and the root folder to use https://shadows-fc.github.io/. Confirm Pages
+activation and the public response before announcing the new address as live.
+The original site at https://zachos7.github.io/SHADOWS-FC/ remains available
+during the migration. No custom domain is configured. See `DEPLOYMENT.md` for
+activation and verification.
 Use the existing checkout in cloud tasks; no Git worktree is needed.
 
 ### Classical museum room

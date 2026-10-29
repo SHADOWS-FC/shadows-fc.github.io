@@ -5,11 +5,13 @@ The club has authorised publication of this website to GitHub Pages.
 Publish the **main** branch, **/(root)** folder, using GitHub Pages' branch
 deployment. The root already contains the HTML, CSS, JavaScript, images and
 fonts. No build step or package installation is required. `.nojekyll` prevents
-unnecessary Jekyll processing. All asset URLs are relative so the project path
-`/SHADOWS-FC/` works without changes.
+unnecessary Jekyll processing. All asset URLs are relative, so both the team
+site's root and the original project path `/SHADOWS-FC/` work without changes.
 
-The expected project address is `https://zachos7.github.io/SHADOWS-FC/`. This is
-an expected address, not a statement that publication has completed. Confirm
+The team repository is `shadows-fc/shadows-fc.github.io` and its expected Pages
+address is `https://shadows-fc.github.io/`. The original repository and site at
+`https://zachos7.github.io/SHADOWS-FC/` are retained during migration. The new
+address is an expected address, not a statement that publication has completed. Confirm
 GitHub's Pages configuration, deployment status, and an actual successful
 response before announcing the site as live.
 
@@ -27,11 +29,16 @@ than changing visibility without authorisation.
 
 Verify the published homepage and these relative assets return successfully:
 
-- `styles.css` and `editorial.css`
-- `app.js` and `data.js`
-- `assets/night-pitch.png` and `assets/shadows-shirt.svg`
+- `styles.css`, `editorial.css` and `theme.css`
+- `app.js`, `data.js` and `i18n.js`
+- `assets/team.jpg` and `assets/team-celebration.jpg`
+- `assets/logos/shadows-fc-2026.jpeg`
+- `assets/announcements/coaching-staff.png`
 
-In a browser, verify the pitch imagery, pink title, four results, score detail
-dialogs, language switch, player search, and mobile menu. Existing data tests
-run with `npm test`. Check that the match page totals are 21 goals scored and
-25 conceded, and Mike is displayed as Mixalis.
+In a browser, verify the two-photo gallery and museum, five results and their
+detail dialogs, homepage standings, scorers, grouped player profiles,
+announcements, all four languages, dark/light themes and mobile layout.
+Existing data tests run with `npm test`. Recorded match totals are 28 goals
+scored and 29 conceded; the club-supplied standings retain 27 goals scored.
+Mike is displayed as Mixalis. Check that shared player, match and announcement
+links use the new domain and reopen the same details.
