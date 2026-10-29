@@ -301,8 +301,8 @@ their dates, logos and goal records retain their source values.
 `upcomingMatches` contains scheduled games separately from completed `matches`.
 Blue Fish on Tuesday 27/10/2026 at 22:00 is now a completed 7–4 win, with
 Manousos 3, Zachos 2 and Tasos 2. Its seven confirmed participants are Dinos,
-Babakos T., Babakos D., Zachos, Manousos, Rothos and Vlachos. No positions,
-shirt numbers, coaching staff, substitutes or MVP were supplied. The lineup
+Babakos T., Babakos D., Zachos, Manousos, Rothos and Vlachos. The club subsequently confirmed Chatzinikolaou and Karvounis as coaching staff.
+No positions, shirt numbers, coaching roles, substitutes or MVP were supplied. The lineup
 is labelled as players who played, rather than an inferred starting lineup.
 No new roster profile or unconfirmed name alias is created for these records.
 The result brings the match totals to five played, two wins, three losses,
@@ -313,15 +313,18 @@ normalizes to `?match=blue-fish-20261027`, preserving previously shared links.
 
 The Standings menu links to `#standings` on the homepage, directly below
 the matches and above the scorers. `leagueStandings` preserves the club's
-12-team table in the supplied order, including tied-team order, played counts
-and the Aston Voula B suffix. SHADOWS is highlighted. All nine columns fit without horizontal scrolling;
+12-team table with only the confirmed Blue Fish game added to SHADOWS and
+Blue Fish. Other teams' statistics, tied-team order and the Aston Voula B suffix
+are retained. SHADOWS moves to sixth on six points; Savralliolid shifts to seventh
+without any change to its statistics. SHADOWS is highlighted. All nine columns fit without horizontal scrolling;
 compact translated headings and an abbreviation key keep the table readable
 on narrow screens.
 All controls, headings and names follow the four language choices. Existing
 team crests are reused; Bunker Parthenr has initials until its crest is supplied.
 
-The last supplied standings snapshot predates Blue Fish and records SHADOWS
-with 20 goals for; the first four match reports total 21. The five completed
-results now total 28 goals for. No newer league table has been supplied. The league snapshot and match statistics deliberately
-retain their respective source values, pending a club-confirmed correction.
-Do not silently reconcile the table, scorers or historical match scores.
+The partial league update adds the 7–4 to the original supplied table:
+SHADOWS has five played, two wins, three losses, 27 goals for, 29 against and
+six points; Blue Fish has five played, one win, four losses, 20 goals for,
+28 against and three points. Results of the other teams have not been supplied,
+so their records remain as provided. The original one-goal discrepancy remains:
+the league table now has 27 SHADOWS goals, while the five match reports total 28.

@@ -18,19 +18,19 @@ export const club = {
 // Scheduled fixtures are separate from completed results and scoring totals.
 export const upcomingMatches = [];
 
-// Club-supplied league snapshot, in the supplied order. Do not derive it from
-// the original four match reports: this pre-Blue-Fish snapshot records 20
-// SHADOWS goals, versus 21 in those reports. Keep this supplied snapshot until
-// an updated league table is confirmed; later results live below separately.
+// Last club-supplied league table, updated only for the confirmed Blue Fish
+// game at the club's request. Other teams' statistics and tied-team order stay
+// as supplied. SHADOWS' 27 league goals carry forward the original one-goal
+// difference from the recorded match reports (28); do not silently reconcile it.
 export const leagueStandings = [
   { position: 1, id: 'champminions', name: 'CHAMPMINIONS', played: 4, won: 4, lost: 0, drawn: 0, goalsFor: 25, goalsAgainst: 9, points: 12, logo: 'assets/logos/champminions-2026.jpeg', crestShape: 'black' },
   { position: 2, id: 'legrena', name: 'LEGRENA FC', played: 4, won: 4, lost: 0, drawn: 0, goalsFor: 17, goalsAgainst: 11, points: 12, logo: 'assets/logos/legrena.jpg', crestShape: 'legrena' },
   { position: 3, id: 'unathletico', name: 'UNATLETICO', played: 4, won: 3, lost: 0, drawn: 1, goalsFor: 22, goalsAgainst: 12, points: 10, logo: 'assets/logos/unathletico-2026.jpeg', crestShape: 'black' },
   { position: 4, id: 'blyzz', name: 'BLYZZ', played: 4, won: 3, lost: 1, drawn: 0, goalsFor: 24, goalsAgainst: 17, points: 9, logo: 'assets/logos/blyzz-2026.jpeg', crestShape: 'black' },
   { position: 5, id: 'fiorepeina', name: 'ΦΙΟΡΕΠΕΙΝΑ', played: 4, won: 2, lost: 1, drawn: 1, goalsFor: 16, goalsAgainst: 14, points: 7, logo: 'assets/logos/fiorepeina-2026.jpeg', crestShape: 'black' },
-  { position: 6, id: 'savralliolid', name: 'SAVRALLIOLID', played: 3, won: 1, lost: 2, drawn: 0, goalsFor: 15, goalsAgainst: 16, points: 3, logo: 'assets/logos/savralliolid-2026.jpeg', crestShape: 'black' },
-  { position: 7, id: 'shadows', name: 'SHADOWS', played: 4, won: 1, lost: 3, drawn: 0, goalsFor: 20, goalsAgainst: 25, points: 3, logo: 'assets/logos/shadows-fc-2026.jpeg', crestShape: 'shadows' },
-  { position: 8, id: 'blue-fish', name: 'BLUE FISH', played: 4, won: 1, lost: 3, drawn: 0, goalsFor: 16, goalsAgainst: 21, points: 3, logo: 'assets/logos/blue-fish-2026.jpeg', crestShape: 'black' },
+  { position: 6, id: 'shadows', name: 'SHADOWS', played: 5, won: 2, lost: 3, drawn: 0, goalsFor: 27, goalsAgainst: 29, points: 6, logo: 'assets/logos/shadows-fc-2026.jpeg', crestShape: 'shadows' },
+  { position: 7, id: 'savralliolid', name: 'SAVRALLIOLID', played: 3, won: 1, lost: 2, drawn: 0, goalsFor: 15, goalsAgainst: 16, points: 3, logo: 'assets/logos/savralliolid-2026.jpeg', crestShape: 'black' },
+  { position: 8, id: 'blue-fish', name: 'BLUE FISH', played: 5, won: 1, lost: 4, drawn: 0, goalsFor: 20, goalsAgainst: 28, points: 3, logo: 'assets/logos/blue-fish-2026.jpeg', crestShape: 'black' },
   { position: 9, id: 'aston-voula-b', name: 'ASTON VOULA B', played: 3, won: 1, lost: 2, drawn: 0, goalsFor: 10, goalsAgainst: 17, points: 3, logo: 'assets/logos/aston-voula-2026.jpeg', crestShape: 'black' },
   { position: 10, id: 'bunker-parthenr', name: 'BUNKER PARTHENR', played: 4, won: 1, lost: 3, drawn: 0, goalsFor: 17, goalsAgainst: 23, points: 3 },
   { position: 11, id: 'gates-of-olympus', name: 'GATES OF OLYMPUS', played: 4, won: 0, lost: 2, drawn: 2, goalsFor: 13, goalsAgainst: 19, points: 2, logo: 'assets/logos/gate-of-olympus-2026.jpeg', crestShape: 'black' },
@@ -172,8 +172,9 @@ export const matches = [
         { name: 'Dinos' }, { name: 'Babakos T.' }, { name: 'Babakos D.' },
         { name: 'Zachos' }, { name: 'Manousos' }, { name: 'Rothos' }, { name: 'Vlachos' },
       ],
+      staff: [{ name: 'Chatzinikolaou' }, { name: 'Karvounis' }],
     },
-    source: 'Result, scorers and seven participants confirmed by the club in chat. Date and time retained from the previously confirmed fixture. No positions, shirt numbers, MVP or coaching staff were supplied.',
+    source: 'Result, scorers and seven participants confirmed by the club in chat. Date and time retained from the previously confirmed fixture. Coaching staff subsequently confirmed as Chatzinikolaou and Karvounis. No positions, shirt numbers, MVP or coaching roles were supplied.',
   },
 ];
 
