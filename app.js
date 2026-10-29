@@ -1,5 +1,5 @@
-import { club, matches, upcomingMatches, leagueStandings, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261029-partial-standings';
-import { messages, localizedName, localizedCareer, localizedOpponent, languageLocales, announcementTranslations } from './i18n.js?v=20261029-partial-standings';
+import { club, matches, upcomingMatches, leagueStandings, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261029-match-report';
+import { messages, localizedName, localizedCareer, localizedOpponent, languageLocales, announcementTranslations } from './i18n.js?v=20261029-match-report';
 
 let language = 'el';
 try { const saved = localStorage.getItem('shadows-language'); if (Object.hasOwn(messages, saved)) language = saved; } catch { /* Storage may be disabled. */ }
@@ -435,6 +435,8 @@ else window.addEventListener('resize', () => showGalleryPhoto(galleryIndex, true
 
 const announcementText = (item, field) => announcementTranslations[item.id]?.[language]?.[field] ?? item[field]?.[language] ?? item[field]?.el ?? item[field]?.en;
 
+const announcementCategory = item => t(item.category || 'officialAnnouncement');
+
 function announcementPhotoMarkup(item, card = false) {
   return item.photo ? `<img class="announcement-photo${card ? ' announcement-card-photo' : ''}" src="${esc(item.photo)}" alt="${esc(announcementText(item, 'photoAlt') || announcementText(item, 'title'))}" width="1280" height="1232"${card ? ' loading="lazy"' : ''}>` : '';
 }
@@ -442,7 +444,7 @@ function announcementPhotoMarkup(item, card = false) {
 function renderAnnouncements() {
   const ordered = [...announcements].sort((a, b) => b.order - a.order);
   $('#announcements-count').textContent = `${ordered.length} ${t(ordered.length === 1 ? 'announcementSingular' : 'announcementCount').toLocaleUpperCase()}`;
-  $('#announcement-list').innerHTML = ordered.map(item => `<article class="announcement-card"><button data-open-announcement="${esc(item.id)}">${announcementPhotoMarkup(item, true)}<span class="announcement-card-meta"><span>${t('officialAnnouncement')}</span>${item.date ? `<time>${esc(item.date)}</time>` : ''}</span><h2>${esc(announcementText(item, 'title'))}</h2><p>${esc(announcementText(item, 'summary') || '')}</p><span class="announcement-card-link">${t('readAnnouncement')} <span aria-hidden="true">↗</span></span></button></article>`).join('') || `<div class="announcements-empty"><span class="eyebrow">SHADOWS FC</span><p>${t('noAnnouncements')}</p></div>`;
+  $('#announcement-list').innerHTML = ordered.map(item => `<article class="announcement-card"><button data-open-announcement="${esc(item.id)}">${announcementPhotoMarkup(item, true)}<span class="announcement-card-meta"><span>${announcementCategory(item)}</span>${item.date ? `<time>${esc(item.date)}</time>` : ''}</span><h2>${esc(announcementText(item, 'title'))}</h2><p>${esc(announcementText(item, 'summary') || '')}</p><span class="announcement-card-link">${t('readAnnouncement')} <span aria-hidden="true">↗</span></span></button></article>`).join('') || `<div class="announcements-empty"><span class="eyebrow">SHADOWS FC</span><p>${t('noAnnouncements')}</p></div>`;
   renderArrows();
 }
 
@@ -495,7 +497,7 @@ function renderDialog() {
   if (dialogContent.type === 'announcement') {
     const item = announcements.find(entry => entry.id === dialogContent.id);
     if (!item) return;
-    $('#dialog-category').textContent = t('officialAnnouncement');
+    $('#dialog-category').textContent = announcementCategory(item);
     $('#dialog-body').innerHTML = `<article class="announcement-detail"><h2 id="dialog-title">${esc(announcementText(item, 'title'))}</h2><p class="announcement-byline">SHADOWS FC${item.date ? ` · ${esc(item.date)}` : ''}</p>${announcementPhotoMarkup(item)}<div class="announcement-body">${(announcementText(item, 'body') || []).map(paragraph => `<p>${esc(paragraph)}</p>`).join('')}</div></article>`;
   } else if (dialogContent.type === 'fixture') {
     const match = upcomingMatches.find(item => item.id === dialogContent.id);

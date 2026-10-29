@@ -328,3 +328,17 @@ six points; Blue Fish has five played, one win, four losses, 20 goals for,
 28 against and three points. Results of the other teams have not been supplied,
 so their records remain as provided. The original one-goal discrepancy remains:
 the league table now has 27 SHADOWS goals, while the five match reports total 28.
+
+### Blue Fish match article
+
+The newest announcement, `blue-fish-two-wins`, is the club-requested article
+about the second consecutive win and Chatzinikolaou/Karvounis coaching staff.
+It uses a match-report category, distinct from the existing Sotiris statement.
+The Greek headline follows the supplied wording, and the article is translated
+into English, Albanian and Spanish. No coaches' photograph has been supplied;
+the optional photo fields remain absent until the original is provided.
+
+The minute-by-minute comeback is a requested fictional narrative, identified as
+such at the article's end. The score7–4 and Manousos3/Zachos2/Tasos2 tally stay
+consistent with the confirmed result. Narrative minutes, play descriptions and
+score progression do not enter match records, scorers, appearances or standings.
