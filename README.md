@@ -310,7 +310,9 @@ No positions, shirt numbers, coaching roles, substitutes or MVP were supplied. T
 is labelled as players who played, rather than an inferred starting lineup.
 No new roster profile or unconfirmed name alias is created for these records.
 The result brings the match totals to five played, two wins, three losses,
-28 goals for and 29 against. No next fixture is currently confirmed.
+28 goals for and 29 against. The next confirmed fixture is against FLAP FC on
+Wednesday 04/11/2026 at 21:00, shown above the completed results with the
+club-supplied FLAP crest. Its shared link is `?fixture=flap-fc-20261104`.
 
 The former `?fixture=blue-fish-20261027` link opens the completed result and
 normalizes to `?match=blue-fish-20261027`, preserving previously shared links.

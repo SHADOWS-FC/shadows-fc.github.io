@@ -360,7 +360,7 @@ Object.assign(messages.el, {
   standingsIntro: 'Η κατάταξη των ομάδων στο Master League της Βούλας.',
   standingsCaption: 'Βαθμολογία Master League — θέσεις, αγώνες, αποτελέσματα, γκολ και βαθμοί',
   teamLabel: 'Ομάδα', rankLabel: 'Θέση', pointsLabel: 'Βαθμοί', goalsForShort: 'ΓΥ', goalsAgainstShort: 'ΓΚ',
-  nextFixture: 'Επόμενος αγώνας', completedFixtures: 'Αποτελέσματα', scheduled: 'ΠΡΟΣΕΧΩΣ', tuesday: 'Τρίτη',
+  nextFixture: 'Επόμενος αγώνας', completedFixtures: 'Αποτελέσματα', scheduled: 'ΠΡΟΣΕΧΩΣ', tuesday: 'Τρίτη', wednesday: 'Τετάρτη',
   fixturePending: 'Δεν έχει καταχωριστεί αποτέλεσμα για αυτόν τον αγώνα.',
 });
 Object.assign(messages.en, {
@@ -368,7 +368,7 @@ Object.assign(messages.en, {
   standingsIntro: 'The team rankings in the Master League in Voula.',
   standingsCaption: 'Master League standings — positions, matches, results, goals and points',
   teamLabel: 'Team', rankLabel: 'Position', pointsLabel: 'Points', goalsForShort: 'GF', goalsAgainstShort: 'GA',
-  nextFixture: 'Next match', completedFixtures: 'Results', scheduled: 'UPCOMING', tuesday: 'Tuesday',
+  nextFixture: 'Next match', completedFixtures: 'Results', scheduled: 'UPCOMING', tuesday: 'Tuesday', wednesday: 'Wednesday',
   fixturePending: 'No result has been recorded for this match.',
 });
 Object.assign(messages.sq, {
@@ -376,7 +376,7 @@ Object.assign(messages.sq, {
   standingsIntro: 'Renditja e ekipeve në Master League në Voula.',
   standingsCaption: 'Renditja e Master League — vendet, ndeshjet, rezultatet, golat dhe pikët',
   teamLabel: 'Ekipi', rankLabel: 'Vendi', pointsLabel: 'Pikë', goalsForShort: 'GS', goalsAgainstShort: 'GP',
-  nextFixture: 'Ndeshja e radhës', completedFixtures: 'Rezultate', scheduled: 'SË SHPEJTI', tuesday: 'E martë',
+  nextFixture: 'Ndeshja e radhës', completedFixtures: 'Rezultate', scheduled: 'SË SHPEJTI', tuesday: 'E martë', wednesday: 'E mërkurë',
   fixturePending: 'Nuk është regjistruar rezultat për këtë ndeshje.',
 });
 Object.assign(messages.es, {
@@ -384,7 +384,7 @@ Object.assign(messages.es, {
   standingsIntro: 'La clasificación de los equipos de la Master League de Voula.',
   standingsCaption: 'Clasificación de la Master League — puestos, partidos, resultados, goles y puntos',
   teamLabel: 'Equipo', rankLabel: 'Puesto', pointsLabel: 'Puntos', goalsForShort: 'GF', goalsAgainstShort: 'GC',
-  nextFixture: 'Próximo partido', completedFixtures: 'Resultados', scheduled: 'PRÓXIMAMENTE', tuesday: 'Martes',
+  nextFixture: 'Próximo partido', completedFixtures: 'Resultados', scheduled: 'PRÓXIMAMENTE', tuesday: 'Martes', wednesday: 'Miércoles',
   fixturePending: 'Todavía no se ha registrado un resultado para este partido.',
 });
 

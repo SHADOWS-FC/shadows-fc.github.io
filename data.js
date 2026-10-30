@@ -16,7 +16,15 @@ export const club = {
 };
 
 // Scheduled fixtures are separate from completed results and scoring totals.
-export const upcomingMatches = [];
+export const upcomingMatches = [
+  {
+    id: 'flap-fc-20261104', date: '04/11', calendarDate: '2026-11-04',
+    weekday: 'wednesday', time: '21:00',
+    opponent: 'ΦΛΑΠ FC', initials: 'FLAP', color: '#d4ad40',
+    logo: 'assets/logos/flap-fc-2026.jpeg', crestShape: 'black',
+    source: 'Club-confirmed upcoming game on Wednesday 04/11/2026 at 21:00. Result and lineup have not been supplied.',
+  },
+];
 
 // Last club-supplied league table, updated only for the confirmed Blue Fish
 // game at the club's request. Other teams' statistics and tied-team order stay

@@ -4,7 +4,7 @@ import { upcomingMatches, leagueStandings, matches, getSummary, getScorers } fro
 import { localizedOpponent } from '../i18n.js';
 
 test('Blue Fish moves from the schedule to a single completed Tuesday result', () => {
-  assert.equal(upcomingMatches.length, 0);
+  assert.equal(upcomingMatches.filter(match => match.id === 'blue-fish-20261027').length, 0);
   const fixture = matches.find(match => match.id === 'blue-fish-20261027');
   assert.ok(fixture);
   assert.equal(fixture.opponent, 'Blue Fish');
