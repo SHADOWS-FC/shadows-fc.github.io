@@ -412,7 +412,7 @@ Object.assign(messages.es, { matchReport: 'CRÓNICA DEL PARTIDO' });
 
 announcementTranslations['blue-fish-two-wins'] = {
   "en": {
-    "title": "2 from 2 for our team under the new coaching staff. Was a change of coach what the team had been missing?",
+    "title": "2 for 2 for our team under the new coaching staff. Was a change of coach what the team had been missing?",
     "summary": "SHADOWS FC beat Blue Fish 7–4, with a Manousos hat-trick and two goals each from Zachos and Tasos. A second consecutive win and a performance full of character.",
     "photoAlt": "Chatzinikolaou and Karvounis speaking to the press, with SHADOWS FC crests in the background.",
     "body": [
@@ -422,7 +422,7 @@ announcementTranslations['blue-fish-two-wins'] = {
       "Manousos equalised at 30′ for 4–4 and sparked the final push. At 34′, Zachos scored his second goal of the night to put SHADOWS back in front at 5–4. Tasos gave the team a two-goal cushion at 38′, before Manousos rounded off the evening at 40+1′ in stoppage time: a hat-trick and a final score of 7–4.",
       "The way the team played in the closing stages was the biggest positive. Rather than settling for the lead, the players kept moving the ball and looking for the right option. Chatzinikolaou and Karvounis saw their instructions put into practice, with clear heads and cover for one another when the game demanded concentration.",
       "There were standout goalscorers, but this was a team effort. Alongside Manousos, Zachos and Tasos, Dinos, Dimitris Babakos, Rothos and Vlachos also played. Running, challenges and support off the ball provided the platform for the goals. Manousos finished with three, Zachos with two and Tasos with two.",
-      "Two wins from two does not mean everything has been solved. It does, however, show a response, greater togetherness and a reason to approach the next game with optimism. Was a change of coach what the team had been missing after all? Two consecutive wins have opened the discussion. What comes next will provide the answer.",
+      "Going 2 for 2 does not mean everything has been solved. It does, however, show a response, greater togetherness and a reason to approach the next game with optimism. Was a change of coach what the team had been missing after all? Two consecutive wins have opened the discussion. What comes next will provide the answer.",
       "Chatzinikolaou on his new assistant, Karvounis: “Karvounis has already brought energy, fresh ideas and better communication with the players. His contribution to our strong start has been important. I see a colleague who is eager to develop, and I believe he can play a significant role in the future of our coaching staff. We keep working together, with commitment to the team.”",
     ]
   },
