@@ -41,7 +41,7 @@ browser validation here uses HTTP.
 - `styles.css`: base layout and responsive rules.
 - `editorial.css`: photo-led homepage, condensed typography, match cards and responsive layout.
 - `black-pink.css`: the black/pink club palette, dark cards and match/player dialogs.
-- `gallery.css`: the two-photo gallery and full-viewport museum room.
+- `gallery.css`: the two-photo gallery and simple full-screen photo viewer.
 - `theme.css`: Dark/Light controls and the white/pink Light palette.
 - `background-details.css`: broad diagonal black/pink background stripes.
 - `assets/`: self-hosted graphics and fonts, including the font licence.
@@ -67,19 +67,18 @@ All 13 profiles remain available: 2 goalkeepers, 3 defenders, 2 midfielders and
 The compact gallery uses a black/pink photo card with thumbnail navigation.
 Visitors can use arrows, indicator buttons, thumbnails, horizontal scrolling,
 touch swipes or mouse dragging; the focused gallery supports Left/Right and
-Home/End. Clicking a photograph or its museum button opens a full-viewport
-exhibition room: the complete original image is framed on a museum wall,
-with spotlights, panel details and a perspective floor. Previous/next controls,
-arrow keys and Escape remain available. Enter on the focused gallery opens the selected photograph. The viewer
+Home/End. Clicking a photograph or its view button opens a simple full-screen
+viewer showing the complete original image. Previous/next controls, touch
+swipes, arrow keys and Escape remain available. Enter on the focused gallery opens the selected photograph. The viewer
 restores focus on closing and keeps the gallery selection in sync. There is no
 automatic advancement. Controls follow reduced-motion settings, announce the
 current photograph and retain the selected image across layout/language changes.
 
-Only the two team photographs are presented in a compact SHADOWS Museum
-setting within the existing homepage gallery, with an immersive room on opening
-either photo. The exhibition wall, spotlight, floor and frame are decorative CSS. Player portraits remain in the squad
-section; the navigation, matches, scorers and announcements retain their earlier
-interface. There is no separate Museum page or photograph category browser.
+Only the two supplied team photographs appear in this gallery. The former
+museum room, architectural background, decorative frames and room-travel
+animations have been removed from the interface. Player portraits remain in
+the squad section; navigation, matches, scorers and announcements retain their
+existing interface. There is no separate photograph category browser.
 
 The active club crest is the supplied black/pink image at
 `assets/logos/shadows-fc-2026.jpeg`, used in the header, footer, match cards,
@@ -96,7 +95,7 @@ The background uses broad diagonal black/deep-pink stripes with unequal widths.
 The upper-right Dark/Light buttons switch the existing interface between the
 original dark palette (default) and white/pink surfaces. Photographs and supplied
 logos retain their original colours. The same controls are available inside
-the museum. The choice is stored under `shadows-theme` when browser storage is
+the photo viewer. The choice is stored under `shadows-theme` when browser storage is
 available, and applied in the document head before styles load to avoid a
 dark flash on a returning Light visit. With storage disabled, switching still
 works for the current page. Language, navigation and content are independent
@@ -149,12 +148,12 @@ profile aliases or assuming a listed substitute came on. The supplied lineup
 graphics are not published as images.
 The club later corrected Savralliolid's coaching staff: Καρβούνης replaces Giotis.
 
-Zachos Giannis (#5) was injured against Legrena on 29/09. Match details and his
-profile show “Estimated absence: 1.5 months”, with the injury date stated
-separately and an
-approximate return in mid-November. The site does not infer a medical diagnosis,
-a medical clearance or revise the original estimate. The club subsequently
-confirmed that Zachos played against Blue Fish on 27/10.
+Zachos Giannis (#5) was injured against Legrena on 29/09. That match retains
+the original estimated absence of 1.5 months and approximate mid-November
+return as historical information. The club has now confirmed his return:
+the injury is marked `resolved: true` and no injury notice appears in his
+current profile. No precise recovery date or medical clearance is inferred.
+The club also confirmed that Zachos played against Blue Fish on 27/10.
 
 The team photographs at `assets/team.jpg` and `assets/team-celebration.jpg` are
 the original attachments supplied by the club. Both are copied without
@@ -245,14 +244,14 @@ during the migration. No custom domain is configured. See `DEPLOYMENT.md` for
 activation and verification.
 Use the existing checkout in cloud tasks; no Git worktree is needed.
 
-### Classical museum room
+### Photo viewing
 
-The two-photo museum uses a self-hosted generated virtual Greek gallery background
-with marble columns and statues. `greek-museum.css` affects only the open museum.
-Directional artwork movement and room parallax simulate moving between exhibits.
-Navigation queues only the latest destination; closing cancels pending movement.
-Reduced-motion users see immediate photo changes, and resizing settles movement.
-Original team photographs, homepage, match records and Dark/Light choices are unchanged.
+The two original team photographs open in a plain photo viewer with no museum
+scenery or travel animation. The original full images are contained without
+cropping; arrows, keyboard controls and touch swipes switch between them.
+Closing the viewer restores focus to the gallery. The old museum stylesheet
+and generated room artwork are retained as unused source assets and are not
+loaded or embedded in the published page.
 
 ### Player careers
 
@@ -293,7 +292,7 @@ Zachos retains his complete seven-line career and its four supplied crests.
 
 The header menu offers Ελληνικά, English, Shqip and Español. The choice is
 stored under `shadows-language`; invalid values default to Greek. All four
-interfaces include navigation, accessible labels, positions, museum controls,
+interfaces include navigation, accessible labels, positions, photo controls,
 match details, injury notices and the full Sotiris announcement. Official club
 branding and the requested MVP label remain unchanged.
 

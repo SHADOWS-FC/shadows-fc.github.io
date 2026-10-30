@@ -123,7 +123,7 @@ export const matches = [
         { name: 'Babakos Tasos', position: 'ST' },
       ],
     },
-    injuries: [{ playerNumber: 5, name: 'Zachos Giannis', absenceMonths: 1.5, expectedReturn: 'mid-November' }],
+    injuries: [{ playerNumber: 5, name: 'Zachos Giannis', absenceMonths: 1.5, expectedReturn: 'mid-November', resolved: true }],
   },
   {
     id: 'aston-voula', round: 2, date: '06/10', time: '20:00',

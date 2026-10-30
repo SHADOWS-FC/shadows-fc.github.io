@@ -1,44 +1,33 @@
-/* The original two-photo gallery, displayed on a compact museum wall. */
+/* Two original team photographs with simple viewing controls. */
 .team-gallery{
-  position:relative;isolation:isolate;width:100%;max-width:760px;margin-inline:auto;
-  padding:62px 25px 22px;border:1px solid #49303f;border-radius:3px;
-  background:radial-gradient(ellipse 65% 340px at 50% 62px,#b7a0b52b,transparent 76%),linear-gradient(90deg,#ffffff04 1px,transparent 1px) 0 0/25% 100%,linear-gradient(90deg,#141016,#211922 50%,#141016);
-  box-shadow:0 18px 44px #0005,inset 0 0 32px #0003;
+  position:relative;width:100%;max-width:760px;margin-inline:auto;
+  padding:18px 18px 20px;border:1px solid var(--line);border-radius:8px;
+  background:var(--surface);box-shadow:none;
 }
-.team-gallery:before{content:'';position:absolute;top:43px;left:calc(50% - 25px);width:50px;height:3px;border-radius:2px;background:#d9cad5;box-shadow:0 3px 11px #ead5e68c;pointer-events:none}
-.team-gallery:after{content:'';position:absolute;bottom:0;left:0;right:0;height:8px;border-top:1px solid #513d4b;background:linear-gradient(#2b202b,#100d12);pointer-events:none}
-.gallery-museum-label{position:absolute;top:18px;left:20px;right:20px;margin:0;text-align:center;font-size:10px;font-weight:700;letter-spacing:3px;color:#efb4d4;line-height:1.4}
+.team-gallery:before,.team-gallery:after{content:none;display:none}
 .team-photo-frame.gallery-frame{
-  position:relative;isolation:isolate;max-width:none;aspect-ratio:auto;
-  margin:0;padding:11px;overflow:hidden;border:1px solid #916578;border-radius:2px;
-  background:linear-gradient(135deg,#342631,#0b080d 35%,#251b24);
-  box-shadow:0 14px 30px #0009,inset 0 0 0 3px #08060b,inset 0 0 0 4px #6e4d5e;
+  position:relative;max-width:none;aspect-ratio:auto;margin:0;padding:0;
+  overflow:hidden;border:0;border-radius:5px;background:var(--bg);box-shadow:none;
 }
 .gallery-frame:before,.gallery-frame:after{content:none;display:none}
 .gallery-viewport{
   display:flex;position:relative;aspect-ratio:6/5;width:100%;min-width:0;
   overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;
   overscroll-behavior-x:contain;scrollbar-width:none;cursor:grab;
-  background:#050506;border:1px solid #100c11;border-radius:0;box-shadow:none;
+  background:var(--bg);border:1px solid var(--line);border-radius:5px;box-shadow:none;
 }
 .gallery-viewport::-webkit-scrollbar{display:none}
 .gallery-viewport:focus-visible{outline:2px solid var(--pink-light);outline-offset:4px}
 .gallery-viewport.is-dragging{scroll-snap-type:none;scroll-behavior:auto;cursor:grabbing}
 .gallery-slide{position:relative;flex:0 0 100%;min-width:100%;height:100%;margin:0;scroll-snap-align:start;scroll-snap-stop:always}
-.gallery-frame .team-photo{display:block;width:100%;height:100%;border:0;box-shadow:none;user-select:none}
-.gallery-frame .team-photo--original{object-fit:cover;object-position:center 58%}
-.gallery-frame .team-photo--celebration{object-fit:contain;object-position:center;background:#050506}
+.gallery-frame .team-photo{display:block;width:100%;height:100%;border:0;box-shadow:none;object-fit:contain;object-position:center;background:var(--bg);user-select:none}
 .gallery-frame-mark{display:none}
 .gallery-zoom{position:absolute;right:14px;bottom:14px;z-index:2;display:flex;align-items:center;gap:8px;min-height:40px;padding:10px 13px;border:1px solid #b05a8a;border-radius:6px;background:#0b080ee8;color:#fff0f8;font-size:11px;font-weight:700;box-shadow:0 3px 15px #0005}
 .gallery-zoom svg{width:16px;height:16px;flex:none}
 .gallery-zoom:hover{background:#37172c;border-color:var(--pink-light)}
 .gallery-zoom:focus-visible{outline:2px solid var(--pink-light);outline-offset:3px}
 .gallery-controls{display:flex;align-items:center;justify-content:center;gap:20px;padding:17px 0 2px}
-.gallery-arrow{
-  display:grid;place-items:center;flex:none;width:40px;height:40px;padding:0;
-  background:#151017;border:1px solid #75465f;border-radius:6px;color:var(--pink-light);
-  transition:background .2s,border-color .2s,color .2s;
-}
+.gallery-arrow{display:grid;place-items:center;flex:none;width:40px;height:40px;padding:0;background:#151017;border:1px solid #75465f;border-radius:6px;color:var(--pink-light);transition:background .2s,border-color .2s,color .2s}
 .gallery-arrow svg{display:block;width:18px;height:18px}
 .gallery-arrow:hover:enabled{background:#33172b;border-color:var(--pink);color:#fff1f8}
 .gallery-arrow:disabled{background:#100d12;border-color:#382a35;color:#84717e;cursor:default}
@@ -58,106 +47,52 @@
 .gallery-hint{text-align:center;font-size:10px;line-height:1.7;color:var(--muted);margin:8px 0 0}
 .team-hero-caption{max-width:760px}
 
-/* Opening a team photograph enters a full-screen virtual museum room. */
-:root{
-  --museum-wall:#211b25;--museum-panel:#4c3a4b;--museum-light:#f9e6ed;
-  --museum-floor:#151018;--museum-floor-line:#584352;--museum-frame:#9b7387;
-  --museum-frame-dark:#241721;--museum-frame-light:#c09aaa;--museum-mat:#110d14;
-  --museum-ink:#f9edf5;--museum-muted:#d5bdcc;--museum-plate:#1a131c;--museum-shadow:#0008;
-}
+/* A plain full-screen photo viewer, without decorative scenery or frames. */
 dialog.photo-dialog{
-  position:fixed;inset:0;isolation:isolate;width:100%;max-width:none;
-  height:100dvh;max-height:none;margin:0;padding:27px 42px 30px;
-  overflow:hidden;border:0;border-radius:0;color:var(--museum-ink);box-shadow:none;
-  background:
-    radial-gradient(ellipse 48% 75% at 50% -15%,color-mix(in srgb,var(--museum-light) 16%,transparent),transparent 80%),
-    repeating-linear-gradient(90deg,transparent 0 calc(25% - 1px),color-mix(in srgb,var(--museum-panel) 45%,transparent) calc(25% - 1px) 25%),
-    var(--museum-wall);
+  position:fixed;inset:0;width:100%;max-width:none;height:100dvh;max-height:100dvh;
+  margin:0;padding:24px 32px;overflow:hidden;border:0;border-radius:0;
+  color:var(--text);background:var(--bg);box-shadow:none;
 }
-dialog.photo-dialog[open]{display:flex;flex-direction:column;gap:0}
-dialog.photo-dialog::backdrop{background:var(--museum-wall)}
-dialog.photo-dialog:before{
-  content:'';position:absolute;z-index:-1;left:0;right:0;bottom:0;height:15%;
-  border-top:5px double var(--museum-panel);
-  background:
-    repeating-conic-gradient(from -90deg at 50% -70%,transparent 0deg 13deg,color-mix(in srgb,var(--museum-floor-line) 38%,transparent) 13deg 13.25deg),
-    repeating-linear-gradient(0deg,transparent 0 29px,color-mix(in srgb,var(--museum-floor-line) 26%,transparent) 30px 31px),
-    var(--museum-floor);
-  box-shadow:0 -10px 20px var(--museum-shadow);
-}
-dialog.photo-dialog:after{
-  content:'';position:absolute;z-index:-1;left:8%;right:8%;top:87px;height:1px;
-  background:var(--museum-panel);box-shadow:0 3px 0 color-mix(in srgb,var(--museum-light) 3%,transparent);
-}
-.photo-viewer-top{position:relative;z-index:2;display:flex;flex:none;align-items:center;justify-content:space-between;gap:20px;min-width:0}
+dialog.photo-dialog[open]{display:flex;flex-direction:column;gap:18px}
+dialog.photo-dialog::backdrop{background:var(--bg)}
+dialog.photo-dialog:before,dialog.photo-dialog:after{content:none;display:none}
+.photo-viewer-top{display:flex;flex:none;align-items:center;justify-content:space-between;gap:20px;min-width:0}
 .photo-viewer-heading{min-width:0}
-.photo-viewer-heading .eyebrow{font-size:9px;letter-spacing:2.3px;color:var(--pink)}
-.photo-viewer-top h2{font-family:var(--display);font-size:clamp(18px,2vw,26px);font-weight:700;line-height:1.2;overflow-wrap:anywhere;margin-top:6px;color:var(--museum-ink)}
+.photo-viewer-heading .eyebrow{font-size:9px;letter-spacing:1.7px;color:var(--pink-light)}
+.photo-viewer-top h2{font-family:var(--display);font-size:clamp(18px,2vw,26px);font-weight:700;line-height:1.2;overflow-wrap:anywhere;margin-top:6px;color:var(--text)}
 .photo-viewer-actions{display:flex;align-items:center;gap:18px;flex:none}
-.photo-viewer-top .close-dialog{display:grid;place-items:center;flex:none;width:40px;height:40px;border:1px solid var(--museum-panel);border-radius:3px;background:var(--museum-plate);color:var(--museum-ink)}
-.photo-viewer-top .close-dialog:hover{border-color:var(--pink);color:var(--pink)}
-.photo-viewer-stage{position:relative;display:flex;flex:1;align-items:center;justify-content:center;min-width:0;min-height:0;padding:48px 18px 65px;overflow:visible;border:0;border-radius:0;background:none}
-.photo-viewer-stage:before{
-  content:'';position:absolute;pointer-events:none;top:31px;left:calc(50% - 32px);width:64px;height:5px;
-  border-radius:5px;background:var(--museum-light);box-shadow:0 0 16px color-mix(in srgb,var(--museum-light) 55%,transparent);
-}
-.photo-viewer-stage:after{
-  content:'';position:absolute;pointer-events:none;z-index:-1;top:36px;left:10%;right:10%;bottom:20%;
-  background:radial-gradient(ellipse at 50% 0,color-mix(in srgb,var(--museum-light) 9%,transparent),transparent 73%);
-  clip-path:polygon(47% 0,53% 0,100% 100%,0 100%);
-}
-.museum-artwork{
-  position:relative;display:flex;flex:none;align-items:center;justify-content:center;margin:0;
-  width:min(67vw,calc((100dvh - 285px)*var(--artwork-ratio,.6664)),850px);
-  aspect-ratio:var(--artwork-ratio,.6664);padding:clamp(9px,1.35vw,19px);
-  border:2px solid var(--museum-frame);border-radius:1px;
-  background:linear-gradient(135deg,var(--museum-frame-light),var(--museum-frame-dark) 25%,var(--museum-frame) 53%,var(--museum-frame-dark) 76%,var(--museum-frame-light));
-  box-shadow:0 18px 26px var(--museum-shadow),0 4px 8px var(--museum-shadow),inset 0 0 0 3px var(--museum-frame-dark),inset 0 0 0 4px var(--museum-frame-light);
-}
-.museum-artwork:after{content:'';position:absolute;inset:7px;border:1px solid var(--museum-frame-dark);pointer-events:none}
-#photo-viewer-image{display:block;width:100%;height:100%;max-width:100%;max-height:100%;min-width:0;min-height:0;object-fit:contain;object-position:center;background:var(--museum-mat);user-select:none;box-shadow:0 0 0 1px var(--museum-frame-dark)}
-.photo-viewer-controls{position:relative;z-index:2;display:flex;flex:none;align-items:center;justify-content:center;gap:25px;align-self:center;max-width:100%;padding:12px 18px;border:1px solid var(--museum-panel);background:var(--museum-plate);box-shadow:0 4px 14px var(--museum-shadow)}
-.photo-viewer-controls .gallery-counter{color:var(--museum-muted);font-size:10px;letter-spacing:1.4px}
-.photo-dialog .gallery-arrow{background:var(--museum-wall);color:var(--pink);border-color:var(--museum-panel);border-radius:3px}
-.photo-dialog .gallery-arrow:hover:enabled{background:var(--museum-plate);border-color:var(--pink);color:var(--pink)}
-.photo-dialog .gallery-arrow:disabled{background:var(--museum-wall);border-color:var(--museum-panel);color:var(--museum-muted);opacity:.45}
-.photo-viewer-top .close-dialog:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+.photo-viewer-top .close-dialog{display:grid;place-items:center;flex:none;width:44px;height:44px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--text)}
+.photo-viewer-top .close-dialog:hover{border-color:var(--pink);color:var(--pink-light)}
+.photo-viewer-top .close-dialog:focus-visible{outline:2px solid var(--pink-light);outline-offset:3px}
+.photo-viewer-stage{display:flex;flex:1;align-items:center;justify-content:center;min-width:0;min-height:0;padding:0;overflow:hidden;touch-action:pan-y}
+.photo-viewer-figure{display:flex;align-items:center;justify-content:center;width:100%;height:100%;min-width:0;min-height:0;margin:0;padding:0;border:0;background:none;box-shadow:none}
+#photo-viewer-image{display:block;width:auto;height:auto;max-width:100%;max-height:100%;min-width:0;min-height:0;object-fit:contain;object-position:center;background:none;user-select:none;box-shadow:none;pointer-events:none}
+.photo-viewer-controls{display:flex;flex:none;align-items:center;justify-content:center;gap:25px;align-self:center;max-width:100%;padding:0;border:0;background:none;box-shadow:none}
+.photo-viewer-controls .gallery-counter{color:var(--muted);font-size:10px;letter-spacing:1.4px}
 @media(prefers-reduced-motion:no-preference){.gallery-viewport{scroll-behavior:smooth}}
 @media(max-width:560px){
-  .team-gallery{max-width:440px;padding:55px 12px 18px}
-  .team-gallery:before{top:39px;width:42px;left:calc(50% - 21px)}
-  .gallery-museum-label{top:16px;font-size:9px;letter-spacing:2.4px}
-  .team-photo-frame.gallery-frame{padding:7px;box-shadow:0 10px 25px #0007,inset 0 0 0 2px #08060b,inset 0 0 0 3px #6e4d5e;}
+  .team-gallery{max-width:440px;padding:10px 10px 16px}
   .gallery-viewport{aspect-ratio:1}
-  .gallery-zoom{right:10px;bottom:10px;min-height:38px;padding:9px 11px;font-size:10px}
+  .gallery-zoom{right:10px;bottom:10px;min-height:40px;padding:9px 11px;font-size:10px}
   .gallery-controls{gap:13px;padding-top:13px}
   .gallery-counter{font-size:9px;letter-spacing:1px}
   .team-hero-caption{max-width:440px}
   .gallery-thumbnail{flex-basis:72px;width:72px;height:55px}
-  dialog.photo-dialog{padding:18px 18px 25px}
+  dialog.photo-dialog{padding:16px}
+  dialog.photo-dialog[open]{gap:14px}
   .photo-viewer-top{gap:10px;align-items:flex-start}
-  .photo-viewer-heading{max-width:calc(100% - 142px)}
+  .photo-viewer-heading{max-width:calc(100% - 152px)}
   .photo-viewer-heading .eyebrow{font-size:7px;letter-spacing:1px}
   .photo-viewer-top h2{font-size:17px;line-height:1.2}
   .photo-viewer-actions{gap:8px}
-  .photo-viewer-top .close-dialog{width:34px;height:34px}
-  dialog.photo-dialog:after{top:91px;left:6%;right:6%}
-  .photo-viewer-stage{padding:56px 2px 63px}
-  .photo-viewer-stage:before{top:34px;width:48px;left:calc(50% - 24px)}
-  .photo-viewer-stage:after{top:39px;left:0;right:0}
-  .museum-artwork{width:min(83vw,calc((100dvh - 290px)*var(--artwork-ratio,.6664)));padding:10px}
-  .photo-viewer-controls{gap:17px;padding:10px 13px}
+  .photo-viewer-controls{gap:17px}
   .photo-viewer-controls .gallery-counter{font-size:9px;letter-spacing:.7px}
 }
 @media(max-height:600px){
-  dialog.photo-dialog{padding:12px 24px 15px}
+  dialog.photo-dialog{padding:10px 18px}
+  dialog.photo-dialog[open]{gap:10px}
   .photo-viewer-top h2{font-size:17px}
   .photo-viewer-heading .eyebrow{font-size:7px}
-  dialog.photo-dialog:after{top:65px}
-  .photo-viewer-stage{padding:22px 20px 23px}
-  .photo-viewer-stage:before{top:6px;width:44px;left:calc(50% - 22px)}
-  .photo-viewer-stage:after{top:11px}
-  .museum-artwork{width:min(65vw,calc((100dvh - 177px)*var(--artwork-ratio,.6664)));padding:8px}
-  .photo-viewer-controls{padding:6px 12px;gap:20px}
-  .photo-viewer-controls .gallery-arrow{width:32px;height:32px}
+  .photo-viewer-top .close-dialog{width:36px;height:36px}
+  .photo-viewer-controls .gallery-arrow{width:34px;height:34px}
 }

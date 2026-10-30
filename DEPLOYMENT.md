@@ -35,7 +35,7 @@ Verify the published homepage and these relative assets return successfully:
 - `assets/logos/shadows-fc-2026.jpeg`
 - `assets/announcements/coaching-staff.png`
 
-In a browser, verify the two-photo gallery and museum, five results and their
+In a browser, verify the two-photo gallery and photo viewer, five results and their
 detail dialogs, homepage standings, scorers, grouped player profiles,
 announcements, all four languages, dark/light themes and mobile layout.
 Existing data tests run with `npm test`. Recorded match totals are 28 goals

@@ -1,4 +1,4 @@
-/* The mode selector is available in the top bar and inside the museum. */
+/* The mode selector is available in the top bar and photo viewer. */
 .club-topline{padding-block:1px}
 .topline-actions{display:flex;align-items:center;justify-content:flex-end;gap:18px;min-width:0}
 .theme-control{display:inline-flex;align-items:center;flex:none;gap:2px;padding:2px;border:1px solid #68415a;border-radius:5px;background:#130d15;letter-spacing:0}
@@ -15,11 +15,6 @@ html[data-theme="light"]{
   --scoreboard:#fff;--scoreboard-ink:#211820;--scoreboard-muted:#71616d;
   --scoreboard-line:#e4cedb;--scoreboard-pink:#fa3299;
   --stripe-black:#fff;--stripe-pink:#ffe1f0;
-  --museum-wall:#f9f6f8;--museum-panel:#e6dce3;--museum-light:#fff;
-  --museum-floor:#ebe5e8;--museum-floor-line:#d5c3cd;
-  --museum-frame:#b57a99;--museum-frame-dark:#dbc8d2;--museum-frame-light:#f9e1ef;
-  --museum-mat:#fff;--museum-ink:#241821;--museum-muted:#74616e;
-  --museum-plate:#fff;--museum-shadow:#37233125;
   background:var(--bg);color:var(--text);
 }
 html[data-theme="light"] body{
@@ -45,18 +40,10 @@ html[data-theme="light"] .footer-seal{background:#fff}
 html[data-theme="light"] .crest-frame{background:#fff;border-color:#d9b5ca}
 html[data-theme="light"] .crest-frame-shadows{background:#fff;border-color:#d9b5ca}
 
-/* The two-photo carousel retains the same size, controls and museum framing. */
-html[data-theme="light"] .team-gallery{
-  border-color:#d5b5c8;
-  background:radial-gradient(ellipse 65% 340px at 50% 62px,#fff,transparent 76%),linear-gradient(90deg,#b98ba415 1px,transparent 1px) 0 0/25% 100%,linear-gradient(90deg,#fdf9fc,#fff 50%,#fdf9fc);
-  box-shadow:0 18px 44px #6737490d,inset 0 0 32px #edcbd410;
-}
-html[data-theme="light"] .team-gallery:before{background:#b18b9f;box-shadow:0 3px 11px #c59eae66}
-html[data-theme="light"] .team-gallery:after{border-color:#d9b8cc;background:linear-gradient(#f4e9ef,#e8dae3)}
-html[data-theme="light"] .gallery-museum-label{color:var(--pink-light)}
-html[data-theme="light"] .team-photo-frame.gallery-frame{border-color:#b984a0;background:linear-gradient(135deg,#f7e5ef,#fff 35%,#f1dce8);box-shadow:0 14px 30px #67374915,inset 0 0 0 3px #fff,inset 0 0 0 4px #dbc0cf}
-html[data-theme="light"] .gallery-viewport{background:#fff;border-color:#e5cfdb}
-html[data-theme="light"] .gallery-frame .team-photo--celebration{background:#fff}
+/* The two original team photos use a simple gallery in either theme. */
+html[data-theme="light"] .team-gallery{border-color:var(--line);background:var(--surface)}
+html[data-theme="light"] .gallery-viewport{background:var(--bg);border-color:var(--line)}
+html[data-theme="light"] .gallery-frame .team-photo{background:var(--bg)}
 html[data-theme="light"] .gallery-zoom{background:#fffffff0;color:#9e1659;border-color:#d27aa6;box-shadow:0 3px 15px #6530481a}
 html[data-theme="light"] .gallery-zoom:hover{background:#ffe4f2;border-color:var(--pink)}
 html[data-theme="light"] .gallery-arrow{background:#fff7fb;border-color:#d4a5bf;color:var(--pink-light)}

@@ -144,11 +144,11 @@ test('Savralliolid selection keeps printed players and the club-corrected staff 
   assert.equal(selection.players.find(player => player.number === 22).name, 'Rothos');
 });
 
-test('Zachos injury is dated to the Legrena match with an approximate return', () => {
+test('Zachos historical injury is resolved after the club confirmed his return', () => {
   const injuryMatch = matches.find(match => match.injuries?.length);
   assert.equal(injuryMatch.id, 'legrena');
   assert.equal(injuryMatch.date, '29/09');
-  assert.deepEqual(injuryMatch.injuries[0], { playerNumber: 5, name: 'Zachos Giannis', absenceMonths: 1.5, expectedReturn: 'mid-November' });
+  assert.deepEqual(injuryMatch.injuries[0], { playerNumber: 5, name: 'Zachos Giannis', absenceMonths: 1.5, expectedReturn: 'mid-November', resolved: true });
   assert.equal(matches.flatMap(match => match.injuries || []).length, 1);
   assert.equal(squad.find(player => player.number === 5).name, 'Zachos Giannis');
 });
