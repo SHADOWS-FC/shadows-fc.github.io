@@ -256,6 +256,8 @@ export const confirmedPlayers = [
     ],
   },
   { name: 'Chatzinikolaou Christos', number: 28, position: 'CM', confirmed: true, photo: 'assets/players/28.jpeg', career: currentShadowsCareer() },
+  // The club-supplied portrait is pending upload to GitHub.
+  { name: 'Manousos Tsaroumis', number: 19, position: 'CM', confirmed: true, scorerName: 'Manousos' },
   { name: 'Chatziamanetoglou Dinos', number: 7, position: 'RW', confirmed: true, photo: 'assets/players/7.jpeg', scorerName: 'Dinos', career: currentShadowsCareer() },
   { name: 'Marfa Mixalis', number: 8, position: 'LW', confirmed: true, photo: 'assets/players/8.jpeg', scorerName: 'Mixalis', career: currentShadowsCareer() },
   { name: 'Stavros Kalogiropoulos', number: 14, position: 'CAM', confirmed: true, photo: 'assets/players/14.jpeg', scorerName: 'Stavros', career: currentShadowsCareer() },

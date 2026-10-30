@@ -55,13 +55,13 @@ Match scores and scorer totals are tested for consistency.
 
 The homepage has five sections, in this order: a gallery of the two supplied
 team photographs, scheduled and completed matches, league standings, all-time
-recorded scorers, then all 13 confirmed players. There are no search boxes, filter/sort controls, sponsor
+recorded scorers, then all 14 confirmed players. There are no search boxes, filter/sort controls, sponsor
 panels or intervening promotional sections. Player portraits retain their
 original photographic backgrounds.
 
 The squad is grouped into goalkeepers (GK), defenders (CB), midfielders (CM/CAM)
 and forwards (RW/LW/ST), preserving the confirmed position on each player card.
-All 13 profiles remain available: 2 goalkeepers, 3 defenders, 2 midfielders and
+All 14 profiles remain available: 2 goalkeepers, 3 defenders, 3 midfielders and
 6 forwards.
 
 The compact gallery uses a black/pink photo card with thumbnail navigation.
@@ -184,7 +184,7 @@ against Unathletico. MVP display names are kept as supplied by the club.
 - Confirmation of the season year; dates intentionally show day/month only.
 - The standalone selfie is excluded at the club's request.
 
-The published squad contains the **13 club-confirmed player profiles**. The
+The published squad contains the **14 club-confirmed player profiles**. The
 club confirmed that this is the complete current roster. The original matchday
 selection is stored separately and does not add unconfirmed players to the
 current squad or rewrite match history. Positions and permanent shirt numbers
@@ -198,9 +198,12 @@ Troka Giorgos (#9, CB), Babakos Dimitris (#11, CB), Zachos Giannis (#5, CB),
 Chatzinikolaou Christos (#28, CM), Chatziamanetoglou Dinos (#7, RW), and
 Marfa Mixalis (#8, LW), Stavros Kalogiropoulos (#14, CAM), and Kobas Gavrilos
 (#69, ST), Rothos Ioannis (#22, ST), Gkoumas Konstantinos (#6, ST), and
-Tasos Babakos (#10, ST).
+Tasos Babakos (#10, ST), and Manousos Tsaroumis (#19, CM).
 Mixalis is linked to the previously confirmed Mike alias; Stavros
-Kalogiropoulos is linked to the recorded scorer Stavros.
+Kalogiropoulos is linked to the recorded scorer Stavros. The club-confirmed
+Manousos Tsaroumis profile is linked to the recorded scorer Manousos and his
+three Blue Fish goals. His historical match positions are retained as supplied.
+His separately supplied original portrait is pending upload to GitHub.
 The club supplied an updated `SHD.rar` containing 13 original JPEGs. All 13 are copied
 without alteration to `assets/players/` and displayed in player cards and
 profile dialogs. The club confirmed that `10.jpeg` is Tasos Babakos (#10),
@@ -312,7 +315,9 @@ Manousos 3, Zachos 2 and Tasos 2. Its seven confirmed participants are Dinos,
 Babakos T., Babakos D., Zachos, Manousos, Rothos and Vlachos. The club subsequently confirmed Chatzinikolaou and Karvounis as coaching staff.
 No positions, shirt numbers, coaching roles, substitutes or MVP were supplied. The lineup
 is labelled as players who played, rather than an inferred starting lineup.
-No new roster profile or unconfirmed name alias is created for these records.
+Manousos was subsequently confirmed as Manousos Tsaroumis (#19, CM) and now
+has a roster profile linked to these goals. Vlachos remains a historical match
+participant without an inferred roster profile.
 The result brings the match totals to five played, two wins, three losses,
 28 goals for and 29 against. The next confirmed fixture is against FLAP FC on
 Wednesday 04/11/2026 at 21:00, shown above the completed results with the

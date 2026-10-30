@@ -104,7 +104,7 @@ test('scoring histories reconcile aliases and totals without implying appearance
   assert.deepEqual(getScoringHistory('Sotiris Giotis'), []);
 });
 
-test('Blue Fish scorers update their own goal histories without inferring new identities', () => {
+test('Blue Fish scoring history links to the club-confirmed Manousos profile', () => {
   const matchId = 'blue-fish-20261027';
   assert.deepEqual(getScoringHistory('Manousos').map(({ match, goals }) => [match.id, goals]), [[matchId, 3]]);
   for (const name of ['Zachos', 'Tasos']) {
@@ -114,8 +114,13 @@ test('Blue Fish scorers update their own goal histories without inferring new id
     assert.equal(history.reduce((sum, entry) => sum + entry.goals, 0), 3);
     assert.equal(getScorers().find(player => player.name === name).goals, 3);
   }
-  assert.equal(squad.length, 13);
-  assert.ok(!squad.some(player => ['Manousos', 'Vlachos'].includes(player.name)));
+  assert.equal(squad.length, 14);
+  const manousos = squad.find(player => player.number === 19);
+  assert.equal(manousos.name, 'Manousos Tsaroumis');
+  assert.equal(manousos.position, 'CM');
+  assert.equal(manousos.confirmed, true);
+  assert.equal(manousos.scorerName, 'Manousos');
+  assert.ok(!squad.some(player => player.name === 'Vlachos'));
   assert.deepEqual(getScoringHistory('Vlachos'), []);
 });
 
