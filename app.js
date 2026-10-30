@@ -1,5 +1,5 @@
-import { club, matches, upcomingMatches, leagueStandings, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261030-manousos-photo';
-import { messages, localizedName, localizedCareer, localizedOpponent, languageLocales, announcementTranslations } from './i18n.js?v=20261030-manousos-photo';
+import { club, matches, upcomingMatches, leagueStandings, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261030-scorer-profile-photo';
+import { messages, localizedName, localizedCareer, localizedOpponent, languageLocales, announcementTranslations } from './i18n.js?v=20261030-scorer-profile-photo';
 
 let language = 'el';
 try { const saved = localStorage.getItem('shadows-language'); if (Object.hasOwn(messages, saved)) language = saved; } catch { /* Storage may be disabled. */ }
@@ -61,7 +61,11 @@ function dialogFromUrl() {
   if (matches.some(match => match.id === params.get('fixture'))) return { type: 'match', id: params.get('fixture') };
   if (upcomingMatches.some(match => match.id === params.get('fixture'))) return { type: 'fixture', id: params.get('fixture') };
   if (squad.some(player => String(player.number) === params.get('player'))) return { type: 'player', id: Number(params.get('player')) };
-  if (getScorers().some(scorer => scorer.name === params.get('scorer'))) return { type: 'scorer', name: params.get('scorer') };
+  const scorerName = params.get('scorer');
+  if (getScorers().some(scorer => scorer.name === scorerName)) {
+    const profile = scorerProfile(scorerName);
+    return profile ? { type: 'player', id: profile.number } : { type: 'scorer', name: scorerName };
+  }
   return null;
 }
 
