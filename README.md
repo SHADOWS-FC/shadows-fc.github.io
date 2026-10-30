@@ -256,6 +256,11 @@ Original team photographs, homepage, match records and Dark/Light choices are un
 
 ### Player careers
 
+Player team histories are temporarily hidden from every profile at the club's
+request. `SHOW_PLAYER_TEAM_HISTORY` in `app.js` is false until histories are
+ready for the whole squad. The supplied career entries and logos below are
+retained for restoration; no empty biography section is rendered.
+
 Zachos (#5) has a seven-line career list, with labels and slash-separated ranges
 reproduced exactly as subsequently supplied by the club: 2006/2016 -
 A.O.Vouliagmenis; 2016/2017 - Astera Varis; 2018 - Frontistirio Prisma;
@@ -263,7 +268,7 @@ A.O.Vouliagmenis; 2016/2017 - Astera Varis; 2018 - Frontistirio Prisma;
 2024/2026 - Shadows FC. There is no biography paragraph, additional career
 heading, loan label, goal column, or explanatory note. The seven source records retain their supplied year ranges; their display
 labels follow the selected interface language. Recorded-match scoring statistics remain
-separate and unchanged. The club-uploaded originals AOV.jpeg, ASTERAS.png and KLASIKO.jpeg are shown beside their matching career lines, together with the SHADOWS crest.
+separate and unchanged. The club-uploaded originals AOV.jpeg, ASTERAS.png and KLASIKO.jpeg are saved with their matching career lines, together with the SHADOWS crest.
 
 ### Crest presentation
 
@@ -272,13 +277,13 @@ Original SHADOWS branding uses black and Legrena uses purple. In match
 cards and details, SHADOWS, Aston Voula, Unathletico and Savralliolid use
 transparent cutouts without surrounding boxes. Artwork is contained without arbitrary shield clipping or blend modes.
 The prior automatic background masking was removed at the club’s request.
-The seven supplied career lines remain unchanged. The three club-uploaded career logos are displayed with their original backgrounds. Altered generated substitutes are not published.
+The seven supplied career lines remain unchanged. The three club-uploaded career logos retain their original backgrounds. Altered generated substitutes are not published.
 
 Career logos were supplied directly through GitHub upload commit 672c4da.
 Their artwork is unmodified and contained in small neutral, navy or black
 canvases. Non-playing rows have no invented organisation badges.
 
-As a temporary club-approved entry, each of the other twelve profiles displays
+As a temporary club-approved entry, each of the other twelve profiles stores
 `2026 - Shadows FC` with the original SHADOWS crest. Their goal totals are not
 invented. `currentShadowsCareer()` returns independent data for each profile;
 replace its call with the supplied history when that player’s details arrive.

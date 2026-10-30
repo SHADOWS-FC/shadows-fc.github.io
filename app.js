@@ -1,9 +1,11 @@
-import { club, matches, upcomingMatches, leagueStandings, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261030-mobile-language';
-import { messages, localizedName, localizedCareer, localizedOpponent, languageLocales, announcementTranslations } from './i18n.js?v=20261030-mobile-language';
+import { club, matches, upcomingMatches, leagueStandings, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261030-hide-team-history';
+import { messages, localizedName, localizedCareer, localizedOpponent, languageLocales, announcementTranslations } from './i18n.js?v=20261030-hide-team-history';
 
 let language = 'el';
 try { const saved = localStorage.getItem('shadows-language'); if (Object.hasOwn(messages, saved)) language = saved; } catch { /* Storage may be disabled. */ }
 const PAGE_SIZE = 8;
+// Keep supplied histories saved until the club has complete team information.
+const SHOW_PLAYER_TEAM_HISTORY = false;
 const archive = { page: 1 };
 let galleryIndex = 0;
 let dialogContent = null;
@@ -485,7 +487,7 @@ function injuryMarkup(match, playerNumber = null) {
 }
 
 function playerCareerMarkup(player) {
-  if (!player.career?.length) return '';
+  if (!SHOW_PLAYER_TEAM_HISTORY || !player.career?.length) return '';
   return `<section class="player-biography" aria-label="${t('playerBiography')}"><ol class="career-timeline">${player.career.map(entry => {
     const period = entry.from === entry.to ? entry.from : `${entry.from}/${entry.to}`;
     return `<li class="career-entry"><span class="career-line"><span class="career-period">${period}</span> - <span class="career-club">${esc(localizedCareer(entry.label, language))}</span></span>${entry.logo ? `<span class="career-logo${entry.logoCanvas ? ` career-logo--${esc(entry.logoCanvas)}` : ''}"><img src="${esc(entry.logo)}" alt="" width="44" height="44" loading="lazy"></span>` : ''}</li>`;
