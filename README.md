@@ -203,7 +203,8 @@ Mixalis is linked to the previously confirmed Mike alias; Stavros
 Kalogiropoulos is linked to the recorded scorer Stavros. The club-confirmed
 Manousos Tsaroumis profile is linked to the recorded scorer Manousos and his
 three Blue Fish goals. His historical match positions are retained as supplied.
-His separately supplied original portrait is pending upload to GitHub.
+His separately supplied original portrait is `assets/players/manousos.jpeg`,
+uploaded directly to GitHub and used without alteration in his card and profile.
 The club supplied an updated `SHD.rar` containing 13 original JPEGs. All 13 are copied
 without alteration to `assets/players/` and displayed in player cards and
 profile dialogs. The club confirmed that `10.jpeg` is Tasos Babakos (#10),
