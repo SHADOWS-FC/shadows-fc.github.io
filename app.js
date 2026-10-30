@@ -1,5 +1,5 @@
-import { club, matches, upcomingMatches, leagueStandings, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261030-flap-fixture';
-import { messages, localizedName, localizedCareer, localizedOpponent, languageLocales, announcementTranslations } from './i18n.js?v=20261030-flap-fixture';
+import { club, matches, upcomingMatches, leagueStandings, squad, announcements, getSummary, getScorers, getRankings, playerName, matchOutcome, selectMatches, getScoringHistory } from './data.js?v=20261030-mobile-language';
+import { messages, localizedName, localizedCareer, localizedOpponent, languageLocales, announcementTranslations } from './i18n.js?v=20261030-mobile-language';
 
 let language = 'el';
 try { const saved = localStorage.getItem('shadows-language'); if (Object.hasOwn(messages, saved)) language = saved; } catch { /* Storage may be disabled. */ }
@@ -593,7 +593,12 @@ $('.language-picker').addEventListener('keydown', event => {
   }
 });
 document.addEventListener('click', event => { if (!event.target.closest('.language-picker')) setLanguageMenu(false); });
-$('.language-picker').addEventListener('focusout', event => { if (!event.currentTarget.contains(event.relatedTarget)) setLanguageMenu(false); });
+$('.language-picker').addEventListener('focusout', event => {
+  // Touch browsers can blur a menu item with no next focus target before its
+  // click fires. Keep the picker open so that tap can select the language;
+  // the outside-click handler still dismisses it when tapping elsewhere.
+  if (event.relatedTarget && !event.currentTarget.contains(event.relatedTarget)) setLanguageMenu(false);
+});
 for (const [id, step] of [['previous-page', -1], ['next-page', 1]]) {
   $('#' + id).addEventListener('click', () => {
     archive.page += step; renderMatches(); writeUrl();
